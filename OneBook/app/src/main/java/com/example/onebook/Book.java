@@ -1,5 +1,7 @@
 package com.example.onebook;
 
+import java.util.ArrayList;
+
 public class Book {
     private int Isbn;
     private String Title;
@@ -61,10 +63,10 @@ public class Book {
     public Borrower getBorrow() {
         return borrow;
     }
-    public void setRequesters(Borrower requesters) {
-        requesters.add(requesters);
+    public void setRequesters(Borrower requester) {
+        requesters.add(requester);
     }
-    public void getRequesters() {
+    public ArrayList<Borrower> getRequesters() {
         return requesters;
     }
 }
