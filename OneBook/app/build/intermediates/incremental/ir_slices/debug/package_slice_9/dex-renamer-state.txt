@@ -1,0 +1,4 @@
+#Thu Feb 21 19:23:18 MST 2019
+base.0=C\:\\Users\\xalro\\Documents\\GitHub\\OneBook\\OneBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\9
+path.0=classes.dex
+renamed.0=classes.dex
