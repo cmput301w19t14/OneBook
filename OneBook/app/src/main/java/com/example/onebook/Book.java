@@ -12,7 +12,19 @@ public class Book {
     private Borrower borrow;
     private Location location;
 
-    public void Book() { }
+    public void Book(int Isbn,String Title,String author,
+                     String Category,ArrayList<Borrower> requesters,
+                     Owner owner,Borrower borrow,Location location)
+    {
+        this.Isbn =Isbn;
+        this.Title = Title;
+        this.author = author;
+        this.Category = Category;
+        this.requesters = requesters;
+        this.owner = owner;
+        this.borrow=borrow;
+        this.location =location;
+    }
     public int get_ISBN() { return Isbn; }
     public void Set_ISBN(int isbn) { this.Isbn = isbn; }
     public String Get_title() { return Title; }

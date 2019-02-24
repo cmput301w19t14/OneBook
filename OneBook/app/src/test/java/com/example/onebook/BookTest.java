@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 
 public class BookTest {
-    private Book book;
+    private Book book = new Book();
     @Test 
     public void test_book()
     {
