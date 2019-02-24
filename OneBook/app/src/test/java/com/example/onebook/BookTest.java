@@ -5,8 +5,12 @@ import static org.junit.Assert.*;
 
 
 public class BookTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    private Book book;
+    @Test 
+    public void test_book()
+    {
+        boolean check_isbn;
+        check_isbn = book.createViaISBNPhoto();
+        assertEquals(true, check_isbn);
     }
 }
