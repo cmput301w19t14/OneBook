@@ -3,3 +3,5 @@ OneBook/.idea/workspace.xml
 *.bin
 *.lock
 *.ser
+*.bin
+*.lock

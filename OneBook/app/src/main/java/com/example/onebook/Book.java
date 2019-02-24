@@ -7,13 +7,13 @@ public class Book {
     private String Title;
     private String author;
     private String Category;
-    private ArrayList<Borrower> requesters;
+    private ArrayList<Request> requesters;
     private Owner owner;
     private Borrower borrow;
     private Location location;
 
-    public void Book(int Isbn,String Title,String author,
-                     String Category,ArrayList<Borrower> requesters,
+    public Book(int Isbn,String Title,String author,
+                     String Category,ArrayList<Request> requesters,
                      Owner owner,Borrower borrow,Location location)
     {
         this.Isbn =Isbn;
@@ -39,8 +39,8 @@ public class Book {
     public void setBorrow(Borrower borrow) { this.borrow = borrow; }
     public Owner getOwner() { return owner; }
     public Borrower getBorrow() { return borrow; }
-    public void setRequesters(Borrower requesters) {this.requesters.add(requesters); }
-    public ArrayList<Borrower> getRequesters() {return requesters; }
+    public void setRequesters(Request requesters) {this.requesters.add(requesters); }
+    public ArrayList<Request> getRequesters() {return requesters; }
     public boolean createViaISBNPhoto()
     {
         //code to be added later
