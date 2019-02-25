@@ -3,6 +3,10 @@ package com.example.onebook;
 public class Borrower extends User {
 
     public boolean requestBook(Book book, int userID) {
+        
+        Borrower(String username, String password, String email, long phone, int userID){
+            super(username, password, email, phone, userID);
+        }   
 
         if (book.getStatus().equals("available") && book.getOwner().getUserID() == userID) {
             return true;
