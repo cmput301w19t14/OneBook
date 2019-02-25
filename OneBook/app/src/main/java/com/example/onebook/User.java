@@ -7,6 +7,16 @@ public abstract class User {
     private String email;
     private int phone;
     private int userID;
+    
+    public User( String username, String password, String email, long phone, int userID){
+
+	    this.username = username;
+	    this.password = password;
+	    this.email = email;
+	    this.phone = phone;
+	    this.userID = userID;
+
+    }
 
     public boolean Login( String username, String password) {
         boolean is_success = false;
