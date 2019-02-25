@@ -1,9 +1,8 @@
 package com.example.onebook;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert;
 
 
 public class LocationTest {
@@ -20,8 +19,8 @@ public class LocationTest {
         Location loc = new Location("test", 19.123213213, 12.123213213);
 
         Assert.assertEquals("test", loc.getName());
-        Assert.assertEquals(19.123213213, loc.getLat());
-        Assert.assertEquals(12.123213213, loc.getLng());
+        Assert.assertEquals(19.123213213, loc.getLat(), 0);
+        Assert.assertEquals(12.123213213, loc.getLng(), 0);
     }
 
     @Test
@@ -39,49 +38,49 @@ public class LocationTest {
     @Test
     public void test_set_name()
     {
-        location.setName("Jandaile")
+        location.setName("Jandaile");
         Assert.assertEquals("Jandaile", location.getName());
     }
 
     @Test
     public void test_set_lat()
     {
-        location.setLat(19.231234111)
-        Assert.assertEquals(19.231234111, location.getLat());
+        location.setLat(19.231234111);
+        Assert.assertEquals(19.231234111, location.getLat(), 0);
     }
 
     @Test
     public void test_set_lng()
     {
-        location.setLng(19.231234111)
-        Assert.assertEquals(19.231234111, location.getLng());
+        location.setLng(19.231234111);
+        Assert.assertEquals(19.231234111, location.getLng(), 0);
     }
 
     @Test
     public void test_streetAddress()
     {
-        location.setStreetAddress("Jandaile")
+        location.setStreetAddress("Jandaile");
         Assert.assertEquals("Jandaile", location.getStreetAddress());
     }
 
     @Test
     public void test_city()
     {
-        location.setCity("Edmonton")
+        location.setCity("Edmonton");
         Assert.assertEquals("Edmonton", location.getCity());
     }
 
     @Test
     public void test_state()
     {
-        location.setState("Alberta")
+        location.setState("Alberta");
         Assert.assertEquals("Alberta", location.getState());
     }
 
     @Test
     public void test_country()
     {
-        location.setCountry("Canada")
+        location.setCountry("Canada");
         Assert.assertEquals("Canada", location.getCountry());
     }
 }

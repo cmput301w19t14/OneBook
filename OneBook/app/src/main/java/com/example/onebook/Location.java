@@ -4,25 +4,25 @@ public class Location {
 
     private double lat;
     private double lng;
-    private string streetAddress;
-    private string city;
-    private string state;
-    private string country;
+    private String streetAddress;
+    private String city;
+    private String state;
+    private String country;
 
     private String name;
 
-    public void Location() {
+    public Location() {
 
     }
 
-    public void Location(String name, double lat, double lng)
+    public Location(String name, double lat, double lng)
     {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
     }
 
-    public void Location(String name, String streetAddress, String city, String state, String country)
+    public Location(String name, String streetAddress, String city, String state, String country)
     {
         this.name = name;
         this.streetAddress = streetAddress;
