@@ -5,7 +5,7 @@ public abstract class User {
     private String username;
     private String password;
     private String email;
-    private int phone;
+    private long phone;
     private int userID;
     
     public User( String username, String password, String email, long phone, int userID){
