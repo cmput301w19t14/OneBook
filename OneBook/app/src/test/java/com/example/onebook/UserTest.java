@@ -18,45 +18,41 @@ public class UserTest {
     }
 
     @Test
-    public void checkChangeUsername(){
-        Assert.assertTrue(user.changeUsername("Micheal"));
-    }
-
-    @Test
-    public void checkChangePassword(){
-        Assert.assertTrue(user.changePassword("password"));
-    }
-
-    @Test
     public void checkChangeContactInfo(){
-        Assert.assertTrue(user.editContactInfo("jmichael@ualberta.ca",
-                7804737373L));
+        user.editContactInfo("jmike@ualberta.ca", 7804474485L);
+        Assert.assertEquals("jmike@ualberta.ca", user.getEmail());
+        Assert.assertEquals(7804474485L, user.getPhone());
     }
 
     @Test
-    public void checkGetUsername(){
-        Assert.assertEquals("Michael", user.getUsername());
+    public void checkSetUsername(){
+        user.setUsername("Mike");
+        Assert.assertEquals("Mike", user.getUsername());
     }
 
     @Test
-    public void checkGetPassword(){
-        Assert.assertEquals("password", user.getPassword());
+    public void checkSetPassword(){
+        user.setPassword("password123");
+        Assert.assertEquals("password123", user.getPassword());
     }
 
     @Test
-    public void checkGetPhone(){
-        Assert.assertEquals(7804737373L, user.getPhone());
+    public void checkSetPhone(){
+        user.setPhone(7809042237L);
+        Assert.assertEquals(7809042237L, user.getPhone());
     }
 
     @Test
-    public void checkGetEmail(){
-        Assert.assertEquals("jmichael@ualberta.ca",
+    public void checkSetEmail(){
+        user.setEmail("jMickey@ualberta.ca");
+        Assert.assertEquals("jMickey@ualberta.ca",
                 user.getEmail());
     }
 
     @Test
-    public void checkGetUserID(){
-        Assert.assertEquals(17892, user.getUserID());
+    public void checkSetUserID(){
+        user.setUserID(17224);
+        Assert.assertEquals(17224, user.getUserID());
     }
 
 }
