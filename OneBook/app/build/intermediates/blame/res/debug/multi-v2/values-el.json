@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Public\\Documents\\AndroidStudioProjects\\OneBook\\OneBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-el\\values-el.xml",
+            "outputFile": "/Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-el/values-el.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Dustin McRorie\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\755ff5759bb0d68fb5dfd2d49680287f\\res\\values-el\\values-el.xml",
+                    "source": "/Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/res/values-el/values-el.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Dustin McRorie\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\cc58dc6bcbc9a01c0dbc52a9e219b895\\res\\values-el\\values-el.xml",
+                    "source": "/Users/JandaileD/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/0cbaff3eeb5f83f3b44f3a364c64e3cc/res/values-el/values-el.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

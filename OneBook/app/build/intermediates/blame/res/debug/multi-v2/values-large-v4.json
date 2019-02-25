@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Public\\Documents\\AndroidStudioProjects\\OneBook\\OneBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "/Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Dustin McRorie\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\cc58dc6bcbc9a01c0dbc52a9e219b895\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "/Users/JandaileD/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/0cbaff3eeb5f83f3b44f3a364c64e3cc/res/values-large-v4/values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

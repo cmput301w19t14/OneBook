@@ -2,8 +2,6 @@ package com.example.onebook;
 
 public class Location {
 
-
-
     private boolean read;
     private String notification;
     private String city;
