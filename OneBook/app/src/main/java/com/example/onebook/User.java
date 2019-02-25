@@ -36,7 +36,7 @@ public abstract class User {
         return is_success;
     }
 
-    public boolean editContactInfo( String email, int phone) {
+    public boolean editContactInfo( String email, long phone) {
         boolean is_success = false;
 
         return is_success;
@@ -48,6 +48,22 @@ public abstract class User {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
 

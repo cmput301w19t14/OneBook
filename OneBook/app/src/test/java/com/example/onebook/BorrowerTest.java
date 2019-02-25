@@ -19,7 +19,8 @@ public class BorrowerTest {
     public Owner own;
     public Location place;
 
-    private Borrower borrower = new Borrower();
+    private Borrower borrower = new Borrower("Claire", "orchard", "claire@hotmail.com",
+            5872172245L, 112546);
     private Book book = new Book(1,"Narnia","narnia guy","narnia book"
             ,req,own,borrower, place, "available");
 
