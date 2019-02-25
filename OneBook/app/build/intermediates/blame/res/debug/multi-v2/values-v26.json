@@ -1,10 +1,17 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
+            "outputFile": "C:\\Users\\xalro\\Documents\\GitHub\\OneBook\\OneBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\xalro\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\59774ce7f310cb6f44af9517fa50143a\\res\\values-v26\\values-v26.xml",
+=======
             "outputFile": "C:\\Users\\ASUS\\Desktop\\301\\OneBook\\OneBook\\OneBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
                     "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\2e2e7b9b19216624098940a95613407a\\res\\values-v26\\values-v26.xml",
+>>>>>>> cc7f7217f2af012088deb286be686cbc54fd36ce
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

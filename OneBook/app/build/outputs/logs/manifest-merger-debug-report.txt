@@ -1,5 +1,159 @@
 -- Merging decision tree log ---
 manifest
+<<<<<<< HEAD
+ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\59774ce7f310cb6f44af9517fa50143a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\9451c237972da1fdc24806bbc38fcb50\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\d8d9d9f467bb264546e54c664e836468\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\dd8b6a54f0ff2c2623056161e1cd9231\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\5fc25eb38843af2a13ffb00c2da10db1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\617171d273f90571c98736862399d8fd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\b107317dfe4dc8862f4ac2097c2334aa\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\0f129023cb0dee7ead445d5979a9089d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\8df2446c24b915eb114e3cf836c508cc\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\ab99d5a55d830437996055b16f49bd58\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\e90098577497edd0e86ddb631b291ec4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\1fa59c3a03b16b1e6a7e1b49f42f610e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\b8124799b849a98fa4afadce073bf46c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\23aa0cde88aa246c2c5413465b68ad8f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\4e81e5ef1064ab74f1acdae6b89c6a40\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\95800a00611dbec9d748e57e028424c3\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\e719660db04b33e940e525ed7c360e7d\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\3c42a425e35dff1e5e0e857d9bb0ad34\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\cbdc33e0784db34953fb89527d873235\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\01ec06362091cedc035f94c8f5888b78\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\c409d20d12c42f9d8e3c49749e156253\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\a3ffff418e4bd25d20db71813d463c37\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\cfbc2af9d827ca72c97cbc576bf60906\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\194eb123247eb43a0038025ce4320e54\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\958d29b6d939870b912fbb1d3469064c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\39d746184451326da554bfe6d4726e88\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\80757cfbfcc9619d960e19e267cee11d\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+	package
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:3:5-34
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\9451c237972da1fdc24806bbc38fcb50\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\9451c237972da1fdc24806bbc38fcb50\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\95800a00611dbec9d748e57e028424c3\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\95800a00611dbec9d748e57e028424c3\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\e719660db04b33e940e525ed7c360e7d\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\e719660db04b33e940e525ed7c360e7d\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\95800a00611dbec9d748e57e028424c3\AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.example.onebook.MainActivity
+ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:12:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\59774ce7f310cb6f44af9517fa50143a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\59774ce7f310cb6f44af9517fa50143a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\9451c237972da1fdc24806bbc38fcb50\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\9451c237972da1fdc24806bbc38fcb50\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\d8d9d9f467bb264546e54c664e836468\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\d8d9d9f467bb264546e54c664e836468\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\dd8b6a54f0ff2c2623056161e1cd9231\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\dd8b6a54f0ff2c2623056161e1cd9231\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\5fc25eb38843af2a13ffb00c2da10db1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\5fc25eb38843af2a13ffb00c2da10db1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\617171d273f90571c98736862399d8fd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\617171d273f90571c98736862399d8fd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\b107317dfe4dc8862f4ac2097c2334aa\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\b107317dfe4dc8862f4ac2097c2334aa\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\0f129023cb0dee7ead445d5979a9089d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\0f129023cb0dee7ead445d5979a9089d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\8df2446c24b915eb114e3cf836c508cc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\8df2446c24b915eb114e3cf836c508cc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\ab99d5a55d830437996055b16f49bd58\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\ab99d5a55d830437996055b16f49bd58\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\e90098577497edd0e86ddb631b291ec4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\e90098577497edd0e86ddb631b291ec4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\1fa59c3a03b16b1e6a7e1b49f42f610e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\1fa59c3a03b16b1e6a7e1b49f42f610e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\b8124799b849a98fa4afadce073bf46c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\b8124799b849a98fa4afadce073bf46c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\23aa0cde88aa246c2c5413465b68ad8f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\23aa0cde88aa246c2c5413465b68ad8f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\4e81e5ef1064ab74f1acdae6b89c6a40\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\4e81e5ef1064ab74f1acdae6b89c6a40\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\95800a00611dbec9d748e57e028424c3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\95800a00611dbec9d748e57e028424c3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\e719660db04b33e940e525ed7c360e7d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\e719660db04b33e940e525ed7c360e7d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\3c42a425e35dff1e5e0e857d9bb0ad34\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\3c42a425e35dff1e5e0e857d9bb0ad34\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\cbdc33e0784db34953fb89527d873235\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\cbdc33e0784db34953fb89527d873235\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\01ec06362091cedc035f94c8f5888b78\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\01ec06362091cedc035f94c8f5888b78\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\c409d20d12c42f9d8e3c49749e156253\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\c409d20d12c42f9d8e3c49749e156253\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\a3ffff418e4bd25d20db71813d463c37\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\a3ffff418e4bd25d20db71813d463c37\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\cfbc2af9d827ca72c97cbc576bf60906\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\cfbc2af9d827ca72c97cbc576bf60906\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\194eb123247eb43a0038025ce4320e54\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\194eb123247eb43a0038025ce4320e54\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\958d29b6d939870b912fbb1d3469064c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\958d29b6d939870b912fbb1d3469064c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\39d746184451326da554bfe6d4726e88\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\39d746184451326da554bfe6d4726e88\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\80757cfbfcc9619d960e19e267cee11d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\xalro\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\80757cfbfcc9619d960e19e267cee11d\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\xalro\Documents\GitHub\OneBook\OneBook\app\src\main\AndroidManifest.xml
+=======
 ADDED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
 INJECTED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
 INJECTED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
@@ -152,3 +306,4 @@ INJECTED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\And
 		INJECTED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\ASUS\Desktop\301\OneBook\OneBook\OneBook\app\src\main\AndroidManifest.xml
+>>>>>>> cc7f7217f2af012088deb286be686cbc54fd36ce

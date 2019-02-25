@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+#Mon Feb 25 13:24:10 MST 2019
+base.0=C\:\\Users\\xalro\\Documents\\GitHub\\OneBook\\OneBook\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+=======
 #Mon Feb 25 13:32:47 MST 2019
 path.1=classes.dex
+>>>>>>> cc7f7217f2af012088deb286be686cbc54fd36ce
 path.0=classes.dex
 renamed.10=classes11.dex
 renamed.9=classes10.dex

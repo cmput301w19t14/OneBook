@@ -1,4 +1,10 @@
 #Internal package file, do not edit.
+<<<<<<< HEAD
+#Mon Feb 25 13:24:10 MST 2019
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\xalro\\Documents\\GitHub\\OneBook\\OneBook\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+0.path=classes.dex
+=======
 #Mon Feb 25 13:32:47 MST 2019
 4.path=classes.dex
 8.set=DEX
@@ -14,6 +20,7 @@
 7.base=C\:\\Users\\Public\\Documents\\AndroidStudioProjects\\OneBook\\OneBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
 9.base=C\:\\Users\\Public\\Documents\\AndroidStudioProjects\\OneBook\\OneBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\20
 1.baseType=DIRECTORY
+>>>>>>> cc7f7217f2af012088deb286be686cbc54fd36ce
 0.set=DEX
 6.baseType=DIRECTORY
 7.set=DEX

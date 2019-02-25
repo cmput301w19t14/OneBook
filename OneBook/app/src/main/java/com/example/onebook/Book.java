@@ -13,6 +13,10 @@ public class Book {
     private Location location;
     private String status;
 
+
+
+    private Waitlist waitlist;
+
     public Book(int Isbn,String Title,String author,
                      String Category,ArrayList<Request> requesters,
                      Owner owner,Borrower borrow,Location location, String status)
@@ -45,10 +49,20 @@ public class Book {
     public ArrayList<Request> getRequesters() {return requesters; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public Waitlist getWaitlist() { return waitlist; }
+    public void setWaitlist(Waitlist waitlist) { this.waitlist = waitlist; }
 
     public boolean createViaISBNPhoto()
     {
         //code to be added later
         return false;
+    }
+    public void lendToNext()
+    {
+        //
+    }
+    public void addToWait(User user)
+    {
+        //
     }
 }

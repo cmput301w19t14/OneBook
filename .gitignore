@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+
+OneBook/.idea/workspace.xml
+*.bin
+*.lock
+*.ser
+*.bin
+*.lock
+OneBook/.idea/workspace.xml
+OneBook/.gradle/4.10.1/fileHashes/fileHashes.lock
+*.json
+*.flat
+=======
 *.iml
 .gradle
 /local.properties
@@ -7,3 +20,4 @@
 /build
 /captures
 .externalNativeBuild 
+>>>>>>> cc7f7217f2af012088deb286be686cbc54fd36ce
