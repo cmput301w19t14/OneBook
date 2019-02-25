@@ -11,6 +11,7 @@ public class UserTest {
             "mjohn@ualberta.ca", 7806216276L, 17892);
 
 
+//comment
     @Test
     public void checkLogin(){
         Assert.assertTrue(user.Login("John", "hunter2"));
