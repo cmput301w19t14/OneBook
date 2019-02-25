@@ -11,10 +11,11 @@ public class Book {
     private Owner owner;
     private Borrower borrow;
     private Location location;
+    private String status;
 
     public Book(int Isbn,String Title,String author,
                      String Category,ArrayList<Request> requesters,
-                     Owner owner,Borrower borrow,Location location)
+                     Owner owner,Borrower borrow,Location location, String status)
     {
         this.Isbn =Isbn;
         this.Title = Title;
@@ -24,6 +25,7 @@ public class Book {
         this.owner = owner;
         this.borrow=borrow;
         this.location =location;
+        this.status = status;
     }
     public int get_ISBN() { return Isbn; }
     public void Set_ISBN(int isbn) { this.Isbn = isbn; }
@@ -41,6 +43,9 @@ public class Book {
     public Borrower getBorrow() { return borrow; }
     public void setRequesters(Request requesters) {this.requesters.add(requesters); }
     public ArrayList<Request> getRequesters() {return requesters; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
     public boolean createViaISBNPhoto()
     {
         //code to be added later

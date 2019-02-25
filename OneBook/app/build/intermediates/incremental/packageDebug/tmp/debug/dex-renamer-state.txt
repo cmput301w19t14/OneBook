@@ -1,4 +1,4 @@
-#Sat Feb 23 22:11:58 MST 2019
-base.0=C\:\\Users\\xalro\\Documents\\GitHub\\OneBook\\OneBook\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+#Sun Feb 24 21:19:15 MST 2019
+base.0=/Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/build/intermediates/dex/debug/mergeDexDebug/out
 path.0=classes.dex
 renamed.0=classes.dex

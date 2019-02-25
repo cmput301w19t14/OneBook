@@ -32,4 +32,12 @@ public abstract class User {
         return is_success;
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 }
+
