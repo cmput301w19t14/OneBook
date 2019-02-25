@@ -1,7 +1,7 @@
 #Internal package file, do not edit.
-#Sun Feb 24 21:19:15 MST 2019
+#Mon Feb 25 13:24:10 MST 2019
 0.baseType=DIRECTORY
-0.base=/Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/build/intermediates/dex/debug/mergeDexDebug/out
+0.base=C\:\\Users\\xalro\\Documents\\GitHub\\OneBook\\OneBook\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
 0.path=classes.dex
 0.set=DEX
 count=1

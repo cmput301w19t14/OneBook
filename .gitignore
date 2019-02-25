@@ -6,3 +6,6 @@ OneBook/.idea/workspace.xml
 *.bin
 *.lock
 OneBook/.idea/workspace.xml
+OneBook/.gradle/4.10.1/fileHashes/fileHashes.lock
+*.json
+*.flat
