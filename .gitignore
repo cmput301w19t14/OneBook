@@ -1,7 +1,11 @@
-
+*.iml
+.gradle
+local.properties
+.idea/workspace.xml
+.idea/libraries
+.DS_Store
+build
+captures
+.externalNativeBuild
+OneBook/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml
 OneBook/.idea/workspace.xml
-*.bin
-*.lock
-*.ser
-*.bin
-*.lock
