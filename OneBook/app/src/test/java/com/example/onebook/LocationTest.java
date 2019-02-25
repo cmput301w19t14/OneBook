@@ -1,9 +1,8 @@
 package com.example.onebook;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert;
 
 
 public class LocationTest {
@@ -27,7 +26,8 @@ public class LocationTest {
     @Test
     public void test_location_full()
     {
-        Location loc = new Location("test", "1525 99 Street", "Edmonton", "Alberta", "Canada");
+        Location loc = new Location("test", "1525 99 Street", "Edmonton",
+                "Alberta", "Canada");
 
         Assert.assertEquals("test", loc.getName());
         Assert.assertEquals("1525 99 Street", loc.getStreetAddress());
@@ -39,49 +39,49 @@ public class LocationTest {
     @Test
     public void test_set_name()
     {
-        location.setName("Jandaile")
+        location.setName("Jandaile");
         Assert.assertEquals("Jandaile", location.getName());
     }
 
     @Test
     public void test_set_lat()
     {
-        location.setLat(19.231234111)
+        location.setLat(19.231234111);
         Assert.assertEquals(19.231234111, location.getLat());
     }
 
     @Test
     public void test_set_lng()
     {
-        location.setLng(19.231234111)
+        location.setLng(19.231234111);
         Assert.assertEquals(19.231234111, location.getLng());
     }
 
     @Test
     public void test_streetAddress()
     {
-        location.setStreetAddress("Jandaile")
+        location.setStreetAddress("Jandaile");
         Assert.assertEquals("Jandaile", location.getStreetAddress());
     }
 
     @Test
     public void test_city()
     {
-        location.setCity("Edmonton")
+        location.setCity("Edmonton");
         Assert.assertEquals("Edmonton", location.getCity());
     }
 
     @Test
     public void test_state()
     {
-        location.setState("Alberta")
+        location.setState("Alberta");
         Assert.assertEquals("Alberta", location.getState());
     }
 
     @Test
     public void test_country()
     {
-        location.setCountry("Canada")
+        location.setCountry("Canada");
         Assert.assertEquals("Canada", location.getCountry());
     }
 }
