@@ -13,12 +13,13 @@ public class BookTest {
     public Location place;
 
 
+
     @Test 
     public void test_book()
     {
 
         Book book = new Book(1,"Narnia","narnia guy","narnia book"
-                ,req,owny,borrow, place);
+                ,req,owny,borrow, place, "available");
         boolean check_isbn;
         check_isbn = book.createViaISBNPhoto();
         assertTrue(check_isbn);

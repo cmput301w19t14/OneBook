@@ -2,14 +2,19 @@ package com.example.onebook;
 
 public class Borrower extends User {
 
-    public void requestBook(int ISBN, int userID) {
+    public boolean requestBook(Book book, int userID) {
 
-
-        return;
+        if (book.getStatus().equals("available") && book.getOwner().getUserID() == userID) {
+            return true;
+        }
+        else
+            return false;
     }
 
-    public void returnBook(int ISBN, int userID) {
+    public boolean returnBook(Book book, int userID) {
 
-        return;
+        //code to be added
+        return true;
+
     }
 }
