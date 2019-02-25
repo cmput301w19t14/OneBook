@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class MessageTest {
 
-    private Message message;
+    private Message message = new Message("Clarkk", "suhhh dude", "10/12/2018");
 
     @Test
     public void testSetUser(){

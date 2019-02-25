@@ -1,154 +1,154 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/0cbaff3eeb5f83f3b44f3a364c64e3cc/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/56ae7a90dc8c0eb84aa7b1cb5f470a65/AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:support-fragment:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/a70bf1c2447384f02ca0172022fac027/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/c931c1eb84d33efa277845463a16797f/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/0590b15d4ed5ef2610e29adbce9a556a/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/70ab5c2501c42f771627e26fbe20c268/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/7ff341b405a325519677060fb7f7e3fd/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:loader:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/a5c3cf910d355b27fa9d0709e4f026b8/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:viewpager:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/ba515e52c29df09d6d743e5da8369919/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/383e261235b1f5e8be574810a42c3690/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:drawerlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/6f589acc2984a90e963989286d4d4603/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/3ef55d6b5a8da8a9c6f8d5f7770a6157/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customview:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/f225b4a8f03363119f4b26c24148b921/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/ebf6fe8ef2a4a8160a0fdce616023a4b/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/f07e6b7322d68ad5258bd4e68878146d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/d31ba968c85a1a376a944655f892012a/AndroidManifest.xml:17:1-25:12
-MERGED from [com.android.support:cursoradapter:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/09cfd26bcce3368b63a1615782c4dba6/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/83282baa3cd193d9b6aa83fd668506f2/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:documentfile:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/28d08ed928f2c56cdfdd720d9c53fa5b/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/7d3c4a026ceb0475586ae7f10fb736b4/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:print:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/71cb6a5971d8eb39601889463404a797/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/00f6857800c78b4a5894ee9c19cb661b/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/93a2076db86c20fb62e2dd1c5e17d6e5/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/c4c9e3fb39942aadbb97fe5c292857c8/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/86400a958389390959f5d330538e96cc/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:interpolator:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/35626f1cd64442bc86d1edaa5fb62e0d/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
+ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\1a8485dcfa6144c91543de9e7c2c5220\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\da4accf0add7c62ee6d32ca65f28601e\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\5aca968cdf421f26200ccd9c00c09ef8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\3c5cbea590dda4fdbfa68a8c0e2f791e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\2581a09013b342f4d51446a4e4d24267\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\58a63447b891c5c6d69141a6d5e13682\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\7bcbeeb4011db233cef8de1a56e16cad\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\b2a4f48ff719be58186309f0589c67d3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\6407ee7bff13a935042a6645952e62d8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\77e51f8ef016a4cc07ecb1dfad75a1d4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\b80f68ffcd3a337053fd9ac9ed644fc8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\652fb2fe78d8d205358babc945877329\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\4f8d3396e30e3937e3f4848b0e1fa413\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\816d31175651450b9d93121c39898e6e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\eeada33289752634f34776b20fc452ee\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\670341b2ed8bd20f0ba7fe16bb1c6440\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\c3a06fbbbc5ffafa296afcdbcac233c9\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\583c6615b02bc750195c555b97f039d2\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\212bef424af1930ce2f43d5ba528505a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\daaaa068b1416894d7805809cb7cff72\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\66d113dc5658c7a4cfceefcd6aacbb2d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\13f5420198ef82eef26935ceced26f32\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\1865c8dba77964e37a54eeefa05d3086\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\91aff63ce5caf7d6cbf02b9475ee34cc\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\ba7e6d947d9be3fd9b6f5e8247be9809\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d0326e1ae2142aeb787c4ffed2ea0c05\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\e0140eb42dea0f040c6ebf8180199832\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
 	package
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:3:5-34
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:3:5-34
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:1-21:12
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:1-21:12
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:5:5-19:19
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/56ae7a90dc8c0eb84aa7b1cb5f470a65/AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/56ae7a90dc8c0eb84aa7b1cb5f470a65/AndroidManifest.xml:9:5-20
-MERGED from [com.android.support:support-compat:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:support-compat:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/d31ba968c85a1a376a944655f892012a/AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/d31ba968c85a1a376a944655f892012a/AndroidManifest.xml:22:5-23:19
+ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\da4accf0add7c62ee6d32ca65f28601e\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\da4accf0add7c62ee6d32ca65f28601e\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\670341b2ed8bd20f0ba7fe16bb1c6440\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\670341b2ed8bd20f0ba7fe16bb1c6440\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\c3a06fbbbc5ffafa296afcdbcac233c9\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\c3a06fbbbc5ffafa296afcdbcac233c9\AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [com.android.support:support-compat:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/AndroidManifest.xml:22:18-91
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\670341b2ed8bd20f0ba7fe16bb1c6440\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:10:9-35
 	android:label
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:8:9-41
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:8:9-41
 	android:roundIcon
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:9:9-54
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:9:9-54
 	android:icon
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:7:9-43
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:7:9-43
 	android:allowBackup
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:6:9-35
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:11:9-40
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:11:9-40
 activity#com.example.onebook.MainActivity
-ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:12:9-18:20
+ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:12:9-18:20
 	android:name
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:12:19-47
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:12:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:13:13-17:29
+ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:13:13-17:29
 action#android.intent.action.MAIN
-ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:14:17-69
+ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:14:17-69
 	android:name
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:14:25-66
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:14:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:16:17-77
+ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:16:17-77
 	android:name
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml:16:27-74
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml:16:27-74
 uses-sdk
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/0cbaff3eeb5f83f3b44f3a364c64e3cc/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/0cbaff3eeb5f83f3b44f3a364c64e3cc/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/56ae7a90dc8c0eb84aa7b1cb5f470a65/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/56ae7a90dc8c0eb84aa7b1cb5f470a65/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-fragment:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/a70bf1c2447384f02ca0172022fac027/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/a70bf1c2447384f02ca0172022fac027/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/c931c1eb84d33efa277845463a16797f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/c931c1eb84d33efa277845463a16797f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/0590b15d4ed5ef2610e29adbce9a556a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/0590b15d4ed5ef2610e29adbce9a556a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/70ab5c2501c42f771627e26fbe20c268/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/70ab5c2501c42f771627e26fbe20c268/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/7ff341b405a325519677060fb7f7e3fd/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/7ff341b405a325519677060fb7f7e3fd/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/a5c3cf910d355b27fa9d0709e4f026b8/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/a5c3cf910d355b27fa9d0709e4f026b8/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/ba515e52c29df09d6d743e5da8369919/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/ba515e52c29df09d6d743e5da8369919/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/383e261235b1f5e8be574810a42c3690/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/383e261235b1f5e8be574810a42c3690/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/6f589acc2984a90e963989286d4d4603/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/6f589acc2984a90e963989286d4d4603/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/3ef55d6b5a8da8a9c6f8d5f7770a6157/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/3ef55d6b5a8da8a9c6f8d5f7770a6157/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/f225b4a8f03363119f4b26c24148b921/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/f225b4a8f03363119f4b26c24148b921/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/ebf6fe8ef2a4a8160a0fdce616023a4b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/ebf6fe8ef2a4a8160a0fdce616023a4b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/f07e6b7322d68ad5258bd4e68878146d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/f07e6b7322d68ad5258bd4e68878146d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/9edfe3b24f18b9d29a24de01ad80551b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/d31ba968c85a1a376a944655f892012a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/d31ba968c85a1a376a944655f892012a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/09cfd26bcce3368b63a1615782c4dba6/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/09cfd26bcce3368b63a1615782c4dba6/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/83282baa3cd193d9b6aa83fd668506f2/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/83282baa3cd193d9b6aa83fd668506f2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/28d08ed928f2c56cdfdd720d9c53fa5b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/28d08ed928f2c56cdfdd720d9c53fa5b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/7d3c4a026ceb0475586ae7f10fb736b4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/7d3c4a026ceb0475586ae7f10fb736b4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/71cb6a5971d8eb39601889463404a797/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/71cb6a5971d8eb39601889463404a797/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/00f6857800c78b4a5894ee9c19cb661b/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/00f6857800c78b4a5894ee9c19cb661b/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/93a2076db86c20fb62e2dd1c5e17d6e5/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/93a2076db86c20fb62e2dd1c5e17d6e5/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/c4c9e3fb39942aadbb97fe5c292857c8/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/c4c9e3fb39942aadbb97fe5c292857c8/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/86400a958389390959f5d330538e96cc/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/86400a958389390959f5d330538e96cc/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/35626f1cd64442bc86d1edaa5fb62e0d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0] /Users/JandaileD/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/35626f1cd64442bc86d1edaa5fb62e0d/AndroidManifest.xml:20:5-44
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\1a8485dcfa6144c91543de9e7c2c5220\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\1a8485dcfa6144c91543de9e7c2c5220\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\da4accf0add7c62ee6d32ca65f28601e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\da4accf0add7c62ee6d32ca65f28601e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\5aca968cdf421f26200ccd9c00c09ef8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\5aca968cdf421f26200ccd9c00c09ef8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\3c5cbea590dda4fdbfa68a8c0e2f791e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\3c5cbea590dda4fdbfa68a8c0e2f791e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\2581a09013b342f4d51446a4e4d24267\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\2581a09013b342f4d51446a4e4d24267\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\58a63447b891c5c6d69141a6d5e13682\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\58a63447b891c5c6d69141a6d5e13682\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\7bcbeeb4011db233cef8de1a56e16cad\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\7bcbeeb4011db233cef8de1a56e16cad\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\b2a4f48ff719be58186309f0589c67d3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\b2a4f48ff719be58186309f0589c67d3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\6407ee7bff13a935042a6645952e62d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\6407ee7bff13a935042a6645952e62d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\77e51f8ef016a4cc07ecb1dfad75a1d4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\77e51f8ef016a4cc07ecb1dfad75a1d4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\b80f68ffcd3a337053fd9ac9ed644fc8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\b80f68ffcd3a337053fd9ac9ed644fc8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\652fb2fe78d8d205358babc945877329\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\652fb2fe78d8d205358babc945877329\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\4f8d3396e30e3937e3f4848b0e1fa413\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\4f8d3396e30e3937e3f4848b0e1fa413\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\816d31175651450b9d93121c39898e6e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\816d31175651450b9d93121c39898e6e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\eeada33289752634f34776b20fc452ee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\eeada33289752634f34776b20fc452ee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\670341b2ed8bd20f0ba7fe16bb1c6440\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\670341b2ed8bd20f0ba7fe16bb1c6440\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\c3a06fbbbc5ffafa296afcdbcac233c9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\c3a06fbbbc5ffafa296afcdbcac233c9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\583c6615b02bc750195c555b97f039d2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\583c6615b02bc750195c555b97f039d2\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\212bef424af1930ce2f43d5ba528505a\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\212bef424af1930ce2f43d5ba528505a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\daaaa068b1416894d7805809cb7cff72\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\daaaa068b1416894d7805809cb7cff72\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\66d113dc5658c7a4cfceefcd6aacbb2d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\66d113dc5658c7a4cfceefcd6aacbb2d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\13f5420198ef82eef26935ceced26f32\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\13f5420198ef82eef26935ceced26f32\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\1865c8dba77964e37a54eeefa05d3086\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\1865c8dba77964e37a54eeefa05d3086\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\91aff63ce5caf7d6cbf02b9475ee34cc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\91aff63ce5caf7d6cbf02b9475ee34cc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\ba7e6d947d9be3fd9b6f5e8247be9809\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\ba7e6d947d9be3fd9b6f5e8247be9809\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d0326e1ae2142aeb787c4ffed2ea0c05\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d0326e1ae2142aeb787c4ffed2ea0c05\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\e0140eb42dea0f040c6ebf8180199832\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Dustin McRorie\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\e0140eb42dea0f040c6ebf8180199832\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		ADDED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/JandaileD/Documents/GitHub/OneBook/OneBook/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Public\Documents\AndroidStudioProjects\OneBook\OneBook\app\src\main\AndroidManifest.xml

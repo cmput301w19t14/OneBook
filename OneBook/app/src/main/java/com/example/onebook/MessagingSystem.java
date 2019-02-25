@@ -3,8 +3,12 @@ package com.example.onebook;
 import java.util.ArrayList;
 
 public class MessagingSystem {
-    User user;
-    ArrayList<Message> messages;
+    private User user;
+    private ArrayList<Message> messages;
+
+    public MessagingSystem(){
+
+    }
 
     public boolean sendMessage( User receivingUser, String message){
 

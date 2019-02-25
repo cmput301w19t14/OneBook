@@ -16,13 +16,14 @@ import static org.junit.Assert.assertTrue;
  */
 public class MessageSystemTest {
 
-    private MessagingSystem messagingSystem;
-    private Borrower receivingUser;
+    public MessagingSystem messagingSystem = new MessagingSystem();
+    public Borrower receivingUser = new Borrower("Kyle", "yoloswag",
+            "toohotty@ualberta.ca", 7806969L, 12234);
+    public Borrower user = new Borrower("Mark", "123", "dmark@ualberta.ca",
+            5877232235L, 12334);
 
     @Test
     public void testSetUser(){
-        Borrower user = new Borrower("Mark", "123", "dmark@ualberta.ca",
-                5877232235L, 12334);
         messagingSystem.setUser(user);
     }
 
