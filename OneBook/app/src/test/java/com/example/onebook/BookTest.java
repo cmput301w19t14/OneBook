@@ -1,16 +1,18 @@
 package com.example.onebook;
-import org.junit.Test;
 
+import org.junit.Assert;
+import org.junit.Test;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+
 
 
 public class BookTest {
     public ArrayList<Request> req;
-    public Owner owny;
-    public Borrower borrow;
-    public Location place;
+    public Owner owny= new Owner("name","passwoed","email",123L,312);
+    public Borrower borrow =  new Borrower("name","passwoed","email",123L,312);
+    public Location place = new Location();
+
 
 
 
@@ -22,6 +24,7 @@ public class BookTest {
                 ,req,owny,borrow, place, "available");
         boolean check_isbn;
         check_isbn = book.createViaISBNPhoto();
-        assertTrue(check_isbn);
+        Assert.assertTrue(check_isbn);
     }
+
 }
