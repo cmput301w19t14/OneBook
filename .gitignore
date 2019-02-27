@@ -1,23 +1,9 @@
-<<<<<<< HEAD
-
-OneBook/.idea/workspace.xml
-*.bin
-*.lock
-*.ser
-*.bin
-*.lock
-OneBook/.idea/workspace.xml
-OneBook/.gradle/4.10.1/fileHashes/fileHashes.lock
-*.json
-*.flat
-=======
 *.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+/OneBook/.gradle
+/OneBook/local.properties
+/OneBook/.idea/workspace.xml
+/OneBook/.idea/libraries
 .DS_Store
-/build
-/captures
-.externalNativeBuild 
->>>>>>> cc7f7217f2af012088deb286be686cbc54fd36ce
+/OneBook/build
+/OneBook/captures
+/OneBook/.externalNativeBuild 
