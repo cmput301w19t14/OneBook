@@ -28,16 +28,16 @@ public class BorrowerTest {
     public void checkRequestBook(){
 
             book.getOwner().setUserID(15);
-            boolean testTrue = borrower.requestBook(book, 15);
+            boolean testTrue = borrower.requestBook(book, 15L);
             assertTrue(testTrue);
 
             book.getOwner().setUserID(14);
-            boolean testFalse = borrower.requestBook(book, 15);
+            boolean testFalse = borrower.requestBook(book, 15L);
             assertFalse(testFalse);
     }
 
     @Test
     public void checkReturnBook() {
-            assertTrue(borrower.returnBook(book, 15));
+            assertTrue(borrower.returnBook(book, 15L));
     }
 }

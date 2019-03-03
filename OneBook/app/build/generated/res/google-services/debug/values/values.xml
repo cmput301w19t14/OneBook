@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">197656956598-4ug4t5vgb4m1rderq65ldavpjimc3kc6.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://onebook-f04ec.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">197656956598</string>
+    <string name="google_api_key" translatable="false">AIzaSyD3DJ890OMpVFvDJwq8kLWmhUHdJmeHYzU</string>
+    <string name="google_app_id" translatable="false">1:197656956598:android:6614f77605fea010</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD3DJ890OMpVFvDJwq8kLWmhUHdJmeHYzU</string>
+    <string name="google_storage_bucket" translatable="false">onebook-f04ec.appspot.com</string>
+    <string name="project_id" translatable="false">onebook-f04ec</string>
+</resources>
