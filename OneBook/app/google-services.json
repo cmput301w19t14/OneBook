@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "197656956598",
+    "firebase_url": "https://onebook-f04ec.firebaseio.com",
+    "project_id": "onebook-f04ec",
+    "storage_bucket": "onebook-f04ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197656956598:android:6614f77605fea010",
+        "android_client_info": {
+          "package_name": "com.example.onebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197656956598-dli8a6hdl3ikifjauls950v07qguqf2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.onebook",
+            "certificate_hash": "3de434b37338be22662045d9719cc15d6d4abdda"
+          }
+        },
+        {
+          "client_id": "197656956598-4ug4t5vgb4m1rderq65ldavpjimc3kc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3DJ890OMpVFvDJwq8kLWmhUHdJmeHYzU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197656956598-4ug4t5vgb4m1rderq65ldavpjimc3kc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

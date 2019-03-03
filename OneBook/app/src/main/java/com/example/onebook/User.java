@@ -6,9 +6,9 @@ public abstract class User {
     private String password;
     private String email;
     private long phone;
-    private int userID;
+    private long userID;
     
-    public User( String username, String password, String email, long phone, int userID){
+    public User( String username, String password, String email, long phone, long userID){
 
 	    this.username = username;
 	    this.password = password;
@@ -64,11 +64,11 @@ public abstract class User {
         this.username = username;
     }
 
-    public void setUserID(int userID){
+    public void setUserID(long userID){
         this.userID = userID;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 
