@@ -4,7 +4,11 @@ public class Borrower extends User {
 
     Borrower(String username, String password, String email, long phone, int userID){
             super(username, password, email, phone, userID);
-        }
+    }
+
+    Borrower(String username, String password, String email){
+        super(username, password, email);
+    }
 
     public boolean requestBook(Book book, int userID) {   
 
