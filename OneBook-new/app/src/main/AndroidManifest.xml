@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
-
-        </activity>
+        <activity android:name=".HomeActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -21,6 +19,23 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SearchingActivity"
+            android:parentActivityName=".BorrowingActivity"
+            android:label="@string/title_activity_searching_main"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".BorrowingActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/title_activity_borrowing_main"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".LendingActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/title_activity_lending_main"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
