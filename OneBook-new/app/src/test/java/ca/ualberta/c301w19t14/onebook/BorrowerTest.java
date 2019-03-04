@@ -20,7 +20,7 @@ public class BorrowerTest {
     public Location place;
 
     private Borrower borrower = new Borrower("Claire", "orchard", "claire@hotmail.com",
-            5872172245L, 112546);
+            5872172245L, 112546L);
     private Book book = new Book(1,"Narnia","narnia guy","narnia book"
             ,req,own,borrower, place, "available");
 
