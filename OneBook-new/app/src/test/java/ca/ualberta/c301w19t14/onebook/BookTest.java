@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class BookTest {
     public ArrayList<Request> req;
-    public Owner owny= new Owner("name","passwoed","email",123L,312);
-    public Borrower borrow =  new Borrower("name","passwoed","email",123L,312);
+    public Owner owny= new Owner("name","passwoed","email",123L,312L);
+    public Borrower borrow =  new Borrower("name","passwoed","email",123L,312L);
     public Location place = new Location();
 
 
