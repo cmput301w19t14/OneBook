@@ -1,4 +1,4 @@
-package com.example.onebook;
+package ca.ualberta.c301w19t14.onebook;
 
 public class Notification{
 

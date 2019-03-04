@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">OneBook</string>
     <string name="title_activity_main">Notifications</string>
+    <string name="title_activity_searching_main">Searching</string>
+    <string name="title_activity_borrowing_main">Borrowing</string>
+    <string name="title_activity_lending_main">Lending</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">User\'s Name</string>
