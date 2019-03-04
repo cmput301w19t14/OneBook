@@ -1,4 +1,4 @@
-package com.example.onebook;
+package ca.ualberta.c301w19t14.onebook;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
