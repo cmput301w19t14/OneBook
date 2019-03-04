@@ -9,18 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
-<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-=======
->>>>>>> origin/master
         </activity>
         <activity android:name=".SearchingActivity"
             android:parentActivityName=".BorrowingActivity"
@@ -39,19 +38,5 @@
             android:label="@string/title_activity_lending_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".UserLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-=======
-        <activity android:name=".UserLoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
->>>>>>> origin/master
     </application>
-
 </manifest>
