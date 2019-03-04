@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     private Borrower user = new Borrower("John", "hunter2",
-            "mjohn@ualberta.ca", 7806216276L, 17892);
+            "mjohn@ualberta.ca", 7806216276L, 17892L);
 
 
 //comment
@@ -51,8 +51,8 @@ public class UserTest {
 
     @Test
     public void checkSetUserID(){
-        user.setUserID(17224);
-        Assert.assertEquals(17224, user.getUserID());
+        user.setUserID(17224L);
+        Assert.assertEquals(17224L, user.getUserID());
     }
 
 }
