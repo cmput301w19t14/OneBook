@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,11 +17,14 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    NavigationView navigationView;
+    Toolbar toolbar = null;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -38,9 +42,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.addDrawerListener(toggle);
             toggle.syncState();
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
+
+            NotificationFragment notificationFragment = new NotificationFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
+            fragmentTransaction.commit();
         }
+
 
         @Override
         public void onBackPressed() {
@@ -68,12 +78,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         //if (id == R.id.action_settings) {
-        //   return true;
+           //return true;
         //}
 
         return super.onOptionsItemSelected(item);
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -81,20 +90,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         //if (id == R.id.nav_camera) {
         //    // Handle the camera action
        // } else if (id == R.id.nav_gallery) {
 
-        if (id == R.id.nav_borrowing) {
-            Intent intent = new Intent(MainActivity.this,BorrowingActivity.class);
-            startActivity(intent);
+        if (id == R.id.nav_notifications) {
+            NotificationFragment notificationFragment = new NotificationFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
+            fragmentTransaction.commit();
         }
 
-        if (id == R.id.nav_lending) {
-            Intent intent = new Intent(MainActivity.this,LendingActivity.class);
-            startActivity(intent);
+        else if (id == R.id.nav_borrowing) {
+            BorrowingFragment borrowingFragment = new BorrowingFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
+            fragmentTransaction.commit();
         }
+
+        else if (id == R.id.nav_lending) {
+            LendingFragment lendingFragment = new LendingFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, lendingFragment);
+            fragmentTransaction.commit();
+        }
+
+        else if (id == R.id.nav_myacct) {
+            MyacctFragment myacctFragment = new MyacctFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, myacctFragment);
+            fragmentTransaction.commit();
+        }
+
+        else if (id == R.id.nav_messages) {
+            MessagesFragment messagesFragment = new MessagesFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, messagesFragment);
+            fragmentTransaction.commit();
+        }
+
+        else if (id == R.id.nav_logout) {
+
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
