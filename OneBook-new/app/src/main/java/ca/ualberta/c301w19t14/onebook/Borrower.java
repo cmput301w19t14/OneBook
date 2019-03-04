@@ -6,6 +6,10 @@ public class Borrower extends User {
             super(username, password, email, phone, userID);
         }
 
+    Borrower(String username, String password, String email){
+        super(username, password, email);
+    }
+
     public boolean requestBook(Book book, long userID) {   
 
         if (book.getStatus().equals("available") && book.getOwner().getUserID() == userID) {

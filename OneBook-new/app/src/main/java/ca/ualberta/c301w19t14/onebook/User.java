@@ -18,6 +18,14 @@ public abstract class User {
 
     }
 
+    public User( String username, String password, String email){
+
+        this.username = username;
+        this.password = password;
+        this.email = email;
+
+    }
+
     public boolean Login( String username, String password) {
         boolean is_success = false;
 

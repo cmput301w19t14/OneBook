@@ -2,6 +2,9 @@ package com.example.onebook;
 
 import org.junit.Test;
 import org.junit.Assert;
+
+import ca.ualberta.c301w19t14.onebook.Notification;
+
 import static org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
