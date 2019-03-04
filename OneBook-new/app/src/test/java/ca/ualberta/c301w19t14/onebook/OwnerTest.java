@@ -19,7 +19,7 @@ public class OwnerTest {
     public Location place;
 
     private Owner owner = new Owner("john", "hunter2", "john2@gmail.com",
-            7804054451L, 110521);
+            7804054451L, 110521L);
     private Book book = new Book(1,"Narnia","narnia guy","narnia book"
             ,req,owner,borrow, place, "available");
     @Test
