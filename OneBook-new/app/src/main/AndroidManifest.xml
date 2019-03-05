@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".editBookActivity"></activity>
+        <activity
+            android:name=".MyAccnt_activity"
+            android:label="@string/title_activity_my_accnt_activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".editBookActivity" />
         <activity android:name=".ViewBookActivity" />
         <activity android:name=".HomeActivity" />
         <activity
