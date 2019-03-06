@@ -13,7 +13,7 @@ public class MyacctFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.userprofile_activity,container, false);
+        myView = inflater.inflate(R.layout.activity_my_accnt_activity,container, false);
 
 
 
