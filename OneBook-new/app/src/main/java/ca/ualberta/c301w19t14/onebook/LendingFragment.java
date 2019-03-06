@@ -13,6 +13,9 @@ public class LendingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
         myView = inflater.inflate(R.layout.lending_main,container, false);
 
 
