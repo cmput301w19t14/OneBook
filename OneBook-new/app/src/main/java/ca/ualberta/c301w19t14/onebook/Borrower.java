@@ -2,20 +2,12 @@ package ca.ualberta.c301w19t14.onebook;
 
 public class Borrower extends User {
 
-    Borrower(String username, String password, String email, long phone, long userID){
-            super(username, password, email, phone, userID);
-        }
-
-    Borrower(String username, String password, String email){
-        super(username, password, email);
-    }
-
     public boolean requestBook(Book book, long userID) {   
 
-        if (book.getStatus().equals("available") && book.getOwner().getUserID() == userID) {
-            return true;
-        }
-        else
+        //if (book.getStatus().equals("available") && book.getOwner().getUserID() == userID) {
+        //    return true;
+        //}
+        //else
             return false;
     }
 

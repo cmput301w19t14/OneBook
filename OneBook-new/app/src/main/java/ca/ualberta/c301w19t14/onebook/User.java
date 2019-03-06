@@ -1,35 +1,36 @@
 package ca.ualberta.c301w19t14.onebook;
 
-public abstract class User {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
-    private String username;
-    private String password;
+public class User {
+
+    private String uid;
+    private String name;
     private String email;
-    private long phone;
-    private long userID;
-    
-    public User( String username, String password, String email, long phone, long userID){
 
-	    this.username = username;
-	    this.password = password;
-	    this.email = email;
-	    this.phone = phone;
-	    this.userID = userID;
+    public User() {
     }
 
+    public User( String uid, String name, String email){
 
-    public User( String username, String password, String email){
-
-        this.username = username;
-        this.password = password;
+        this.uid = uid;
+        this.name = name;
         this.email = email;
 
     }
 
-    public boolean Login( String username, String password) {
-        boolean is_success = false;
-
-        return is_success;
+    public static void createIfNotExists(final String firebaseUid) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        myRef.child(firebaseUid).setValue(new User(firebaseUid, user.getDisplayName(), user.getEmail()));
     }
 
     protected boolean changeUsername(String username) {
@@ -52,41 +53,10 @@ public abstract class User {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setUserID(long userID){
-        this.userID = userID;
-    }
-
-    public long getUserID() {
-        return userID;
-    }
-
-
-    public String getUsername() {
-        return username;
-    }
 
     public String getEmail() {
         return email;
     }
 
-    public long getPhone() {
-        return phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }
 
