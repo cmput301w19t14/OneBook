@@ -28,8 +28,8 @@ public class editBookActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(editBookActivity.this, LendingActivity.class);  // new to change Lending to My books
-                startActivity(intent);
+                //Intent intent  = new Intent(editBookActivity.this, ?.class);  // new to change Lending to My books
+                //startActivity(intent);
             }
         });
     }

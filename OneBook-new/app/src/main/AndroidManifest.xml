@@ -9,13 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MyAccnt_activity"
-            android:label="@string/title_activity_my_accnt_activity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".editBookActivity" />
         <activity android:name=".ViewBookActivity" />
-        <activity android:name=".HomeActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -33,16 +28,6 @@
         <activity
             android:name=".SearchingActivity"
             android:label="@string/title_activity_searching_main"
-            android:parentActivityName=".BorrowingActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".BorrowingActivity"
-            android:label="@string/title_activity_borrowing_main"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".LendingActivity"
-            android:label="@string/title_activity_lending_main"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

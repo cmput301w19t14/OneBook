@@ -94,10 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        //if (id == R.id.nav_camera) {
-        //    // Handle the camera action
-       // } else if (id == R.id.nav_gallery) {
-
         if (id == R.id.nav_notifications) {
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -106,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_borrowing) {
+
             BorrowingFragment borrowingFragment = new BorrowingFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
