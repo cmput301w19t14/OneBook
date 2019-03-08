@@ -3,50 +3,52 @@ package ca.ualberta.c301w19t14.onebook;
 import java.util.ArrayList;
 
 public class Book {
-    private int Isbn;
-    private String Title;
+    private int isbn;
+    private String title;
     private String author;
-    private String Category;
+    private String category;
     private ArrayList<Request> requesters;
     private Owner owner;
-    private Borrower borrow;
+    private Borrower borrower;
     private Location location;
     private String status;
 
-
-
     private Waitlist waitlist;
+
+    public Book() {
+
+    }
 
     public Book(int Isbn,String Title,String author,
                      String Category,ArrayList<Request> requesters,
                      Owner owner,Borrower borrow,Location location, String status)
     {
-        this.Isbn =Isbn;
-        this.Title = Title;
+        this.isbn =Isbn;
+        this.title = Title;
         this.author = author;
-        this.Category = Category;
+        this.category = Category;
         this.requesters = requesters;
         this.owner = owner;
-        this.borrow=borrow;
+        this.borrower=borrow;
         this.location =location;
         this.status = status;
     }
-    public int get_ISBN() { return Isbn; }
-    public void Set_ISBN(int isbn) { this.Isbn = isbn; }
-    public String Get_title() { return Title; }
-    public void Set_Title(String Titile) { this.Title = Titile; }
-    public String Get_Category() { return Category; }
-    public void Set_Category(String category) { this.Title = category; }
-    public String Get_author() { return this.author; }
-    public void Set_Author(String author) { this.author = author; }
-    public void setOwner(Owner owner) { this.owner = owner; }
-    public void Set_Location(Location location) { this.location = location; }
-    public Location Get_location() { return location; }
-    public void setBorrow(Borrower borrow) { this.borrow = borrow; }
+    public int getIsbn() { return isbn; }
+    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public String getTitle() { return title; }
+    public void setTitle(String Titile) { this.title = Titile; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.title = category; }
+    public String getAuthor() { return this.author; }
+    public void setAuthor(String author) { this.author = author; }
+    public void setLocation(Location location) { this.location = location; }
+    public Location getLocation() { return location; }
     public Owner getOwner() { return owner; }
-    public Borrower getBorrow() { return borrow; }
+    public void setOwner(Owner owner) { this.owner = owner; }
+
     public void setRequesters(Request requesters) {this.requesters.add(requesters); }
     public ArrayList<Request> getRequesters() {return requesters; }
+
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public Waitlist getWaitlist() { return waitlist; }
