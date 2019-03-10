@@ -32,14 +32,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
-
-
         </activity>
-        <activity
-            android:name=".EditUserAcitivity"
-            android:label="@string/title_activity_edit_user_acitivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditUserActivity"/>
         <activity android:name=".editBookActivity" />
         <activity android:name=".ViewBookActivity" />
         <activity
@@ -51,7 +45,6 @@
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -19,27 +19,25 @@ public class MyacctFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.activity_my_accnt_activity,container, false);
-
-
+        myView = inflater.inflate(R.layout.content_my_accnt_activity,container, false);
 
         return myView;
     }
-    @Override
+
+
+   @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        TextView name = getView().findViewById(R.id.name);
-        TextView phone = getView().findViewById(R.id.phone);
-        TextView email = getView().findViewById(R.id.email);
-        name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        TextView nm = getView().findViewById(R.id.Name);
+        TextView em = getView().findViewById(R.id.email);
         Button UserEdit = getView().findViewById(R.id.UserInfoButton);
         UserEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),EditUserAcitivity.class));
+                startActivity(new Intent(getContext(), EditUserActivity.class));
             }
         });
-        //name.setText("Hello, " + FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
+       em.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+       nm.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
     }
 }
