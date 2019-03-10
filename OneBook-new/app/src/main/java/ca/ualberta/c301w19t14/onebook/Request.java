@@ -1,75 +1,52 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.time.Instant;
+import java.util.Date;
+
 public class Request {
 
+    private String date;
     private Location location;
-    private Owner owner;
-    private Borrower borrower;
+    private User user;
     private Book book;
+    private String status;
 
-    Request(Owner owner, Borrower borrower, Book book){
-        setOwner(owner);
-        setBorrower(borrower);
-        setBook(book);
-    }
-
-    public boolean sendNotification() {
-
-        boolean is_success = true;
-
-        return is_success;
+    Request() {
 
     }
 
-    public boolean setLocation(Location location) {
+    Request(User user, Book book){
+        // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
 
-        boolean is_success = true;
-
-        this.location = location;
-
-        return is_success;
-    }
-
-    public boolean setOwner(Owner owner) {
-
-        boolean is_success = true;
-
-        this.owner = owner;
-
-        return is_success;
-    }
-
-    public boolean setBorrower(Borrower borrower) {
-
-        boolean is_success = true;
-
-        this.borrower = borrower;
-
-        return is_success;
-    }
-
-    public boolean setBook(Book book) {
-
-        boolean is_success = true;
-
+        this.user = user;
         this.book = book;
-
-        return is_success;
+        this.date = ts;
     }
 
-    public Book getBook() {
-        return book;
+    Request(User user, Book book, Location location, String date){
+        this.user = user;
+        this.book = book;
+        this.location = location;
+        this.date = date;
     }
 
-    public Borrower getBorrower() {
-        return borrower;
+    public static void requestBook(User user, Book book) {
+        // save to database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Requests");
+        myRef.child(book.getId()).push().setValue(new Request(user, book));
+
+        // notify the user
     }
 
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public Location getLocation() {
-        return location;
+    public void setLocation() {
+        // TODO
     }
 }
