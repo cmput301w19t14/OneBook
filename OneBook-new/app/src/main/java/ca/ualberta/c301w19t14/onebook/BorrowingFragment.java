@@ -24,6 +24,7 @@ public class BorrowingFragment extends Fragment {
 
     View myView;
     GeneralUtil util;
+    public FirebaseUtil firebaseUtil = new FirebaseUtil("Books");
 
     //*********************************************************************************************
     // This is some fabricated test data to make sure the activity page works
@@ -40,7 +41,6 @@ public class BorrowingFragment extends Fragment {
     public Book finance = new Book("Finance", gregg, sue);
 
     public ArrayList<Book> books = new ArrayList<Book>();
-
 
     //*********************************************************************************************
 
@@ -93,8 +93,9 @@ public class BorrowingFragment extends Fragment {
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(getContext(), SearchingActivity.class);
-                startActivity(intent);
+                firebaseUtil.getAllBooks();
+                //Intent intent  = new Intent(getContext(), SearchingActivity.class);
+                //startActivity(intent);
             }
         });
     }
