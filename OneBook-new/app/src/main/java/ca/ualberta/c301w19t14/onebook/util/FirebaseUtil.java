@@ -67,7 +67,12 @@ public class FirebaseUtil {
         }
 
         long i = data.getChildrenCount();
-        Log.d("Onebook", "Children: "+ String.valueOf(i));
+
+        //DEBUG
+        for (int j = 0; j < i; j++){
+            Log.d("Onebook", "Children: "+ books.get(j).getAuthor());
+        }
+
 
         return books;
 
