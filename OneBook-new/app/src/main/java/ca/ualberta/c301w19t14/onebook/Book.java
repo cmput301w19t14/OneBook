@@ -3,7 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import java.util.ArrayList;
 
 public class Book {
-    private int isbn;
+    private long isbn;
     private String title;
     private String author;
     private String category;
@@ -26,21 +26,20 @@ public class Book {
         this.borrower = borrower;
     }
 
-    public Book(int Isbn,String Title,String author,
-                     String Category,ArrayList<Request> requesters,
-                     Owner owner,Borrower borrow,Location location, String status)
+    public Book(long Isbn,String Title,String author,
+                     String Category,
+                User owner,User borrow,Location location, String status)
     {
         this.isbn =Isbn;
         this.title = Title;
         this.author = author;
         this.category = Category;
-        this.requesters = requesters;
         this.owner = owner;
         this.borrower=borrow;
         this.location =location;
         this.status = status;
     }
-    public int getIsbn() { return isbn; }
+    public long getIsbn() { return isbn; }
     public void setIsbn(int isbn) { this.isbn = isbn; }
     public String getTitle() { return title; }
     public void setTitle(String Title) { this.title = Title; }
@@ -52,7 +51,7 @@ public class Book {
     public Location getLocation() { return location; }
     public User getOwner() { return owner; }
     public User getBorrower(){return borrower; }
-    public void setOwner(Owner owner) { this.owner = owner; }
+    public void setOwner(User owner) { this.owner = owner; }
 
     public void setRequesters(Request requesters) {this.requesters.add(requesters); }
     public ArrayList<Request> getRequesters() {return requesters; }

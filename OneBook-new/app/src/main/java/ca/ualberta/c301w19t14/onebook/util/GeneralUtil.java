@@ -13,7 +13,7 @@ public class GeneralUtil {
 
         //see which books' borrowerID matches the given userID
         for (Book book : books){
-            if (book.getBorrower().getUid() == user.getUid()){
+            if (book.getBorrower().getUid().equals(user.getUid())){
                 borrower_books.add(book);
             }
         }
