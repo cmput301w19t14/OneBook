@@ -7,6 +7,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 public class User {
@@ -51,6 +54,9 @@ public class User {
         this.email = email;
     }
 
+    public String getUid(){ return this.uid; }
+
+    public String getName(){ return this.name; }
 
     public String getEmail() {
         return email;

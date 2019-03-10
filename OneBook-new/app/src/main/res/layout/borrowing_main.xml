@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/borrow_recycler"
         android:layout_width="344dp"
         android:layout_height="404dp"
         android:layout_marginStart="16dp"
