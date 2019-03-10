@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
+import java.util.ArrayList;
+
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -116,13 +118,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_lending) {
+            ArrayList<Book> book = new ArrayList<Book>();
 
-            /*
             for(DataSnapshot snapshot : this.books.getData().getChildren()) {
-                Log.i("test",snapshot.getValue(Book.class).toString());
-            }*/
+                Book b = snapshot.getValue(Book.class);
 
-            LendingFragment lendingFragment = new LendingFragment();
+                if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+                {
+                    book.add(b);
+                }
+            }
+
+            LendingFragment lendingFragment = new LendingFragment(book);
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, lendingFragment);
             fragmentTransaction.commit();
@@ -143,7 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_logout) {
-
+            startActivity( new Intent(MainActivity.this, UserLoginActivity.class));
+            FirebaseAuth.getInstance().signOut();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

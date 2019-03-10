@@ -44,8 +44,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         contactViewHolder.vOwner.setText(book.getOwner().getName());
         contactViewHolder.vStatus.setText(book.getStatus());
 
-        //If status is Accepted or Requested, color code
-        //otherwise, leave black if Borrowed
+        // If status is Accepted or Requested, color code
+        // otherwise, leave black if Borrowed
         if (book.getStatus().equals("Accepted"))
             contactViewHolder.vStatus.setTextColor(Color.GREEN);
         else if (book.getStatus().equals("Requested"))
