@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "197656956598-5brl6je6ogsjue34rpe9sil5skn2ngo4.apps.googleusercontent.com",
+          "client_id": "197656956598-87fheiooknhn1qngmf08sopdg983t4d8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ca.ualberta.c301w19t14.onebook",
-            "certificate_hash": "3de434b37338be22662045d9719cc15d6d4abdda"
+            "certificate_hash": "9951acfafaa164d3189e8e87859ff27dee20b9cc"
           }
         },
         {
@@ -54,7 +54,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:197656956598:android:6614f77605fea010",
         "android_client_info": {
-          "package_name": "ca.ualberta.c301w19t14.onebook"
+          "package_name": "com.example.onebook"
         }
       },
       "oauth_client": [
@@ -62,7 +62,7 @@
           "client_id": "197656956598-dli8a6hdl3ikifjauls950v07qguqf2l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ca.ualberta.c301w19t14.onebook",
+            "package_name": "com.example.onebook",
             "certificate_hash": "3de434b37338be22662045d9719cc15d6d4abdda"
           }
         },

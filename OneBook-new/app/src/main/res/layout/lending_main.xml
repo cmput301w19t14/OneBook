@@ -5,10 +5,10 @@
     android:id="@+id/lending_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LendingActivity">
+    tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView3"
+        android:id="@+id/recyclerView"
         android:layout_width="352dp"
         android:layout_height="420dp"
         android:layout_marginStart="16dp"

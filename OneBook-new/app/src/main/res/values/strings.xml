@@ -11,4 +11,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="action_scan">Quick scan</string>
+    <string name="title_activity_my_accnt_activity">MyAccnt_activity</string>
+    <string name="EditUserButton">Edit user information</string>
+    <string name="title_activity_edit_user_acitivity">EditUserAcitivity</string>
 </resources>
