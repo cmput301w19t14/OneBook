@@ -150,7 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_logout) {
-
+            startActivity( new Intent(MainActivity.this, UserLoginActivity.class));
+            FirebaseAuth.getInstance().signOut();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
