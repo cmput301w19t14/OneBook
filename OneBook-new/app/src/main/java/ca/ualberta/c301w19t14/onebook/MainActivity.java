@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,11 +19,17 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+
+import java.util.ArrayList;
+
+import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
     Toolbar toolbar = null;
+    FirebaseUtil books;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
+            this.books = new FirebaseUtil("Books");
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
@@ -110,7 +118,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_lending) {
-            LendingFragment lendingFragment = new LendingFragment();
+            ArrayList<Book> book = new ArrayList<Book>();
+
+            for(DataSnapshot snapshot : this.books.getData().getChildren()) {
+                Book b = snapshot.getValue(Book.class);
+
+                if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+                {
+                    book.add(b);
+                }
+            }
+
+            LendingFragment lendingFragment = new LendingFragment(book);
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, lendingFragment);
             fragmentTransaction.commit();
@@ -131,7 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_logout) {
-
+            startActivity( new Intent(MainActivity.this, UserLoginActivity.class));
+            FirebaseAuth.getInstance().signOut();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
