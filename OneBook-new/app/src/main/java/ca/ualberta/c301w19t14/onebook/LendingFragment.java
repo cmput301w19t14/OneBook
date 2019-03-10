@@ -25,6 +25,7 @@ public class LendingFragment extends Fragment {
     FirebaseRecyclerAdapter adapter;
     ArrayList<Book> book;
 
+
     LendingFragment(ArrayList<Book> book) {
         super();
         this.book = book;
@@ -41,7 +42,7 @@ public class LendingFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        BookAdapter ba = new BookAdapter(this.book);
+        BookAdapter ba = new BookAdapter(getActivity(), book);
         mRecyclerView.setAdapter(ba);
 
         return myView;
