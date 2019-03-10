@@ -22,7 +22,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 // Get an instance of AuthUI based on the default app
                 AuthUI.getInstance().createSignInIntentBuilder().build(),
                 123);
-                
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
