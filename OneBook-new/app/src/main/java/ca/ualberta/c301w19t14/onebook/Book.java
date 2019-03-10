@@ -28,7 +28,7 @@ public class Book {
 
     public Book(int Isbn,String Title,String author,
                      String Category,ArrayList<Request> requesters,
-                     Owner owner,Borrower borrow,Location location, String status)
+                User owner,User borrow,Location location, String status)
     {
         this.isbn =Isbn;
         this.title = Title;
@@ -52,7 +52,7 @@ public class Book {
     public Location getLocation() { return location; }
     public User getOwner() { return owner; }
     public User getBorrower(){return borrower; }
-    public void setOwner(Owner owner) { this.owner = owner; }
+    public void setOwner(User owner) { this.owner = owner; }
 
     public void setRequesters(Request requesters) {this.requesters.add(requesters); }
     public ArrayList<Request> getRequesters() {return requesters; }

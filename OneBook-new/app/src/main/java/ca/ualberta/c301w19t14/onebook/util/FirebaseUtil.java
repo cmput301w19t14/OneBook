@@ -19,9 +19,9 @@ public class FirebaseUtil {
     DatabaseReference ref;
     DataSnapshot data;
 
-    public FirebaseUtil() {
+    public FirebaseUtil(String ref) {
         this.db = FirebaseDatabase.getInstance();
-        this.ref = this.db.getReference();
+        this.ref = this.db.getReference(ref);
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -37,7 +37,7 @@ public class FirebaseUtil {
 
     }
 
-    public DataSnapshot getDataSnapshop() {
+    public DataSnapshot getData() {
         return this.data;
     }
 }
