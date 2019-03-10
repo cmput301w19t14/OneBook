@@ -59,7 +59,7 @@
             android:name=".SearchingActivity"
             android:label="@string/title_activity_searching_main"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
     </application>
 
 </manifest>
