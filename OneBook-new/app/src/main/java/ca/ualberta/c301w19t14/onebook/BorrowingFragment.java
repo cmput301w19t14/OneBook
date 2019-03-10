@@ -59,8 +59,8 @@ public class BorrowingFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Intent intent  = new Intent(getContext(), SearchingActivity.class);
-                //startActivity(intent);
+                Intent intent  = new Intent(getContext(), SearchingActivity.class);
+                startActivity(intent);
             }
         });
     }
