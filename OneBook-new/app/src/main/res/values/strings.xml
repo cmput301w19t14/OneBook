@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">OneBook</string>
-    <string name="title_activity_main">Notifications</string>
+    <string name="title_activity_main">OneBook</string>
     <string name="title_activity_searching_main">Searching</string>
     <string name="title_activity_borrowing_main">Borrowing</string>
     <string name="title_activity_lending_main">Lending</string>
@@ -13,6 +13,12 @@
     <string name="action_scan">Quick scan</string>
     <string name="title_activity_my_accnt_activity">MyAccnt_activity</string>
     <string name="EditUserButton">Edit user information</string>
-    <string name="title_activity_edit_user_acitivity">EditUserAcitivity</string>
+    <string name="title_activity_edit_user_activity">EditUserActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="save">Save</string>
+    <string name="name">Name:</string>
+    <string name="phone">Phone Number:</string>
+    <string name="email">Email:</string>
+    <string name="new_password">New Password:</string>
+
 </resources>

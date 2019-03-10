@@ -40,6 +40,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
         Book book = bookList.get(i);
+
+        contactViewHolder.position = i;
         contactViewHolder.vTitle.setText(book.getTitle());
         contactViewHolder.vOwner.setText(book.getOwner().getName());
         contactViewHolder.vStatus.setText(book.getStatus());
@@ -65,9 +67,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         protected TextView vStatus;
         protected TextView vOwner;
         protected TextView vTitle;
+        public int position;
 
         public BookViewHolder(View v) {
             super(v);
+
 
             v.setBackgroundColor(Color.LTGRAY);
             vTitle =  (TextView) v.findViewById(R.id.txtTitle);
@@ -80,14 +84,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                 @Override public void onClick(View v){
                     Log.d("AHHHHH", "Onclick: clicking recycle view");
-                    int i = getAdapterPosition();
+                    int i = position;
 
                     bookList.get(i);
 
-                    Toast.makeText(mContext, vTitle.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, String.valueOf(position), Toast.LENGTH_SHORT).show();
+
 
                     Intent intent = new Intent(mContext, ViewBookActivity.class);
+                    intent.putExtra("BOOK_ID", i);
                     mContext.startActivity(intent);
+
                 }
 
             });
