@@ -45,11 +45,9 @@ public class EditUserActivity extends AppCompatActivity {
 
                 User.updateEmail(FirebaseAuth.getInstance().getUid(), emailInput);
                 User.updateName(FirebaseAuth.getInstance().getUid(), nameInput);
-                if(passwordInput.isEmpty()) {
-                }else{
+                if(!passwordInput.isEmpty()) {
                     User.updatePassword(FirebaseAuth.getInstance().getUid(), passwordInput);
                 }
-
                 startActivity(new Intent(EditUserActivity.this, MainActivity.class));
             }
         });
