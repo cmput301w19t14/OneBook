@@ -8,8 +8,8 @@ public class Book {
     private String author;
     private String category;
     private ArrayList<Request> requesters;
-    private Owner owner;
-    private Borrower borrower;
+    private User owner;
+    private User borrower;
     private Location location;
     private String status;
 
@@ -17,6 +17,13 @@ public class Book {
 
     public Book() {
 
+    }
+
+    //temporary constructor for recycleview test
+    public Book(String title, User owner, User borrower) {
+        this.title = title;
+        this.owner = owner;
+        this.borrower = borrower;
     }
 
     public Book(int Isbn,String Title,String author,
@@ -36,14 +43,15 @@ public class Book {
     public int getIsbn() { return isbn; }
     public void setIsbn(int isbn) { this.isbn = isbn; }
     public String getTitle() { return title; }
-    public void setTitle(String Titile) { this.title = Titile; }
+    public void setTitle(String Title) { this.title = Title; }
     public String getCategory() { return category; }
     public void setCategory(String category) { this.title = category; }
     public String getAuthor() { return this.author; }
     public void setAuthor(String author) { this.author = author; }
     public void setLocation(Location location) { this.location = location; }
     public Location getLocation() { return location; }
-    public Owner getOwner() { return owner; }
+    public User getOwner() { return owner; }
+    public User getBorrower(){return borrower; }
     public void setOwner(Owner owner) { this.owner = owner; }
 
     public void setRequesters(Request requesters) {this.requesters.add(requesters); }
