@@ -3,6 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import java.util.ArrayList;
 
 public class Book {
+    private String id;
     private long isbn;
     private String title;
     private String author;
@@ -39,6 +40,14 @@ public class Book {
         this.location =location;
         this.status = status;
     }
+
+    public String getId() {
+        return this.id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public long getIsbn() { return isbn; }
     public void setIsbn(int isbn) { this.isbn = isbn; }
     public String getTitle() { return title; }

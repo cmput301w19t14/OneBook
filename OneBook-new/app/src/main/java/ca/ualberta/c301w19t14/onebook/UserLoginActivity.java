@@ -16,8 +16,6 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, MainActivity.class));
-
         startActivityForResult(
                 // Get an instance of AuthUI based on the default app
                 AuthUI.getInstance().createSignInIntentBuilder().build(),
