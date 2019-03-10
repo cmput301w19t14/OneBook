@@ -66,6 +66,7 @@ public class BorrowingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         FloatingActionButton search_button = view.findViewById(R.id.searchButton);
         ArrayList<Book> user_books = new ArrayList<Book>();
+
         util = new GeneralUtil();
 
 
