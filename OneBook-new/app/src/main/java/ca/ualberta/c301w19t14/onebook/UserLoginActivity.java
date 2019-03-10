@@ -16,17 +16,22 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startActivity(new Intent(this, MainActivity.class));
+        /*
         startActivityForResult(
                 // Get an instance of AuthUI based on the default app
                 AuthUI.getInstance().createSignInIntentBuilder().build(),
                 123);
+                */
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
+
         if (requestCode == 123) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
+
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {

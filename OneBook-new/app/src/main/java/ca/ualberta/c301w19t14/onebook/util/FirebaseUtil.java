@@ -9,6 +9,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
+import ca.ualberta.c301w19t14.onebook.Book;
+import ca.ualberta.c301w19t14.onebook.User;
+
 public class FirebaseUtil {
     FirebaseDatabase db;
     DatabaseReference ref;
