@@ -78,6 +78,15 @@ public class FirebaseUtil {
 
     }
 
+    public boolean isNull(){
+        if (data.getChildren() == null) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public DataSnapshot getData() {
         return this.data;
     }

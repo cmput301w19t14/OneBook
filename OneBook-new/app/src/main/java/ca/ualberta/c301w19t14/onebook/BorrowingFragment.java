@@ -24,7 +24,7 @@ public class BorrowingFragment extends Fragment {
 
     View myView;
     GeneralUtil util;
-    public FirebaseUtil firebaseUtil = new FirebaseUtil("Books");
+    Globals globals;
     public ArrayList<Book> books = new ArrayList<Book>();
 
     @Override
@@ -32,6 +32,8 @@ public class BorrowingFragment extends Fragment {
                              Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.borrowing_main,container, false);
 
+        //get globals
+        globals = Globals.getInstance();
 
         RecyclerView recyclerView = (RecyclerView) myView.findViewById(R.id.borrow_recycler);
         recyclerView.setHasFixedSize(true);
@@ -39,7 +41,7 @@ public class BorrowingFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        books = firebaseUtil.getAllBooks();
+        books = globals.firebaseUtil.getAllBooks();
         BookAdapter ba = new BookAdapter(getActivity(), books);
         recyclerView.setAdapter(ba);
 

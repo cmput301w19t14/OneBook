@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,12 +30,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     NavigationView navigationView;
     Toolbar toolbar = null;
-    FirebaseUtil books;
+    Globals globals;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+
+            //Initialize singleton Globals
+            globals = Globals.getInstance();
+            globals.initFirebaseUtil();
+
+
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
@@ -56,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-            this.books = new FirebaseUtil("Books");
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
@@ -111,16 +117,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         else if (id == R.id.nav_borrowing) {
 
-            BorrowingFragment borrowingFragment = new BorrowingFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
-            fragmentTransaction.commit();
+            if (globals.firebaseUtil.isNull()){
+                Toast.makeText(this, "Still loading data, please wait", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                BorrowingFragment borrowingFragment = new BorrowingFragment();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
+                fragmentTransaction.commit();
+            }
         }
 
         else if (id == R.id.nav_lending) {
             ArrayList<Book> book = new ArrayList<Book>();
 
-            for(DataSnapshot snapshot : this.books.getData().getChildren()) {
+            for(DataSnapshot snapshot : globals.firebaseUtil.getData().getChildren()) {
                 Book b = snapshot.getValue(Book.class);
 
                 if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
