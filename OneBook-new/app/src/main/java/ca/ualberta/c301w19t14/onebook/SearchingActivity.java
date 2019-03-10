@@ -72,7 +72,7 @@ public class SearchingActivity extends AppCompatActivity {
                 Book new_book;
                 new_book = snapshot.getValue(Book.class);
                 Log.d(TAG, "Set_recycleView: Book.getTitle is " + new_book.getTitle());
-                if(new_book.getTitle().equals(keyword)) {
+                if(new_book.getTitle().contains(keyword)) {
                     if (new_book != null) {
                         rec_books.add(new_book);
                     }
