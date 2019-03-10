@@ -56,7 +56,7 @@ public class BorrowingFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        BookAdapter ba = new BookAdapter(books);
+        BookAdapter ba = new BookAdapter(getActivity(), books);
         recyclerView.setAdapter(ba);
 
         return myView;
