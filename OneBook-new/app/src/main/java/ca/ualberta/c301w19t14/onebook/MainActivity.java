@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
@@ -115,7 +116,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.nav_lending) {
-            this.books.getData();
+
+            /*
+            for(DataSnapshot snapshot : this.books.getData().getChildren()) {
+                Log.i("test",snapshot.getValue(Book.class).toString());
+            }*/
+
             LendingFragment lendingFragment = new LendingFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, lendingFragment);
