@@ -55,7 +55,7 @@ public class editBookActivity extends AppCompatActivity {
         isbn.setText(Long.toString(ISBN_value));
         owner.setText(Owner_value);
 
-        String bookId = intent.getStringExtra("FINAL_BOOK_ID");
+        //String bookId = intent.getStringExtra("FINAL_BOOK_ID");
 
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //login_user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
@@ -83,7 +83,7 @@ public class editBookActivity extends AppCompatActivity {
                     //save data in database
                     String new_title = title.getText().toString();
                     String new_author = author.getText().toString();
-                    String new_isbn = isbn.getText().toString();
+                    long new_isbn = Long.valueOf(isbn.getText().toString());
                     String new_description = description.getText().toString();
                     //commit statements for the database, sets new values for title,description,isbn,author
                     mDatabase.child("Books").child(Integer.toString(primary_key)).
@@ -91,9 +91,9 @@ public class editBookActivity extends AppCompatActivity {
                     mDatabase.child("Books").child(Integer.toString(primary_key)).
                             child("description").setValue(new_description);
                     mDatabase.child("Books").child(Integer.toString(primary_key)).
-                            child("isbn").setValue(new_title);
+                            child("ISBN").setValue(new_isbn);
                     mDatabase.child("Books").child(Integer.toString(primary_key)).
-                            child("author").setValue(new_title);
+                            child("author").setValue(new_author);
                     //DatabaseReference booksRef = mDatabase.child("books");
                     //booksRef.setValue();
 
