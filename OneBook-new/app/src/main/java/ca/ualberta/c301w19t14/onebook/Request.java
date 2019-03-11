@@ -3,6 +3,8 @@ package ca.ualberta.c301w19t14.onebook;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**This class implements the transaction of a user requesting a book and updates the database
+ * @author CMPUT 301 Team 14*/
 public class Request {
 
 
@@ -19,6 +21,11 @@ public class Request {
     public Request() {
     }
 
+    /**
+     *
+     * @param user
+     * @param book
+     */
     public Request(User user, Book book){
         // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
         Long tsLong = System.currentTimeMillis()/1000;
@@ -30,6 +37,14 @@ public class Request {
         this.date = ts;
     }
 
+    /**
+     *
+     * @param user
+     * @param book
+     * @param location
+     * @param date
+     * @param status
+     */
     Request(User user, Book book, Location location, String date, String status){
         this.user = user;
         this.book = book;
@@ -38,7 +53,11 @@ public class Request {
         this.status = status;
     }
 
-
+    /**
+     *
+     * @param user
+     * @param book
+     */
     public static void requestBook(User user, Book book) {
         // save to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -52,47 +71,92 @@ public class Request {
         // part 5
     }
 
+    /**
+     *
+     */
     public void setLocation() {
         // TODO
     }
 
+    /**
+     *
+     * @return date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     *
+     * @return location
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     *
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @return book
+     */
     public Book getBook() {
         return book;
     }
 
+    /**
+     *
+     * @return status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param date
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     *
+     * @param ISBN
+     */
     public void setISBN(long ISBN) {
         book.setIsbn(ISBN);
     }
 
+    /**
+     *
+     * @param owneremail
+     */
     public void setOwneremail(String owneremail) {
         this.owneremail = owneremail;
     }
 
-
+    /**
+     *
+     * @param requesteremail
+     */
     public void setRequesteremail(String requesteremail) {
         this.requesteremail = requesteremail;
     }
 
+    /**
+     *
+     * @param user
+     * @param book
+     * @param location
+     * @param date
+     */
     Request(User user, Book book, Location location, String date){
         this.user = user;
         this.book = book;
@@ -100,26 +164,50 @@ public class Request {
         this.date = date;
     }
 
+    /**
+     *
+     * @param location
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     *
+     * @param book
+     */
     public void setBook(Book book) {
         this.book = book;
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }

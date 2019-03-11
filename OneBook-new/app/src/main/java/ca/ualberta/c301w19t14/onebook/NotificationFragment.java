@@ -26,11 +26,22 @@ import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
+/**This class will be used in part 5 to implement notifications
+ * A notification will be sent to an owner when someone requests a book they own, or when someone returns it
+ * A notification will be sent to a borrower when their request has been accepted or declined
+ * @author CMPUT 301 Team 14*/
 public class NotificationFragment extends Fragment {
 
     View myView;
     GeneralUtil util;
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return myView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +51,11 @@ public class NotificationFragment extends Fragment {
         DatabaseReference ref = db.getReference("Requests");
 
         ref.addValueEventListener(new ValueEventListener() {
+
+            /**
+             *
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Request> requests = new ArrayList<Request>();
@@ -60,6 +76,10 @@ public class NotificationFragment extends Fragment {
                 mRecyclerView.setAdapter(ba);
             }
 
+            /**
+             *
+             * @param databaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -68,17 +88,32 @@ public class NotificationFragment extends Fragment {
         return myView;
     }
 
+    /**
+     *
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.camera_toolbar, menu);
     }
 
+    /**
+     *
+     * @param item
+     * @return false
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         return false;
     }
 
+    /**
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
