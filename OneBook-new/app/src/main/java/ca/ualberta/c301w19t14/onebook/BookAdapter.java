@@ -52,6 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         contactViewHolder.name = book.getOwner().getName();
         contactViewHolder.owner = book.getOwner().getEmail();
         contactViewHolder.ISBN = book.getIsbn();
+        Log.d(TAG, "onBindViewHolder: book.getISBN: " + book.getIsbn());
         contactViewHolder.title = book.getTitle();
         contactViewHolder.author = book.getAuthor();
         contactViewHolder.description = book.getDescription();
@@ -140,7 +141,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     else
                     {
                         Log.d("book adapter", "Not the Owner of the Book");
-
+                        Intent intent = new Intent(mContext, ViewRequestableActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
                     }
 
 
