@@ -92,19 +92,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             view.setOnClickListener(new View.OnClickListener() {
 
                 @Override public void onClick(View v){
-                    Bundle bundle = new Bundle();
-                    bundle.putString("id", book.getId());
-
                     String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
                     if (current_user.equals(book.getOwner().getEmail()))
                     {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", book.getId());
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
                     }
                     else
                     {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", book.getId());
                         Intent intent = new Intent(mContext, ViewRequestableActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);

@@ -10,6 +10,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * This class allows a user to view book information for a book that they own
+ * Still need to add the book description
+ * Still need to implement the set location so that a user can choose a location on the map
+ * */
 public class ViewBookActivity extends AppCompatActivity {
 //need to add description update
 
@@ -64,20 +69,21 @@ public class ViewBookActivity extends AppCompatActivity {
     }
 
     private void updateData(String id) {
-        title = findViewById(R.id.bookTitle);
-        author = findViewById(R.id.bookauthor);
-        isbn = findViewById(R.id.bookIsbn);
-        owner = findViewById(R.id.bookOwner);
-        description = findViewById(R.id.bookDescription);
-        status = findViewById(R.id.bookStatus);
+        if(id != null) {
+            title = findViewById(R.id.bookTitle);
+            author = findViewById(R.id.bookauthor);
+            isbn = findViewById(R.id.bookIsbn);
+            owner = findViewById(R.id.bookOwner);
+            description = findViewById(R.id.bookDescription);
+            status = findViewById(R.id.bookStatus);
 
-        book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
-        title.setText(book.getTitle());
-        author.setText(book.getAuthor());
-        isbn.setText(Long.toString(book.getIsbn()));
-        owner.setText(book.getOwner().getName());
-        description.setText(book.getDescription());
-        status.setText(book.getStatus());
-
+            book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
+            title.setText(book.getTitle());
+            author.setText(book.getAuthor());
+            isbn.setText(Long.toString(book.getIsbn()));
+            owner.setText(book.getOwner().getName());
+            description.setText(book.getDescription());
+            status.setText(book.getStatus());
+        }
     }
 }

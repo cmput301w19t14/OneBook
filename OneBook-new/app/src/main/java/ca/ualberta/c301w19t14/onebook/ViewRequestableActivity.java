@@ -11,6 +11,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
+/**
+ * This class allows a user to view book information for a book that they do not own
+ * Still need to add the book description
+ * Still need to implement the view location so that a user can see the correct pick up location
+ * Still need to add request process
+ * @author CMPUT 301 Team 14
+ * */
 public class ViewRequestableActivity extends AppCompatActivity {
 //need to add description update
 

@@ -80,6 +80,7 @@ public class Book {
     public User getOwner() { return owner; }
     public User getBorrower(){return borrower; }
     public void setOwner(User owner) { this.owner = owner; }
+    public void setBorrower(User borrower) { this.borrower = borrower; }
 
     public void setRequesters(Request requesters) {this.requesters.add(requesters); }
     public ArrayList<Request> getRequesters() {return requesters; }
