@@ -44,7 +44,7 @@ public class FirebaseUtil {
 
         ArrayList<Request> requests = new ArrayList<Request>();
 
-        for (DataSnapshot ds : data.getChildren()){
+        for (DataSnapshot ds : data.getChildren()) {
             String date = (String) ds.child("date").getValue();
             String owneremail = (String) ds.child("owner").getValue();
             String requesteremail = (String) ds.child("requester").getValue();
@@ -52,6 +52,7 @@ public class FirebaseUtil {
             Request r = new Request(requesteremail, ISBN, owneremail, date);
             requests.add(r);
         }
+
 
         return requests;
     }

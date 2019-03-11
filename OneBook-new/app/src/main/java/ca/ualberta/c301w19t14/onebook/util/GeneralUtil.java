@@ -26,6 +26,7 @@ public class GeneralUtil {
 
         //find requests relevant to the owner
         for (Request request : all_requests) {
+            //Log.d("Requests", request.getOwneremail());
             if (request.getOwneremail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                 owner_requests.add(request);
             }
