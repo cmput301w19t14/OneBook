@@ -48,11 +48,21 @@ public class editBookActivity extends AppCompatActivity {
 
         String bookId = intent.getStringExtra("FINAL_BOOK_ID");
 
+        //private final DatabaseReference mDatabase;
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
+
         Button saveButton =  findViewById(R.id.saveBookButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(editBookActivity.this, ViewBookActivity.class);
+                //save data in database
+
+                //mDatabase.child("Books").child()
+                //DatabaseReference booksRef = mDatabase.child("books");
+                //booksRef.setValue();
+
+                //return to book info page
+                Intent intent  = new Intent(editBookActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +71,11 @@ public class editBookActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(editBookActivity.this, LendingFragment.class);
+                //delete data from database
+
+
+                //return to lending page
+                Intent intent  = new Intent(editBookActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
