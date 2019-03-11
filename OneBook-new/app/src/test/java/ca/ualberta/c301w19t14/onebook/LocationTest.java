@@ -19,8 +19,10 @@ public class LocationTest {
         Location loc = new Location("test", 19.123213213, 12.123213213);
 
         Assert.assertEquals("test", loc.getName());
-        Assert.assertEquals(19.123213213, loc.getLat());
-        Assert.assertEquals(12.123213213, loc.getLng());
+        Assert.assertEquals("message", 19.123213213,
+                loc.getLat(), 0.01f);
+        Assert.assertEquals("message", 12.123213213,
+                loc.getLng(), 0.01f);
     }
 
     @Test
@@ -47,14 +49,16 @@ public class LocationTest {
     public void test_set_lat()
     {
         location.setLat(19.231234111);
-        Assert.assertEquals(19.231234111, location.getLat());
+        Assert.assertEquals("message", 19.231234111,
+                location.getLat(), 0.01f);
     }
 
     @Test
     public void test_set_lng()
     {
         location.setLng(19.231234111);
-        Assert.assertEquals(19.231234111, location.getLng());
+        Assert.assertEquals("message", 19.231234111,
+                location.getLng(), 0.01f);
     }
 
     @Test

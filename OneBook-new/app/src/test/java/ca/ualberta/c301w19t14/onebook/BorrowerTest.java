@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class BorrowerTest {
     public String title = "Narnia";
     public String author = "Narnia Guy";
     public String category = "Fantasy";
-    public String status = "Requested";
+    public String status = "Available";
 
 
     public ArrayList<Request> req;
@@ -50,13 +51,16 @@ public class BorrowerTest {
     @Test
     public void checkRequestBook(){
 
+            boolean testTrue;
+
             book.getOwner().setUid(steve_uid);
-            boolean testTrue = bob.requestBook(book, 15);
-            assertTrue(testTrue);
+            testTrue = bob.requestBook(book);
+            Assert.assertTrue(testTrue);
 
             book.getOwner().setUid(bob_uid);
-            testTrue = steve.requestBook(book, 15);
-            assertFalse(testTrue);
+            book.setStatus("Unavailable");
+            testTrue = steve.requestBook(book);
+            Assert.assertFalse(testTrue);
     }
 
     @Test

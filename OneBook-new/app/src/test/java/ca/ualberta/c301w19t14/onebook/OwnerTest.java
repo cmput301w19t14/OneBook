@@ -14,18 +14,41 @@ import static org.junit.Assert.assertTrue;
  */
 public class OwnerTest {
 
-    public ArrayList<Request> req;
-    public Borrower borrow;
-    public Location place;
+    public String steve_uid = "13w74X57b";
+    public String bob_uid = "43h82Y12a";
+    public String steve_name = "Steve Walloc";
+    public String bob_name = "Bob Marshall";
+    public String steve_email = "steveW@gmail.com";
+    public String bob_email = "bobM@gmail.com";
 
-    private Owner owner = new Owner("john", "hunter2", "john2@gmail.com",
-            7804054451L, 110521L);
-    private Book book = new Book(1,"Narnia","narnia guy","narnia book"
-            ,req,owner,borrow, place, "available");
+    public String edmonton_name = "Edmonton";
+    public double edmonton_lat = 97.3f;
+    public double edmonton_long = 31.8f;
+
+    public String calgary_name = "Calgary";
+    public double calgary_lat = 118.2f;
+    public double calgary_long = 207.5f;
+
+    //Book info
+    public long isbn = 1897213L;
+    public String title = "Narnia";
+    public String author = "Narnia Guy";
+    public String category = "Fantasy";
+    public String status = "Requested";
+
+
+    public ArrayList<Request> req;
+    public Owner steve =  new Owner(steve_uid, steve_name, steve_email);
+    public Borrower bob = new Borrower(bob_uid, bob_name, bob_email);
+    public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
+    public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
+
+    public Book book = new Book(1897213, title, author,category,
+            steve, bob, edmonton, status);
     @Test
     public void checkLendBook() {
 
-        assertTrue(owner.lendBook(book, 20));
+        assertTrue(steve.lendBook(book, 20));
 
 
     }

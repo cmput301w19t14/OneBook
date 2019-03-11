@@ -10,12 +10,12 @@ public class Borrower extends User {
         super(uid, name, email);
     }
 
-    public boolean requestBook(Book book, long userID) {   
+    public boolean requestBook(Book book) {
 
-        //if (book.getStatus().equals("available") && book.getOwner().getUserID() == userID) {
-        //    return true;
-        //}
-        //else
+        if (book.getStatus().equals("Available")) {
+            return true;
+        }
+        else
             return false;
     }
 

@@ -20,17 +20,17 @@ public class NotificationTest {
 
     @Test
     public void checkCreateNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.createNotification(3, 100,200, "This is my message"));
+        Assert.assertEquals(Boolean.TRUE, notificationTest.createNotification(3, "100","200", "This is my message"));
     }
 
     @Test
     public void checkDeleteNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.deleteNotification(3, 100,200, "This is my message"));
+        Assert.assertEquals(Boolean.TRUE, notificationTest.deleteNotification(3, "100","200", "This is my message"));
     }
 
     @Test
     public void checkSendNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.sendNotification(3, 100,200, "This is my message"));
+        Assert.assertEquals(Boolean.TRUE, notificationTest.sendNotification(3, "100","200", "This is my message"));
     }
 
     @Test
@@ -47,14 +47,14 @@ public class NotificationTest {
 
     @Test
     public void checkSetSenderID() {
-        Integer i = 2;
+        String i = "257";
         notificationTest.setSenderID(i);
         Assert.assertEquals(i, notificationTest.getSenderID());
     }
 
     @Test
     public void checkSetRecipientID() {
-        Integer j = 2;
+        String j = "377";
         notificationTest.setRecipientID(j);
         Assert.assertEquals(j, notificationTest.getRecipientID());
     }

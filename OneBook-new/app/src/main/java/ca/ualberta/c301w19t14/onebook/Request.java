@@ -60,6 +60,31 @@ public class Request {
     public String getStatus() {
         return status;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setISBN(long ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setOwneremail(String owneremail) {
+        this.owneremail = owneremail;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setRequesteremail(String requesteremail) {
+        this.requesteremail = requesteremail;
+    }
+
     /*
     Request(User user, Book book, Location location, String date){
         this.user = user;

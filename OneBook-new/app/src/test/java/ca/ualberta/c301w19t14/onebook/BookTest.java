@@ -72,8 +72,8 @@ public class BookTest {
     @Test
     public void testLocation(){
         Assert.assertEquals(edmonton_name, book.getLocation().getName());
-        Assert.assertEquals(edmonton_lat, book.getLocation().getLat());
-        Assert.assertEquals(edmonton_long, book.getLocation().getLng());
+        Assert.assertEquals("message",edmonton_lat, book.getLocation().getLat(), 0.01);
+        Assert.assertEquals("message",edmonton_long, book.getLocation().getLng(), 0.01);
     }
 
 }
