@@ -68,7 +68,7 @@ public class SearchingActivity extends AppCompatActivity {
         rec_books.removeAll(rec_books);
         if(this.books != null) {
             for (DataSnapshot snapshot : this.books.getData().getChildren()) {
-                //Log.d(TAG, "Set_recycleView: "+snapshot.getValue(Book.class).toString());
+                Log.d(TAG, "Set_recycleView: "+snapshot.getValue(Book.class).getTitle());
                 Book new_book;
                 new_book = snapshot.getValue(Book.class);
                 Log.d(TAG, "Set_recycleView: Book.getTitle is " + new_book.getTitle());
