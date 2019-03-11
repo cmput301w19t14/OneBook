@@ -1,5 +1,6 @@
-package com.example.onebook;
+package ca.ualberta.c301w19t14.onebook;
 
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -8,53 +9,65 @@ import java.util.ArrayList;
 
 public class RequestTest {
 
+    public String steve_uid = "13w74X57b";
+    public String bob_uid = "43h82Y12a";
+    public String steve_name = "Steve Walloc";
+    public String bob_name = "Bob Marshall";
+    public String steve_email = "steveW@gmail.com";
+    public String bob_email = "bobM@gmail.com";
+
+    public String edmonton_name = "Edmonton";
+    public double edmonton_lat = 97.3f;
+    public double edmonton_long = 31.8f;
+
+    public String calgary_name = "Calgary";
+    public double calgary_lat = 118.2f;
+    public double calgary_long = 207.5f;
+
+    //Book info
+    public long isbn = 1897213L;
+    public long isbn2 = 1876543L;
+    public String title = "Narnia";
+    public String author = "Narnia Guy";
+    public String category = "Fantasy";
+    public String status = "Requested";
+
+
     public ArrayList<Request> req;
-    public Borrower borrow;
-    public Location place;
+    public User steve =  new User(steve_uid, steve_name, steve_email);
+    public User bob = new User(bob_uid, bob_name, bob_email);
+    public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
+    public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
-    private Owner owner = new Owner("john", "hunter2", "john2@gmail.com",
-            7804054451L, 110521);
-    private Book book = new Book(1,"Narnia","narnia guy","narnia book",
-            req,owner,borrow, place, "available");
-    private Borrower borrower = new Borrower("sam", "sam12", "sam@gmail.com", 121544789, 11111);
+    public Book book = new Book(1897213, title, author,category,
+            steve, bob, edmonton, status);
 
-    private Location location = new Location("test", "Paris", "1124 Street", "France", "T6G 2T7");
-
-    private Request request = new Request(owner, borrower, book);
+    public Notification notification = new Notification();
+    public Request request = new Request(steve, book, edmonton, "21/08/2019", status);
 
     @Test
     public void testSendNotification() {
-        assertTrue(request.sendNotification());
-    }
-
-    @Test
-    public void testSetLocation() {
-        request.setLocation(location);
-        assertEquals(location, request.getLocation());
+        Assert.assertTrue(notification.sendNotification(0, steve_uid,
+                bob_uid, "Requested Book"));
     }
 
     @Test
     public void testSetOwner() {
-        Owner owner1 = new Owner("mary", "hunter2", "john2@gmail.com",
-                7804054451L, 110566);
-        request.setOwner(owner1);
-        assertEquals(owner1, request.getOwner());
+        request.setOwneremail(steve_email);
+        Assert.assertNotEquals(bob_email, request.getUser().getEmail());
+        Assert.assertEquals(steve_email, request.getUser().getEmail());
     }
 
     @Test
-    public void testSetBorrower() {
-        Borrower borrower1 = new Borrower("tom", "sam12", "sam@gmail.com", 121544789, 113411);
-
-        request.setBorrower(borrower1);
-        assertEquals(borrower1, request.getBorrower());
-
+    public void testSetLocation() {
+        request.setLocation(edmonton);
+        Assert.assertEquals(edmonton_name, request.getLocation().getName());
     }
 
     @Test
-    public void testSetBook() {
-        Book book1 = new Book(123,"Another Narnia","narnia guy","narnia book",
-                req,owner,borrow, place, "available");
-        request.setBook(book1);
-        assertEquals(book1, request.getBook());
+    public void testSetISBN() {
+        request.setISBN(isbn2);
+        assertNotEquals(isbn, request.getBook().getIsbn());
+        assertEquals(isbn2, request.getBook().getIsbn());
     }
 }

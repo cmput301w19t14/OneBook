@@ -3,6 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import java.util.ArrayList;
 
 public class Book {
+    private String id;
     private long isbn;
     private String title;
     private String author;
@@ -12,6 +13,16 @@ public class Book {
     private User borrower;
     private Location location;
     private String status;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
 
     private Waitlist waitlist;
 
@@ -24,6 +35,15 @@ public class Book {
         this.title = title;
         this.owner = owner;
         this.borrower = borrower;
+    }
+
+    public Book(long isbn, String title, String author, String description, User owner) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.owner = owner;
+        this.status = "Available";
     }
 
     public Book(long Isbn,String Title,String author,
@@ -39,8 +59,16 @@ public class Book {
         this.location =location;
         this.status = status;
     }
+
+    public String getId() {
+        return this.id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public long getIsbn() { return isbn; }
-    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public void setIsbn(long isbn) { this.isbn = isbn; }
     public String getTitle() { return title; }
     public void setTitle(String Title) { this.title = Title; }
     public String getCategory() { return category; }

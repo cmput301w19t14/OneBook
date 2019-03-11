@@ -7,10 +7,12 @@ public class Waitlist {
 
     private ArrayList<User> queue;
     private Book book;
-    private Borrower borrow;
+    private User borrow;
 
-    public Waitlist(ArrayList<User> q,Book b)
+    public Waitlist(Book b)
     {
+        this.queue = new ArrayList<User>();
+        this.book = b;
 
     }
     public void addQueue(User queue) {
@@ -29,16 +31,22 @@ public class Waitlist {
     }
     public User nextinqueue()
     {
-        //code later
+        if (queue.size() == 0)
+            return null;
+        User user = queue.remove(queue.size()-1);
 
-        return borrow;
+        return user;
+    }
+
+    public User seeNextInQueue(){
+        return queue.get(queue.size()-1);
     }
     public boolean addtoQueue(User user)
     {
         this.queue.add(user);
         return true;
     }
-    public boolean notifyUsers(Borrower borrower,Owner owner)
+    public boolean notifyUsers(User borrower,User owner)
     {
         //code later
         return true;

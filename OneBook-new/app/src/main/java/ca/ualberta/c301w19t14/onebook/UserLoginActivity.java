@@ -16,8 +16,6 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, MainActivity.class));
-
         startActivityForResult(
                 // Get an instance of AuthUI based on the default app
                 AuthUI.getInstance().createSignInIntentBuilder().build(),
@@ -35,7 +33,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                User.createIfNotExists(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                User.updateDatabase(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {

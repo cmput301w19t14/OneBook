@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -24,7 +27,7 @@ public class BorrowingFragment extends Fragment {
 
     View myView;
     GeneralUtil util;
-    public FirebaseUtil firebaseUtil = new FirebaseUtil("Books");
+    Globals globals;
     public ArrayList<Book> books = new ArrayList<Book>();
 
     @Override
@@ -32,6 +35,9 @@ public class BorrowingFragment extends Fragment {
                              Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.borrowing_main,container, false);
 
+        //get globals
+        globals = Globals.getInstance();
+        util = new GeneralUtil();
 
         RecyclerView recyclerView = (RecyclerView) myView.findViewById(R.id.borrow_recycler);
         recyclerView.setHasFixedSize(true);
@@ -39,8 +45,8 @@ public class BorrowingFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        books = firebaseUtil.getAllBooks();
-        BookAdapter ba = new BookAdapter(getActivity(), books);
+        books = util.findBorrowerBooks();
+        BookAdapter ba = new BookAdapter(getActivity(), books, true);
         recyclerView.setAdapter(ba);
 
         return myView;
@@ -48,6 +54,8 @@ public class BorrowingFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
         FloatingActionButton search_button = view.findViewById(R.id.searchButton);
         ArrayList<Book> user_books = new ArrayList<Book>();
 
@@ -57,12 +65,22 @@ public class BorrowingFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Intent intent  = new Intent(getContext(), SearchingActivity.class);
-                //startActivity(intent);
+                Intent intent  = new Intent(getContext(), SearchingActivity.class);
+                startActivity(intent);
             }
         });
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.camera_toolbar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return false;
+    }
 
 
 }

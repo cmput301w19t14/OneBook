@@ -13,21 +13,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
-
-
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     public View view;
     private ArrayList<Book> bookList;
     public Context mContext;
+    public Boolean mode;
 
 
-
-    public BookAdapter(Context context, ArrayList<Book> bookList) {
+    public BookAdapter(Context context, ArrayList<Book> bookList, Boolean mode) {
         this.bookList = bookList;
         this.mContext = context;
+        this.mode = mode;
     }
 
     @Override
@@ -36,27 +37,38 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     @Override
-    public void onBindViewHolder(BookViewHolder contactViewHolder, int i) {
+    public void onBindViewHolder(BookViewHolder bookVh, int i) {
 
 
         Book book = bookList.get(i);
-        contactViewHolder.vTitle.setText(book.getTitle());
-        contactViewHolder.vOwner.setText(book.getOwner().getName());
-        contactViewHolder.vStatus.setText(book.getStatus());
+        bookVh.book = book;
 
-        // If status is Accepted or Requested, color code
-        // otherwise, leave black if Borrowed
-        if (book.getStatus().equals("Accepted"))
-            contactViewHolder.vStatus.setTextColor(Color.GREEN);
-        else if (book.getStatus().equals("Requested"))
-            contactViewHolder.vStatus.setTextColor(Color.YELLOW);
+        bookVh.vTitle.setText(book.getTitle());
+        bookVh.vOwner.setText(book.getOwner().getName());
+        bookVh.vStatus.setText(book.getStatus().toUpperCase());
+        bookVh.vAuthor.setText(book.getAuthor());
+
+        //MODE = true -> do borrowing/lending
+        if (mode) {
+            // If status is Accepted or Requested, color code
+            // otherwise, leave black if Borrowed
+            if (book.getStatus().equals("Accepted"))
+                bookVh.vStatus.setTextColor(Color.GREEN);
+            else if (book.getStatus().equals("Requested"))
+                bookVh.vStatus.setTextColor(Color.YELLOW);
+        }
+        else {
+            // If status
+
+
+        }
     }
 
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.borrower_listitem, viewGroup, false);
+                inflate(R.layout.book_list_item, viewGroup, false);
 
         return new BookViewHolder(itemView);
     }
@@ -64,36 +76,42 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public class BookViewHolder extends RecyclerView.ViewHolder {
         protected TextView vStatus;
         protected TextView vOwner;
+        protected TextView vAuthor;
         protected TextView vTitle;
+        public Book book;
 
         public BookViewHolder(View v) {
             super(v);
-
-            v.setBackgroundColor(Color.LTGRAY);
-            vTitle =  (TextView) v.findViewById(R.id.txtTitle);
-            vOwner = (TextView)  v.findViewById(R.id.txtOwner);
-            vStatus = (TextView)  v.findViewById(R.id.txtStatus);
+            vTitle =  (TextView) v.findViewById(R.id.bookTitle);
+            vOwner = (TextView)  v.findViewById(R.id.bookOwner);
+            vStatus = (TextView)  v.findViewById(R.id.bookStatus);
+            vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
 
             //make the cards clickable
             view = v;
             view.setOnClickListener(new View.OnClickListener() {
 
                 @Override public void onClick(View v){
-                    Log.d("AHHHHH", "Onclick: clicking recycle view");
-                    int i = getAdapterPosition();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", book.getId());
 
-                    bookList.get(i);
+                    String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                    Toast.makeText(mContext, vTitle.getText().toString(), Toast.LENGTH_SHORT).show();
+                    if (current_user.equals(book.getOwner().getEmail()))
+                    {
+                        Intent intent = new Intent(mContext, ViewBookActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(mContext, ViewRequestableActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+                    }
 
-                    Intent intent = new Intent(mContext, ViewBookActivity.class);
-                    mContext.startActivity(intent);
                 }
-
             });
-
-
         }
     }
-
 }

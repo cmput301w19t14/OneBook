@@ -2,6 +2,7 @@ package ca.ualberta.c301w19t14.onebook.util;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.AbsListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,7 +13,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.Book;
+import ca.ualberta.c301w19t14.onebook.Request;
 import ca.ualberta.c301w19t14.onebook.User;
+
+import static java.lang.Thread.sleep;
 
 public class FirebaseUtil {
     private FirebaseDatabase db;
@@ -37,6 +41,19 @@ public class FirebaseUtil {
 
     }
 
+
+    public ArrayList<Request> getAllRequests(){
+
+        ArrayList<Request> requests = new ArrayList<Request>();
+
+        for (DataSnapshot ds : data.getChildren()) {
+            Request r = ds.getValue(Request.class);
+            requests.add(r);
+        }
+
+        return requests;
+    }
+
     public ArrayList<Book> getAllBooks(){
 
         ArrayList<Book> books = new ArrayList<Book>();
@@ -46,19 +63,29 @@ public class FirebaseUtil {
 
             //load in raw data
             String title = (String) ds.child("title").getValue();
-            long ISBN = (long) ds.child("ISBN").getValue();
+            long ISBN = (long) ds.child("isbn").getValue();
             String status = (String) ds.child("status").getValue();
             String author = (String) ds.child("author").getValue();
-            String bemail = (String) ds.child("borrower").child("email").getValue();
             String oemail = (String) ds.child("owner").child("email").getValue();
-            String bname = (String) ds.child("borrower").child("name").getValue();
+
             String oname = (String) ds.child("owner").child("name").getValue();
-            String buid = (String) ds.child("borrower").child("uid").getValue();
+
             String ouid = (String) ds.child("owner").child("uid").getValue();
 
             //load in user and borrower
             User owner = new User(ouid, oname, oemail);
-            User borrower = new User(buid, bname, bemail);
+
+            //only load in borrower if the book is not available
+            User borrower;
+            if (!status.equals("Available") || (!status.equals("Requested"))) {
+                String bemail = (String) ds.child("borrower").child("email").getValue();
+                String bname = (String) ds.child("borrower").child("name").getValue();
+                String buid = (String) ds.child("borrower").child("uid").getValue();
+                borrower = new User(buid, bname, bemail);
+            }
+            else
+                borrower = null;
+
 
             //finally, create the book
             Book b = new Book(ISBN, title, author, null, owner, borrower, null,
@@ -76,6 +103,15 @@ public class FirebaseUtil {
 
         return books;
 
+    }
+
+    public boolean isNull(){
+        if (data.getChildren() == null) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public DataSnapshot getData() {

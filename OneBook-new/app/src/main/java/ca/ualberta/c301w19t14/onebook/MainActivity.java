@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,28 +25,26 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
+import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
     Toolbar toolbar = null;
-    FirebaseUtil books;
+    Globals globals;
+    GeneralUtil util;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+
+            //Initialize singleton Globals
+            globals = Globals.getInstance();
+            globals.initFirebaseUtil();
+
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,7 +55,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-            this.books = new FirebaseUtil("Books");
+            View headerView = navigationView.getHeaderView(0);
+            TextView name = (TextView) headerView.findViewById(R.id.nav_name);
+            name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            TextView email = (TextView) headerView.findViewById(R.id.nav_email);
+            email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
@@ -102,25 +106,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        util = new GeneralUtil();
+
+        //process requests, if any
+        //ArrayList<Request> requests = util.findOwnerRequests();
+
+        //DEBUG
+        //for (Request r : requests) {
+        //    String str = String.valueOf(r.getISBN());
+        //    Log.d("Requests", str);
+       // }
+
         if (id == R.id.nav_notifications) {
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
             fragmentTransaction.commit();
         }
-
         else if (id == R.id.nav_borrowing) {
-
-            BorrowingFragment borrowingFragment = new BorrowingFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
-            fragmentTransaction.commit();
+            if (globals.books.isNull()){
+                Toast.makeText(this, "Still loading data, please wait", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                BorrowingFragment borrowingFragment = new BorrowingFragment();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
+                fragmentTransaction.commit();
+            }
         }
 
         else if (id == R.id.nav_lending) {
             ArrayList<Book> book = new ArrayList<Book>();
 
-            for(DataSnapshot snapshot : this.books.getData().getChildren()) {
+            for(DataSnapshot snapshot : globals.books.getData().getChildren()) {
                 Book b = snapshot.getValue(Book.class);
 
                 if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))

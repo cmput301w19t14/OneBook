@@ -4,8 +4,8 @@ public class Notification{
 
     private Boolean read;
     private String notification;
-    private Integer senderID;
-    private Integer recipientID;
+    private String senderID;
+    private String recipientID;
 
 
     public Boolean getRead() {
@@ -22,29 +22,32 @@ public class Notification{
         this.notification = notification;
     }
 
-    public Integer getSenderID() {
+    public String getSenderID() {
         return senderID;
     }
-    public void setSenderID(Integer senderID) {
+    public void setSenderID(String senderID) {
         this.senderID = senderID;
     }
 
-    public Integer getRecipientID() {
+    public String getRecipientID() {
         return recipientID;
     }
-    public void setRecipientID(Integer recipientID) {
+    public void setRecipientID(String recipientID) {
         this.recipientID = recipientID;
     }
 
-    public Boolean createNotification(Integer notificationType, Integer senderID,  Integer recipientID, String notification){
+    public Boolean createNotification(Integer notificationType, String senderID,
+                                      String recipientID, String notification){
         return Boolean.TRUE;
     }
 
-    public Boolean deleteNotification(Integer notificationType, Integer senderID,  Integer recipientID, String notification){
+    public Boolean deleteNotification(Integer notificationType, String senderID,
+                                      String recipientID, String notification){
         return Boolean.TRUE;
     }
 
-    public Boolean sendNotification(Integer notificationType, Integer senderID,  Integer recipientID, String notification){
+    public Boolean sendNotification(Integer notificationType, String senderID,
+                                    String recipientID, String notification){
         return Boolean.TRUE;
     }
 }

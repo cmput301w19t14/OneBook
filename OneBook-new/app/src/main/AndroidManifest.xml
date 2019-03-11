@@ -31,15 +31,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-
-
-        </activity>
-        <activity
-            android:name=".EditUserAcitivity"
-            android:label="@string/title_activity_edit_user_acitivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_maps"></activity>
+        <activity android:name=".EditUserActivity" />
         <activity android:name=".editBookActivity" />
         <activity android:name=".ViewBookActivity" />
         <activity
@@ -58,8 +51,17 @@
         <activity
             android:name=".SearchingActivity"
             android:label="@string/title_activity_searching_main"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ViewRequestableActivity" />
+        <activity
+            android:name=".AddActivity"
+            android:label="@string/title_activity_add"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.ualberta.c301w19t14.onebook.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
