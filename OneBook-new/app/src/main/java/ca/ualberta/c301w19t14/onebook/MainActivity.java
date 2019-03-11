@@ -55,9 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-            TextView name = (TextView) findViewById(R.id.nav_name);
+            View headerView = navigationView.getHeaderView(0);
+            TextView name = (TextView) headerView.findViewById(R.id.nav_name);
             name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-            TextView email = (TextView) findViewById(R.id.nav_email);
+            TextView email = (TextView) headerView.findViewById(R.id.nav_email);
             email.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
             NotificationFragment notificationFragment = new NotificationFragment();
