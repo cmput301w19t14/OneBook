@@ -72,7 +72,7 @@ public class ViewBookActivity extends AppCompatActivity {
         });
 
         // Add logic to determine when this should be shown
-        Button requestBtn =  findViewById(R.id.requestBtn);
+        Button requestBtn =  findViewById(R.id.requestBookButton);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -12,6 +12,9 @@ public class Request {
     private User user;
     private Book book;
     private String status;
+    private String owneremail;
+    private String requesteremail;
+    private long ISBN;
 
     public Request() {
     }
@@ -77,6 +80,26 @@ public class Request {
         this.date = date;
     }
 
+    public void setISBN(long ISBN) {
+        book.setIsbn(ISBN);
+    }
+
+    public void setOwneremail(String owneremail) {
+        this.owneremail = owneremail;
+    }
+
+
+    public void setRequesteremail(String requesteremail) {
+        this.requesteremail = requesteremail;
+    }
+
+    Request(User user, Book book, Location location, String date){
+        this.user = user;
+        this.book = book;
+        this.location = location;
+        this.date = date;
+    }
+
     public void setLocation(Location location) {
         this.location = location;
     }
@@ -100,4 +123,5 @@ public class Request {
     public void setId(String id) {
         this.id = id;
     }
+
 }

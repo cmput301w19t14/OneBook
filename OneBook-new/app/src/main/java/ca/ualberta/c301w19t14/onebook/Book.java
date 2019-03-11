@@ -59,7 +59,7 @@ public class Book {
     }
 
     public long getIsbn() { return isbn; }
-    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public void setIsbn(long isbn) { this.isbn = isbn; }
     public String getTitle() { return title; }
     public void setTitle(String Title) { this.title = Title; }
     public String getCategory() { return category; }
