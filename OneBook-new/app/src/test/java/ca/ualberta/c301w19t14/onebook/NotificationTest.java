@@ -1,4 +1,4 @@
-package com.example.onebook;
+package ca.ualberta.c301w19t14.onebook;
 
 import org.junit.Test;
 import org.junit.Assert;
