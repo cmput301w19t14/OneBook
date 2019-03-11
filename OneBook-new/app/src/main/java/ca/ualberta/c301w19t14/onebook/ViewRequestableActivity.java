@@ -1,15 +1,15 @@
 package ca.ualberta.c301w19t14.onebook;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.TextView;
 
-import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
+        import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
-public class ViewBookActivity extends AppCompatActivity {
+public class ViewRequestableActivity extends AppCompatActivity {
 //need to add description update
 
     private TextView title;
@@ -24,7 +24,7 @@ public class ViewBookActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_book_main);
+        setContentView(R.layout.activity_requestable_book);
 
         Intent intent = getIntent();
         final String bookId = intent.getStringExtra("BOOK_ID");
@@ -43,11 +43,11 @@ public class ViewBookActivity extends AppCompatActivity {
         owner.setText(bundle.getString("NAME"));
         status.setText(bundle.getString("STATUS"));
 
-        Button editButton =  findViewById(R.id.editBookButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
+        Button requestButton =  findViewById(R.id.requestBookButton);
+        requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(ViewBookActivity.this, editBookActivity.class);
+                Intent intent  = new Intent(ViewRequestableActivity.this, editBookActivity.class);
                 intent.putExtra( "EDIT_BOOK_ID", bookId);
                 startActivity(intent);
             }
@@ -57,7 +57,7 @@ public class ViewBookActivity extends AppCompatActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(ViewBookActivity.this, MapsActivity.class);
+                Intent intent  = new Intent(ViewRequestableActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
