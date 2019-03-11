@@ -146,8 +146,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                         mContext.startActivity(intent);
                     }
 
-
-
                 }
             });
         }
