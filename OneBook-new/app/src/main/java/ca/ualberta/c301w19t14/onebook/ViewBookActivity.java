@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Still need to add the book description
  * Still need to implement the set location so that a user can choose a location on the map
  * */
+
 public class ViewBookActivity extends AppCompatActivity {
 //need to add description update
 

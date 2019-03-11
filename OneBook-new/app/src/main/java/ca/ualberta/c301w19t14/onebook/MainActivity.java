@@ -1,11 +1,7 @@
 package ca.ualberta.c301w19t14.onebook;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,14 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
-import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
+/**This class implements the main functionality of the app
+ * From this class, the navigation bar can be used and all of the fragments can be accessed.
+ * @author CMPUT 301 Team 14*/
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
@@ -34,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Globals globals;
     GeneralUtil util;
 
+        /**
+        *
+        * @param savedInstanceState
+        */
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
 
-
+    //for Navigation menu
         @Override
         public void onBackPressed() {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+    //for Navigation menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //for Navigation menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //    Log.d("Requests", str);
        // }
 
+        //open fragments depending on what was clicked in the nagivation menu
         if (id == R.id.nav_notifications) {
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
