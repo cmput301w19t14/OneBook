@@ -36,7 +36,7 @@ public class ViewBookActivity extends AppCompatActivity {
         description = findViewById(R.id.bookDescription);
         status = findViewById(R.id.bookStatus);
 
-        Bundle bundle = intent.getExtras();
+        final Bundle bundle = intent.getExtras();
         title.setText(bundle.getString("TITLE"));
         author.setText(bundle.getString("AUTHOR"));
         isbn.setText(Long.toString(bundle.getLong("ISBN")));
@@ -47,9 +47,14 @@ public class ViewBookActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(ViewBookActivity.this, editBookActivity.class);
-                intent.putExtra( "EDIT_BOOK_ID", bookId);
-                startActivity(intent);
+                Intent intent = new Intent(ViewBookActivity.this, editBookActivity.class);
+                intent.putExtras(bundle);
+                ViewBookActivity.this.startActivity(intent);
+
+
+                //Intent intent  = new Intent(ViewBookActivity.this, editBookActivity.class);
+                //intent.putExtra( "EDIT_BOOK_ID", bookId);
+                //startActivity(intent);
             }
         });
 
