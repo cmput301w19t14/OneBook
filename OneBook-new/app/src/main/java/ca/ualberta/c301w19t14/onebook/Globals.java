@@ -6,10 +6,12 @@ public class Globals {
     private static Globals instance;
 
     //Globals variables in Globals
-    public FirebaseUtil firebaseUtil;
+    public FirebaseUtil books;
+    public FirebaseUtil requests;
 
     public void initFirebaseUtil(){
-        firebaseUtil = new FirebaseUtil("Books");
+        books = new FirebaseUtil("Books");
+        requests = new FirebaseUtil("Requests");
     }
 
     public static synchronized Globals getInstance(){

@@ -12,31 +12,65 @@ public class Request {
 
     private String date;
     private Location location;
-    private User user;
-    private Book book;
+    private String owneremail;
+    private String requesteremail;
+    private long ISBN;
     private String status;
 
-    Request() {
-
-    }
-
-    Request(User user, Book book){
+    public Request(String requesteremail, long ISBN, String owneremail){
         // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
 
-        this.user = user;
-        this.book = book;
+        this.requesteremail = requesteremail;
+        this.ISBN = ISBN;
+        this.owneremail = owneremail;
         this.date = ts;
     }
 
+    public Request(String requesteremail, long ISBN, String owneremail, String date){
+
+
+        this.requesteremail = requesteremail;
+        this.ISBN = ISBN;
+        this.owneremail = owneremail;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public long getISBN() {
+        return ISBN;
+    }
+
+    public String getOwneremail() {
+        return owneremail;
+    }
+
+    public String getRequesteremail() {
+        return requesteremail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    /*
     Request(User user, Book book, Location location, String date){
         this.user = user;
         this.book = book;
         this.location = location;
         this.date = date;
     }
+    */
 
+
+    /*
     public static void requestBook(User user, Book book) {
         // save to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,6 +79,8 @@ public class Request {
 
         // notify the user
     }
+    */
+
 
     public void setLocation() {
         // TODO

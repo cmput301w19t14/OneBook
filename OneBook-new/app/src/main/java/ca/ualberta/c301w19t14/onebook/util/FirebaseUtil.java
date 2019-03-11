@@ -2,6 +2,7 @@ package ca.ualberta.c301w19t14.onebook.util;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.AbsListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.Book;
+import ca.ualberta.c301w19t14.onebook.Request;
 import ca.ualberta.c301w19t14.onebook.User;
 
 public class FirebaseUtil {
@@ -35,6 +37,23 @@ public class FirebaseUtil {
             }
         });
 
+    }
+
+
+    public ArrayList<Request> getAllRequests(){
+
+        ArrayList<Request> requests = new ArrayList<Request>();
+
+        for (DataSnapshot ds : data.getChildren()){
+            String date = (String) ds.child("date").getValue();
+            String owneremail = (String) ds.child("owner").getValue();
+            String requesteremail = (String) ds.child("requester").getValue();
+            long ISBN = (long) ds.child("ISBN").getValue();
+            Request r = new Request(requesteremail, ISBN, owneremail, date);
+            requests.add(r);
+        }
+
+        return requests;
     }
 
     public ArrayList<Book> getAllBooks(){
