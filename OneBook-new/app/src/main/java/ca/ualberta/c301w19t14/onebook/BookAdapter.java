@@ -90,7 +90,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                     Toast.makeText(mContext, String.valueOf(position), Toast.LENGTH_SHORT).show();
 
-
                     Intent intent = new Intent(mContext, ViewBookActivity.class);
                     intent.putExtra("BOOK_ID", i);
                     mContext.startActivity(intent);
