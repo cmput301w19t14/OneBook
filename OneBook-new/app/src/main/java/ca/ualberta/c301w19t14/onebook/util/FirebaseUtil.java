@@ -63,7 +63,7 @@ public class FirebaseUtil {
 
             //load in raw data
             String title = (String) ds.child("title").getValue();
-            long ISBN = (long) ds.child("ISBN").getValue();
+            long ISBN = (long) ds.child("isbn").getValue();
             String status = (String) ds.child("status").getValue();
             String author = (String) ds.child("author").getValue();
             String oemail = (String) ds.child("owner").child("email").getValue();

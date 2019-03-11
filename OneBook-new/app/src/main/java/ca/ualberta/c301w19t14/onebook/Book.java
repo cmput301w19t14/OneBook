@@ -37,6 +37,15 @@ public class Book {
         this.borrower = borrower;
     }
 
+    public Book(long isbn, String title, String author, String description, User owner) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.owner = owner;
+        this.status = "Available";
+    }
+
     public Book(long Isbn,String Title,String author,
                      String Category,
                 User owner,User borrow,Location location, String status)
@@ -59,7 +68,7 @@ public class Book {
     }
 
     public long getIsbn() { return isbn; }
-    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public void setIsbn(long isbn) { this.isbn = isbn; }
     public String getTitle() { return title; }
     public void setTitle(String Title) { this.title = Title; }
     public String getCategory() { return category; }
