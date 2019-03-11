@@ -19,7 +19,7 @@
         android:src="@drawable/ic_account_box_black_24dp"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/viewBookOwner"
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
@@ -63,7 +63,7 @@
         android:ems="10"
         android:hint="ISBN"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/viewBookOwner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/editBookAuthor" />
@@ -125,5 +125,5 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/viewBookOwner" />
 </android.support.constraint.ConstraintLayout>
