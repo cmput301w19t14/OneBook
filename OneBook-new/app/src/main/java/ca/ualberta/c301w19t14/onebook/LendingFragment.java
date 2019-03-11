@@ -42,7 +42,7 @@ public class LendingFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        BookAdapter ba = new BookAdapter(getActivity(), book);
+        BookAdapter ba = new BookAdapter(getActivity(), book, true);
         mRecyclerView.setAdapter(ba);
 
         return myView;

@@ -49,16 +49,26 @@ public class FirebaseUtil {
             long ISBN = (long) ds.child("ISBN").getValue();
             String status = (String) ds.child("status").getValue();
             String author = (String) ds.child("author").getValue();
-            String bemail = (String) ds.child("borrower").child("email").getValue();
             String oemail = (String) ds.child("owner").child("email").getValue();
-            String bname = (String) ds.child("borrower").child("name").getValue();
+
             String oname = (String) ds.child("owner").child("name").getValue();
-            String buid = (String) ds.child("borrower").child("uid").getValue();
+
             String ouid = (String) ds.child("owner").child("uid").getValue();
 
             //load in user and borrower
             User owner = new User(ouid, oname, oemail);
-            User borrower = new User(buid, bname, bemail);
+
+            //only load in borrower if the book is not available
+            User borrower;
+            if (!status.equals("Available") || (!status.equals("Requested"))) {
+                String bemail = (String) ds.child("borrower").child("email").getValue();
+                String bname = (String) ds.child("borrower").child("name").getValue();
+                String buid = (String) ds.child("borrower").child("uid").getValue();
+                borrower = new User(buid, bname, bemail);
+            }
+            else
+                borrower = null;
+
 
             //finally, create the book
             Book b = new Book(ISBN, title, author, null, owner, borrower, null,
