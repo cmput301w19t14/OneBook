@@ -53,7 +53,7 @@ public class ViewBookActivity extends AppCompatActivity {
             }
         });
     }
-
+  
     @Override
     public void onResume(){
         super.onResume();
@@ -78,5 +78,6 @@ public class ViewBookActivity extends AppCompatActivity {
         owner.setText(book.getOwner().getName());
         description.setText(book.getDescription());
         status.setText(book.getStatus());
+
     }
 }

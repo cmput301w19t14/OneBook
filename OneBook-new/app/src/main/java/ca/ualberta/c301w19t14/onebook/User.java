@@ -80,5 +80,12 @@ public class User {
         return email;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 
