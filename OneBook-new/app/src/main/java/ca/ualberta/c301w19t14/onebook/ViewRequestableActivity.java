@@ -57,13 +57,5 @@ public class ViewRequestableActivity extends AppCompatActivity {
             }
         });
 
-        Button locationButton =  findViewById(R.id.GetLocationButton);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(ViewRequestableActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

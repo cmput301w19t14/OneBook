@@ -37,24 +37,25 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     @Override
-    public void onBindViewHolder(BookViewHolder contactViewHolder, int i) {
+    public void onBindViewHolder(BookViewHolder bookVh, int i) {
 
 
         Book book = bookList.get(i);
-        contactViewHolder.book = book;
+        bookVh.book = book;
 
-        contactViewHolder.vTitle.setText(book.getTitle());
-        contactViewHolder.vOwner.setText(book.getOwner().getName());
-        contactViewHolder.vStatus.setText(book.getStatus());
+        bookVh.vTitle.setText(book.getTitle());
+        bookVh.vOwner.setText(book.getOwner().getName());
+        bookVh.vStatus.setText(book.getStatus().toUpperCase());
+        bookVh.vAuthor.setText(book.getAuthor());
 
         //MODE = true -> do borrowing/lending
         if (mode) {
             // If status is Accepted or Requested, color code
             // otherwise, leave black if Borrowed
             if (book.getStatus().equals("Accepted"))
-                contactViewHolder.vStatus.setTextColor(Color.GREEN);
+                bookVh.vStatus.setTextColor(Color.GREEN);
             else if (book.getStatus().equals("Requested"))
-                contactViewHolder.vStatus.setTextColor(Color.YELLOW);
+                bookVh.vStatus.setTextColor(Color.YELLOW);
         }
         else {
             // If status
@@ -67,7 +68,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.borrower_listitem, viewGroup, false);
+                inflate(R.layout.book_list_item, viewGroup, false);
 
         return new BookViewHolder(itemView);
     }
@@ -75,15 +76,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public class BookViewHolder extends RecyclerView.ViewHolder {
         protected TextView vStatus;
         protected TextView vOwner;
+        protected TextView vAuthor;
         protected TextView vTitle;
         public Book book;
 
         public BookViewHolder(View v) {
             super(v);
-            v.setBackgroundColor(Color.LTGRAY);
-            vTitle =  (TextView) v.findViewById(R.id.txtTitle);
-            vOwner = (TextView)  v.findViewById(R.id.txtOwner);
-            vStatus = (TextView)  v.findViewById(R.id.txtStatus);
+            vTitle =  (TextView) v.findViewById(R.id.bookTitle);
+            vOwner = (TextView)  v.findViewById(R.id.bookOwner);
+            vStatus = (TextView)  v.findViewById(R.id.bookStatus);
+            vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
 
             //make the cards clickable
             view = v;
