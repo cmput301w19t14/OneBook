@@ -2,145 +2,137 @@ package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-
-
+/**This class is used to create all of the recycler views that list books.
+ This includes the Search Book View, the Lending View, and the Borrowing View.
+ * @author CMPUT 301 Team 14
+ */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     public View view;
     private ArrayList<Book> bookList;
     public Context mContext;
-    
-    public String TAG = "book adapter";
     public Boolean mode;
 
-
-
-
+    /**
+     *
+     * @param context
+     * @param bookList
+     * @param mode
+     */
     public BookAdapter(Context context, ArrayList<Book> bookList, Boolean mode) {
         this.bookList = bookList;
         this.mContext = context;
         this.mode = mode;
     }
 
+    /**
+     *
+     * @return bookList.size()
+     */
     @Override
     public int getItemCount() {
         return bookList.size();
     }
 
+    /**
+     *
+     * @param bookVh
+     * @param i
+     */
     @Override
-    public void onBindViewHolder(BookViewHolder contactViewHolder, int i) {
-
+    public void onBindViewHolder(BookViewHolder bookVh, int i) {
 
         Book book = bookList.get(i);
+        bookVh.book = book;
 
-        //variables for the book associated with card
-        contactViewHolder.name = book.getOwner().getName();
-        contactViewHolder.owner = book.getOwner().getEmail();
-        contactViewHolder.ISBN = book.getIsbn();
-        Log.d(TAG, "onBindViewHolder: book.getISBN: " + book.getIsbn());
-        contactViewHolder.title = book.getTitle();
-        contactViewHolder.author = book.getAuthor();
-        contactViewHolder.description = book.getDescription();
-        contactViewHolder.status = book.getStatus();
-
-        contactViewHolder.vTitle.setText(book.getTitle());
-        contactViewHolder.vOwner.setText(book.getOwner().getName());
-        contactViewHolder.vStatus.setText(book.getStatus());
+        bookVh.vTitle.setText(book.getTitle());
+        bookVh.vOwner.setText(book.getOwner().getName());
+        bookVh.vStatus.setText(book.getStatus().toUpperCase());
+        bookVh.vAuthor.setText(book.getAuthor());
 
         //MODE = true -> do borrowing/lending
         if (mode) {
             // If status is Accepted or Requested, color code
             // otherwise, leave black if Borrowed
             if (book.getStatus().equals("Accepted"))
-                contactViewHolder.vStatus.setTextColor(Color.GREEN);
+                bookVh.vStatus.setTextColor(Color.GREEN);
             else if (book.getStatus().equals("Requested"))
-                contactViewHolder.vStatus.setTextColor(Color.YELLOW);
+                bookVh.vStatus.setTextColor(Color.YELLOW);
         }
         else {
-            // If status
-
-
+            // If status is borrowed, do nothing.
         }
     }
 
+    /**
+     *
+     * @param viewGroup
+     * @param i
+     * @return
+     */
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.borrower_listitem, viewGroup, false);
+                inflate(R.layout.book_list_item, viewGroup, false);
 
         return new BookViewHolder(itemView);
     }
 
+    /**
+     *
+     */
     public class BookViewHolder extends RecyclerView.ViewHolder {
         protected TextView vStatus;
         protected TextView vOwner;
+        protected TextView vAuthor;
         protected TextView vTitle;
-        public long ISBN;
-        public String owner;
-        public String title;
-        public String author;
-        public String description;
-        public String status;
-        public String name;
+        public Book book;
 
+        /**
+         *
+         * @param v
+         */
         public BookViewHolder(View v) {
             super(v);
-
-
-            v.setBackgroundColor(Color.LTGRAY);
-            vTitle =  (TextView) v.findViewById(R.id.txtTitle);
-            vOwner = (TextView)  v.findViewById(R.id.txtOwner);
-            vStatus = (TextView)  v.findViewById(R.id.txtStatus);
+            vTitle =  (TextView) v.findViewById(R.id.bookTitle);
+            vOwner = (TextView)  v.findViewById(R.id.bookOwner);
+            vStatus = (TextView)  v.findViewById(R.id.bookStatus);
+            vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
 
             //make the cards clickable
             view = v;
             view.setOnClickListener(new View.OnClickListener() {
 
+                //create bundle to pass the current book to the view book page
                 @Override public void onClick(View v){
-                    Log.d("AHHHHH", "Onclick: clicking recycle view");
-
-
-                    Toast.makeText(mContext, String.valueOf(ISBN), Toast.LENGTH_SHORT).show();
-
-
                     Bundle bundle = new Bundle();
-                    bundle.putLong("ISBN",ISBN);
-                    bundle.putString("DESCRIPTION",description);
-                    bundle.putString("STATUS",status);
-                    bundle.putString("TITLE",title);
-                    bundle.putString("AUTHOR",author);
-                    bundle.putString("OWNER",owner);
-                    bundle.putString("NAME",name);
+                    bundle.putString("id", book.getId());
 
-                    String current_user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-                    Log.d(TAG, "onClick: current user: "+current_user );
-                    Log.d(TAG, "onClick: current owner: "+name );
-                    if (current_user.equals(name))
+                    //if the user clicks on a book they own, they will get a view page that allows edits
+                    //if the user clicks on a book they do not own, they will get a view page that doesn't allow edits
+                    String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                    if (current_user.equals(book.getOwner().getEmail()))
                     {
-                        Log.d("book adapter", "all the info: "+ISBN+description+status+title+author+owner);
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
                     }
                     else
                     {
-                        Log.d("book adapter", "Not the Owner of the Book");
                         Intent intent = new Intent(mContext, ViewRequestableActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);

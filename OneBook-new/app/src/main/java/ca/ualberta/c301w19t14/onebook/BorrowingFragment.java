@@ -8,18 +8,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
+/**This class runs when Borrowing is clicked on in the navigation menu
+ * It displays a recycler view of all books that the current user has requested or has borrowed
+ * @author CMPUT 301 Team 14*/
 public class BorrowingFragment extends Fragment {
 
     View myView;
@@ -36,6 +36,7 @@ public class BorrowingFragment extends Fragment {
         globals = Globals.getInstance();
         util = new GeneralUtil();
 
+        //create recycler view of books requested or borrowed by current user
         RecyclerView recyclerView = (RecyclerView) myView.findViewById(R.id.borrow_recycler);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -49,13 +50,17 @@ public class BorrowingFragment extends Fragment {
         return myView;
     }
 
+    //create page content
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
         FloatingActionButton search_button = view.findViewById(R.id.searchButton);
         ArrayList<Book> user_books = new ArrayList<Book>();
 
         util = new GeneralUtil();
 
+        //go to the search page when the search button is clicked
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +71,16 @@ public class BorrowingFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.camera_toolbar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return false;
+    }
 
 
 }

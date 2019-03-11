@@ -1,37 +1,41 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
+/**This class runs when "Lending" is clicked on the navigation menu
+ * It displays all of the books that the current user owns
+ * If a user clicks on an item in a list, they see the view book page with an edit option
+ * @author CMPUT 301 Team 14*/
 public class LendingFragment extends Fragment {
 
     View myView;
-    FirebaseRecyclerAdapter adapter;
+    BookAdapter ba;
     ArrayList<Book> book;
 
+
+    public LendingFragment() {
+
+    }
 
     LendingFragment(ArrayList<Book> book) {
         super();
         this.book = book;
     }
 
-
+    //create recycler view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,14 +46,47 @@ public class LendingFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        BookAdapter ba = new BookAdapter(getActivity(), book, true);
+        ba = new BookAdapter(getActivity(), book, true);
         mRecyclerView.setAdapter(ba);
 
+        myView.findViewById(R.id.newBook).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), AddActivity.class));
+                    }
+                }
+        );
+
         return myView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onStart() {
         super.onStart();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ba.notifyDataSetChanged();
+    }
+
+    //use tool bar that has the camera button
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.camera_toolbar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return false;
+    }
+
 }

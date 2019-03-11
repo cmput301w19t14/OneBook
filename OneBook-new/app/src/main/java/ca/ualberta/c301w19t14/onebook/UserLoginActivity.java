@@ -10,7 +10,10 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 
-
+/**Implements the user login functionality
+ Allows a user to login with an email and password
+ If a user inputs an email that isn't already associated with an account, they will be prompted to make a new account
+ @author CMPUT 301 Team 14*/
 public class UserLoginActivity extends AppCompatActivity {
 
     @Override
