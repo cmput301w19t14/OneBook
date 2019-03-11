@@ -7,7 +7,7 @@ public class Waitlist {
 
     private ArrayList<User> queue;
     private Book book;
-    private Borrower borrow;
+    private User borrow;
 
     public Waitlist(Book b)
     {
@@ -46,7 +46,7 @@ public class Waitlist {
         this.queue.add(user);
         return true;
     }
-    public boolean notifyUsers(Borrower borrower,Owner owner)
+    public boolean notifyUsers(User borrower,User owner)
     {
         //code later
         return true;

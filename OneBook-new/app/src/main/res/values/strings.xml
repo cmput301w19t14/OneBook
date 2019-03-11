@@ -20,5 +20,6 @@
     <string name="phone">Phone Number:</string>
     <string name="email">Email:</string>
     <string name="new_password">New Password:</string>
+    <string name="request">Request</string>
 
 </resources>

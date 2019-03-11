@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
@@ -65,6 +68,19 @@ public class ViewBookActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent  = new Intent(ViewBookActivity.this, MapsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // Add logic to determine when this should be shown
+        Button requestBtn =  findViewById(R.id.requestBookButton);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = Globals.getInstance().users.getData().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(User.class);
+                Book book = Globals.getInstance().books.getData().child(bookId).getValue(Book.class);
+                Request.requestBook(user, book);
+                Toast.makeText(ViewBookActivity.this, "Book requested.", Toast.LENGTH_SHORT).show();
+                // todo: update book status
             }
         });
     }

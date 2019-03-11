@@ -17,25 +17,6 @@ public class GeneralUtil {
 
     public Globals globals;
 
-    public ArrayList<Request> findOwnerRequests(){
-
-        ArrayList<Request> owner_requests = new ArrayList<Request>();
-        ArrayList<Request> all_requests = new ArrayList<Request>();
-        globals = Globals.getInstance();
-        all_requests = globals.requests.getAllRequests();
-
-        //find requests relevant to the owner
-        for (Request request : all_requests) {
-            //Log.d("Requests", request.getOwneremail());
-            if (request.getOwneremail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                owner_requests.add(request);
-            }
-        }
-
-        return owner_requests;
-
-    }
-
     public ArrayList<Book> findBorrowerBooks(){
 
         ArrayList<Book> all_books = new ArrayList<>();

@@ -34,8 +34,8 @@ public class RequestTest {
 
 
     public ArrayList<Request> req;
-    public Borrower steve =  new Borrower(steve_uid, steve_name, steve_email);
-    public Borrower bob = new Borrower(bob_uid, bob_name, bob_email);
+    public User steve =  new User(steve_uid, steve_name, steve_email);
+    public User bob = new User(bob_uid, bob_name, bob_email);
     public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
     public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
@@ -43,7 +43,7 @@ public class RequestTest {
             steve, bob, edmonton, status);
 
     public Notification notification = new Notification();
-    public Request request = new Request(bob_email, isbn, steve_email, "21/08/2019");
+    public Request request = new Request(steve, book, edmonton, "21/08/2019", status);
 
     @Test
     public void testSendNotification() {
@@ -54,8 +54,8 @@ public class RequestTest {
     @Test
     public void testSetOwner() {
         request.setOwneremail(steve_email);
-        Assert.assertNotEquals(bob_email, request.getOwneremail());
-        Assert.assertEquals(steve_email, request.getOwneremail());
+        Assert.assertNotEquals(bob_email, request.getUser().getEmail());
+        Assert.assertEquals(steve_email, request.getUser().getEmail());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class RequestTest {
     @Test
     public void testSetISBN() {
         request.setISBN(isbn2);
-        assertNotEquals(isbn, request.getISBN());
-        assertEquals(isbn2, request.getISBN());
+        assertNotEquals(isbn, request.getBook().getIsbn());
+        assertEquals(isbn2, request.getBook().getIsbn());
     }
 }

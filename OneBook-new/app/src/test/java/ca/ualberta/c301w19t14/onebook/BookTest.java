@@ -32,8 +32,8 @@ public class BookTest {
 
 
     public ArrayList<Request> req;
-    public Borrower steve =  new Borrower(steve_uid, steve_name, steve_email);
-    public Borrower bob = new Borrower(bob_uid, bob_name, bob_email);
+    public User steve =  new User(steve_uid, steve_name, steve_email);
+    public User bob = new User(bob_uid, bob_name, bob_email);
     public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
     public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
