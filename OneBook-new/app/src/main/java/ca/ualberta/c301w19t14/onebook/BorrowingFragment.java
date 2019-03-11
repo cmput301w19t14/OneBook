@@ -42,7 +42,8 @@ public class BorrowingFragment extends Fragment {
         recyclerView.setLayoutManager(llm);
 
         books = globals.firebaseUtil.getAllBooks();
-        BookAdapter ba = new BookAdapter(getActivity(), books);
+        books = util.findBorrowerBooks(books);
+        BookAdapter ba = new BookAdapter(getActivity(), books, true);
         recyclerView.setAdapter(ba);
 
         return myView;
