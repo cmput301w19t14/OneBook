@@ -42,6 +42,7 @@ public class ViewRequestableActivity extends AppCompatActivity {
         isbn.setText(Long.toString(bundle.getLong("ISBN")));
         owner.setText(bundle.getString("NAME"));
         status.setText(bundle.getString("STATUS"));
+        description.setText(bundle.getString("DESCRIPTION"));
 
         Button requestButton =  findViewById(R.id.requestBookButton);
         requestButton.setOnClickListener(new View.OnClickListener() {
