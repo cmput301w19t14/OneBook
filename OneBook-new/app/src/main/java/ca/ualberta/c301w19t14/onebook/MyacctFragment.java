@@ -40,15 +40,6 @@ public class MyacctFragment extends Fragment{
 
         em.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         nm.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-
-        /*
-        ImageButton UserEdit = getView().findViewById(R.id.pencil_button);
-        UserEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), EditUserActivity.class));
-            }
-        });*/
     }
 
     @Override
