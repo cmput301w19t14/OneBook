@@ -17,7 +17,7 @@
             android:layout_width="151dp"
             android:layout_height="128dp"
 
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             android:contentDescription="@string/user_pic"
             android:src="@drawable/ic_account_box_black_24dp"
             app:layout_constraintStart_toStartOf="parent"

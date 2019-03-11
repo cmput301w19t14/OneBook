@@ -72,8 +72,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
 
                 @Override public void onClick(View v){
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Alert message to be shown");
+                    alertDialog.setTitle("Accept/Reject");
+                    alertDialog.setMessage("What would you like to do?");
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
