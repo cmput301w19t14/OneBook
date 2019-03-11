@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Set Pick-up Location"
+        android:text="View Pick-Up Location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bookStatus"
         app:layout_constraintTop_toBottomOf="@+id/bookDescription" />
@@ -168,11 +168,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/editBookButton"
+        android:id="@+id/requestBookButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="edit"
+        android:text="Request"
         app:layout_constraintBottom_toTopOf="@+id/GetLocationButton"
         app:layout_constraintEnd_toEndOf="@+id/GetLocationButton"
         app:layout_constraintStart_toStartOf="@+id/GetLocationButton" />
