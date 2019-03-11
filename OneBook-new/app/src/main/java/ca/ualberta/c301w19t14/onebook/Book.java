@@ -189,6 +189,7 @@ public class Book {
      * @param owner
      */
     public void setOwner(User owner) { this.owner = owner; }
+    public void setBorrower(User borrower) { this.borrower = borrower; }
 
     /**
      * setter for book requesters

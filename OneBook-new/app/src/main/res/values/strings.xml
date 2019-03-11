@@ -33,7 +33,7 @@
     <string name="Description">Description</string>
     <string name="Requests_on_Books">Requests on the book</string>
     <string name="edit">Edit</string>
-    <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_add">Add Book</string>
     <string name="author">Author</string>
     <string name="book_name">Name</string>
     <string name="descr">Description</string>

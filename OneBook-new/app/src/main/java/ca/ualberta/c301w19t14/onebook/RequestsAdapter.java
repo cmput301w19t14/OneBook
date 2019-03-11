@@ -78,6 +78,12 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                                     DatabaseReference myRef = database.getReference("Requests");
                                     myRef.child(request.getId()).setValue(request);
 
+                                    Book book = request.getBook();
+                                    book.setStatus("Borrowed");
+                                    book.setBorrower(request.getUser());
+                                    myRef = database.getReference("Books");
+                                    myRef.child(request.getBook().getId()).setValue(request.getBook());
+
                                     dialog.dismiss();
                                 }
                             });
