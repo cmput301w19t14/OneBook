@@ -41,7 +41,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         Book book = bookList.get(i);
 
-        contactViewHolder.position = i;
+        //variables for the book associated with card
+        contactViewHolder.owner = book.getOwner().getEmail();
+        contactViewHolder.ISBN = book.getIsbn();
+        contactViewHolder.title = book.getTitle();
+        contactViewHolder.author = book.getAuthor();
+        contactViewHolder.description = book.getDescription();
+        contactViewHolder.status = book.getStatus();
+
         contactViewHolder.vTitle.setText(book.getTitle());
         contactViewHolder.vOwner.setText(book.getOwner().getName());
         contactViewHolder.vStatus.setText(book.getStatus());
@@ -67,7 +74,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         protected TextView vStatus;
         protected TextView vOwner;
         protected TextView vTitle;
-        public int position;
+        public long ISBN;
+        public String owner;
+        public String title;
+        public String author;
+        public String description;
+        public String status;
 
         public BookViewHolder(View v) {
             super(v);
@@ -84,23 +96,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                 @Override public void onClick(View v){
                     Log.d("AHHHHH", "Onclick: clicking recycle view");
-                    int i = position;
-
-                    bookList.get(i);
-
-                    Toast.makeText(mContext, String.valueOf(position), Toast.LENGTH_SHORT).show();
 
 
+                    Toast.makeText(mContext, String.valueOf(ISBN), Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("ISBN",ISBN);
+                    bundle.putString("DESCRIPTION",description);
+                    bundle.putString("STATUS",status);
+                    bundle.putString("TITLE",title);
+                    bundle.putString("AUTHOR",author);
+                    bundle.putString("OWNER",owner);
+
+                    Log.d("book adapter", "all the info: "+ISBN+description+status+title+author+owner);
                     Intent intent = new Intent(mContext, ViewBookActivity.class);
-                    intent.putExtra("BOOK_ID", i);
+                    intent.putExtras(bundle);
                     mContext.startActivity(intent);
 
+
                 }
-
             });
-
-
         }
     }
-
 }

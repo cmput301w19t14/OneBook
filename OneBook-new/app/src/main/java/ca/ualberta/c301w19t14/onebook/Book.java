@@ -14,6 +14,16 @@ public class Book {
     private Location location;
     private String status;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
     private Waitlist waitlist;
 
     public Book() {
