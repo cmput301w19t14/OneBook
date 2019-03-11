@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 
@@ -22,7 +24,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public View view;
     private ArrayList<Book> bookList;
     public Context mContext;
+    
+    public String TAG = "book adapter";
     public Boolean mode;
+
 
 
 
@@ -44,8 +49,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(i);
 
         //variables for the book associated with card
+        contactViewHolder.name = book.getOwner().getName();
         contactViewHolder.owner = book.getOwner().getEmail();
         contactViewHolder.ISBN = book.getIsbn();
+        Log.d(TAG, "onBindViewHolder: book.getISBN: " + book.getIsbn());
         contactViewHolder.title = book.getTitle();
         contactViewHolder.author = book.getAuthor();
         contactViewHolder.description = book.getDescription();
@@ -90,6 +97,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         public String author;
         public String description;
         public String status;
+        public String name;
 
         public BookViewHolder(View v) {
             super(v);
@@ -118,12 +126,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     bundle.putString("TITLE",title);
                     bundle.putString("AUTHOR",author);
                     bundle.putString("OWNER",owner);
+                    bundle.putString("NAME",name);
 
-                    Log.d("book adapter", "all the info: "+ISBN+description+status+title+author+owner);
+                    String current_user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                    Log.d(TAG, "onClick: current user: "+current_user );
+                    Log.d(TAG, "onClick: current owner: "+name );
+                    if (current_user.equals(name))
+                    {
+                        Log.d("book adapter", "all the info: "+ISBN+description+status+title+author+owner);
+                        Intent intent = new Intent(mContext, ViewBookActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+                    }
+                    else
+                    {
+                        Log.d("book adapter", "Not the Owner of the Book");
+                        Intent intent = new Intent(mContext, ViewRequestableActivity.class);
+                        intent.putExtras(bundle);
+                        mContext.startActivity(intent);
+                    }
 
-                    Intent intent = new Intent(mContext, ViewBookActivity.class);
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
 
 
                 }

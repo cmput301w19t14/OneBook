@@ -40,7 +40,7 @@ public class ViewBookActivity extends AppCompatActivity {
         title.setText(bundle.getString("TITLE"));
         author.setText(bundle.getString("AUTHOR"));
         isbn.setText(Long.toString(bundle.getLong("ISBN")));
-        owner.setText(bundle.getString("OWNER"));
+        owner.setText(bundle.getString("NAME"));
         status.setText(bundle.getString("STATUS"));
 
         Button editButton =  findViewById(R.id.editBookButton);
