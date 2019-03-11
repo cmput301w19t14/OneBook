@@ -22,12 +22,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public View view;
     private ArrayList<Book> bookList;
     public Context mContext;
+    public Boolean mode;
 
 
 
-    public BookAdapter(Context context, ArrayList<Book> bookList) {
+    public BookAdapter(Context context, ArrayList<Book> bookList, Boolean mode) {
         this.bookList = bookList;
         this.mContext = context;
+        this.mode = mode;
     }
 
     @Override
@@ -53,12 +55,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         contactViewHolder.vOwner.setText(book.getOwner().getName());
         contactViewHolder.vStatus.setText(book.getStatus());
 
-        // If status is Accepted or Requested, color code
-        // otherwise, leave black if Borrowed
-        if (book.getStatus().equals("Accepted"))
-            contactViewHolder.vStatus.setTextColor(Color.GREEN);
-        else if (book.getStatus().equals("Requested"))
-            contactViewHolder.vStatus.setTextColor(Color.YELLOW);
+        //MODE = true -> do borrowing/lending
+        if (mode) {
+            // If status is Accepted or Requested, color code
+            // otherwise, leave black if Borrowed
+            if (book.getStatus().equals("Accepted"))
+                contactViewHolder.vStatus.setTextColor(Color.GREEN);
+            else if (book.getStatus().equals("Requested"))
+                contactViewHolder.vStatus.setTextColor(Color.YELLOW);
+        }
+        else {
+            // If status
+
+
+        }
     }
 
     @Override
@@ -100,6 +110,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                     Toast.makeText(mContext, String.valueOf(ISBN), Toast.LENGTH_SHORT).show();
 
+
                     Bundle bundle = new Bundle();
                     bundle.putLong("ISBN",ISBN);
                     bundle.putString("DESCRIPTION",description);
@@ -109,6 +120,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     bundle.putString("OWNER",owner);
 
                     Log.d("book adapter", "all the info: "+ISBN+description+status+title+author+owner);
+
                     Intent intent = new Intent(mContext, ViewBookActivity.class);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);

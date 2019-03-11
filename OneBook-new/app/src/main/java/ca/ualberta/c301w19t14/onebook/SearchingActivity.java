@@ -45,7 +45,7 @@ public class SearchingActivity extends AppCompatActivity {
         Recycler.setLayoutManager(llm);
         Log.d(TAG, "onCreate: got through setlayout");
 
-        BA = new BookAdapter(this,rec_books);
+        BA = new BookAdapter(this,rec_books, true);
         Recycler.setAdapter(BA);
 
         /*
