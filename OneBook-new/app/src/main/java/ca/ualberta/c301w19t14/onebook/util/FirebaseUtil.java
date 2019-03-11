@@ -16,6 +16,8 @@ import ca.ualberta.c301w19t14.onebook.Book;
 import ca.ualberta.c301w19t14.onebook.Request;
 import ca.ualberta.c301w19t14.onebook.User;
 
+import static java.lang.Thread.sleep;
+
 public class FirebaseUtil {
     private FirebaseDatabase db;
     private DatabaseReference ref;
@@ -45,14 +47,9 @@ public class FirebaseUtil {
         ArrayList<Request> requests = new ArrayList<Request>();
 
         for (DataSnapshot ds : data.getChildren()) {
-            String date = (String) ds.child("date").getValue();
-            String owneremail = (String) ds.child("owner").getValue();
-            String requesteremail = (String) ds.child("requester").getValue();
-            long ISBN = (long) ds.child("ISBN").getValue();
-            Request r = new Request(requesteremail, ISBN, owneremail, date);
+            Request r = ds.getValue(Request.class);
             requests.add(r);
         }
-
 
         return requests;
     }

@@ -105,13 +105,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         util = new GeneralUtil();
 
         //process requests, if any
-        ArrayList<Request> requests = util.findOwnerRequests();
+        //ArrayList<Request> requests = util.findOwnerRequests();
 
         //DEBUG
-        for (Request r : requests) {
-            String str = String.valueOf(r.getISBN());
-            Log.d("Requests", str);
-        }
+        //for (Request r : requests) {
+        //    String str = String.valueOf(r.getISBN());
+        //    Log.d("Requests", str);
+       // }
 
         if (id == R.id.nav_notifications) {
             NotificationFragment notificationFragment = new NotificationFragment();
