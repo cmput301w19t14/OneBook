@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".EditUserActivity"
-    tools:showIn="@layout/activity_edit_user_activity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
     <ImageView
@@ -19,6 +17,7 @@
 
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:contentDescription="@string/user_pic"
         android:src="@drawable/ic_account_box_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +65,6 @@
         android:layout_marginLeft="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/Name"
         app:layout_constraintStart_toEndOf="@+id/Name" />
 
@@ -78,7 +76,6 @@
         android:layout_marginLeft="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/email"
         app:layout_constraintStart_toEndOf="@+id/email" />
 

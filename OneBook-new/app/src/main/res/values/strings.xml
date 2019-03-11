@@ -21,5 +21,17 @@
     <string name="email">Email:</string>
     <string name="new_password">New Password:</string>
     <string name="request">Request</string>
+    <string name="book_title_example">This is a book title</string>
+    <string name="author_example">Author Name</string>
+    <string name="status_example">Available</string>
+    <string name="owner_example">Owner Name</string>
+    <string name="user_pic">User Profile Picture</string>
+    <string name="keyword">Search Keywords</string>
+    <string name="Search">Search</string>
+    <string name="set_location">Set Pick-up Location</string>
+    <string name="ISBN">ISBN</string>
+    <string name="Description">Description</string>
+    <string name="Requests_on_Books">Requests on the book</string>
+    <string name="edit">Edit</string>
 
 </resources>
