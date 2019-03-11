@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/**This class diplays the current user's account information when they choose my account in the menu
+ * @author CMPUT 301 Team 14*/
 public class MyacctFragment extends Fragment{
 
     View myView;

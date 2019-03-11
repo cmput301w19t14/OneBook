@@ -2,21 +2,22 @@ package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+/**This class is used to create all of the recycler views that list books.
+ This includes the Search Book View, the Lending View, and the Borrowing View.
+ * @author CMPUT 301 Team 14
+ */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     public View view;
@@ -24,21 +25,34 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public Context mContext;
     public Boolean mode;
 
-
+    /**
+     *
+     * @param context
+     * @param bookList
+     * @param mode
+     */
     public BookAdapter(Context context, ArrayList<Book> bookList, Boolean mode) {
         this.bookList = bookList;
         this.mContext = context;
         this.mode = mode;
     }
 
+    /**
+     *
+     * @return bookList.size()
+     */
     @Override
     public int getItemCount() {
         return bookList.size();
     }
 
+    /**
+     *
+     * @param bookVh
+     * @param i
+     */
     @Override
     public void onBindViewHolder(BookViewHolder bookVh, int i) {
-
 
         Book book = bookList.get(i);
         bookVh.book = book;
@@ -58,12 +72,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 bookVh.vStatus.setTextColor(Color.YELLOW);
         }
         else {
-            // If status
-
-
+            // If status is borrowed, do nothing.
         }
     }
 
+    /**
+     *
+     * @param viewGroup
+     * @param i
+     * @return
+     */
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
@@ -73,6 +91,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return new BookViewHolder(itemView);
     }
 
+    /**
+     *
+     */
     public class BookViewHolder extends RecyclerView.ViewHolder {
         protected TextView vStatus;
         protected TextView vOwner;
@@ -80,6 +101,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         protected TextView vTitle;
         public Book book;
 
+        /**
+         *
+         * @param v
+         */
         public BookViewHolder(View v) {
             super(v);
             vTitle =  (TextView) v.findViewById(R.id.bookTitle);
@@ -91,10 +116,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             view = v;
             view.setOnClickListener(new View.OnClickListener() {
 
+                //create bundle to pass the current book to the view book page
                 @Override public void onClick(View v){
                     Bundle bundle = new Bundle();
                     bundle.putString("id", book.getId());
 
+                    //if the user clicks on a book they own, they will get a view page that allows edits
+                    //if the user clicks on a book they do not own, they will get a view page that doesn't allow edits
                     String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
                     if (current_user.equals(book.getOwner().getEmail()))

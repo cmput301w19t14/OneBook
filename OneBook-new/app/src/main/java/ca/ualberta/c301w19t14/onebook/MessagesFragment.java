@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**Fragment that diplays when messages is chosen in the navigation menu
+ Still need to implement this in part 5
+ @author CMPUT 301 Team 14*/
 public class MessagesFragment extends Fragment {
 
     View myView;

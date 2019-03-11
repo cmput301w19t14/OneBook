@@ -2,20 +2,15 @@ package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
+/**This class allows a user to edit their account information
+ * @author CMPUT 301 Team 14*/
 public class EditUserActivity extends AppCompatActivity {
 
     private EditText nm_edit;
@@ -27,6 +22,7 @@ public class EditUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_edit_user_activity);
 
+        //autofill current account information
         nm_edit = findViewById(R.id.editName);
         em_edit = findViewById(R.id.editEmail);
         ps_edit = findViewById(R.id.editPassword);
@@ -34,6 +30,7 @@ public class EditUserActivity extends AppCompatActivity {
         em_edit.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         nm_edit.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
+        //save changes to database
         Button saveEdit = findViewById(R.id.UserSaveButton);
         saveEdit.setOnClickListener(new View.OnClickListener() {
             @Override

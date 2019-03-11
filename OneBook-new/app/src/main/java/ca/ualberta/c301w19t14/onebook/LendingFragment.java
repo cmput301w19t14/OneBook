@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+/**This class runs when "Lending" is clicked on the navigation menu
+ * It displays all of the books that the current user owns
+ * If a user clicks on an item in a list, they see the view book page with an edit option
+ * @author CMPUT 301 Team 14*/
 public class LendingFragment extends Fragment {
 
     View myView;
@@ -31,7 +35,7 @@ public class LendingFragment extends Fragment {
         this.book = book;
     }
 
-
+    //create recycler view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +77,7 @@ public class LendingFragment extends Fragment {
         ba.notifyDataSetChanged();
     }
 
+    //use tool bar that has the camera button
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.camera_toolbar, menu);
