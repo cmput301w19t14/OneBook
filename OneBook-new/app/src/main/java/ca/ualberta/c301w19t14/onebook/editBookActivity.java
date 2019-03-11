@@ -27,16 +27,11 @@ public class editBookActivity extends AppCompatActivity {
     private TextView owner;
     private EditText description;
     public FirebaseUtil books;
-    private Long ISBN_value;
-    private String Owner_value;
-    private int primary_key;
-    private String TAG = "edit book activity";
-    private String login_user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_book_main);
-
 
         Intent intent = getIntent();
         this.books = new FirebaseUtil("Books");
@@ -48,72 +43,39 @@ public class editBookActivity extends AppCompatActivity {
         description = findViewById(R.id.editBookDescription);
 
         final Bundle bundle = intent.getExtras();
-        ISBN_value = bundle.getLong("ISBN");
-        Owner_value = bundle.getString("NAME");
-        title.setText(bundle.getString("TITLE"));
-        author.setText(bundle.getString("AUTHOR"));
-        isbn.setText(Long.toString(ISBN_value));
-        owner.setText(Owner_value);
-
-        //String bookId = intent.getStringExtra("FINAL_BOOK_ID");
-
-        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        //login_user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-
+        final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
+        title.setText(book.getTitle());
+        author.setText(book.getAuthor());
+        isbn.setText(Long.toString(book.getIsbn()));
+        owner.setText(book.getOwner().getName());
+        description.setText(book.getDescription());
 
         Button saveButton =  findViewById(R.id.saveBookButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(books != null) {
-                    int i = 0;
-                    for (DataSnapshot snapshot : books.getData().getChildren()) {
-                        i++;
-                        Book new_book = snapshot.getValue(Book.class);
-                        //Log.d(TAG, "onClick: newbook owner vs owner value :"+new_book.getOwner().getName()+" "+Owner_value);
-                        //Log.d(TAG, "onClick: newbook isbn vs isbn value :"+new_book.getIsbn()+" "+ISBN_value);
+                book.setAuthor(author.getText().toString());
+                book.setTitle(title.getText().toString());
+                book.setDescription(description.getText().toString());
+                book.setIsbn(Long.valueOf(isbn.getText().toString()));
 
-                        if(new_book.getOwner().getName().equals(Owner_value) && new_book.getIsbn() == ISBN_value)
-                        {
-                            primary_key = i;
-                            Log.d("primary key test", "onClick: primary key is: "+primary_key);
-                        }
-                    }
-
-                    //save data in database
-                    String new_title = title.getText().toString();
-                    String new_author = author.getText().toString();
-                    long new_isbn = Long.valueOf(isbn.getText().toString());
-                    String new_description = description.getText().toString();
-                    //commit statements for the database, sets new values for title,description,isbn,author
-                    mDatabase.child("Books").child(Integer.toString(primary_key)).
-                            child("title").setValue(new_title);
-                    mDatabase.child("Books").child(Integer.toString(primary_key)).
-                            child("description").setValue(new_description);
-                    mDatabase.child("Books").child(Integer.toString(primary_key)).
-                            child("ISBN").setValue(new_isbn);
-                    mDatabase.child("Books").child(Integer.toString(primary_key)).
-                            child("author").setValue(new_author);
-                    //DatabaseReference booksRef = mDatabase.child("books");
-                    //booksRef.setValue();
-
-                    //return to book info page
-                    Intent intent = new Intent(editBookActivity.this, MainActivity.class);
-                    startActivity(intent);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Books");
+                myRef.child(book.getId()).setValue(book);
+                finish();
                 }
-            }
-        });
+            });
 
         Button deleteButton =  findViewById(R.id.deleteBookButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //delete data from database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Books");
+                myRef.child(book.getId()).removeValue();
 
-
-                //return to lending page
-                Intent intent  = new Intent(editBookActivity.this, MainActivity.class);
-                startActivity(intent);
+                // TODO: MUST REMOVE REQUESTS
+                finish();
             }
         });
     }

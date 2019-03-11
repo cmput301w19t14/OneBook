@@ -17,18 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-
-
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     public View view;
     private ArrayList<Book> bookList;
     public Context mContext;
-    
-    public String TAG = "book adapter";
     public Boolean mode;
-
-
 
 
     public BookAdapter(Context context, ArrayList<Book> bookList, Boolean mode) {
@@ -47,16 +41,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
         Book book = bookList.get(i);
-
-        //variables for the book associated with card
-        contactViewHolder.name = book.getOwner().getName();
-        contactViewHolder.owner = book.getOwner().getEmail();
-        contactViewHolder.ISBN = book.getIsbn();
-        Log.d(TAG, "onBindViewHolder: book.getISBN: " + book.getIsbn());
-        contactViewHolder.title = book.getTitle();
-        contactViewHolder.author = book.getAuthor();
-        contactViewHolder.description = book.getDescription();
-        contactViewHolder.status = book.getStatus();
+        contactViewHolder.book = book;
 
         contactViewHolder.vTitle.setText(book.getTitle());
         contactViewHolder.vOwner.setText(book.getOwner().getName());
@@ -91,18 +76,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         protected TextView vStatus;
         protected TextView vOwner;
         protected TextView vTitle;
-        public long ISBN;
-        public String owner;
-        public String title;
-        public String author;
-        public String description;
-        public String status;
-        public String name;
+        public Book book;
 
         public BookViewHolder(View v) {
             super(v);
-
-
             v.setBackgroundColor(Color.LTGRAY);
             vTitle =  (TextView) v.findViewById(R.id.txtTitle);
             vOwner = (TextView)  v.findViewById(R.id.txtOwner);
@@ -113,34 +90,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             view.setOnClickListener(new View.OnClickListener() {
 
                 @Override public void onClick(View v){
-                    Log.d("AHHHHH", "Onclick: clicking recycle view");
-
-
-                    Toast.makeText(mContext, String.valueOf(ISBN), Toast.LENGTH_SHORT).show();
-
-
                     Bundle bundle = new Bundle();
-                    bundle.putLong("ISBN",ISBN);
-                    bundle.putString("DESCRIPTION",description);
-                    bundle.putString("STATUS",status);
-                    bundle.putString("TITLE",title);
-                    bundle.putString("AUTHOR",author);
-                    bundle.putString("OWNER",owner);
-                    bundle.putString("NAME",name);
+                    bundle.putString("id", book.getId());
 
-                    String current_user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-                    Log.d(TAG, "onClick: current user: "+current_user );
-                    Log.d(TAG, "onClick: current owner: "+name );
-                    if (current_user.equals(name))
+                    String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                    if (current_user.equals(book.getOwner().getEmail()))
                     {
-                        Log.d("book adapter", "all the info: "+ISBN+description+status+title+author+owner);
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
                     }
                     else
                     {
-                        Log.d("book adapter", "Not the Owner of the Book");
                         Intent intent = new Intent(mContext, ViewRequestableActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
