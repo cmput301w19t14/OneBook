@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/**This class allows a user to view book information for a book that they own
+ * Still need to add the book description
+ * Still need to implement the set location so that a user can choose a location on the map*/
+
 public class ViewBookActivity extends AppCompatActivity {
 //need to add description update
 
