@@ -25,12 +25,14 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
+import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
     Toolbar toolbar = null;
     Globals globals;
+    GeneralUtil util;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //Initialize singleton Globals
             globals = Globals.getInstance();
             globals.initFirebaseUtil();
-
 
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
             fragmentTransaction.commit();
+
         }
 
 
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -99,6 +102,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        util = new GeneralUtil();
+
+        //process requests, if any
+        ArrayList<Request> requests = util.findOwnerRequests();
+
+        //DEBUG
+        for (Request r : requests) {
+            String str = String.valueOf(r.getISBN());
+            Log.d("Requests", str);
+        }
+
         if (id == R.id.nav_notifications) {
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -108,7 +122,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         else if (id == R.id.nav_borrowing) {
 
-            if (globals.firebaseUtil.isNull()){
+
+
+            if (globals.books.isNull()){
                 Toast.makeText(this, "Still loading data, please wait", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -122,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.nav_lending) {
             ArrayList<Book> book = new ArrayList<Book>();
 
-            for(DataSnapshot snapshot : globals.firebaseUtil.getData().getChildren()) {
+            for(DataSnapshot snapshot : globals.books.getData().getChildren()) {
                 Book b = snapshot.getValue(Book.class);
 
                 if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
