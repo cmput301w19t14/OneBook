@@ -2,10 +2,14 @@ package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -54,6 +58,11 @@ public class LendingFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
     }
@@ -63,4 +72,16 @@ public class LendingFragment extends Fragment {
         super.onResume();
         ba.notifyDataSetChanged();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.camera_toolbar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return false;
+    }
+
 }

@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
@@ -124,11 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
             fragmentTransaction.commit();
         }
-
         else if (id == R.id.nav_borrowing) {
-
-
-
             if (globals.books.isNull()){
                 Toast.makeText(this, "Still loading data, please wait", Toast.LENGTH_SHORT).show();
             }
