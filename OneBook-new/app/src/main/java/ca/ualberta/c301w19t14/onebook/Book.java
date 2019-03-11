@@ -37,6 +37,15 @@ public class Book {
         this.borrower = borrower;
     }
 
+    public Book(long isbn, String title, String author, String description, User owner) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.owner = owner;
+        this.status = "Available";
+    }
+
     public Book(long Isbn,String Title,String author,
                      String Category,
                 User owner,User borrow,Location location, String status)
