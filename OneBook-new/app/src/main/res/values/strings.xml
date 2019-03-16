@@ -39,5 +39,7 @@
     <string name="descr">Description</string>
     <string name="add">Add</string>
     <string name="sbn">ISBN</string>
+    <string name="channel_name">OneBook Notifications</string>
+    <string name="channel_description">General notifications.</string>
 
 </resources>
