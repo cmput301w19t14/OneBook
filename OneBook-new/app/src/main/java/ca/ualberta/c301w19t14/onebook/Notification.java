@@ -10,6 +10,20 @@ public class Notification{
     private String recipientID;
 
     /**
+     * constructor for Notification
+     * @param read
+     * @param notification
+     * @param senderID
+     * @param recipientID
+     */
+    public Notification(Boolean read, String notification, String senderID, String recipientID ){
+        this.read = read;
+        this.notification = notification;
+        this.senderID = senderID;
+        this.recipientID = recipientID;
+    }
+
+    /**
      * getter for the read status
      * @return read
      */
@@ -75,13 +89,28 @@ public class Notification{
 
     /**
      *
+     * @param read
+     * @param notification
+     * @param senderID
+     * @param recipientID
+     * @return Notification
+     */
+    public Notification createNotification(Boolean read, String notification,
+                                           String senderID, String recipientID){
+        Notification note = new Notification(read, notification, senderID, recipientID);
+        return note;
+    }
+
+    /**
+     *
      * @param notificationType
      * @param senderID
      * @param recipientID
      * @param notification
      * @return boolean
      */
-    public Boolean createNotification(Integer notificationType, Integer senderID,  Integer recipientID, String notification){
+    public Boolean deleteNotification(Boolean read, String notification,
+                                      String senderID, String recipientID){
         return Boolean.TRUE;
     }
 
@@ -93,19 +122,8 @@ public class Notification{
      * @param notification
      * @return boolean
      */
-    public Boolean deleteNotification(Integer notificationType, Integer senderID,  Integer recipientID, String notification){
-        return Boolean.TRUE;
-    }
-
-    /**
-     *
-     * @param notificationType
-     * @param senderID
-     * @param recipientID
-     * @param notification
-     * @return boolean
-     */
-    public Boolean sendNotification(Integer notificationType, Integer senderID,  Integer recipientID, String notification){
+    public Boolean sendNotification(Boolean read, String notification,
+                                    String senderID, String recipientID){
         return Boolean.TRUE;
     }
 }

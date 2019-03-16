@@ -22,15 +22,18 @@ public class FirebaseUtil {
     private FirebaseDatabase db;
     private DatabaseReference ref;
     private DataSnapshot data;
+    public boolean data_loaded;
 
     public FirebaseUtil(String table) {
         this.db = FirebaseDatabase.getInstance();
         this.ref = this.db.getReference(table);
+        this.data_loaded = false;
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 data = dataSnapshot;
+                data_loaded = true;
             }
 
             @Override
