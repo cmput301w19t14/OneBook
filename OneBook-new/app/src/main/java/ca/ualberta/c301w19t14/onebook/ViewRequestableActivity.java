@@ -47,11 +47,21 @@ public class ViewRequestableActivity extends AppCompatActivity {
         final Bundle bundle = intent.getExtras();
         final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
 
-        title.setText(book.getTitle());
-        author.setText(book.getAuthor());
-        isbn.setText(Long.toString(book.getIsbn()));
-        owner.setText(book.getOwner().getName());
-        description.setText(book.getDescription());
+        String str_title = "Title: " + book.getTitle();
+        title.setText(str_title);
+
+        String str_author = "Author: " + book.getAuthor();
+        author.setText(str_author);
+
+        String str_ISBN = "ISBN: " + Long.toString(book.getIsbn());
+        isbn.setText(str_ISBN);
+
+        String str_owner = "Owner: " + book.getOwner().getName();
+        owner.setText(str_owner);
+
+        String str_description = "Description: " + book.getDescription();
+        description.setText(str_description);
+
         status.setText(book.getStatus());
 
         final User user = Globals.getInstance().users.getData().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(User.class);

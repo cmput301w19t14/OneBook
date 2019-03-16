@@ -37,8 +37,11 @@ public class MyacctFragment extends Fragment{
         TextView nm = getView().findViewById(R.id.Name);
         TextView em = getView().findViewById(R.id.email);
 
-        em.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        nm.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        String str_email = "Email: " + FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        em.setText(str_email);
+
+        String str_name = "Name: " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        nm.setText(str_name);
     }
 
     @Override
