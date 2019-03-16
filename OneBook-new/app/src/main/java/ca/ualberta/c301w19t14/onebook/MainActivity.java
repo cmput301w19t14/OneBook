@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
            //return true;
         //}
 
+
+        Intent intent = new Intent(MainActivity.this, ScanISBN.class);
+        MainActivity.this.startActivity(intent);
+
         return super.onOptionsItemSelected(item);
     }
 
