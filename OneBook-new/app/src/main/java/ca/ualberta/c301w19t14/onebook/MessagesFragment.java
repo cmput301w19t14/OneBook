@@ -26,7 +26,7 @@ public class MessagesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.activity_messages,container, false);
+        myView = inflater.inflate(R.layout.activity_messages_fragments,container, false);
 
         //get globals
         globals = Globals.getInstance();

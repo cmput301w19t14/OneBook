@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,8 +35,18 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        User user = mUsers.get(i);
+        final User user = mUsers.get(i);
         viewHolder.username.setText(user.getName());
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MessageActivity.class);
+                intent.putExtra("userID", user.getUid());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
