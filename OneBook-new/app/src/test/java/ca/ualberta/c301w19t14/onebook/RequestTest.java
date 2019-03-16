@@ -42,13 +42,14 @@ public class RequestTest {
     public Book book = new Book(1897213, title, author,category,
             steve, bob, edmonton, status);
 
-    public Notification notification = new Notification();
+    public Notification notification = new Notification(true, "100","200",
+            "This is my message");
     public Request request = new Request(steve, book, edmonton, "21/08/2019", status);
 
     @Test
     public void testSendNotification() {
-        Assert.assertTrue(notification.sendNotification(0, steve_uid,
-                bob_uid, "Requested Book"));
+        Assert.assertTrue(notification.sendNotification(true, "100","200",
+                "This is my message"));
     }
 
     @Test
