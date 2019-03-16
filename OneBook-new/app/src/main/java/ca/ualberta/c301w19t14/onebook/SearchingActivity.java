@@ -67,13 +67,16 @@ public class SearchingActivity extends AppCompatActivity {
         rec_books.removeAll(rec_books);
         if(this.books != null) {
             for (DataSnapshot snapshot : this.books.getData().getChildren()) {
-                Log.d(TAG, "Set_recycleView: "+snapshot.getValue(Book.class).getTitle());
+                Log.d(TAG, "Set_recycleView: " + snapshot.getValue(Book.class).getTitle());
                 Book new_book;
                 new_book = snapshot.getValue(Book.class);
                 Log.d(TAG, "Set_recycleView: Book.getTitle is " + new_book.getTitle());
-                if(new_book.getTitle().contains(keyword)) {
-                    if (new_book != null) {
-                        rec_books.add(new_book);
+                if (new_book.getStatus().equals("Available")) {
+                    if (new_book.getTitle().contains(keyword) || new_book.getAuthor().contains(keyword)
+                            || Long.toString(new_book.getIsbn()).contains(keyword)) {
+                        if (new_book != null) {
+                            rec_books.add(new_book);
+                        }
                     }
                 }
             }
