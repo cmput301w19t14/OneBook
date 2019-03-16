@@ -79,12 +79,24 @@ public class ViewBookActivity extends AppCompatActivity {
             status = findViewById(R.id.bookStatus);
 
             book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
-            title.setText(book.getTitle());
-            author.setText(book.getAuthor());
-            isbn.setText(Long.toString(book.getIsbn()));
-            owner.setText(book.getOwner().getName());
-            description.setText(book.getDescription());
-            status.setText(book.getStatus());
+
+            String str_title = "Title: " + book.getTitle();
+            title.setText(str_title);
+
+            String str_author = "Author: " + book.getAuthor();
+            author.setText(str_author);
+
+            String str_ISBN = "ISBN: " + Long.toString(book.getIsbn());
+            isbn.setText(str_ISBN);
+
+            String str_owner = "Owner: " + book.getOwner().getName();
+            owner.setText(str_owner);
+
+            String str_description = "Description: " + book.getDescription();
+            description.setText(str_description);
+
+            String str_status = "Status: " + book.getStatus();
+            status.setText(str_status);
         }
     }
 }
