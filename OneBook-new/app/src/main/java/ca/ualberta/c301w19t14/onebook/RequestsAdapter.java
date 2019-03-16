@@ -3,24 +3,20 @@ package ca.ualberta.c301w19t14.onebook;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the request process
+ */
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.RequestsViewHolder> {
 
     public View view;
@@ -81,6 +77,12 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference myRef = database.getReference("Requests");
                                     myRef.child(request.getId()).setValue(request);
+
+                                    Book book = request.getBook();
+                                    book.setStatus("Borrowed");
+                                    book.setBorrower(request.getUser());
+                                    myRef = database.getReference("Books");
+                                    myRef.child(request.getBook().getId()).setValue(request.getBook());
 
                                     dialog.dismiss();
                                 }

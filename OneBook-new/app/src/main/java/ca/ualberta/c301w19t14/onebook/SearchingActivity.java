@@ -1,6 +1,5 @@
 package ca.ualberta.c301w19t14.onebook;
 
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,16 +11,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
+/**This class allows a user to do a key word search on a book title
+ * Currently only allows keyword searches on title,
+ * but we need to update it to include author, description, owner, and isbn
+ * the search is currently case sensitive and we need to change that
+ * @author CMPUT 301 Team 14*/
 public class SearchingActivity extends AppCompatActivity {
 
     public RecyclerView Recycler;

@@ -56,11 +56,7 @@
         <activity
             android:name=".AddActivity"
             android:label="@string/title_activity_add"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.ualberta.c301w19t14.onebook.MainActivity" />
+            android:parentActivityName=".MainActivity" >
         </activity>
     </application>
 
