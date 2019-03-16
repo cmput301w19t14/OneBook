@@ -16,21 +16,22 @@ import static org.junit.Assert.assertEquals;
  */
 public class NotificationTest {
 
-    private Notification notificationTest = new Notification();
+    private Notification notificationTest = new Notification(true, "100","200",
+            "This is my message");
 
     @Test
     public void checkCreateNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.createNotification(3, "100","200", "This is my message"));
+        Assert.assertEquals(Boolean.TRUE, notificationTest.getRead());
     }
 
     @Test
     public void checkDeleteNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.deleteNotification(3, "100","200", "This is my message"));
+        Assert.assertEquals(Boolean.TRUE, notificationTest.deleteNotification(true, "100","200", "This is my message"));
     }
 
     @Test
     public void checkSendNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.sendNotification(3, "100","200", "This is my message"));
+        Assert.assertEquals(Boolean.TRUE, notificationTest.sendNotification(true, "100","200", "This is my message"));
     }
 
     @Test
