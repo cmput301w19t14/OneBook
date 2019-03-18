@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,10 +18,12 @@ import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
  * @author CMPUT 301 Team 14*/
 public class  editBookActivity extends AppCompatActivity {
 
+    private final static int REQUEST_IMAGE_CAPTURE = 1;
     private EditText title;
     private EditText author;
     private EditText isbn;
     private TextView owner;
+    private Button editphoto;
     private EditText description;
     public FirebaseUtil books;
 
@@ -38,6 +41,7 @@ public class  editBookActivity extends AppCompatActivity {
         owner = findViewById(R.id.viewBookOwner);
         description = findViewById(R.id.editBookDescription);
 
+
         final Bundle bundle = intent.getExtras();
         final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
         title.setText(book.getTitle());
@@ -45,6 +49,17 @@ public class  editBookActivity extends AppCompatActivity {
         isbn.setText(Long.toString(book.getIsbn()));
         owner.setText(book.getOwner().getName());
         description.setText(book.getDescription());
+
+        editphoto = findViewById(R.id.editPhoto);
+        editphoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
 
         Button saveButton =  findViewById(R.id.saveBookButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -75,4 +90,5 @@ public class  editBookActivity extends AppCompatActivity {
             }
         });
     }
+    
 }
