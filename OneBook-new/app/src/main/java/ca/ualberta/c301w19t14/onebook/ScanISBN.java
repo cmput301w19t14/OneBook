@@ -47,7 +47,12 @@ public class ScanISBN extends AppCompatActivity {
                         if(item.getIsbn() == isbn) {
                             if(item.getOwner().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 // user is owner: we go to view book activity
-                                startActivity(new Intent(ScanISBN.this, MainActivity.class));
+                                Intent intent = new Intent(ScanISBN.this, ViewBookActivity.class);
+                                final Bundle bundle = new Bundle();
+                                String id = item.getId();
+                                bundle.putString("id", id);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
                             }
                         }
                         else {
