@@ -16,6 +16,7 @@ public class EditUserActivity extends AppCompatActivity {
     private EditText nm_edit;
     private EditText em_edit;
     private EditText ps_edit;
+    private Button ph_edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,18 @@ public class EditUserActivity extends AppCompatActivity {
         nm_edit = findViewById(R.id.editName);
         em_edit = findViewById(R.id.editEmail);
         ps_edit = findViewById(R.id.editPassword);
+        ph_edit = findViewById(R.id.editPhoto);
 
         em_edit.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         nm_edit.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+
+        ph_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         //save changes to database
         Button saveEdit = findViewById(R.id.UserSaveButton);
