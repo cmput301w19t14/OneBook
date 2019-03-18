@@ -44,7 +44,7 @@ public class MessageActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
 
         intent = getIntent();
-        String userID = intent.getStringExtra("userId");
+        String userID = intent.getStringExtra("userID");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
 
