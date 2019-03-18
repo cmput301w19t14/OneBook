@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //if (id == R.id.action_settings) {
            //return true;
         //}
+
+
+        Intent intent = new Intent(MainActivity.this, ScanISBN.class);
+        MainActivity.this.startActivity(intent);
 
         return super.onOptionsItemSelected(item);
     }
