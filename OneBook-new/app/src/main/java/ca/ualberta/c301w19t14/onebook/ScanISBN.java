@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 public class ScanISBN extends AppCompatActivity {
     TextView barcodeResult;
@@ -20,7 +24,42 @@ public class ScanISBN extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_scan_isbn);
+
         barcodeResult = (EditText) findViewById(R.id.enterIsbnManual);
+        barcodeResult.setHint("Enter ISBN");
+
+        Button findBookButton = findViewById(R.id.findBookButton);
+        findBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String barcode = barcodeResult.getText().toString();
+
+                // check if ISBN is entered
+                if (barcode.matches("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "You did not enter ISBN", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else {
+                    long isbn = Long.parseLong(barcode);
+                    DataSnapshot book = Globals.getInstance().books.getData();
+                    for (DataSnapshot i : book.getChildren()) {
+                        Book item = i.getValue(Book.class);
+                        if(item.getIsbn() == isbn) {
+                            if(item.getOwner().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                // user is owner: we go to view book activity
+                                startActivity(new Intent(ScanISBN.this, MainActivity.class));
+                            }
+                        }
+                        else {
+                            // user is not owner: go to edit book where everything is empty, but ISBN is autofilled
+                            Intent intent = new Intent(ScanISBN.this, AddActivity.class);
+                            intent.putExtra("ISBN", barcode);
+                            startActivity(intent);
+                        }
+                    }
+                }
+            }
+        });
 
         Button scanButton =  findViewById(R.id.scanButton);
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -30,7 +69,6 @@ public class ScanISBN extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
-
     }
 
     @Override
@@ -51,3 +89,4 @@ public class ScanISBN extends AppCompatActivity {
         }
     }
 }
+
