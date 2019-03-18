@@ -33,7 +33,7 @@ public class NotificationTest {
     private String author = "J.K. Rowling";
     private String description = "About wizards and magic";
     private long isbn = 27892231L;
-    private Book book = new Book(isbn, title, author, description, owner);
+    private Book book = new Book(isbn, booktitle, author, description, owner);
 
     private Request request = new Request(borrower, book);
     private Notification notificationTest = new Notification(title, content, request, owner);
@@ -58,7 +58,7 @@ public class NotificationTest {
     @Test
     public void checkGetRequestBookDetails() {
         Assert.assertEquals(isbn, request.getBook().getIsbn());
-        Assert.assertEquals(title, request.getBook().getTitle());
+        Assert.assertEquals(booktitle, request.getBook().getTitle());
         Assert.assertEquals(username, request.getBook().getOwner().getName());
     }
 

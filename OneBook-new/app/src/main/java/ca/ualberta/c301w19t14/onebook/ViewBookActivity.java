@@ -3,6 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -64,7 +65,12 @@ public class ViewBookActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
-        if(!book_id.isEmpty()) {
+        if (Globals.getInstance().books.getData().child(book_id).getValue(Book.class) == null) {
+            finish();
+            Log.d("DEBUG_ONEBOOK", "book is equal to null");
+        }
+
+        else if(!book_id.isEmpty()) {
             updateData(book_id);
         }
     }

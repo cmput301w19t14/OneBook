@@ -29,8 +29,14 @@ public class RequestTest {
     public long isbn2 = 1876543L;
     public String title = "Narnia";
     public String author = "Narnia Guy";
-    public String category = "Fantasy";
+    public String description = "Fantasy book about lions";
     public String status = "Requested";
+
+    private String date = "21/08/2019";
+
+    //request data
+    private String requesttitle = "Title of the Request";
+    private String requestcontent = "this is the content of the Request";
 
 
     public ArrayList<Request> req;
@@ -39,18 +45,13 @@ public class RequestTest {
     public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
     public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
-    public Book book = new Book(1897213, title, author,category,
-            steve, bob, edmonton, status);
+    public Book book = new Book(1897213, title, author,description,
+            steve);
 
-    public Notification notification = new Notification(true, "100","200",
-            "This is my message");
-    public Request request = new Request(steve, book, edmonton, "21/08/2019", status);
+    public Request request = new Request(steve, book, edmonton, date, status);
+    public Notification notification = new Notification(requesttitle, requestcontent,request,
+            steve);
 
-    @Test
-    public void testSendNotification() {
-        Assert.assertTrue(notification.sendNotification(true, "100","200",
-                "This is my message"));
-    }
 
     @Test
     public void testSetOwner() {

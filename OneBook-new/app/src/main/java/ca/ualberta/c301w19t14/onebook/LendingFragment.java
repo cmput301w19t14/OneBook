@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.ArrayList;
 
 /**This class runs when "Lending" is clicked on the navigation menu
@@ -24,13 +27,15 @@ public class LendingFragment extends Fragment {
     View myView;
     BookAdapter ba;
     ArrayList<Book> book;
+    private Globals globals;
+    private RecyclerView mRecyclerView;
 
 
     public LendingFragment() {
 
     }
 
-    LendingFragment(ArrayList<Book> book) {
+    public LendingFragment(ArrayList<Book> book) {
         super();
         this.book = book;
     }
@@ -42,7 +47,7 @@ public class LendingFragment extends Fragment {
 
         myView = inflater.inflate(R.layout.lending_main,container, false);
 
-        RecyclerView mRecyclerView = (RecyclerView) myView.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) myView.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -74,7 +79,21 @@ public class LendingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ba.notifyDataSetChanged();
+
+        //see if anything changed in the database
+        globals = Globals.getInstance();
+        ArrayList<Book> deltabook = new ArrayList<Book>();
+
+        for(DataSnapshot snapshot : globals.books.getData().getChildren()) {
+            Book b = snapshot.getValue(Book.class);
+
+            if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+            {
+                deltabook.add(b);
+            }
+        }
+        ba = new BookAdapter(getActivity(), deltabook, true);
+        mRecyclerView.setAdapter(ba);
     }
 
     //use tool bar that has the camera button
