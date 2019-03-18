@@ -15,7 +15,7 @@ import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 /**This class allows a user to edit their account information
  * @author CMPUT 301 Team 14*/
-public class editBookActivity extends AppCompatActivity {
+public class  editBookActivity extends AppCompatActivity {
 
     private EditText title;
     private EditText author;

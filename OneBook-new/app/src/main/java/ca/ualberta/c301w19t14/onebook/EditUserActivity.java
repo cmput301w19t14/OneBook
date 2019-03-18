@@ -1,7 +1,10 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ public class EditUserActivity extends AppCompatActivity {
     private EditText em_edit;
     private EditText ps_edit;
     private Button ph_edit;
+    Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,8 @@ public class EditUserActivity extends AppCompatActivity {
         ph_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery,100);
             }
         });
 
@@ -58,5 +63,10 @@ public class EditUserActivity extends AppCompatActivity {
                 startActivity(new Intent(EditUserActivity.this, MainActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
