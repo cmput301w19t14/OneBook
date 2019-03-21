@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import java.util.Random;
@@ -35,7 +37,11 @@ public class Notification {
 
     private String title;
     private String content;
+
+    @Nullable
     private Request request = null;
+
+    @NonNull
     private User user;
 
     /**

@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.platforminfo.GlobalLibraryVersionRegistrar;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class NotificationFragment extends Fragment {
         myView = inflater.inflate(R.layout.activity_home,container, false);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("Requests");
+        DatabaseReference ref = db.getReference("Notifications");
 
         ref.addValueEventListener(new ValueEventListener() {
 
@@ -58,13 +59,12 @@ public class NotificationFragment extends Fragment {
              */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Request> requests = new ArrayList<Request>();
+                ArrayList<Notification> notifications = new ArrayList<Notification>();
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Request r = ds.getValue(Request.class);
-                    if(r.getBook().getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()) && r.getStatus().equals("Pending"))
-                    {
-                        requests.add(r);
+                    Notification r = ds.getValue(Notification.class);
+                    if(r.getUser().getEmail().equals(Globals.getInstance().user.getEmail())) {
+                        notifications.add(r);
                     }
                 }
 
@@ -72,8 +72,15 @@ public class NotificationFragment extends Fragment {
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
-                RequestsAdapter ba = new RequestsAdapter(getActivity(), requests);
+                NotificationsAdapter ba = new NotificationsAdapter(getActivity(), notifications);
                 mRecyclerView.setAdapter(ba);
+                if(notifications.isEmpty()) {
+                    myView.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+                    myView.findViewById(R.id.requestList).setVisibility(View.GONE);
+                } else {
+                    myView.findViewById(R.id.noData).setVisibility(View.GONE);
+                    myView.findViewById(R.id.requestList).setVisibility(View.VISIBLE);
+                }
             }
 
             /**
