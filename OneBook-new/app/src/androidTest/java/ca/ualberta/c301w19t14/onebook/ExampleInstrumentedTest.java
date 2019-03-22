@@ -17,6 +17,12 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
+    //firebase xml id's
+    //String test = R.layout.fui
+    //String test = R.id.button_sign_in
+
+
     @Test
     public void useAppContext() {
         // Context of the app under test.
