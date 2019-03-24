@@ -3,7 +3,6 @@ package ca.ualberta.c301w19t14.onebook;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,31 +15,36 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 /**
+ * requests book
+ * request was accepted
+ * messages
+ *
  * Handles the request process
  */
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationsViewHolder> {
 
     public View view;
-    private ArrayList<Notification> requestList;
+    private ArrayList<Notification> notificationList;
     public Context mContext;
 
-    public NotificationsAdapter(Context context, ArrayList<Notification> requestList) {
-        this.requestList = requestList;
+    public NotificationsAdapter(Context context, ArrayList<Notification> notificationList) {
+        this.notificationList = notificationList;
         this.mContext = context;
     }
 
     @Override
     public int getItemCount() {
-        return requestList.size();
+        return notificationList.size();
     }
 
     @Override
     public void onBindViewHolder(NotificationsViewHolder mVh, int i) {
-        Notification request = requestList.get(i);
+        Notification notification = notificationList.get(i);
 
-        mVh.book.setText("Book title: " + request.getBook().getTitle());
-        mVh.user.setText("Requester: " + request.getUser().getName());
-        mVh.request = request;
+        mVh.notification = notification;
+        mVh.title.setText(notification.getTitle());
+        mVh.content.setText(notification.getContent());
+
     }
 
     @Override
@@ -55,13 +59,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public class NotificationsViewHolder extends RecyclerView.ViewHolder {
         protected TextView title;
         protected TextView content;
-        public Notification request;
+        public Notification notification;
 
         NotificationsViewHolder(View v, int i) {
             super(v);
-
-            book =  (TextView) v.findViewById(R.id.bookTitle);
-            user = (TextView)  v.findViewById(R.id.user);
 
             //make the cards clickable
             view = v;
@@ -74,16 +75,16 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    request.setStatus("Accepted");
+                                    notification.getRequest().setStatus("Accepted");
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference myRef = database.getReference("Requests");
-                                    myRef.child(request.getId()).setValue(request);
+                                    myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
-                                    Book book = request.getBook();
+                                    Book book = notification.getRequest().getBook();
                                     book.setStatus("Borrowed");
-                                    book.setBorrower(request.getUser());
+                                    book.setBorrower(notification.getRequest().getUser());
                                     myRef = database.getReference("Books");
-                                    myRef.child(request.getBook().getId()).setValue(request.getBook());
+                                    myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
 
                                     dialog.dismiss();
                                 }
@@ -91,10 +92,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    request.setStatus("Rejected");
+                                    notification.getRequest().setStatus("Rejected");
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference myRef = database.getReference("Requests");
-                                    myRef.child(request.getId()).setValue(request);
+                                    myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
                                     dialog.dismiss();
                                 }
