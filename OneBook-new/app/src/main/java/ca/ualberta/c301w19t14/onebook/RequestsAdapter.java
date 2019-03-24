@@ -59,8 +59,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         RequestsViewHolder(View v, int i) {
             super(v);
 
-            book =  (TextView) v.findViewById(R.id.bookTitle);
-            user = (TextView)  v.findViewById(R.id.user);
+            book =  (TextView) v.findViewById(R.id.title);
+            user = (TextView)  v.findViewById(R.id.content);
 
             //make the cards clickable
             view = v;
