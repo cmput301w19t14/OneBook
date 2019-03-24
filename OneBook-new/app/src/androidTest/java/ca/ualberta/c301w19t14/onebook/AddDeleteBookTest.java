@@ -42,6 +42,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 public class AddDeleteBookTest {
 
+    private Methods methods;
 
     public boolean complete;
     public String email = "UITest@gmail.com";
@@ -112,6 +113,8 @@ public class AddDeleteBookTest {
     {
 
         onView(withId(R.id.newBook)).perform(click());
+
+
 
         //at this point, we are at the add book activity. Now we need to fill in the details
         //of our new book.
