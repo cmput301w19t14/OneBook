@@ -94,13 +94,13 @@ public class ViewRequestableTest {
 
         activityRule.launchActivity(i);
 
-        onView(withId(R.id.bookTitle)).check(matches(withText("Title: " + title)));
-        onView(withId(R.id.bookauthor)).check(matches(withText("Author: " + author)));
-        onView(withId(R.id.bookIsbn))
+        onView(withId(R.id.bookTitle2)).check(matches(withText("Title: " + title)));
+        onView(withId(R.id.bookauthor2)).check(matches(withText("Author: " + author)));
+        onView(withId(R.id.bookIsbn2))
                 .check(matches(withText("ISBN: " + String.valueOf(ISBN))));
-        onView(withId(R.id.bookOwner)).check(matches(withText("Owner: " + name)));
-        onView(withId(R.id.bookDescription)).check(matches(withText("Description: " + description)));
-        onView(withId(R.id.bookStatus)).check(matches(withText(status)));
+        onView(withId(R.id.bookOwner2)).check(matches(withText("Owner: " + name)));
+        onView(withId(R.id.bookDescription2)).check(matches(withText("Description: " + description)));
+        onView(withId(R.id.bookStatus2)).check(matches(withText("Status: " + status)));
 
     }
 
