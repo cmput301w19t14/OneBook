@@ -7,7 +7,7 @@
     tools:context=".editBookActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/bookImage"
         android:layout_width="129dp"
         android:layout_height="179dp"
         android:layout_marginStart="16dp"
@@ -49,7 +49,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editBookAuthor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/bookImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -66,7 +66,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/viewBookOwner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/bookImage"
         app:layout_constraintTop_toBottomOf="@+id/editBookAuthor" />
 
     <EditText
@@ -83,7 +83,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editBookISBN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/bookImage"
         app:layout_constraintTop_toBottomOf="@+id/editBookTitle" />
 
     <Button
@@ -143,5 +143,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/bookImage" />
 </android.support.constraint.ConstraintLayout>

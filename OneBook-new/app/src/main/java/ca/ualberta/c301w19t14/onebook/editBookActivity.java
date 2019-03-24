@@ -1,16 +1,32 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
+import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
@@ -24,8 +40,12 @@ public class  editBookActivity extends AppCompatActivity {
     private EditText isbn;
     private TextView owner;
     private Button editphoto;
+    private ImageView image;
     private EditText description;
     public FirebaseUtil books;
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference book_ref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +55,8 @@ public class  editBookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.books = new FirebaseUtil("Books");
 
+
+        image = findViewById(R.id.bookImage);
         title = findViewById(R.id.editBookTitle);
         author = findViewById(R.id.editBookAuthor);
         isbn = findViewById(R.id.editBookISBN);
@@ -44,6 +66,7 @@ public class  editBookActivity extends AppCompatActivity {
 
         final Bundle bundle = intent.getExtras();
         final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
+        book_ref = storage.getReference().child("Book images/"+book.getId()+"/bookimage.jpeg");
         title.setText(book.getTitle());
         author.setText(book.getAuthor());
         isbn.setText(Long.toString(book.getIsbn()));
@@ -70,10 +93,37 @@ public class  editBookActivity extends AppCompatActivity {
                 book.setDescription(description.getText().toString());
                 book.setIsbn(Long.valueOf(isbn.getText().toString()));
 
+                //committing to real time database
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Books");
                 myRef.child(book.getId()).setValue(book);
                 finish();
+                //committing image to fire base storage
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Bitmap imageBitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+                        byte[] byteArray = baos.toByteArray();
+                        UploadTask uploadTask = book_ref.putBytes(byteArray);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(editBookActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                                Toast.makeText(editBookActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    }
+                });
+
                 }
             });
 
@@ -90,5 +140,20 @@ public class  editBookActivity extends AppCompatActivity {
             }
         });
     }
-    
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK)
+        {
+            if(requestCode == REQUEST_IMAGE_CAPTURE)
+            {
+                //Log.d(TAG, "onActivityResult: sucessful return to intent");
+                Bundle extras = data.getExtras();
+                final Bitmap imageBitmap = (Bitmap) extras.get("data");
+                image.setImageBitmap(imageBitmap);
+
+            }
+        }
+    }
 }

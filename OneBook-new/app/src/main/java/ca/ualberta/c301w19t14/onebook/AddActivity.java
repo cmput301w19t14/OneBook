@@ -2,9 +2,12 @@ package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,28 +15,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class AddActivity extends AppCompatActivity {
     public ImageView image;
+
     private static final String TAG = "add activity";
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_add);
-        image = (ImageView)findViewById(R.id.bookPhoto);
+        image = findViewById(R.id.bookPhoto);
         storageReference = storage.getReference();
-        StorageReference personRef = storageReference.child("Book images/test directory");
+
+
+
+        //byte[] data = baos
 
 
 
@@ -74,7 +89,34 @@ public class AddActivity extends AppCompatActivity {
                         book.setId(name);
                         myRef.child(name).setValue(book);
 
-                        //StorageReference personRef = storageReference.child("Book images/");
+                        final StorageReference personRef = storageReference.child("Book images/"+name+"/bookimage.jpeg");
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Bitmap imageBitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+                                byte[] byteArray = baos.toByteArray();
+                                UploadTask uploadTask = personRef.putBytes(byteArray);
+                                uploadTask.addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(AddActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                                        Toast.makeText(AddActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                            }
+                        });
+
                         finish();
                     }
                 });
@@ -90,10 +132,11 @@ public class AddActivity extends AppCompatActivity {
             {
                 Log.d(TAG, "onActivityResult: sucessful return to intent");
                 Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                final Bitmap imageBitmap = (Bitmap) extras.get("data");
                 image.setImageBitmap(imageBitmap);
 
             }
         }
     }
+
 }

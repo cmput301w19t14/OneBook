@@ -1,14 +1,23 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * This class allows a user to view book information for a book that they own
@@ -27,6 +36,8 @@ public class ViewBookActivity extends AppCompatActivity {
     private TextView status;
     private Book book;
     private String book_id = "";
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +108,32 @@ public class ViewBookActivity extends AppCompatActivity {
 
             String str_status = "Status: " + book.getStatus();
             status.setText(str_status);
+            final ImageView bookimage = findViewById(R.id.bookImage);
+
+            storage.getReference().child("Book images/"+id+"/bookimage.jpeg").getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    bookimage.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+            /*
+            //Glide.with(this).load(Bookpath).into(bookimage);kj
+            try{
+                //Glide.with(this).load(Bookpath).into(bookimage);
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "error caught", Toast.LENGTH_SHORT).show();
+            }
+            */
+
+
         }
     }
 }
