@@ -32,6 +32,7 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     Intent intent;
+    String userID;
 
     Button sendButton;
     EditText sendText;
