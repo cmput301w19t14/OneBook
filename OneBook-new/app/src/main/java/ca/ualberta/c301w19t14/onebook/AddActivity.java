@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +17,14 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_add);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            String isbnString = intent.getStringExtra("ISBN");
+            EditText isbn = (EditText) findViewById(R.id.isbn);
+            isbn.setText(isbnString);
+        }
+
         final User user = Globals.getInstance().users.getData().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(User.class);
         Button btn = findViewById(R.id.add);
 

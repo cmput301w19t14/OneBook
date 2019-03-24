@@ -6,6 +6,7 @@ import android.content.Intent;
         import android.view.View;
         import android.widget.Button;
         import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -29,6 +30,8 @@ public class ViewRequestableActivity extends AppCompatActivity {
     private TextView status;
 
     public FirebaseUtil books;
+    public Book book;
+    private String book_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +40,17 @@ public class ViewRequestableActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        title = findViewById(R.id.bookTitle);
-        author = findViewById(R.id.bookauthor);
-        isbn = findViewById(R.id.bookIsbn);
-        owner = findViewById(R.id.bookOwner);
-        description = findViewById(R.id.bookDescription);
-        status = findViewById(R.id.bookStatus);
+
 
         final Bundle bundle = intent.getExtras();
-        final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
+        book_id = bundle.getString("id");
 
-        String str_title = "Title: " + book.getTitle();
-        title.setText(str_title);
+        //DEBUG - remove later
+        //Toast toast = Toast.makeText(this, "Book ID: " + book_id, Toast.LENGTH_SHORT);
+        //toast.show();
 
-        String str_author = "Author: " + book.getAuthor();
-        author.setText(str_author);
+        updateData(book_id);
 
-        String str_ISBN = "ISBN: " + Long.toString(book.getIsbn());
-        isbn.setText(str_ISBN);
-
-        String str_owner = "Owner: " + book.getOwner().getName();
-        owner.setText(str_owner);
-
-        String str_description = "Description: " + book.getDescription();
-        description.setText(str_description);
-
-        status.setText(book.getStatus());
 
         final User user = Globals.getInstance().users.getData().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(User.class);
 
@@ -74,5 +62,36 @@ public class ViewRequestableActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateData(String id) {
+        if(id != null) {
+            title = findViewById(R.id.bookTitle2);
+            author = findViewById(R.id.bookauthor2);
+            isbn = findViewById(R.id.bookIsbn2);
+            owner = findViewById(R.id.bookOwner2);
+            description = findViewById(R.id.bookDescription2);
+            status = findViewById(R.id.bookStatus2);
+
+            book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
+
+            String str_title = "Title: " + book.getTitle();
+            title.setText(str_title);
+
+            String str_author = "Author: " + book.getAuthor();
+            author.setText(str_author);
+
+            String str_ISBN = "ISBN: " + Long.toString(book.getIsbn());
+            isbn.setText(str_ISBN);
+
+            String str_owner = "Owner: " + book.getOwner().getName();
+            owner.setText(str_owner);
+
+            String str_description = "Description: " + book.getDescription();
+            description.setText(str_description);
+
+            String str_status = "Status: " + book.getStatus();
+            status.setText(str_status);
+        }
     }
 }
