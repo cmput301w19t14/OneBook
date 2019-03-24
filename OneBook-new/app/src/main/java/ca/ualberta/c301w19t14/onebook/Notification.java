@@ -3,13 +3,16 @@ package ca.ualberta.c301w19t14.onebook;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Notification model.
  *
  * @author Dimitri Trofimuk
  */
 public class Notification {
-
+    private String id;
     private String title;
     private String content;
 
@@ -55,6 +58,35 @@ public class Notification {
     }
 
     /**
+     * Saves the notification to the database.
+     */
+    public void save() {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
+        this.setId(db.push().getKey());
+
+        db.child(this.getId()).setValue(this);
+    }
+
+    /**
+     * Gets the notification ID.
+     *
+     * @return String
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets the notification ID.
+     * Should be Firebases push().
+     *
+     * @param id push() value
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
      * Getter for title.
      *
      * @return title notification title
@@ -77,6 +109,7 @@ public class Notification {
      *
      * @return request notification request or null
      */
+    @Nullable
     public Request getRequest() {
         return this.request;
     }
