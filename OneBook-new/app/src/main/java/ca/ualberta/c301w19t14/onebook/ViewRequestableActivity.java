@@ -34,7 +34,7 @@ public class ViewRequestableActivity extends AppCompatActivity {
     private String book_id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requestable_book);
 
@@ -58,7 +58,7 @@ public class ViewRequestableActivity extends AppCompatActivity {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Request.requestBook(user, book);
+                Request.requestBook(user, book, book_id);
             }
         });
 

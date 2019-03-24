@@ -1,7 +1,13 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 /**This class implements the transaction of a user requesting a book and updates the database
  * @author CMPUT 301 Team 14*/
@@ -16,6 +22,7 @@ public class Request {
     private String status;
     private String owneremail;
     private String requesteremail;
+    private String time;
     private long ISBN;
 
     public Request() {
@@ -32,9 +39,9 @@ public class Request {
         String ts = tsLong.toString();
 
         this.user = user;
-        this.book = book;
+        //this.book = book;
         this.status = "Pending";
-        this.date = ts;
+        //this.date = ts;
     }
 
     /**
@@ -47,7 +54,7 @@ public class Request {
      */
     Request(User user, Book book, Location location, String date, String status){
         this.user = user;
-        this.book = book;
+        //this.book = book;
         this.location = location;
         this.date = date;
         this.status = status;
@@ -58,14 +65,17 @@ public class Request {
      * @param user
      * @param book
      */
-    public static void requestBook(User user, Book book) {
-        // save to database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Requests");
-        String name = myRef.child(book.getId()).push().getKey();
-        Request request = new Request(user, book);
-        request.setId(name);
-        myRef.child(name).setValue(request);
+    public static void requestBook(User user, Book book, String book_id) {
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+
+        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef2 = database2.getReference("Books");
+        String name2 = myRef2.child(book.getId()).getKey();
+
+        Request request2 = new Request(user, book);
+        myRef2.child(book_id).child("request").child(ts).setValue(request2);
+
 
         // notify the user
         // part 5
