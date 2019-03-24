@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 /**
  * This class allows a user to view book information for a book that they own
@@ -103,6 +104,21 @@ public class ViewBookActivity extends AppCompatActivity {
 
             String str_status = "Status: " + book.getStatus();
             status.setText(str_status);
+
+            DataSnapshot book = Globals.getInstance().books.getData();
+            for (DataSnapshot i : book.getChildren()) {
+                Book item = i.getValue(Book.class);
+                if(item.getIsbn() == ISBN) {
+                    if(item.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                        // user is owner
+                    } else {
+                        // user is not owner
+                    }
+                }
+            }
+
+            // otherwise book doesn't exist
+
         }
     }
 }
