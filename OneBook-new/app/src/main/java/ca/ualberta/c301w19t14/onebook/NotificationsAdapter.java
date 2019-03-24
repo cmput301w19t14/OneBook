@@ -64,7 +64,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         NotificationsViewHolder(View v, int i) {
             super(v);
 
-            if(notification.getRequest() != null && notification.getRequest().getBook().getOwner() == Globals.getInstance().user.get) {
+            if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid() == Globals.getInstance().user.getUid()) {
                 // just mark as read and delete
             } else {
 
