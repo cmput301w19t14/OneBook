@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
+import static com.google.android.gms.vision.barcode.Barcode.ISBN;
+
 /**
  * This class allows a user to view book information for a book that they own
  * Still need to add the book description
