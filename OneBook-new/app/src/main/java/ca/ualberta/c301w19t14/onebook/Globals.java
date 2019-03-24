@@ -1,5 +1,8 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 //save changes to database
@@ -11,6 +14,8 @@ public class Globals {
     public FirebaseUtil requests;
     public FirebaseUtil users;
 
+    public FirebaseUser user;
+
     /**
      *
      */
@@ -18,6 +23,7 @@ public class Globals {
         requests = new FirebaseUtil("Requests");
         books = new FirebaseUtil("Books");
         users = new FirebaseUtil("Users");
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     /**
