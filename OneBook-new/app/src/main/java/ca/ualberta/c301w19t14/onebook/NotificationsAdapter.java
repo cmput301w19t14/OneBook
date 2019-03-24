@@ -25,9 +25,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
     public View view;
     private ArrayList<Notification> notificationList;
-    public Context mContext;
+    private Context mContext;
 
-    public NotificationsAdapter(Context context, ArrayList<Notification> notificationList) {
+    NotificationsAdapter(Context context, ArrayList<Notification> notificationList) {
         this.notificationList = notificationList;
         this.mContext = context;
     }
@@ -59,11 +59,16 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public class NotificationsViewHolder extends RecyclerView.ViewHolder {
         protected TextView title;
         protected TextView content;
-        public Notification notification;
+        Notification notification;
 
         NotificationsViewHolder(View v, int i) {
             super(v);
 
+            if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid() == Globals.getInstance().user.getUid()) {
+                // just mark as read and delete
+            } else {
+
+            }
             //make the cards clickable
             view = v;
             view.setOnClickListener(new View.OnClickListener() {
