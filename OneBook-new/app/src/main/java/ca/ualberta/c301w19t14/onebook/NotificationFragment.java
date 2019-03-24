@@ -81,11 +81,9 @@ public class NotificationFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Notification> notifications = new ArrayList<Notification>();
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Notification r = ds.getValue(Notification.class);
-                    if(r.getUser().getEmail().equals(Globals.getInstance().user.getEmail())) {
+                for (DataSnapshot ds : dataSnapshot.child(Globals.getInstance().user.getUid()).getChildren()) {
+                        Notification r = ds.getValue(Notification.class);
                         notifications.add(r);
-                    }
                 }
 
                 RecyclerView mRecyclerView = (RecyclerView) myView.findViewById(R.id.requestList);
