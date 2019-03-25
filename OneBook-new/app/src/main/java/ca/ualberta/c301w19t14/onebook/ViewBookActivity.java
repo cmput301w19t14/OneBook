@@ -32,6 +32,7 @@ public class ViewBookActivity extends AppCompatActivity {
     private Book book;
     private String book_id = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +45,13 @@ public class ViewBookActivity extends AppCompatActivity {
         updateData(book_id);
 
         //let's the user click on an owner to see their profile
-        TextView owner = findViewById(R.id.bookOwner);
+        TextView owner = (TextView)findViewById(R.id.bookOwner);
         owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewBookActivity.this, MyacctFragment.class);
-                Log.d("ViewBookActivity", "owner clicked ");
-                //intent.putExtras(bundle);
+                //when the user clicks on their own name as owner
+                Intent intent = new Intent(ViewBookActivity.this,UserAccount.class);
+                intent.putExtras(bundle);
                 ViewBookActivity.this.startActivity(intent);
             }
         });
@@ -73,6 +74,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
   
     @Override
@@ -134,4 +136,5 @@ public class ViewBookActivity extends AppCompatActivity {
 
         }
     }
+
 }

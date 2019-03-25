@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewBookActivity">
+    tools:context=".ViewRequestableActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="false"
+            android:focusable="false">
 
             <ImageView
                 android:id="@+id/bookImage"
@@ -46,7 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="12dp">
+            android:paddingLeft="12dp"
+            android:clickable="false"
+            android:focusable="false">
 
             <TextView
                 android:id="@+id/bookTitle2"
@@ -95,6 +99,9 @@
                 android:layout_marginTop="5dp"
                 android:text="Owner: Amy33"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="gotoOwner2"
                 app:layout_constraintBottom_toTopOf="@+id/bookDescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

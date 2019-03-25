@@ -46,6 +46,7 @@
         <activity android:name=".EditUserActivity" />
         <activity android:name=".editBookActivity" />
         <activity android:name=".ViewBookActivity" />
+        <activity android:name=".UserAccount" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

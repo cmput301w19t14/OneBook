@@ -94,13 +94,12 @@
         android:layout_marginRight="16dp"
         android:text="@string/owner_example"
         android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toTopOf="@+id/bookDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookIsbn"
-        android:onClick="bookOwner"
-        android:clickable="true"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/bookIsbn" />
 
     <TextView
         android:id="@+id/bookDescription"

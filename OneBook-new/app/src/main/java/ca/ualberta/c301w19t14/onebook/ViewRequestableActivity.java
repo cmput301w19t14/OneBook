@@ -3,7 +3,8 @@ package ca.ualberta.c301w19t14.onebook;
 import android.content.Intent;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
-        import android.view.View;
+import android.util.Log;
+import android.view.View;
         import android.widget.Button;
         import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,13 @@ public class ViewRequestableActivity extends AppCompatActivity {
     public FirebaseUtil books;
     public Book book;
     private String book_id;
+
+    public void gotoOwner2(View v){
+        TextView owner = findViewById(R.id.bookOwner2);
+        Log.d("testing", "onClick: it worked");
+
+    }
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -62,7 +70,21 @@ public class ViewRequestableActivity extends AppCompatActivity {
             }
         });
 
+        //let's the user click on an owner to see their profile
+        TextView owner = (TextView)findViewById(R.id.bookOwner2);
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when the user clicks on their own name as owner
+                Intent intent = new Intent(ViewRequestableActivity.this,UserAccount.class);
+                intent.putExtras(bundle);
+                ViewRequestableActivity.this.startActivity(intent);
+            }
+        });
+
+
     }
+
 
     private void updateData(String id) {
         if(id != null) {
