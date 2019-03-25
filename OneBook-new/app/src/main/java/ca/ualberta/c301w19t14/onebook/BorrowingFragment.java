@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +23,7 @@ import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
  * @author CMPUT 301 Team 14*/
 public class BorrowingFragment extends Fragment {
 
-    View myView;
+    public View myView;
     GeneralUtil util;
     Globals globals;
     public ArrayList<Book> books = new ArrayList<Book>();
@@ -31,6 +32,9 @@ public class BorrowingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.borrowing_main,container, false);
+
+
+
 
         //get globals
         globals = Globals.getInstance();
@@ -60,6 +64,26 @@ public class BorrowingFragment extends Fragment {
 
         util = new GeneralUtil();
 
+        //back button override
+        //Source: https://stackoverflow.com/questions/7992216/android-fragment-handle-back-button-press
+        this.getView().setFocusableInTouchMode(true);
+        this.getView().requestFocus();
+
+        //set up listener for back button
+        this.getView().setOnKeyListener( new View.OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        } );
+
         //go to the search page when the search button is clicked
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +105,8 @@ public class BorrowingFragment extends Fragment {
         int id = item.getItemId();
         return false;
     }
+
+
 
 
 }
