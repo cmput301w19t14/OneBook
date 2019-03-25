@@ -43,6 +43,17 @@ public class ViewBookActivity extends AppCompatActivity {
         book_id = bundle.getString("id");
         updateData(book_id);
 
+        //let's the user click on an owner to see their profile
+        TextView owner = findViewById(R.id.bookOwner);
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewBookActivity.this, MyacctFragment.class);
+                Log.d("ViewBookActivity", "owner clicked ");
+                //intent.putExtras(bundle);
+                ViewBookActivity.this.startActivity(intent);
+            }
+        });
 
         Button editButton =  findViewById(R.id.editBookButton);
         editButton.setOnClickListener(new View.OnClickListener() {

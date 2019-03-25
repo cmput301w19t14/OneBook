@@ -97,7 +97,10 @@
         app:layout_constraintBottom_toTopOf="@+id/bookDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookIsbn" />
+        app:layout_constraintTop_toBottomOf="@+id/bookIsbn"
+        android:onClick="bookOwner"
+        android:clickable="true"
+        />
 
     <TextView
         android:id="@+id/bookDescription"
