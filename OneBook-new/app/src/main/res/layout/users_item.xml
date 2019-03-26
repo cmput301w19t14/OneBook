@@ -14,6 +14,15 @@
         android:layout_centerVertical="true"
         android:textSize="18sp"/>
 
-
+    <TextView
+        android:id="@+id/lastMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user"
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimaryDark"/>
 
 </RelativeLayout>

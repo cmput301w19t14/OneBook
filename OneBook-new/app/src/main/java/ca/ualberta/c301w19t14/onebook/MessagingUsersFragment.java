@@ -79,7 +79,8 @@ public class MessagingUsersFragment extends Fragment {
     private void searchingUsers(String s) {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username" )
+        Query query = FirebaseDatabase.getInstance().getReference("Users")
+                .orderByChild("name")
                 .startAt(s)
                 .endAt(s+"\uf8ff");
 
@@ -92,7 +93,7 @@ public class MessagingUsersFragment extends Fragment {
 
                     assert user != null;
                     assert firebaseUser != null;
-                    if (!(user.getUid().equals(firebaseUser.getUid()))){
+                    if (!(user.getName().equals(firebaseUser.getDisplayName()))){
                         users.add(user);
                     }
                 }
@@ -125,11 +126,9 @@ public class MessagingUsersFragment extends Fragment {
                             users.add(user);
                         }
                     }
+                    messagingUserAdapter = new MessagingUserAdapter(getContext(), users);
+                    recyclerView.setAdapter(messagingUserAdapter);
                 }
-
-
-                messagingUserAdapter = new MessagingUserAdapter(getContext(), users);
-                recyclerView.setAdapter(messagingUserAdapter);
             }
 
             @Override
