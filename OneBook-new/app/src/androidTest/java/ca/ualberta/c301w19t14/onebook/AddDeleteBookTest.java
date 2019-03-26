@@ -135,11 +135,8 @@ public class AddDeleteBookTest {
                 .atPositionOnView(0, R.id.bookTitle))
                 .perform(click());
 
-        //click on the "Edit" button
-        onView(withId(R.id.editBookButton)).perform(click());
-
-        //We should be at the editBookActivity. Click "Delete"
-        onView(withId(R.id.deleteBookButton)).perform(click());
+        //Click "Delete"
+        onView(withId(R.id.buttonDelete)).perform(click());
 
         //restart lending transaction
         StartLendingTransaction();
