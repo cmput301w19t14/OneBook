@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -61,53 +62,58 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         protected TextView content;
         Notification notification;
 
-        NotificationsViewHolder(View v, int i) {
-            super(v);
+        NotificationsViewHolder(View view, int i) {
+            super(view);
 
-            if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid() == Globals.getInstance().user.getUid()) {
-                // just mark as read and delete
+            if(notification.getRequest() == null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                // This notification is for an owner of a book, notifying them of a new actionable request.
+
+                view.setOnClickListener(new View.OnClickListener() {
+
+                    @Override public void onClick(View v){
+                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                        alertDialog.setTitle("Accept/Reject");
+                        alertDialog.setMessage("What would you like to do?");
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        notification.getRequest().setStatus("Accepted");
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference myRef = database.getReference("Requests");
+                                        myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+
+                                        Book book = notification.getRequest().getBook();
+                                        book.setStatus("Borrowed");
+                                        book.setBorrower(notification.getRequest().getUser());
+                                        myRef = database.getReference("Books");
+                                        myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
+
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        notification.getRequest().setStatus("Rejected");
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference myRef = database.getReference("Requests");
+                                        myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                });
             } else {
+                // delete notification
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
+                db.child(notification.getId()).removeValue();
 
+                Toast.makeText(mContext, "Notification removed.", Toast.LENGTH_SHORT).show();
             }
-            //make the cards clickable
-            view = v;
-            view.setOnClickListener(new View.OnClickListener() {
 
-                @Override public void onClick(View v){
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Accept/Reject");
-                    alertDialog.setMessage("What would you like to do?");
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    notification.getRequest().setStatus("Accepted");
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference myRef = database.getReference("Requests");
-                                    myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
-                                    Book book = notification.getRequest().getBook();
-                                    book.setStatus("Borrowed");
-                                    book.setBorrower(notification.getRequest().getUser());
-                                    myRef = database.getReference("Books");
-                                    myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
-
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    notification.getRequest().setStatus("Rejected");
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    DatabaseReference myRef = database.getReference("Requests");
-                                    myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
-
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
-                }
-            });
         }
     }
 }

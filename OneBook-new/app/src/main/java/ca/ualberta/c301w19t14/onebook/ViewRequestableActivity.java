@@ -34,13 +34,6 @@ public class ViewRequestableActivity extends AppCompatActivity {
     public Book book;
     private String book_id;
 
-    public void gotoOwner2(View v){
-        TextView owner = findViewById(R.id.bookOwner2);
-        Log.d("testing", "onClick: it worked");
-
-    }
-
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

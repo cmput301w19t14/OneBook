@@ -153,6 +153,7 @@
         app:layout_constraintTop_toBottomOf="@+id/bookStatus" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="395dp"
         android:layout_height="146dp"
         android:layout_marginStart="16dp"
@@ -176,9 +177,22 @@
         android:text="@string/edit"
         app:layout_constraintBottom_toTopOf="@+id/GetLocationButton"
         app:layout_constraintEnd_toEndOf="@+id/GetLocationButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/bookStatus"
         app:layout_constraintTop_toBottomOf="@+id/bookDescription"
         app:layout_constraintVertical_bias="0.307" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Delete"
+        app:layout_constraintEnd_toStartOf="@+id/editBookButton"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toEndOf="@+id/bookStatus"
+        app:layout_constraintTop_toBottomOf="@+id/bookDescription" />
 
 </android.support.constraint.ConstraintLayout>
