@@ -87,16 +87,17 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userID) ||
-                            chat.getReceiver().equals(userID) && chat.getSender().equals(userID)){
-
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userID)){
+                        theLastMessage = chat.getMessage();
+                    }
+                    if (chat.getReceiver().equals(userID) && chat.getSender().equals(userID)){
                         theLastMessage = chat.getMessage();
                     }
 
                     switch (theLastMessage){
 
                         case "default":
-                            lastMessage.setText("No message");
+                            lastMessage.setText("No new messages");
                             break;
 
                         default:
