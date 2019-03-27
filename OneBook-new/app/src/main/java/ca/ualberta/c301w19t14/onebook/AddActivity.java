@@ -1,6 +1,9 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
@@ -9,6 +12,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -65,9 +70,18 @@ public class AddActivity extends AppCompatActivity {
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                if(ContextCompat.checkSelfPermission(AddActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(AddActivity.this,
+                            new String[]{Manifest.permission.CAMERA}, 1);
+
+                }
+                else
+                {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
             }
         });
@@ -89,29 +103,37 @@ public class AddActivity extends AppCompatActivity {
                         book.setId(name);
                         myRef.child(name).setValue(book);
 
-                        final StorageReference personRef = storageReference.child("Book images/"+name+"/bookimage.jpeg");
+                        final StorageReference personRef = storageReference.child("Book images/"+name+"/bookimage.png");
 
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Bitmap imageBitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
-                                byte[] byteArray = baos.toByteArray();
-                                UploadTask uploadTask = personRef.putBytes(byteArray);
-                                uploadTask.addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(AddActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                        Toast.makeText(AddActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                try {
+                                    Bitmap imageBitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                    imageBitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+                                    byte[] byteArray = baos.toByteArray();
+                                    UploadTask uploadTask = personRef.putBytes(byteArray);
+                                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AddActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                                            Toast.makeText(AddActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                                catch(Exception e)
+                                {
+                                    Toast.makeText(AddActivity.this, "no image committed", Toast.LENGTH_SHORT).show();
+                                }
+                                //Bitmap imageBitmap = Bitmap.createBitmap(((BitmapDrawable)image.getDrawable()).getBitmap());
+
 
 
                             }

@@ -151,6 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/bookStatus" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/RequestView"
         android:layout_width="395dp"
         android:layout_height="146dp"
         android:layout_marginStart="16dp"

@@ -2,7 +2,9 @@ package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -27,6 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
@@ -40,6 +43,8 @@ public class  editBookActivity extends AppCompatActivity {
     private EditText isbn;
     private TextView owner;
     private Button editphoto;
+    private Button editDelete;
+
     private ImageView image;
     private EditText description;
     public FirebaseUtil books;
@@ -66,12 +71,34 @@ public class  editBookActivity extends AppCompatActivity {
 
         final Bundle bundle = intent.getExtras();
         final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
-        book_ref = storage.getReference().child("Book images/"+book.getId()+"/bookimage.jpeg");
+        book_ref = storage.getReference().child("Book images/"+book.getId()+"/bookimage.png");
         title.setText(book.getTitle());
         author.setText(book.getAuthor());
         isbn.setText(Long.toString(book.getIsbn()));
         owner.setText(book.getOwner().getName());
         description.setText(book.getDescription());
+
+        book_ref.getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                        image.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override public void onFailure(@NonNull Exception e) { }});
+        editDelete = findViewById(R.id.delete_botton);
+        editDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.ic_account_box_black_24dp);
+                //Drawable drawable = getResources().getDrawable(R.drawable.ic_account_box_black_24dp);
+                //Bitmap i = ((BitmapDrawable) drawable).getBitmap();
+                image.setImageResource(R.drawable.ic_account_box_black_24dp);
+                //image.setImageBitmap(i);
+
+            }
+        });
 
         editphoto = findViewById(R.id.editPhoto);
         editphoto.setOnClickListener(new View.OnClickListener() {
@@ -84,10 +111,12 @@ public class  editBookActivity extends AppCompatActivity {
             }
         });
 
+
         Button saveButton =  findViewById(R.id.saveBookButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 book.setAuthor(author.getText().toString());
                 book.setTitle(title.getText().toString());
                 book.setDescription(description.getText().toString());
@@ -102,30 +131,45 @@ public class  editBookActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Bitmap imageBitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
-                        byte[] byteArray = baos.toByteArray();
-                        UploadTask uploadTask = book_ref.putBytes(byteArray);
-                        uploadTask.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(editBookActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                Toast.makeText(editBookActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        try {
+                            Bitmap imageBitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            byte[] byteArray = baos.toByteArray();
+                            UploadTask uploadTask = book_ref.putBytes(byteArray);
+                            uploadTask.addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(editBookActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                                    Toast.makeText(editBookActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
-
+                        }
+                        catch(ClassCastException e)
+                        {
+                            book_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(editBookActivity.this, "Data deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(editBookActivity.this, "Data is still there idiot", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     }
                 });
 
-                }
-            });
+            }
+        });
 
         Button deleteButton =  findViewById(R.id.deleteBookButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {

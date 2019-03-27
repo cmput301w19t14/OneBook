@@ -3,12 +3,20 @@ package ca.ualberta.c301w19t14.onebook;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +43,9 @@ public class ViewBookActivity extends AppCompatActivity {
     private TextView description;
     private TextView status;
     private Book book;
+    public ImageView image;
+    public RecyclerView recyclerView;
+
     private String book_id = "";
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference;
@@ -43,14 +54,34 @@ public class ViewBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_book_main);
-
         Intent intent = getIntent();
         final Bundle bundle = intent.getExtras();
 
         book_id = bundle.getString("id");
         updateData(book_id);
 
+        image = findViewById(R.id.bookImage);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ViewBookActivity.this, "error caught", Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popup = inflater.inflate(R.layout.image_pop_up,null);
+                ImageView picture = popup.findViewById(R.id.ImageCloseUp);
+                picture.setImageBitmap(((BitmapDrawable)image.getDrawable()).getBitmap());
+                int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                final PopupWindow popupWindow = new PopupWindow(popup,width,height,true);
+                popupWindow.showAtLocation(v, Gravity.CENTER,0,0);
+                popup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
 
+            }
+        });
         Button editButton =  findViewById(R.id.editBookButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +89,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewBookActivity.this, editBookActivity.class);
                 intent.putExtras(bundle);
                 ViewBookActivity.this.startActivity(intent);
+                updateData(book_id);
             }
         });
 
@@ -88,6 +120,11 @@ public class ViewBookActivity extends AppCompatActivity {
             owner = findViewById(R.id.bookOwner);
             description = findViewById(R.id.bookDescription);
             status = findViewById(R.id.bookStatus);
+            recyclerView = findViewById(R.id.RequestView);
+            LinearLayoutManager llm = new LinearLayoutManager(ViewBookActivity.this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(llm);
+
 
             book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
 
@@ -110,7 +147,8 @@ public class ViewBookActivity extends AppCompatActivity {
             status.setText(str_status);
             final ImageView bookimage = findViewById(R.id.bookImage);
 
-            storage.getReference().child("Book images/"+id+"/bookimage.jpeg").getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            storage.getReference().child("Book images/"+id+"/bookimage.png").getBytes(Long.MAX_VALUE)
+                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
@@ -122,16 +160,11 @@ public class ViewBookActivity extends AppCompatActivity {
 
                 }
             });
-            /*
-            //Glide.with(this).load(Bookpath).into(bookimage);kj
-            try{
-                //Glide.with(this).load(Bookpath).into(bookimage);
-            }
-            catch (Exception e)
-            {
-                Toast.makeText(this, "error caught", Toast.LENGTH_SHORT).show();
-            }
-            */
+
+            //BookRequestAdapter bookRequestAdapter = new BookRequestAdapter(ViewBookActivity.this,book.getRequesters());
+            //recyclerView.setAdapter(bookRequestAdapter);
+
+
 
 
         }
