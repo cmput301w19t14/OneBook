@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,21 +11,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.rule.ActivityTestRule;
-import ca.ualberta.c301w19t14.onebook.R;
-import ca.ualberta.c301w19t14.onebook.ViewRequestableActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-public class MyAccountTest {
+public class BorrowerTests {
 
     public boolean complete;
     public String email = "UITest@gmail.com";
@@ -36,6 +36,8 @@ public class MyAccountTest {
     public String actual_name2 = "Mary Jane";
     public String DUSTIN_EMAIL = "dustinmcrorie@gmail.com";
     public String DUSTIN_PASS = "hunter2";
+    private int resID = R.id.borrow_recycler;
+    private RecyclerView mRecyclerView;
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule =
@@ -71,17 +73,27 @@ public class MyAccountTest {
         Intent i = new Intent();
         activityRule.launchActivity(i);
 
-        MyacctFragment myacctFragment = new MyacctFragment();
+        BorrowingFragment borrowingFragment = new BorrowingFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 activityRule.getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, myacctFragment);
+        fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
         fragmentTransaction.commit();
     }
 
+
     @Test
-    public void CheckUserDetails(){
-        onView(withId(R.id.Name)).check(matches(withText("Name: " + actual_name)));
-        onView(withId(R.id.email)).check(matches(withText("Email: " + email.toLowerCase())));
+    public void CheckBookDetails(){
+
+        //Check to see if the title of the book is what it should be
+        onView(new RecyclerViewMatcher(this.resID)
+                        .atPositionOnView(0, R.id.bookTitle))
+                .check(matches(withText("UI Test Book 1")));
+
+        //check to see if the book is borrowed (it should be)
+        onView(new RecyclerViewMatcher(this.resID)
+                .atPositionOnView(0, R.id.bookStatus))
+                .check(matches(withText("BORROWED")));
+
     }
 
 }

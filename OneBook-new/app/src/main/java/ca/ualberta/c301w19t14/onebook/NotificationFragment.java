@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.platforminfo.GlobalLibraryVersionRegistrar;
 
 import java.util.ArrayList;
 
@@ -48,7 +51,25 @@ public class NotificationFragment extends Fragment {
         myView = inflater.inflate(R.layout.activity_home,container, false);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("Requests");
+        DatabaseReference ref = db.getReference("Notifications");
+
+        myView.findViewById(R.id.bookReceivedButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), ScanISBN.class));
+                    }
+                }
+        );
+
+        myView.findViewById(R.id.handOverBookButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), ScanISBN.class));
+                    }
+                }
+        );
 
         ref.addValueEventListener(new ValueEventListener() {
 
@@ -58,22 +79,26 @@ public class NotificationFragment extends Fragment {
              */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Request> requests = new ArrayList<Request>();
+                ArrayList<Notification> notifications = new ArrayList<Notification>();
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Request r = ds.getValue(Request.class);
-                    if(r.getBook().getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()) && r.getStatus().equals("Pending"))
-                    {
-                        requests.add(r);
-                    }
+                for (DataSnapshot ds : dataSnapshot.child(Globals.getInstance().user.getUid()).getChildren()) {
+                        Notification r = ds.getValue(Notification.class);
+                        notifications.add(r);
                 }
 
                 RecyclerView mRecyclerView = (RecyclerView) myView.findViewById(R.id.requestList);
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
-                RequestsAdapter ba = new RequestsAdapter(getActivity(), requests);
+                NotificationsAdapter ba = new NotificationsAdapter(getActivity(), notifications);
                 mRecyclerView.setAdapter(ba);
+                if(notifications.isEmpty()) {
+                    myView.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+                    myView.findViewById(R.id.requestList).setVisibility(View.GONE);
+                } else {
+                    myView.findViewById(R.id.noData).setVisibility(View.GONE);
+                    myView.findViewById(R.id.requestList).setVisibility(View.VISIBLE);
+                }
             }
 
             /**

@@ -24,7 +24,7 @@
                 android:src="@drawable/ic_account_box_black_24dp" />
 
             <TextView
-                android:id="@+id/bookStatus"
+                android:id="@+id/bookStatus2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -49,7 +49,7 @@
             android:paddingLeft="12dp">
 
             <TextView
-                android:id="@+id/bookTitle"
+                android:id="@+id/bookTitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -65,7 +65,7 @@
                 tools:text="Title" />
 
             <TextView
-                android:id="@+id/bookIsbn"
+                android:id="@+id/bookIsbn2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -77,7 +77,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bookauthor" />
 
             <TextView
-                android:id="@+id/bookauthor"
+                android:id="@+id/bookauthor2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -89,7 +89,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
 
             <TextView
-                android:id="@+id/bookOwner"
+                android:id="@+id/bookOwner2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -101,7 +101,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bookIsbn" />
 
             <TextView
-                android:id="@+id/bookDescription"
+                android:id="@+id/bookDescription2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

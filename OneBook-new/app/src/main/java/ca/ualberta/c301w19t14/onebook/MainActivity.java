@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
  * @author CMPUT 301 Team 14*/
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private NotificationFragment notificationFragment;
     NavigationView navigationView;
     Toolbar toolbar = null;
     Globals globals;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TextView email = (TextView) headerView.findViewById(R.id.nav_email);
             email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-            NotificationFragment notificationFragment = new NotificationFragment();
+            notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
             fragmentTransaction.commit();
@@ -100,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
            //return true;
         //}
 
+
+        Intent intent = new Intent(MainActivity.this, ScanISBN.class);
+        MainActivity.this.startActivity(intent);
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -132,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Still loading data, please wait", Toast.LENGTH_SHORT).show();
             }
             else {
+
                 BorrowingFragment borrowingFragment = new BorrowingFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
