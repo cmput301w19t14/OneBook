@@ -80,45 +80,33 @@ public class Request {
 
         //adds user to waitlist if they aren't already on that book's waitlist
         DataSnapshot bookData = Globals.getInstance().books.getData();
-        for (DataSnapshot i: bookData.getChildren()){
+        boolean duplicateRequest = false;
+        for (DataSnapshot i: bookData.getChildren()) {
             Book item = i.getValue(Book.class);
 
             //add request to current book only
             if (item.getId().equals(book_id)) {
+                //checks if the user has already made a request on this book
+                if (item.getRequest() != null) {
+                    for (Request r : item.getRequest().values()) {
+                        if (r.getUser().getUid().equals(user.getUid())) {
+                            Log.d("mytag", "returned true");
+                            duplicateRequest = true;
+                        }
+                    }
+                    if (!duplicateRequest) {
+                        Log.d("mytag", "still false");
+                        //saves the request to database if they haven't already made a request
+                        Request request2 = new Request(user, book);
+                        myRef2.child(book_id).child("request").child(ts).setValue(request2);
+                    }
+                }else{
+                    Request request2 = new Request(user, book);
+                    myRef2.child(book_id).child("request").child(ts).setValue(request2);
 
-                //iterate through the request on current item.
-                // if user isn't already in the list of requests for that book then save request
-
-
-
-                    //saves the request to database
-                    //Request request2 = new Request(user, book);
-                    //myRef2.child(book_id).child("request").child(ts).setValue(request2);
+                }
             }
         }
-
-        /*
-                    long isbn = Long.parseLong(barcode);
-                    DataSnapshot book = Globals.getInstance().books.getData();
-                    for (DataSnapshot i : book.getChildren()) {
-                        Book item = i.getValue(Book.class);
-                        if(item.getIsbn() == isbn) {
-                            if(item.getOwner().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                // user is owner: we go to view book activity
-                                Intent intent = new Intent(ScanISBN.this, ViewBookActivity.class);
-                                final Bundle bundle = new Bundle();
-                                String id = item.getId();
-                                bundle.putString("id", id);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                            }
-                        }
-
-
-         */
-
-
-
 
 
         // notify the user
