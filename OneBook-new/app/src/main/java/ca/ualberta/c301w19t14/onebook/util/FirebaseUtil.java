@@ -64,37 +64,11 @@ public class FirebaseUtil {
         //iterate through books, loading in each one
         for (DataSnapshot ds : data.getChildren()){
 
-            //load in raw data
-            String title = (String) ds.child("title").getValue();
-            long ISBN = (long) ds.child("isbn").getValue();
-            String status = (String) ds.child("status").getValue();
-            String author = (String) ds.child("author").getValue();
-            String oemail = (String) ds.child("owner").child("email").getValue();
-            String book_id = (String) ds.child("id").getValue();
-
-            String oname = (String) ds.child("owner").child("name").getValue();
-
-            String ouid = (String) ds.child("owner").child("uid").getValue();
-
-            //load in user and borrower
-            User owner = new User(ouid, oname, oemail);
-
-            //only load in borrower if the book is not available
-            User borrower;
-            if (!status.equals("Available") || (!status.equals("Requested"))) {
-                String bemail = (String) ds.child("borrower").child("email").getValue();
-                String bname = (String) ds.child("borrower").child("name").getValue();
-                String buid = (String) ds.child("borrower").child("uid").getValue();
-                borrower = new User(buid, bname, bemail);
-            }
-            else
-                borrower = null;
-
-
             //finally, create the book
-            Book b = new Book(ISBN, title, author, null, owner, borrower, null,
-                    status);
-            b.setId(book_id);
+            Book b = ds.getValue(Book.class);
+
+            // TODO: Override status.
+
             books.add(b);
         }
 

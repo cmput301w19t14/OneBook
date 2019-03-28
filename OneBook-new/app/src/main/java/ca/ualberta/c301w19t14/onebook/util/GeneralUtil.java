@@ -28,7 +28,7 @@ public class GeneralUtil {
         //see which books' borrowerID matches the given userID
 
         for (Book book : all_books){
-            if (book.getBorrower().getEmail() == null){
+            if (book.getBorrower() == null){
                 int temp = 1+1;
             }
             else {

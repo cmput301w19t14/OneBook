@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -120,13 +121,25 @@ public class LendingFragment extends Fragment {
     //use tool bar that has the camera button
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.camera_toolbar, menu);
+        inflater.inflate(R.menu.filter_toolbar, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        return false;
+
+        if (id == R.id.quick_camera) {
+            Intent intent = new Intent(getActivity(), ScanISBN.class);
+            this.startActivity(intent);
+        }
+        else if (id == R.id.quick_filter) {
+            AlertDialog filterDialog = new AlertDialog.Builder(this.getContext()).create();
+            filterDialog.setTitle("Filtering options available:");
+        }
+
+
+
+        return true;
     }
 
 }
