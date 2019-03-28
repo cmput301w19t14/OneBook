@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 import ca.ualberta.c301w19t14.onebook.activities.ViewRequestableActivity;
@@ -63,10 +65,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(i);
         bookVh.book = book;
 
+
         bookVh.vTitle.setText(book.getTitle());
         bookVh.vOwner.setText(book.getOwner().getName());
         bookVh.vStatus.setText(book.getStatus().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
+        //bookVh.vImage.setImageBitmap();
 
         //MODE = true -> do borrowing/lending
         if (mode) {
@@ -105,6 +109,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         protected TextView vOwner;
         protected TextView vAuthor;
         protected TextView vTitle;
+        protected CircleImageView vImage;
         public Book book;
 
         /**
@@ -117,6 +122,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             vOwner = (TextView)  v.findViewById(R.id.bookOwner);
             vStatus = (TextView)  v.findViewById(R.id.bookStatus);
             vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
+            //vImage = v.findViewById(R.id.bookImage);
 
             //make the cards clickable
             view = v;
