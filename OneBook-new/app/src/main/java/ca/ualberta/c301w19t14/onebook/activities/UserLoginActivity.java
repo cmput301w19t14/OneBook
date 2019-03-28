@@ -21,10 +21,15 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivityForResult(
-                // Get an instance of AuthUI based on the default app
-                AuthUI.getInstance().createSignInIntentBuilder().build(),
-                123);
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startActivityForResult(
+                    // Get an instance of AuthUI based on the default app
+                    AuthUI.getInstance().createSignInIntentBuilder().build(),
+                    123);
+        } else {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
 
     }
 

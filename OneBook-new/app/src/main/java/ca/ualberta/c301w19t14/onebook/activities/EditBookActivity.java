@@ -16,16 +16,20 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
-/**This class allows a user to edit their account information
- * @author CMPUT 301 Team 14*/
+
+/**
+ * Edit book activity.
+ *
+ * @author Oran, Dimitri
+ */
 public class EditBookActivity extends AppCompatActivity {
 
     private EditText title;
     private EditText author;
     private EditText isbn;
-    private TextView owner;
     private EditText description;
     public FirebaseUtil books;
+    private Book book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +37,24 @@ public class EditBookActivity extends AppCompatActivity {
         setContentView(R.layout.edit_book_main);
 
         Intent intent = getIntent();
-        this.books = new FirebaseUtil("Books");
+        book = Book.find(intent.getStringExtra("id"));
 
+        // init the views
         title = findViewById(R.id.editBookTitle);
         author = findViewById(R.id.editBookAuthor);
         isbn = findViewById(R.id.editBookISBN);
-        owner = findViewById(R.id.viewBookOwner);
+        TextView owner = findViewById(R.id.viewBookOwner);
         description = findViewById(R.id.editBookDescription);
 
-        final Bundle bundle = intent.getExtras();
-        final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
+        // set the current data
         title.setText(book.getTitle());
         author.setText(book.getAuthor());
         isbn.setText(Long.toString(book.getIsbn()));
         owner.setText(book.getOwner().getName());
         description.setText(book.getDescription());
 
-
-        Button saveButton =  findViewById(R.id.saveBookButton);
+        // handle saving
+        Button saveButton = findViewById(R.id.saveBookButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,23 +62,19 @@ public class EditBookActivity extends AppCompatActivity {
                 book.setTitle(title.getText().toString());
                 book.setDescription(description.getText().toString());
                 book.setIsbn(Long.valueOf(isbn.getText().toString()));
+                book.update();
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Books");
-                myRef.child(book.getId()).setValue(book);
                 finish();
                 }
             });
 
-        Button deleteButton =  findViewById(R.id.deleteBookButton);
+        // handle deleting
+        Button deleteButton = findViewById(R.id.deleteBookButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Books");
-                myRef.child(book.getId()).removeValue();
+                book.delete();
 
-                // TODO: MUST REMOVE REQUESTS
                 finish();
             }
         });

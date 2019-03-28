@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
@@ -25,15 +26,15 @@ public class EditUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_edit_user_activity);
 
-        //autofill current account information
+        // autofill current account information
         nm_edit = findViewById(R.id.editName);
         em_edit = findViewById(R.id.editEmail);
         ps_edit = findViewById(R.id.editPassword);
 
-        em_edit.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        nm_edit.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        em_edit.setText(Globals.getInstance().user.getEmail());
+        nm_edit.setText(Globals.getInstance().user.getDisplayName());
 
-        //save changes to database
+        // save changes to database
         Button saveEdit = findViewById(R.id.UserSaveButton);
         saveEdit.setOnClickListener(new View.OnClickListener() {
             @Override
