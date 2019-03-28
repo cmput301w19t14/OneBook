@@ -16,48 +16,64 @@ import static org.junit.Assert.assertEquals;
  */
 public class NotificationTest {
 
-    private Notification notificationTest = new Notification(true, "100","200",
-            "This is my message");
+    private String title = "Title";
+    private String content = "this is content";
+
+    private String username = "John Stuart";
+    private String useremail = "johns@ualberta.ca";
+    private String useruid = "w65E6Y72S";
+    private User owner = new User(useruid, username, useremail);
+
+    private String borrowname = "Meek Mill";
+    private String borrowemail = "millm@ualberta.ca";
+    private String borrowuid = "a47NM7T12A";
+    private User borrower = new User(borrowuid, borrowname, borrowemail);
+
+    private String booktitle = "Harry Potter";
+    private String author = "J.K. Rowling";
+    private String description = "About wizards and magic";
+    private long isbn = 27892231L;
+    private Book book = new Book(isbn, booktitle, author, description, owner);
+
+    private Request request = new Request(borrower, book);
+    private Notification notificationTest = new Notification(title, content, request, owner);
 
     @Test
-    public void checkCreateNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.getRead());
+    public void checkGetTitle(){
+        Assert.assertEquals(title, notificationTest.getTitle());
     }
 
     @Test
-    public void checkDeleteNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.deleteNotification(true, "100","200", "This is my message"));
+    public void checkGetContent(){
+        Assert.assertEquals(content, notificationTest.getContent());
     }
 
     @Test
-    public void checkSendNotification(){
-        Assert.assertEquals(Boolean.TRUE, notificationTest.sendNotification(true, "100","200", "This is my message"));
+    public void checkGetRequestUserDetails(){
+        Assert.assertEquals(borrowemail, request.getUser().getEmail());
+        Assert.assertEquals(borrowname, request.getUser().getName());
+        Assert.assertEquals(borrowuid, request.getUser().getUid());
     }
 
     @Test
-    public void checkSetRead() {
-        notificationTest.setRead(Boolean.TRUE);
-        Assert.assertEquals(Boolean.TRUE,notificationTest.getRead());
+    public void checkGetRequestBookDetails() {
+        Assert.assertEquals(isbn, request.getBook().getIsbn());
+        Assert.assertEquals(booktitle, request.getBook().getTitle());
+        Assert.assertEquals(username, request.getBook().getOwner().getName());
     }
 
     @Test
-    public void checkSetNotification() {
-        notificationTest.setNotification("this is my message");
-        Assert.assertEquals("this is my message", notificationTest.getNotification());
+    public void checkGetNotificationRequestDetails() {
+        Assert.assertEquals(borrowname, notificationTest.getRequest().getUser().getName());
+        Assert.assertEquals(booktitle, notificationTest.getRequest().getBook().getTitle());
+        Assert.assertEquals(borrowuid, notificationTest.getRequest().getUser().getUid());
     }
 
     @Test
-    public void checkSetSenderID() {
-        String i = "257";
-        notificationTest.setSenderID(i);
-        Assert.assertEquals(i, notificationTest.getSenderID());
-    }
-
-    @Test
-    public void checkSetRecipientID() {
-        String j = "377";
-        notificationTest.setRecipientID(j);
-        Assert.assertEquals(j, notificationTest.getRecipientID());
+    public void checkGetNotificationUserDetails() {
+        Assert.assertEquals(username, notificationTest.getUser().getName());
+        Assert.assertEquals(useremail, notificationTest.getUser().getEmail());
+        Assert.assertEquals(useruid, notificationTest.getUser().getUid());
     }
 
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -127,6 +128,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 @Override public void onClick(View v){
                     Bundle bundle = new Bundle();
                     bundle.putString("id", book.getId());
+
+                    //DEBUG - remove later
+                    Toast toast = Toast
+                            .makeText(mContext, "Book ID: " + book.getTitle(), Toast.LENGTH_SHORT);
+                    toast.show();
 
                     //if the user clicks on a book they own, they will get a view page that allows edits
                     //if the user clicks on a book they do not own, they will get a view page that doesn't allow edits

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +27,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+
+import static com.google.android.gms.vision.barcode.Barcode.ISBN;
 
 /**
  * This class allows a user to view book information for a book that they own
@@ -49,6 +57,7 @@ public class ViewBookActivity extends AppCompatActivity {
     private String book_id = "";
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference;
+    public Globals globals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +88,23 @@ public class ViewBookActivity extends AppCompatActivity {
                         popupWindow.dismiss();
                     }
                 });
+        globals = Globals.getInstance();
+
+        //Delete Button
+        Button deleteButton = findViewById(R.id.buttonDelete);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Books");
+                myRef.child(book.getId()).removeValue();
+
+                // TODO: MUST REMOVE REQUESTS
+                finish();
+
+            }
+        });
+
 
             }
         });
@@ -107,7 +133,12 @@ public class ViewBookActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
-        if(!book_id.isEmpty()) {
+        if (Globals.getInstance().books.getData().child(book_id).getValue(Book.class) == null) {
+            finish();
+            Log.d("DEBUG_ONEBOOK", "book is equal to null");
+        }
+
+        else if(!book_id.isEmpty()) {
             updateData(book_id);
         }
     }

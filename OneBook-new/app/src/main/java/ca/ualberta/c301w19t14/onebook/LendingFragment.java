@@ -6,12 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
@@ -24,13 +28,15 @@ public class LendingFragment extends Fragment {
     View myView;
     BookAdapter ba;
     ArrayList<Book> book;
+    private Globals globals;
+    private RecyclerView mRecyclerView;
 
 
     public LendingFragment() {
 
     }
 
-    LendingFragment(ArrayList<Book> book) {
+    public LendingFragment(ArrayList<Book> book) {
         super();
         this.book = book;
     }
@@ -42,7 +48,7 @@ public class LendingFragment extends Fragment {
 
         myView = inflater.inflate(R.layout.lending_main,container, false);
 
-        RecyclerView mRecyclerView = (RecyclerView) myView.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) myView.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -64,6 +70,26 @@ public class LendingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+
+        //back button override
+        //Source: https://stackoverflow.com/questions/7992216/android-fragment-handle-back-button-press
+        this.getView().setFocusableInTouchMode(true);
+        this.getView().requestFocus();
+
+        //set up listener for back button
+        this.getView().setOnKeyListener( new View.OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        } );
     }
 
     @Override
@@ -74,7 +100,21 @@ public class LendingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ba.notifyDataSetChanged();
+
+        //see if anything changed in the database
+        globals = Globals.getInstance();
+        ArrayList<Book> deltabook = new ArrayList<Book>();
+
+        for(DataSnapshot snapshot : globals.books.getData().getChildren()) {
+            Book b = snapshot.getValue(Book.class);
+
+            if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+            {
+                deltabook.add(b);
+            }
+        }
+        ba = new BookAdapter(getActivity(), deltabook, true);
+        mRecyclerView.setAdapter(ba);
     }
 
     //use tool bar that has the camera button

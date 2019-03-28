@@ -70,6 +70,7 @@ public class FirebaseUtil {
             String status = (String) ds.child("status").getValue();
             String author = (String) ds.child("author").getValue();
             String oemail = (String) ds.child("owner").child("email").getValue();
+            String book_id = (String) ds.child("id").getValue();
 
             String oname = (String) ds.child("owner").child("name").getValue();
 
@@ -93,6 +94,7 @@ public class FirebaseUtil {
             //finally, create the book
             Book b = new Book(ISBN, title, author, null, owner, borrower, null,
                     status);
+            b.setId(book_id);
             books.add(b);
         }
 
