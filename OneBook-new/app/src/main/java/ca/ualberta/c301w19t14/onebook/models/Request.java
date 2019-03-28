@@ -87,10 +87,17 @@ public class Request {
                         //saves the request to database if they haven't already made a request
                         Request request2 = new Request(user, book);
                         myRef2.child(book_id).child("request").child(ts).setValue(request2);
+
                     }
                 } else {
+                    //this is only request on the book
                     Request request2 = new Request(user, book);
                     myRef2.child(book_id).child("request").child(ts).setValue(request2);
+
+                    //notifies owner since they are automatically at the top of the waitlist
+                    Notification notification = new Notification("New Request on Book", user.getName() + " has requested " + item.getTitle(), request2, item.getOwner());
+                    notification.save();
+
                 }
             }
         }
