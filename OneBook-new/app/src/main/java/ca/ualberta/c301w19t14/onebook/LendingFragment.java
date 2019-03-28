@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +41,12 @@ public class LendingFragment extends Fragment {
     public LendingFragment(ArrayList<Book> book) {
         super();
         this.book = book;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     //create recycler view
@@ -70,7 +77,6 @@ public class LendingFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
 
         //back button override
         //Source: https://stackoverflow.com/questions/7992216/android-fragment-handle-back-button-press
@@ -135,9 +141,11 @@ public class LendingFragment extends Fragment {
         else if (id == R.id.quick_filter) {
             AlertDialog filterDialog = new AlertDialog.Builder(this.getContext()).create();
             filterDialog.setTitle("Filtering options available:");
+            // you still need a body and buttons
+            // then call filterDialog.show();
+            Toast.makeText(myView.getContext(), "I clicked filter.", Toast.LENGTH_SHORT).show();
+
         }
-
-
 
         return true;
     }
