@@ -1,6 +1,11 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.HashMap;
+
+import ca.ualberta.c301w19t14.onebook.Globals;
 
 /** Handles all attributes of the book object.
  * @author CMPUT 301 Team 14
@@ -159,5 +164,31 @@ public class Book {
             }
         }
         return null;
+    }
+
+    /**
+     * Finds a book by it's ID.
+     *
+     * @param id string book id
+     * @return Book a book object
+     */
+    public static Book find(String id) {
+        return Globals.getInstance().books.getData().child(id).getValue(Book.class);
+    }
+
+    /**
+     * Deletes a book.
+     */
+    public void delete() {
+        FirebaseDatabase.getInstance().getReference("Books").child(this.getId()).removeValue();
+    }
+
+    /**
+     * Updates a book.
+     */
+    public void update() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Books");
+        myRef.child(this.getId()).setValue(this);
     }
 }

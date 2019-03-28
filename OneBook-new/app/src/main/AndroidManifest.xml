@@ -30,12 +30,8 @@
             android:value="barcode" />
 
         <activity android:name=".activities.ScanIsbnActivity"
-            android:label = "Barcode Reader">
-            <intent-filter>
-                <action android:name = "android.intent.action.MAIN" />
-
-            </intent-filter>
-        </activity>
+            android:parentActivityName=".activities.MainActivity"
+            android:label = "Barcode Reader" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -43,16 +39,21 @@
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".activities.EditUserActivity" />
-        <activity android:name=".activities.EditBookActivity" />
-        <activity android:name=".activities.ViewBookActivity" />
-        <activity android:name=".activities.UserAccountActivity" />
+        <activity android:name=".activities.EditUserActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.EditBookActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.ViewBookActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.UserAccountActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.MessageActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.UserLoginActivity"

@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NotificationFragment notificationFragment = new NotificationFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         }
         else if (id == R.id.nav_borrowing) {
             if (globals.books.isNull()){
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 BorrowingFragment borrowingFragment = new BorrowingFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
             }
         }
 
@@ -138,21 +139,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             LendingFragment lendingFragment = new LendingFragment(book);
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, lendingFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         }
 
         else if (id == R.id.nav_myacct) {
             MyacctFragment myacctFragment = new MyacctFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, myacctFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         }
 
         else if (id == R.id.nav_messages) {
             MessagesFragment messagesFragment = new MessagesFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, messagesFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         }
 
         else if (id == R.id.nav_logout) {
