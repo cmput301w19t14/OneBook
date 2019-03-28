@@ -95,7 +95,7 @@ public class Request {
                     myRef2.child(book_id).child("request").child(ts).setValue(request2);
 
                     //notifies owner since they are automatically at the top of the waitlist
-                    Notification notification = new Notification("New Request", "Your book has been requested", request2, user);
+                    Notification notification = new Notification("New Request on Book", user.getName() + " has requested " + item.getTitle(), request2, item.getOwner());
                     notification.save();
 
                 }
