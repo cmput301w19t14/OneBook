@@ -80,20 +80,18 @@ public class Request {
         DataSnapshot bookData = Globals.getInstance().books.getData();
         for (DataSnapshot i: bookData.getChildren()){
             Book item = i.getValue(Book.class);
-            if (item.getId().equals(book_id)){
 
-                //Natalie is currently editing this part for the waitlist
+            //add request to current book only
+            if (item.getId().equals(book_id)) {
 
-                //for(DataSnapshot j: bookData.child(book.getId()).getChildren()) {
-                    ///Book item2 = j.getValue(Book.class);
+                //iterate through the request on current item.
+                // if user isn't already in the list of requests for that book then save request
 
-                    //Log.d("my_test_working", j.child("request").getKey());
-                    //Log.d("my_test_maybe", j.child("request").child("user").getValue().toString());
-                    //Log.d("my_test_1", j.getValue().toString());
-                    //Log.d("my_test_2", item.getRequest().
-                //}
-                Request request2 = new Request(user, book);
-                myRef2.child(book_id).child("request").child(ts).setValue(request2);
+
+
+                    //saves the request to database
+                    //Request request2 = new Request(user, book);
+                    //myRef2.child(book_id).child("request").child(ts).setValue(request2);
             }
         }
 
