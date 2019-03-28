@@ -90,7 +90,7 @@ public class ViewBookActivity extends AppCompatActivity {
                     }
                 });
             }
-        }
+        });
         //let's the user click on an owner to see their profile
         TextView owner = (TextView)findViewById(R.id.bookOwner);
         owner.setOnClickListener(new View.OnClickListener() {
