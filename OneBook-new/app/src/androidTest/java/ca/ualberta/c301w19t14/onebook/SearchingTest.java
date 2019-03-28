@@ -18,10 +18,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Map;
-
 //import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
+import ca.ualberta.c301w19t14.onebook.activities.SearchingActivity;
 
 //import static androidx.test.espresso.Espresso.onData;
 //import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;

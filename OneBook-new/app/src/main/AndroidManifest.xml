@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".activities.CameraActivity"></activity>
         <!-- add mobile vision dependencies and vision to metadata -->
         <meta-data
             android:name="com.google.android.gms.version"
@@ -29,7 +29,7 @@
             android:name="com.google.android.gms.version.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".ScanISBN"
+        <activity android:name=".activities.ScanIsbnActivity"
             android:label = "Barcode Reader">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
@@ -41,21 +41,21 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".EditUserActivity" />
-        <activity android:name=".editBookActivity" />
-        <activity android:name=".ViewBookActivity" />
-        <activity android:name=".UserAccount" />
+        <activity android:name=".activities.EditUserActivity" />
+        <activity android:name=".activities.EditBookActivity" />
+        <activity android:name=".activities.ViewBookActivity" />
+        <activity android:name=".activities.UserAccountActivity" />
         <activity
-            android:name=".MessageActivity"
+            android:name=".activities.MessageActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UserLoginActivity"
+            android:name=".activities.UserLoginActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,14 +64,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchingActivity"
+            android:name=".activities.SearchingActivity"
             android:label="@string/title_activity_searching_main"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".ViewRequestableActivity" />
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.ViewRequestableActivity" />
         <activity
-            android:name=".AddActivity"
+            android:name=".activities.AddActivity"
             android:label="@string/title_activity_add"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>
