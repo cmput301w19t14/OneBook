@@ -1,163 +1,89 @@
 package ca.ualberta.c301w19t14.onebook;
 
-/**Class for Location. This will be used in Part 5 when implementing the pick up locations
- *  @author CMPUT 301 Team 14*/
+/**
+ * Location class.
+ * Mainly used to abstract location data for book pickup.
+ *
+ * @author Dimitri Trofimuk
+ */
 public class Location {
 
     private double lat;
     private double lng;
-    private String streetAddress;
-    private String city;
-    private String state;
-    private String country;
-    private String name;
+    private String address;
 
     /**
-     *
+     * Empty constructor for Firebase.
      */
     public Location() {
 
     }
 
     /**
+     * Create a new location record with address and LatLng.
      *
-     * @param name
-     * @param lat
-     * @param lng
+     * @param address human formatted address
+     * @param lat latitude
+     * @param lng longitude
      */
-    public Location(String name, double lat, double lng)
+    public Location(String address, double lat, double lng)
     {
-        this.name = name;
+        this.address = address;
         this.lat = lat;
         this.lng = lng;
     }
 
     /**
+     * Set the address.
      *
-     * @param name
-     * @param streetAddress
-     * @param city
-     * @param state
-     * @param country
+     * @param address human formatted address
      */
-    public Location(String name, String streetAddress, String city, String state, String country)
-    {
-        this.name = name;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.state = state;
-        this.country = country;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     /**
-     * setter for the location name
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * setter for the street address
-     * @param streetAddress
-     */
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
-    /**
-     * setter for the location's latitude
-     * @param lat
+     * Set the lat.
+     *
+     * @param lat latitude
      */
     public void setLat(double lat) {
         this.lat = lat;
     }
 
     /**
-     * setter for the location's longitude
-     * @param lng
+     * Set the lng.
+     *
+     * @param lng longitude
      */
     public void setLng(double lng) {
         this.lng = lng;
     }
 
     /**
-     * setter for the location's city
-     * @param city
+     * Get the address.
+     *
+     * @return address
      */
-    public void setCity(String city) {
-        this.city = city;
+    public String getAddress() {
+        return address;
     }
 
     /**
-     * setter for the location's province/state/territory
-     * @param state
-     */
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    /**
-     * setter for the location's country
-     * @param country
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    /**
-     * getter for the location's name
-     * @return this.name
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * getter for the location's latitude
-     * @return this.lat
+     * Get the lat.
+     *
+     * @return lat
      */
     public double getLat() {
-        return this.lat;
+        return lat;
     }
 
     /**
-     * getter for the location's longitude
-     * @return this.lng
+     * Get the lng.
+     *
+     * @return lng
      */
     public double getLng() {
-        return this.lng;
-    }
-
-    /**
-     * getter for the location's address
-     * @return this.streetAdress
-     */
-    public String getStreetAddress() {
-        return this.streetAddress;
-    }
-
-    /**
-     * getter for the location's city
-     * @return this.city
-     */
-    public String getCity() {
-        return this.city;
-    }
-
-    /**
-     * getter for the location's state/province/territory
-     * @return this.state
-     */
-    public String getState() {
-        return this.state;
-    }
-
-    /**
-     * getter for the location's country
-     * @return this.country
-     */
-    public String getCountry() {
-        return this.country;
+        return lng;
     }
 }
