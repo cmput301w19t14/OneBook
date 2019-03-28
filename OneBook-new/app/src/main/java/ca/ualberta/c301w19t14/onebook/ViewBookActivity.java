@@ -88,17 +88,27 @@ public class ViewBookActivity extends AppCompatActivity {
             }
         });
 
-        Button locationButton =  findViewById(R.id.GetLocationButton);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(ViewBookActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+        Button locationButton = findViewById(R.id.GetLocationButton);
 
+        if(book.getAcceptedRequest() &&
+                (book.getOwner().getUid().equals(Globals.getInstance().user.getUid()) ||
+                        book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
+        ) {
+            // TODO: if accepted request and book owner OR if book.requests where requester = user, show location button.
+
+            locationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
+                    intent.putExtra("book_id", book.getId());
+                    startActivity(intent);
+                }
+            });
+        } else {
+            locationButton.setVisibility(View.GONE);
+        }
     }
-  
+
     @Override
     public void onResume(){
         super.onResume();
