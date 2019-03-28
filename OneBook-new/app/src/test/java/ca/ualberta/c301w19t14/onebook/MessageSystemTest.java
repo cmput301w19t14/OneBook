@@ -5,6 +5,11 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Location;
+import ca.ualberta.c301w19t14.onebook.models.Request;
+import ca.ualberta.c301w19t14.onebook.models.User;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -3,7 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import ca.ualberta.c301w19t14.onebook.models.Message;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

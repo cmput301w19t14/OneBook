@@ -2,7 +2,7 @@ package ca.ualberta.c301w19t14.onebook;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import ca.ualberta.c301w19t14.onebook.models.Location;
 
 
 public class LocationTest {

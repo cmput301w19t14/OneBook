@@ -2,7 +2,6 @@ package ca.ualberta.c301w19t14.onebook.util;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.AbsListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,9 +11,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import ca.ualberta.c301w19t14.onebook.Book;
-import ca.ualberta.c301w19t14.onebook.Request;
-import ca.ualberta.c301w19t14.onebook.User;
+import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Request;
 
 import static java.lang.Thread.sleep;
 
