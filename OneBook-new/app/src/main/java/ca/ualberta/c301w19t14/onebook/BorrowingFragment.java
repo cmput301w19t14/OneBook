@@ -97,7 +97,7 @@ public class BorrowingFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.camera_toolbar, menu);
+        inflater.inflate(R.menu.filter_toolbar, menu);
     }
 
     @Override
