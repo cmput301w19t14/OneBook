@@ -1,6 +1,8 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,6 +12,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,8 +64,6 @@ public class EditBookActivity extends AppCompatActivity {
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference book_ref;
 
-    private EditText description;
-    public FirebaseUtil books;
     private Book book;
 
     @Override
@@ -118,9 +120,16 @@ public class EditBookActivity extends AppCompatActivity {
         editphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                if (ContextCompat.checkSelfPermission(EditBookActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(EditBookActivity.this,
+                            new String[]{Manifest.permission.CAMERA}, 1);
+                }
+                else {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
             }
         });
@@ -155,13 +164,13 @@ public class EditBookActivity extends AppCompatActivity {
                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(editBookActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditBookActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                    Toast.makeText(editBookActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditBookActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -171,12 +180,12 @@ public class EditBookActivity extends AppCompatActivity {
                             book_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(editBookActivity.this, "Data deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditBookActivity.this, "Data deleted", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(editBookActivity.this, "Data is still there idiot", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditBookActivity.this, "Data is still there idiot", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }

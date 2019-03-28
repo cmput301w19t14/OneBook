@@ -14,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import ca.ualberta.c301w19t14.onebook.models.Request;
+
 public class BookRequestAdapter extends RecyclerView.Adapter<BookRequestAdapter.UserViewHolder> {
 
     public View view;

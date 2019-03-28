@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+import ca.ualberta.c301w19t14.onebook.models.Request;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.UserViewHolder> {

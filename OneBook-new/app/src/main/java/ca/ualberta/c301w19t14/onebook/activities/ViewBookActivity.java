@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -79,17 +80,24 @@ public class ViewBookActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popup = inflater.inflate(R.layout.image_pop_up,null);
                 ImageView picture = popup.findViewById(R.id.ImageCloseUp);
-                picture.setImageBitmap(((BitmapDrawable)image.getDrawable()).getBitmap());
-                int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                final PopupWindow popupWindow = new PopupWindow(popup,width,height,true);
-                popupWindow.showAtLocation(v, Gravity.CENTER,0,0);
-                popup.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                    }
-                });
+                try {
+                    picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
+                    int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
+                    popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                    popup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                }
+                catch(ClassCastException e)
+                {
+                    Toast.makeText(ViewBookActivity.this,"No current picture",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         //let's the user click on an owner to see their profile
@@ -97,6 +105,7 @@ public class ViewBookActivity extends AppCompatActivity {
         owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //when the user clicks on their own name as owner
                 Intent intent = new Intent(ViewBookActivity.this, UserAccountActivity.class);
                 intent.putExtras(bundle);
