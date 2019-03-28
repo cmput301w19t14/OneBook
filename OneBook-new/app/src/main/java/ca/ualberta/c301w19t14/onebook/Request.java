@@ -1,12 +1,21 @@
 package ca.ualberta.c301w19t14.onebook;
 
+import android.content.Intent;
+import android.nfc.Tag;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 /**This class implements the transaction of a user requesting a book and updates the database
  * @author CMPUT 301 Team 14*/
 public class Request {
-
 
     private String id;
     private String date;
@@ -16,6 +25,7 @@ public class Request {
     private String status;
     private String owneremail;
     private String requesteremail;
+    private String time;
     private long ISBN;
 
     public Request() {
@@ -32,9 +42,9 @@ public class Request {
         String ts = tsLong.toString();
 
         this.user = user;
-        this.book = book;
+        //this.book = book;
         this.status = "Pending";
-        this.date = ts;
+        //this.date = ts;
     }
 
     /**
@@ -47,7 +57,7 @@ public class Request {
      */
     Request(User user, Book book, Location location, String date, String status){
         this.user = user;
-        this.book = book;
+        //this.book = book;
         this.location = location;
         this.date = date;
         this.status = status;
@@ -58,14 +68,58 @@ public class Request {
      * @param user
      * @param book
      */
-    public static void requestBook(User user, Book book) {
-        // save to database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Requests");
-        String name = myRef.child(book.getId()).push().getKey();
-        Request request = new Request(user, book);
-        request.setId(name);
-        myRef.child(name).setValue(request);
+    public static void requestBook(User user, Book book, String book_id) {
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+
+        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef2 = database2.getReference("Books");
+        String name2 = myRef2.child(book.getId()).getKey();
+
+        //adds user to waitlist if they aren't already on that book's waitlist
+        DataSnapshot bookData = Globals.getInstance().books.getData();
+        for (DataSnapshot i: bookData.getChildren()){
+            Book item = i.getValue(Book.class);
+            if (item.getId().equals(book_id)){
+
+                //Natalie is currently editing this part for the waitlist
+
+                //for(DataSnapshot j: bookData.child(book.getId()).getChildren()) {
+                    ///Book item2 = j.getValue(Book.class);
+
+                    //Log.d("my_test_working", j.child("request").getKey());
+                    //Log.d("my_test_maybe", j.child("request").child("user").getValue().toString());
+                    //Log.d("my_test_1", j.getValue().toString());
+                    //Log.d("my_test_2", item.getRequest().
+                //}
+                Request request2 = new Request(user, book);
+                myRef2.child(book_id).child("request").child(ts).setValue(request2);
+            }
+        }
+
+        /*
+                    long isbn = Long.parseLong(barcode);
+                    DataSnapshot book = Globals.getInstance().books.getData();
+                    for (DataSnapshot i : book.getChildren()) {
+                        Book item = i.getValue(Book.class);
+                        if(item.getIsbn() == isbn) {
+                            if(item.getOwner().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                // user is owner: we go to view book activity
+                                Intent intent = new Intent(ScanISBN.this, ViewBookActivity.class);
+                                final Bundle bundle = new Bundle();
+                                String id = item.getId();
+                                bundle.putString("id", id);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        }
+
+
+         */
+
+
+
+
 
         // notify the user
         // part 5

@@ -16,6 +16,17 @@ public class Book {
     private User borrower;
     private Location location;
     private String status;
+    private Request request;
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+
 
     /**
      * getter for description
@@ -94,6 +105,22 @@ public class Book {
         this.borrower=borrow;
         this.location =location;
         this.status = status;
+    }
+
+    //added for requests
+    public Book(long Isbn,String Title,String author,
+                String Category,
+                User owner,User borrow,Location location, String status, Request request)
+    {
+        this.isbn =Isbn;
+        this.title = Title;
+        this.author = author;
+        this.category = Category;
+        this.owner = owner;
+        this.borrower=borrow;
+        this.location =location;
+        this.status = status;
+        this.request = request;
     }
 
     /**

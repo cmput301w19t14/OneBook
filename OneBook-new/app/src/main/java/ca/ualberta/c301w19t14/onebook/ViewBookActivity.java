@@ -59,6 +59,7 @@ public class ViewBookActivity extends AppCompatActivity {
     private StorageReference storageReference;
     public Globals globals;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +89,20 @@ public class ViewBookActivity extends AppCompatActivity {
                         popupWindow.dismiss();
                     }
                 });
+            }
+        }
+        //let's the user click on an owner to see their profile
+        TextView owner = (TextView)findViewById(R.id.bookOwner);
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when the user clicks on their own name as owner
+                Intent intent = new Intent(ViewBookActivity.this,UserAccount.class);
+                intent.putExtras(bundle);
+                ViewBookActivity.this.startActivity(intent);
+            }
+        });
+
         globals = Globals.getInstance();
 
         //Delete Button
@@ -105,9 +120,6 @@ public class ViewBookActivity extends AppCompatActivity {
             }
         });
 
-
-            }
-        });
         Button editButton =  findViewById(R.id.editBookButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +139,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
   
     @Override
@@ -198,6 +211,22 @@ public class ViewBookActivity extends AppCompatActivity {
 
 
 
+
+            DataSnapshot book = Globals.getInstance().books.getData();
+            for (DataSnapshot i : book.getChildren()) {
+                Book item = i.getValue(Book.class);
+                if(item.getIsbn() == ISBN) {
+                    if(item.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                        // user is owner
+                    } else {
+                        // user is not owner
+                    }
+                }
+            }
+
+            // otherwise book doesn't exist
+
         }
     }
+
 }
