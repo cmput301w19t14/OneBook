@@ -90,7 +90,7 @@ public class ViewBookActivity extends AppCompatActivity {
 
         Button locationButton = findViewById(R.id.GetLocationButton);
 
-        if(book.getAcceptedRequest() &&
+        if(book.getAcceptedRequest() != null &&
                 (book.getOwner().getUid().equals(Globals.getInstance().user.getUid()) ||
                         book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
         ) {

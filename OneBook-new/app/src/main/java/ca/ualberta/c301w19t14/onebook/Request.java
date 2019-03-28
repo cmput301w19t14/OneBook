@@ -17,6 +17,8 @@ import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
  * @author CMPUT 301 Team 14*/
 public class Request {
 
+    final static String ACCEPTED = "Accepted";
+
     private String id;
     private String date;
     private Location location;

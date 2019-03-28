@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /** Handles all attributes of the book object.
  * @author CMPUT 301 Team 14
@@ -8,25 +9,13 @@ import java.util.ArrayList;
 public class Book {
     private String id;
     private long isbn;
+    private String description;
     private String title;
     private String author;
-    private String category;
-    private ArrayList<Request> requesters;
+    private HashMap<String, Request> request;
     private User owner;
     private User borrower;
-    private Location location;
     private String status;
-    private Request request;
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
-
 
     /**
      * getter for description
@@ -44,26 +33,10 @@ public class Book {
         this.description = description;
     }
 
-    private String description;
-
-    private Waitlist waitlist;
-
     /**
      *
      */
     public Book() {
-
-    }
-
-    /**temporary constructor for recycleview test
-     * @param title
-     * @param owner
-     * @param borrower
-     */
-    public Book(String title, User owner, User borrower) {
-        this.title = title;
-        this.owner = owner;
-        this.borrower = borrower;
     }
 
     /**
@@ -81,46 +54,6 @@ public class Book {
         this.description = description;
         this.owner = owner;
         this.status = "Available";
-    }
-
-    /**
-     * @param Isbn
-     * @param Title
-     * @param author
-     * @param Category
-     * @param owner
-     * @param borrow
-     * @param location
-     * @param status
-     */
-    public Book(long Isbn,String Title,String author,
-                     String Category,
-                User owner,User borrow,Location location, String status)
-    {
-        this.isbn =Isbn;
-        this.title = Title;
-        this.author = author;
-        this.category = Category;
-        this.owner = owner;
-        this.borrower=borrow;
-        this.location =location;
-        this.status = status;
-    }
-
-    //added for requests
-    public Book(long Isbn,String Title,String author,
-                String Category,
-                User owner,User borrow,Location location, String status, Request request)
-    {
-        this.isbn =Isbn;
-        this.title = Title;
-        this.author = author;
-        this.category = Category;
-        this.owner = owner;
-        this.borrower=borrow;
-        this.location =location;
-        this.status = status;
-        this.request = request;
     }
 
     /**
@@ -164,18 +97,6 @@ public class Book {
     public void setTitle(String Title) { this.title = Title; }
 
     /**
-     * getter for book category
-     * @return category
-     */
-    public String getCategory() { return category; }
-
-    /**
-     * setter for book category
-     * @param category
-     */
-    public void setCategory(String category) { this.title = category; }
-
-    /**
      * getter for book author
      * @return this.author
      */
@@ -186,18 +107,6 @@ public class Book {
      * @param author
      */
     public void setAuthor(String author) { this.author = author; }
-
-    /**
-     * setter for book location
-     * @param location
-     */
-    public void setLocation(Location location) { this.location = location; }
-
-    /**
-     * getter for book location
-     * @return location
-     */
-    public Location getLocation() { return location; }
 
     /**
      * getter for book owner
@@ -220,15 +129,15 @@ public class Book {
 
     /**
      * setter for book requesters
-     * @param requesters
+     * @param request
      */
-    public void setRequesters(Request requesters) {this.requesters.add(requesters); }
+    public void setRequest(HashMap<String, Request> request) {this.request = request; }
 
     /**
      * getter for book requesters
      * @return requesters
      */
-    public ArrayList<Request> getRequesters() {return requesters; }
+    public HashMap<String, Request> getRequest() {return request; }
 
     /**
      * getter for book status
@@ -242,42 +151,14 @@ public class Book {
      */
     public void setStatus(String status) { this.status = status; }
 
-    /**
-     * getter for book waitlist
-     * @return waitlist
-     */
-    public Waitlist getWaitlist() { return waitlist; }
-
-    /**
-     * setter for book waitlist
-     * @param waitlist
-     */
-    public void setWaitlist(Waitlist waitlist) { this.waitlist = waitlist; }
-
-    /**
-     * create a book based on a photo of an ISBN
-     * @return boolean
-     */
-    public boolean createViaISBNPhoto()
-    {
-        //code to be added later
-        return false;
-    }
-
-    /**
-     * lend an available book to the first person in the queue
-     */
-    public void lendToNext()
-    {
-        //
-    }
-
-    /**
-     * add a user to the end of the waitlist queue
-     * @param user
-     */
-    public void addToWait(User user)
-    {
-        //
+    public Request getAcceptedRequest() {
+        if(this.getRequest() != null) {
+            for (Request r : this.getRequest().values()) {
+                if (r.getStatus().equals(Request.ACCEPTED)) {
+                    return r;
+                }
+            }
+        }
+        return null;
     }
 }
