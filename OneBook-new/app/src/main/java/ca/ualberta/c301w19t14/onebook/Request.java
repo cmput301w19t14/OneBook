@@ -3,6 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -76,19 +77,19 @@ public class Request {
         String name2 = myRef2.child(book.getId()).getKey();
 
         //adds user to waitlist if they aren't already on that book's waitlist
-
         DataSnapshot bookData = Globals.getInstance().books.getData();
         for (DataSnapshot i: bookData.getChildren()){
             Book item = i.getValue(Book.class);
-
-
-            //Log.d("request.java", "get id");
-            //Log.d("get id", item.getId());
-            //Log.d("request.java", "book id");
-            //Log.d("request.java", book_id);
-
-
             if (item.getId().equals(book_id)){
+
+                for(DataSnapshot j: bookData.child(book.getId()).getChildren()) {
+                    ///Book item2 = j.getValue(Book.class);
+
+                    Log.d("my_test_working", j.child("request").getKey());
+                    Log.d("my_test_maybe", j.child("request").child("user").getValue().toString());
+                    //Log.d("my_test_1", j.getValue().toString());
+                    //Log.d("my_test_2", item.getRequest().
+                }
                 Request request2 = new Request(user, book);
                 myRef2.child(book_id).child("request").child(ts).setValue(request2);
             }
