@@ -16,6 +16,7 @@ public class Globals {
 
     public FirebaseUser user;
 
+
     /**
      *
      */

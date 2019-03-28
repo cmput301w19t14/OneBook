@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.rule.ActivityTestRule;
+import ca.ualberta.c301w19t14.onebook.activities.MainActivity;
+import ca.ualberta.c301w19t14.onebook.fragements.LendingFragment;
+import ca.ualberta.c301w19t14.onebook.models.Book;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
