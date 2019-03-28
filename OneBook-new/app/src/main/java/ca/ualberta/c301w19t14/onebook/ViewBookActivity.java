@@ -37,6 +37,7 @@ public class ViewBookActivity extends AppCompatActivity {
     private String book_id = "";
     public Globals globals;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,18 @@ public class ViewBookActivity extends AppCompatActivity {
 
         book_id = bundle.getString("id");
         updateData(book_id);
+
+        //let's the user click on an owner to see their profile
+        TextView owner = (TextView)findViewById(R.id.bookOwner);
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when the user clicks on their own name as owner
+                Intent intent = new Intent(ViewBookActivity.this,UserAccount.class);
+                intent.putExtras(bundle);
+                ViewBookActivity.this.startActivity(intent);
+            }
+        });
 
         globals = Globals.getInstance();
 
@@ -64,7 +77,6 @@ public class ViewBookActivity extends AppCompatActivity {
 
             }
         });
-
 
         Button editButton =  findViewById(R.id.editBookButton);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +96,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
   
     @Override
@@ -129,6 +142,22 @@ public class ViewBookActivity extends AppCompatActivity {
             String str_status = "Status: " + book.getStatus();
             status.setText(str_status);
 
+
+            DataSnapshot book = Globals.getInstance().books.getData();
+            for (DataSnapshot i : book.getChildren()) {
+                Book item = i.getValue(Book.class);
+                if(item.getIsbn() == ISBN) {
+                    if(item.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                        // user is owner
+                    } else {
+                        // user is not owner
+                    }
+                }
+            }
+
+            // otherwise book doesn't exist
+
         }
     }
+
 }

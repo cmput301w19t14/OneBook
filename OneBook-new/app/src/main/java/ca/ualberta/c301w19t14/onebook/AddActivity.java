@@ -42,6 +42,7 @@ public class AddActivity extends AppCompatActivity {
 
                         Book book = new Book(Long.parseLong(isbn.getText().toString()), title.getText().toString(), author.getText().toString(), desc.getText().toString(), user);
                         book.setId(name);
+
                         myRef.child(name).setValue(book);
                         finish();
                     }

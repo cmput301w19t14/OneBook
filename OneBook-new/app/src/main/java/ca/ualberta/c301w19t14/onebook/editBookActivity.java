@@ -46,6 +46,7 @@ public class editBookActivity extends AppCompatActivity {
         owner.setText(book.getOwner().getName());
         description.setText(book.getDescription());
 
+
         Button saveButton =  findViewById(R.id.saveBookButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
