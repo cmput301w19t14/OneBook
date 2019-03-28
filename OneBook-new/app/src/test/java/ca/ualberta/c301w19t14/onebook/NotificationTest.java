@@ -3,9 +3,10 @@ package ca.ualberta.c301w19t14.onebook;
 import org.junit.Test;
 import org.junit.Assert;
 
-import ca.ualberta.c301w19t14.onebook.Notification;
-
-import static org.junit.Assert.*;
+import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Notification;
+import ca.ualberta.c301w19t14.onebook.models.Request;
+import ca.ualberta.c301w19t14.onebook.models.User;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,17 +1,11 @@
 package ca.ualberta.c301w19t14.onebook.util;
 
-import android.provider.Settings;
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import ca.ualberta.c301w19t14.onebook.Book;
+import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
-import ca.ualberta.c301w19t14.onebook.Request;
-import ca.ualberta.c301w19t14.onebook.User;
 
 public class GeneralUtil {
 
@@ -28,7 +22,7 @@ public class GeneralUtil {
         //see which books' borrowerID matches the given userID
 
         for (Book book : all_books){
-            if (book.getBorrower().getEmail() == null){
+            if (book.getBorrower() == null){
                 int temp = 1+1;
             }
             else {

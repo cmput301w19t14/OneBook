@@ -6,6 +6,12 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Location;
+import ca.ualberta.c301w19t14.onebook.models.Notification;
+import ca.ualberta.c301w19t14.onebook.models.Request;
+import ca.ualberta.c301w19t14.onebook.models.User;
+
 
 public class RequestTest {
 

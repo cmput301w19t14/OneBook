@@ -1,51 +1,26 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.firebase.ui.auth.ui.email.EmailLinkFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.action.TypeTextAction;
-import androidx.test.espresso.contrib.DrawerActions;
-import androidx.test.espresso.contrib.NavigationViewActions;
 import androidx.test.rule.ActivityTestRule;
+import ca.ualberta.c301w19t14.onebook.activities.UserLoginActivity;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.DrawerMatchers.isClosed;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.core.AllOf.allOf;
 
 public class LoginScreenTest {
