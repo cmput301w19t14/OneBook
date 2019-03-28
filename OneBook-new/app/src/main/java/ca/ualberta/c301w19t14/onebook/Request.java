@@ -82,14 +82,16 @@ public class Request {
             Book item = i.getValue(Book.class);
             if (item.getId().equals(book_id)){
 
-                for(DataSnapshot j: bookData.child(book.getId()).getChildren()) {
+                //Natalie is currently editing this part for the waitlist
+
+                //for(DataSnapshot j: bookData.child(book.getId()).getChildren()) {
                     ///Book item2 = j.getValue(Book.class);
 
-                    Log.d("my_test_working", j.child("request").getKey());
-                    Log.d("my_test_maybe", j.child("request").child("user").getValue().toString());
+                    //Log.d("my_test_working", j.child("request").getKey());
+                    //Log.d("my_test_maybe", j.child("request").child("user").getValue().toString());
                     //Log.d("my_test_1", j.getValue().toString());
                     //Log.d("my_test_2", item.getRequest().
-                }
+                //}
                 Request request2 = new Request(user, book);
                 myRef2.child(book_id).child("request").child(ts).setValue(request2);
             }
