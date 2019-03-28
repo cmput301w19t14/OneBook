@@ -27,13 +27,12 @@ public class Request {
     }
 
     /**
-     *
      * @param user
      * @param book
      */
-    public Request(User user, Book book){
+    public Request(User user, Book book) {
         // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
-        Long tsLong = System.currentTimeMillis()/1000;
+        Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
 
         this.user = user;
@@ -43,14 +42,13 @@ public class Request {
     }
 
     /**
-     *
      * @param user
      * @param book
      * @param location
      * @param date
      * @param status
      */
-    public Request(User user, Book book, Location location, String date, String status){
+    public Request(User user, Book book, Location location, String date, String status) {
         this.user = user;
         //this.book = book;
         this.location = location;
@@ -59,12 +57,11 @@ public class Request {
     }
 
     /**
-     *
      * @param user
      * @param book
      */
     public static void requestBook(User user, Book book, String book_id) {
-        Long tsLong = System.currentTimeMillis()/1000;
+        Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
 
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -73,52 +70,33 @@ public class Request {
 
         //adds user to waitlist if they aren't already on that book's waitlist
         DataSnapshot bookData = Globals.getInstance().books.getData();
-        for (DataSnapshot i: bookData.getChildren()){
+        boolean duplicateRequest = false;
+        for (DataSnapshot i : bookData.getChildren()) {
             Book item = i.getValue(Book.class);
-            if (item.getId().equals(book_id)){
 
-                //Natalie is currently editing this part for the waitlist
-
-                //for(DataSnapshot j: bookData.child(book.getId()).getChildren()) {
-                    ///Book item2 = j.getValue(Book.class);
-
-                    //Log.d("my_test_working", j.child("request").getKey());
-                    //Log.d("my_test_maybe", j.child("request").child("user").getValue().toString());
-                    //Log.d("my_test_1", j.getValue().toString());
-                    //Log.d("my_test_2", item.getRequest().
-                //}
-                Request request2 = new Request(user, book);
-                myRef2.child(book_id).child("request").child(ts).setValue(request2);
+            //add request to current book only
+            if (item.getId().equals(book_id)) {
+                //checks if the user has already made a request on this book
+                if (item.getRequest() != null) {
+                    for (Request r : item.getRequest().values()) {
+                        if (r.getUser().getUid().equals(user.getUid())) {
+                            duplicateRequest = true;
+                        }
+                    }
+                    if (!duplicateRequest) {
+                        //saves the request to database if they haven't already made a request
+                        Request request2 = new Request(user, book);
+                        myRef2.child(book_id).child("request").child(ts).setValue(request2);
+                    }
+                } else {
+                    Request request2 = new Request(user, book);
+                    myRef2.child(book_id).child("request").child(ts).setValue(request2);
+                }
             }
         }
-
-        /*
-                    long isbn = Long.parseLong(barcode);
-                    DataSnapshot book = Globals.getInstance().books.getData();
-                    for (DataSnapshot i : book.getChildren()) {
-                        Book item = i.getValue(Book.class);
-                        if(item.getIsbn() == isbn) {
-                            if(item.getOwner().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                // user is owner: we go to view book activity
-                                Intent intent = new Intent(ScanIsbnActivity.this, ViewBookActivity.class);
-                                final Bundle bundle = new Bundle();
-                                String id = item.getId();
-                                bundle.putString("id", id);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                            }
-                        }
-
-
-         */
-
-
-
-
-
-        // notify the user
-        // part 5
     }
+
+
 
     /**
      *
