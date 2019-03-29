@@ -120,14 +120,15 @@ public class ViewBookActivity extends AppCompatActivity {
             requestButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    User user = Globals.getInstance().users.getData().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(User.class);
-                    Request.requestBook(user, book, book_id);
+                    Request.requestBook(Globals.getCurrentUser(), book, book_id);
                     requestButton.setVisibility(View.GONE);
+                    findViewById(R.id.divider7).setVisibility(View.GONE);
                     Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
                 }
             });
         } else {
             requestButton.setVisibility(View.GONE);
+            findViewById(R.id.divider7).setVisibility(View.GONE);
         }
     }
 
