@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
 
-
+import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Location;
+import ca.ualberta.c301w19t14.onebook.models.Request;
+import ca.ualberta.c301w19t14.onebook.models.User;
 
 
 public class BookTest {

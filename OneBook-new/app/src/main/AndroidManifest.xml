@@ -7,11 +7,14 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".activities.CameraActivity"></activity>
         <!-- add mobile vision dependencies and vision to metadata -->
         <meta-data
             android:name="com.google.android.gms.version"
@@ -29,32 +32,32 @@
             android:name="com.google.android.gms.version.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".ScanISBN"
-            android:label = "Barcode Reader">
-            <intent-filter>
-                <action android:name = "android.intent.action.MAIN" />
-
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.ScanIsbnActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:label = "Barcode Reader" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".EditUserActivity" />
-        <activity android:name=".editBookActivity" />
-        <activity android:name=".ViewBookActivity" />
+        <activity android:name=".activities.EditUserActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.EditBookActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.UserAccountActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".MessageActivity"
+            android:name=".activities.MessageActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UserLoginActivity"
+            android:name=".activities.UserLoginActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,14 +66,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchingActivity"
+            android:name=".activities.SearchingActivity"
             android:label="@string/title_activity_searching_main"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".ViewRequestableActivity" />
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.ViewBookActivity" />
         <activity
-            android:name=".AddActivity"
+            android:name=".activities.AddActivity"
             android:label="@string/title_activity_add"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package ca.ualberta.c301w19t14.onebook;
 import org.junit.Rule;
 
 import androidx.test.rule.ActivityTestRule;
+import ca.ualberta.c301w19t14.onebook.activities.MainActivity;
 
 public class TestUserRequests {
 
