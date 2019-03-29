@@ -30,6 +30,13 @@ import ca.ualberta.c301w19t14.onebook.adapters.MessageAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
+/**
+ * This class implements the chat view for the messaging functionality of the app.
+ * Messages are sent, received, and viewed by this class.
+ * @author jandaile CMPUT 301 team 14
+ * @since 2019-03-29
+ * @version 1.0
+ */
 public class MessageActivity extends AppCompatActivity {
 
     TextView username;
@@ -111,6 +118,13 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sends message to Firebase with all attributes
+     * @param sender: tracks the current user
+     * @param receiver: tracks who the chat is going to
+     * @param message: holds the message string by sender
+     *
+     */
     private void sendMessage(String sender, final String receiver, String message) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -142,8 +156,13 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Reads all messages between the sender and receiver from Firebase
+     * @param senderID: Checks for sender's ID in the Chats
+     * @param receiverID: Checks for receiver's ID in the Chats
+     */
 
-    private void readMessages(final String myID, final String userID){
+    private void readMessages(final String senderID, final String receiverID){
 
         mChat = new ArrayList<>();
 
@@ -154,8 +173,8 @@ public class MessageActivity extends AppCompatActivity {
                 mChat.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getReceiver().equals(myID) && chat.getSender().equals(userID) ||
-                            chat.getReceiver().equals(userID) && chat.getSender().equals(myID)){
+                    if(chat.getReceiver().equals(senderID) && chat.getSender().equals(receiverID) ||
+                            chat.getReceiver().equals(receiverID) && chat.getSender().equals(senderID)){
                         mChat.add(chat);
                     }
 

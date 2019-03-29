@@ -13,9 +13,14 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.adapters.ViewPageAdapter;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
-/**Fragment that diplays when messages is chosen in the navigation menu
- Still need to implement this in part 5
- @author CMPUT 301 Team 14*/
+/**
+ * This class implements the Messaging Functionality in different fragments for the app.
+ * From this class, the fragments is linked to user and chat fragments.
+ * These fragments are held by a ViewPager and have their own methods.
+ * @author jandaile CMPUT 301 team 14
+ * @since 2019-03-29
+ * @version 1.0
+ */
 public class MessagesFragment extends Fragment {
 
     View myView;

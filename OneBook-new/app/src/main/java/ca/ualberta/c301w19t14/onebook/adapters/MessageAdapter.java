@@ -16,6 +16,14 @@ import java.util.List;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Chat;
 
+/**
+ * This class is implements the adapter for viewing the chat messages.
+ * The messages organized to show which messages are from the sender vs
+ * the receiver from this class.
+ * @author jandaile CMPUT 301 team 14
+ * @since 2019-03-29
+ * @version 1.0
+ */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
 
     public static final int MSG_TYPE_LEFT = 0;
@@ -50,7 +58,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Chat chat = mChat.get(i);
 
         viewHolder.showMessage.setText(chat.getMessage());
-
 
     }
 
