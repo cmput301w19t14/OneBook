@@ -105,14 +105,6 @@ public class CheckMessagesTest {
         fragmentTransaction.commit();
     }
 
-    public void StartChatTransaction(){
-        MessagingChatsFragment messagingChatsFragment = new MessagingChatsFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                activityRule.getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, messagingChatsFragment);
-        fragmentTransaction.commit();
-    }
-
     public void ClickViewPagerChat(){
         onView(withContentDescription("Users")).perform(click());
     }
