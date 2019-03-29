@@ -78,10 +78,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                     @Override public void onClick(View v){
                         if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
                             // This notification is for an owner of a book, notifying them of a new actionable request.
-                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                        alertDialog.setTitle("Accept/Reject");
-                        alertDialog.setMessage("What would you like to do?");
-                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
+                            AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog.setTitle("Accept/Reject");
+                            alertDialog.setMessage("What would you like to do?");
+                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         notification.getRequest().setStatus("Accepted");
@@ -98,19 +98,39 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                         dialog.dismiss();
                                     }
                                 });
-                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
+                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+
+                                        //if they reject a request.
+                                        //create a new notification for the person who was rejected
+                                        Notification reject_notification = new Notification("Request Rejected", notification.getUser().getName()+ " has rejected your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                        reject_notification.save();
+
+
+                                        //delete old notification from current user
+
+
+
+                                        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
+                                        db.child(notification.getId()).removeValue();
+
+                                        Log.d("NEH TAG", db.child(notification.getId()).toString());
+
+
+
+                                        /*
                                         notification.getRequest().setStatus("Rejected");
                                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                                         DatabaseReference myRef = database.getReference("Requests");
                                         myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
                                         dialog.dismiss();
+                                        */
                                     }
                                 });
-                        alertDialog.show();
-                    }
+                            alertDialog.show();
+                        }
                         else {
                             // delete notification
                             DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
