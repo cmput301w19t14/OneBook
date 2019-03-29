@@ -57,7 +57,7 @@ public class Book {
         this.author = author;
         this.description = description;
         this.owner = owner;
-        this.status = "Available";
+        //this.status = "Available";
     }
 
     /**

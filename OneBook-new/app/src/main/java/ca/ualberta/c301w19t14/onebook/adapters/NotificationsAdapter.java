@@ -21,6 +21,7 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
  * requests book
@@ -85,16 +86,26 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            notification.getRequest().setStatus("Accepted");
-                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                            DatabaseReference myRef = database.getReference("Requests");
-                                            myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
+                                            //notification.getRequest().setStatus("Accepted");
+                                            //FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            //DatabaseReference myRef = database.getReference("Requests");
+                                            //myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+
+
+                                            //myRef2.child(book_id).child("request").child(ts).setValue(request_book);
+
+
+                                            //update request status to accepted
                                             Book book = notification.getRequest().getBook();
-                                            book.setStatus("Borrowed");
-                                            book.setBorrower(notification.getRequest().getUser());
-                                            myRef = database.getReference("Books");
-                                            myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
+                                            Request request = notification.getRequest();
+
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("book").child("status").setValue("Accepted");
+
+                                            //book.child(book.getId()).child("request").child().setStatus("Accepted");
+                                            //book.setBorrower(notification.getRequest().getUser());
+                                            //myRef = database.getReference("Books");
+                                            //myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
 
                                             dialog.dismiss();
                                         }
@@ -110,6 +121,11 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
                                             //deletes the original notification for current user
                                             notification.delete();
+
+                                            //deletes the request from the book database
+                                            Book book = notification.getRequest().getBook();
+                                            Request request = notification.getRequest();
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                                             dialog.dismiss();
                                         }
