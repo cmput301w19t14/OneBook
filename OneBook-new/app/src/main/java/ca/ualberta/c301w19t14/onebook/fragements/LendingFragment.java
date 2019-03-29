@@ -95,6 +95,14 @@ public class LendingFragment extends Fragment {
                 }
         );
 
+        if(book.isEmpty()) {
+            myView.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+            myView.findViewById(R.id.recyclerView).setVisibility(View.GONE);
+        } else {
+            myView.findViewById(R.id.noData).setVisibility(View.GONE);
+            myView.findViewById(R.id.recyclerView).setVisibility(View.VISIBLE);
+        }
+
         return myView;
     }
 
