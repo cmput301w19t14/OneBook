@@ -2,8 +2,11 @@ package ca.ualberta.c301w19t14.onebook.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -32,6 +39,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private ArrayList<Book> bookList;
     public Context mContext;
     public Boolean mode;
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference;
 
     /**
      *
@@ -60,7 +69,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
      * @param i
      */
     @Override
-    public void onBindViewHolder(BookViewHolder bookVh, int i) {
+    public void onBindViewHolder(final BookViewHolder bookVh, int i) {
 
         Book book = bookList.get(i);
         bookVh.book = book;
@@ -70,6 +79,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         bookVh.vOwner.setText(book.getOwner().getName());
         bookVh.vStatus.setText(book.getStatus().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
+        storage.getReference().child("Book images/"+book.getId()+"/bookimage.png").getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                        bookVh.vImage.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
         //bookVh.vImage.setImageBitmap();
 
         //MODE = true -> do borrowing/lending
@@ -122,7 +144,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             vOwner = (TextView)  v.findViewById(R.id.bookOwner);
             vStatus = (TextView)  v.findViewById(R.id.bookStatus);
             vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
-            //vImage = v.findViewById(R.id.bookImage);
+            vImage = v.findViewById(R.id.bookImage);
 
             //make the cards clickable
             view = v;

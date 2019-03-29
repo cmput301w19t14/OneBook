@@ -31,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import ca.ualberta.c301w19t14.onebook.BookRequestAdapter;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
@@ -225,7 +226,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 }
             });
 
-            //BookRequestAdapter bookRequestAdapter = new BookRequestAdapter(ViewBookActivity.this,book.getRequesters());
+            //BookRequestAdapter bookRequestAdapter = new BookRequestAdapter(ViewBookActivity.this,book.getRequest());
             //recyclerView.setAdapter(bookRequestAdapter);
 
 
