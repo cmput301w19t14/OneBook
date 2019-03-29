@@ -67,7 +67,7 @@ public class Notification {
      */
     public void save() {
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications").child(Globals.getInstance().user.getUid());
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications").child(this.user.getUid());
         this.setId(db.push().getKey());
 
         db.child(this.getId()).setValue(this);

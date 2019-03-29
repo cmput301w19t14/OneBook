@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -57,9 +58,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Location loc = book.getAcceptedRequest().getLocation();
             LatLng latLng = new LatLng(loc.getLat(), loc.getLng());
 
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Pick Up Location :" + loc.getAddress()));
+            mMap.addMarker(new MarkerOptions().position(latLng).title("Pick Up Location: " + loc.getAddress()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            Toast.makeText(MapsActivity.this, "Pick Up Location :" + loc.getAddress(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MapsActivity.this, "Pick Up Location: " + loc.getAddress(), Toast.LENGTH_SHORT).show();
         }
 
         if(book.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
@@ -91,10 +92,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 public void onClick(DialogInterface dialog, int which) {
                                     // update request location
                                     book.getAcceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
+                                    book.update();
                                     Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.getAcceptedRequest().getUser());
                                     notification.save();
-
                                     dialog.dismiss();
+                                    finish();
                                 }
                             });
                     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
