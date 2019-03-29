@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     @Override
     public void onBindViewHolder(NotificationsViewHolder mVh, int i) {
         Notification notification = notificationList.get(i);
+        Log.e("TEST", notification.getContent());
 
         mVh.notification = notification;
         mVh.title.setText(notification.getTitle());
@@ -69,13 +71,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
         NotificationsViewHolder(View view, int i) {
             super(view);
-
-            if(notification.getRequest() == null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
-                // This notification is for an owner of a book, notifying them of a new actionable request.
-
+            title = view.findViewById(R.id.title);
+            content = view.findViewById(R.id.content);
                 view.setOnClickListener(new View.OnClickListener() {
 
                     @Override public void onClick(View v){
+                        if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                            // This notification is for an owner of a book, notifying them of a new actionable request.
                         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                         alertDialog.setTitle("Accept/Reject");
                         alertDialog.setMessage("What would you like to do?");
@@ -109,15 +111,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                 });
                         alertDialog.show();
                     }
-                });
-            } else {
-                // delete notification
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
-                db.child(notification.getId()).removeValue();
+                        else {
+                            // delete notification
+                            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
+                            db.child(notification.getId()).removeValue();
 
-                Toast.makeText(mContext, "Notification removed.", Toast.LENGTH_SHORT).show();
-            }
-
+                            Toast.makeText(mContext, "Notification removed.", Toast.LENGTH_SHORT).show();
+                        }
+                }});
 
         }
     }
