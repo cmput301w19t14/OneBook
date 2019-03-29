@@ -229,22 +229,6 @@ public class ViewBookActivity extends AppCompatActivity {
             //BookRequestAdapter bookRequestAdapter = new BookRequestAdapter(ViewBookActivity.this,book.getRequest());
             //recyclerView.setAdapter(bookRequestAdapter);
 
-
-
-
-
-            DataSnapshot book = Globals.getInstance().books.getData();
-            for (DataSnapshot i : book.getChildren()) {
-                Book item = i.getValue(Book.class);
-                if(item.getIsbn() == ISBN) {
-                    if(item.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
-                        // user is owner
-                    } else {
-                        // user is not owner
-                    }
-                }
-            }
-
             // otherwise book doesn't exist
 
         }
