@@ -66,11 +66,15 @@ public class Notification {
      * Saves the notification to the database.
      */
     public void save() {
-
+        
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications").child(this.user.getUid());
         this.setId(db.push().getKey());
 
         db.child(this.getId()).setValue(this);
+    }
+
+    public void delete() {
+        FirebaseDatabase.getInstance().getReference("Notifications").child(this.getUser().getUid()).child(this.getId()).removeValue();
     }
 
     /**

@@ -32,15 +32,11 @@ public class Request {
      * @param user
      * @param book
      */
-    public Request(User user, Book book) {
-        // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
-        Long tsLong = System.currentTimeMillis() / 1000;
-        String ts = tsLong.toString();
-
+    public Request(User user, Book book, String requestID) {
         this.user = user;
         this.book = book;
         this.status = "Pending";
-        //this.date = ts;
+        this.id = requestID;
     }
 
     /**
@@ -63,6 +59,7 @@ public class Request {
      * @param book
      */
     public static void requestBook(User user, Book book, String book_id) {
+        // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
         Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
 
@@ -87,13 +84,15 @@ public class Request {
                     }
                     if (!duplicateRequest) {
                         //saves the request to database if they haven't already made a request
-                        Request request2 = new Request(user, book);
+                        Request request2 = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
                         myRef2.child(book_id).child("request").child(ts).setValue(request2);
 
+                        Log.d("NEH TAG!", myRef2.child(book_id).child("request").child(ts).toString());
                     }
                 } else {
+
                     //this is only request on the book
-                    Request request2 = new Request(user, book);
+                    Request request2 = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
                     myRef2.child(book_id).child("request").child(ts).setValue(request2);
 
                     //notifies owner since they are automatically at the top of the waitlist
