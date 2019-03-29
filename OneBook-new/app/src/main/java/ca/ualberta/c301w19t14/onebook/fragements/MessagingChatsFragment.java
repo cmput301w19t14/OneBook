@@ -25,7 +25,13 @@ import ca.ualberta.c301w19t14.onebook.adapters.MessagingUserAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
-
+/**
+ * This class implements the Chatlist functionality of the Messaging part of the app.
+ * From this class, messages that exist between two users are held then displayed.
+ * @author jandaile CMPUT 301 team 14
+ * @since 2019-03-29
+ * @version 1.0
+ */
 public class MessagingChatsFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -35,11 +41,10 @@ public class MessagingChatsFragment extends Fragment {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
 
-    private  List<MessagingChatsList> usersList;
-
+    private List<MessagingChatsList> usersList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_messaging_chats, container, false);
@@ -71,6 +76,9 @@ public class MessagingChatsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * The method checks for users that already have chats so that they'll be displayed here.
+     */
     private void chatList() {
         Users = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");
