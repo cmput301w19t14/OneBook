@@ -8,34 +8,23 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
-
-import static com.google.android.gms.vision.barcode.Barcode.ISBN;
 
 /**
  * This class allows a user to view book information for a book that they own
@@ -44,111 +33,61 @@ import static com.google.android.gms.vision.barcode.Barcode.ISBN;
  * */
 
 public class ViewBookActivity extends AppCompatActivity {
-//need to add description update
-
-    private TextView title;
-    private TextView author;
-    private TextView isbn;
-    private TextView owner;
-    private TextView description;
-    private TextView status;
     private Book book;
     public ImageView image;
     public RecyclerView recyclerView;
 
     private String book_id = "";
-    private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference;
     public Globals globals;
+    private boolean hasImage = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_book_main);
-        Intent intent = getIntent();
-        final Bundle bundle = intent.getExtras();
-
-        book_id = bundle.getString("id");
+        setContentView(R.layout.view_book);
+        book_id = getIntent().getStringExtra("id");
         updateData(book_id);
 
         image = findViewById(R.id.bookImage);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ViewBookActivity.this, "error caught", Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popup = inflater.inflate(R.layout.image_pop_up,null);
-                ImageView picture = popup.findViewById(R.id.ImageCloseUp);
-                try {
-                    picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
-                    int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                    int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                    final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
-                    popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-                    popup.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            popupWindow.dismiss();
-                        }
-                    });
+                if(hasImage) {
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popup = inflater.inflate(R.layout.image_pop_up, null);
+                    ImageView picture = popup.findViewById(R.id.ImageCloseUp);
+                    try {
+                        picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
+                        int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                        int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                        final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
+                        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                        popup.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                    } catch (ClassCastException e) {
+                        Toast.makeText(ViewBookActivity.this, "No current picture", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                catch(ClassCastException e)
-                {
-                    Toast.makeText(ViewBookActivity.this,"No current picture",Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
-        //let's the user click on an owner to see their profile
-        TextView owner = (TextView)findViewById(R.id.bookOwner);
-        owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                //when the user clicks on their own name as owner
-                Intent intent = new Intent(ViewBookActivity.this, UserAccountActivity.class);
-                intent.putExtras(bundle);
-                ViewBookActivity.this.startActivity(intent);
-            }
-        });
+
+        // TODO: Click owner, go to view profile.
 
         globals = Globals.getInstance();
 
-        //Delete Button
-        Button deleteButton = findViewById(R.id.buttonDelete);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Books");
-                myRef.child(book.getId()).removeValue();
 
-                // TODO: MUST REMOVE REQUESTS
-                finish();
-
-            }
-        });
-
-        Button editButton =  findViewById(R.id.editBookButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewBookActivity.this, EditBookActivity.class);
-                intent.putExtras(bundle);
-                ViewBookActivity.this.startActivity(intent);
-                updateData(book_id);
-            }
-        });
-
-        Button locationButton = findViewById(R.id.GetLocationButton);
+        Button locationButton = findViewById(R.id.location);
 
         if(book.getAcceptedRequest() != null &&
-                (book.getOwner().getUid().equals(Globals.getInstance().user.getUid()) ||
+                (book.userIsOwner() ||
                         book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
         ) {
-            // TODO: if accepted request and book owner OR if book.requests where requester = user, show location button.
-
             locationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -166,86 +105,53 @@ public class ViewBookActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
-        if (Globals.getInstance().books.getData().child(book_id).getValue(Book.class) == null) {
-            finish();
-            Log.d("DEBUG_ONEBOOK", "book is equal to null");
+        if(!book_id.isEmpty()) {
+            updateData(book_id);
+            return;
         }
 
-        else if(!book_id.isEmpty()) {
-            updateData(book_id);
-        }
+        finish();
     }
 
     private void updateData(String id) {
         if(id != null) {
-            title = findViewById(R.id.bookTitle);
-            author = findViewById(R.id.bookauthor);
-            isbn = findViewById(R.id.bookIsbn);
-            owner = findViewById(R.id.bookOwner);
-            description = findViewById(R.id.bookDescription);
-            status = findViewById(R.id.bookStatus);
-            recyclerView = findViewById(R.id.RequestView);
-            LinearLayoutManager llm = new LinearLayoutManager(ViewBookActivity.this);
-            llm.setOrientation(LinearLayoutManager.VERTICAL);
-            recyclerView.setLayoutManager(llm);
+            book = Book.find(id);
 
+            TextView title = findViewById(R.id.title);
+            TextView author = findViewById(R.id.author);
+            TextView isbn = findViewById(R.id.isbn);
+            TextView owner = findViewById(R.id.owner);
+            TextView description = findViewById(R.id.description);
+            TextView status = findViewById(R.id.status);
 
-            book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
+            title.setText(book.getTitle());
+            author.setText(book.getAuthor());
+            isbn.setText(Long.toString(book.getIsbn()));
+            owner.setText(book.getOwner().getName());
+            description.setText(book.getDescription());
 
-            String str_title = "Title: " + book.getTitle();
-            title.setText(str_title);
-
-            String str_author = "Author: " + book.getAuthor();
-            author.setText(str_author);
-
-            String str_ISBN = "ISBN: " + Long.toString(book.getIsbn());
-            isbn.setText(str_ISBN);
-
-            String str_owner = "Owner: " + book.getOwner().getName();
-            owner.setText(str_owner);
-
-            String str_description = "Description: " + book.getDescription();
-            description.setText(str_description);
-
-            String str_status = "Status: " + book.getStatus();
+            String str_status = book.getStatus();
             status.setText(str_status);
             final ImageView bookimage = findViewById(R.id.bookImage);
 
-            storage.getReference().child("Book images/"+id+"/bookimage.png").getBytes(Long.MAX_VALUE)
+            FirebaseStorage.getInstance().getReference().child("Book images/"+id+"/bookimage.png").getBytes(Long.MAX_VALUE)
                     .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                    bookimage.setImageBitmap(bitmap);
+                    if(bytes != null) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                        bookimage.setImageBitmap(bitmap);
+                        hasImage = true;
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
+                    bookimage.setImageResource(R.drawable.ic_book_black_24dp);
+                    Toast.makeText(ViewBookActivity.this, "test", Toast.LENGTH_SHORT).show();
+                    hasImage = false;
                 }
             });
-
-            //BookRequestAdapter bookRequestAdapter = new BookRequestAdapter(ViewBookActivity.this,book.getRequesters());
-            //recyclerView.setAdapter(bookRequestAdapter);
-
-
-
-
-
-            DataSnapshot book = Globals.getInstance().books.getData();
-            for (DataSnapshot i : book.getChildren()) {
-                Book item = i.getValue(Book.class);
-                if(item.getIsbn() == ISBN) {
-                    if(item.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
-                        // user is owner
-                    } else {
-                        // user is not owner
-                    }
-                }
-            }
-
-            // otherwise book doesn't exist
-
         }
     }
 

@@ -197,7 +197,7 @@ public class Book {
      *
      * @return boolean
      */
-    public boolean isOwner() {
+    public boolean userIsOwner() {
         return this.getOwner().getUid().equals(Globals.getInstance().user.getUid());
     }
 }
