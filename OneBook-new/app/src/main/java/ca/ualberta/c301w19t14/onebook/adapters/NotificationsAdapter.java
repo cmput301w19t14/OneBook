@@ -119,7 +119,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             Toast.makeText(mContext, "Notification removed.", Toast.LENGTH_SHORT).show();
                         }
                 }});
-
         }
     }
 }

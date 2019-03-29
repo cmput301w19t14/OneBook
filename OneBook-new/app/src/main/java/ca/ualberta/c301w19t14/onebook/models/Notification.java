@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
@@ -57,6 +58,7 @@ public class Notification {
         this.title = title;
         this.content = content;
         this.user = user;
+
         this.request = request;
     }
 
@@ -64,7 +66,8 @@ public class Notification {
      * Saves the notification to the database.
      */
     public void save() {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications").child(Globals.getInstance().user.getUid());
         this.setId(db.push().getKey());
 
         db.child(this.getId()).setValue(this);
