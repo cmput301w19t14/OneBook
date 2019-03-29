@@ -50,12 +50,8 @@ public class BorrowingFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.borrowing_main,container, false);
-
-
-
 
         //get globals
         globals = Globals.getInstance();
@@ -71,6 +67,14 @@ public class BorrowingFragment extends Fragment {
         books = util.findBorrowerBooks();
         BookAdapter ba = new BookAdapter(getActivity(), books, true);
         recyclerView.setAdapter(ba);
+
+        if(books.isEmpty()) {
+            myView.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+            myView.findViewById(R.id.borrow_recycler).setVisibility(View.GONE);
+        } else {
+            myView.findViewById(R.id.noData).setVisibility(View.GONE);
+            myView.findViewById(R.id.borrow_recycler).setVisibility(View.VISIBLE);
+        }
 
         return myView;
     }

@@ -166,6 +166,17 @@ public class Book {
         return null;
     }
 
+    private boolean userHasRequest(User user) {
+        if(this.getRequest() != null) {
+            for (Request r : this.getRequest().values()) {
+                if (r.getUser().getUid().equals(user.getUid())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Finds a book by it's ID.
      *
@@ -199,5 +210,14 @@ public class Book {
      */
     public boolean userIsOwner() {
         return this.getOwner().getUid().equals(Globals.getInstance().user.getUid());
+    }
+
+    /**
+     * Returns if the current user can request the book.
+     *
+     * @return boolean
+     */
+    public boolean userCanRequest() {
+        return (!this.userHasRequest(Globals.getCurrentUser()) && !this.userIsOwner());
     }
 }
