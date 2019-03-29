@@ -40,9 +40,6 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
-/**This class allows a user to edit their account information
- * @author CMPUT 301 Team 14*
- * /
 /**
  * Edit book activity.
  *

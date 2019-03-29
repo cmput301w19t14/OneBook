@@ -191,4 +191,13 @@ public class Book {
         DatabaseReference myRef = database.getReference("Books");
         myRef.child(this.getId()).setValue(this);
     }
+
+    /**
+     * Returns if the current user is the books owner.
+     *
+     * @return boolean
+     */
+    public boolean isOwner() {
+        return this.getOwner().getUid().equals(Globals.getInstance().user.getUid());
+    }
 }

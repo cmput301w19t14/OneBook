@@ -16,7 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import androidx.test.rule.ActivityTestRule;
-import ca.ualberta.c301w19t14.onebook.activities.ViewRequestableActivity;
+import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -32,8 +32,8 @@ public class ViewRequestableTest {
     public String password = "test123";
 
     @Rule
-    public ActivityTestRule<ViewRequestableActivity> activityRule =
-            new ActivityTestRule<ViewRequestableActivity>(ViewRequestableActivity.class, false, false);
+    public ActivityTestRule<ViewBookActivity> activityRule =
+            new ActivityTestRule<ViewBookActivity>(ViewBookActivity.class, false, false);
 
     @Before
     public void init(){
