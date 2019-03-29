@@ -87,25 +87,26 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
 
-                                            //notification.getRequest().setStatus("Accepted");
-                                            //FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                            //DatabaseReference myRef = database.getReference("Requests");
-                                            //myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
-
-
-                                            //myRef2.child(book_id).child("request").child(ts).setValue(request_book);
-
-
                                             //update request status to accepted
                                             Book book = notification.getRequest().getBook();
                                             Request request = notification.getRequest();
-
                                             FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("book").child("status").setValue("Accepted");
 
-                                            //book.child(book.getId()).child("request").child().setStatus("Accepted");
-                                            //book.setBorrower(notification.getRequest().getUser());
-                                            //myRef = database.getReference("Books");
-                                            //myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
+                                            //notify borrower that their request has been accepted
+                                            //TODO: how do they find out the location to meet up?
+                                            Notification accept_notification = new Notification("Request Accepted", notification.getUser().getName() + " has accepted your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            accept_notification.save();
+
+                                            //notify borrower that they need to meet up with the owner
+                                            Notification trade_notification_borrower = new Notification("Meet up Required", "You need to meet " + notification.getUser().getName() + " to pick up " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            trade_notification_borrower.save();
+
+                                            //notify owner that they need to meet up with borrower
+                                            Notification trade_notification_owner = new Notification("Meet up Required", "You need to meet " + notification.getRequest().getUser().getName()+ " to give them " + notification.getRequest().getBook().getTitle(), notification.getUser());
+                                            trade_notification_owner.save();
+
+                                            //deletes the original notification for owner
+                                            notification.delete();
 
                                             dialog.dismiss();
                                         }
