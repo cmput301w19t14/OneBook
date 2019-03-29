@@ -21,6 +21,7 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
  * requests book
@@ -91,7 +92,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                             myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
                                             Book book = notification.getRequest().getBook();
-                                            book.setStatus("Borrowed");
+                                            book.setStatus("Accepted");
                                             book.setBorrower(notification.getRequest().getUser());
                                             myRef = database.getReference("Books");
                                             myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
@@ -102,7 +103,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-
+                                            
                                             //if they reject a request.
                                             //create a new notification for the person who was rejected
                                             Notification reject_notification = new Notification("Request Rejected", notification.getUser().getName() + " has rejected your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
@@ -110,6 +111,11 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
                                             //deletes the original notification for current user
                                             notification.delete();
+*/
+                                            //deletes the request from the book database
+                                            Book book = notification.getRequest().getBook();
+                                            Request request = notification.getRequest();
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                                             dialog.dismiss();
                                         }

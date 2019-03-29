@@ -65,6 +65,14 @@ public class Request {
     }
 
     /**
+     * Deletes a request.
+     */
+    public void delete() {
+        //FirebaseDatabase.getInstance().getReference("Books").child(this.getId()).child("request").child(this.).removeValue();
+    }
+
+
+    /**
      * @param user
      * @param book
      */
