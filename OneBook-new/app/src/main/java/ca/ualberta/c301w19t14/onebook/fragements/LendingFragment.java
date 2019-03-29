@@ -140,11 +140,6 @@ public class LendingFragment extends Fragment {
             this.startActivity(intent);
         }
         else if (id == R.id.quick_filter) {
-            AlertDialog filterDialog = new AlertDialog.Builder(this.getContext()).create();
-            filterDialog.setTitle("Filtering options available:");
-            // you still need a body and buttons
-            // then call filterDialog.show();
-            Toast.makeText(myView.getContext(), "I clicked filter.", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
 
             fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
