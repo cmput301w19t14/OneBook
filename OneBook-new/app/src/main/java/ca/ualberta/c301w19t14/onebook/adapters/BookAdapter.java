@@ -67,7 +67,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         bookVh.vTitle.setText(book.getTitle());
         bookVh.vOwner.setText(book.getOwner().getName());
-        //bookVh.vStatus.setText(book.getStatus().toUpperCase());
+        bookVh.vStatus.setText(book.getStatus().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
         //bookVh.vImage.setImageBitmap();
 
@@ -106,7 +106,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
      *
      */
     public class BookViewHolder extends RecyclerView.ViewHolder {
-        //protected TextView vStatus;
+        protected TextView vStatus;
         protected TextView vOwner;
         protected TextView vAuthor;
         protected TextView vTitle;
@@ -121,7 +121,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             super(v);
             vTitle =  (TextView) v.findViewById(R.id.bookTitle);
             vOwner = (TextView)  v.findViewById(R.id.bookOwner);
-            //vStatus = (TextView)  v.findViewById(R.id.bookStatus);
+            vStatus = (TextView)  v.findViewById(R.id.bookStatus);
             vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
             //vImage = v.findViewById(R.id.bookImage);
 
