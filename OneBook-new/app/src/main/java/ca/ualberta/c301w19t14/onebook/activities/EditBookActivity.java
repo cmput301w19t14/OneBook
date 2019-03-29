@@ -16,7 +16,6 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
-
 /**
  * Edit book activity.
  *

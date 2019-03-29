@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
-import ca.ualberta.c301w19t14.onebook.activities.ViewRequestableActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 
 /**This class is used to create all of the recycler views that list books.
@@ -136,18 +135,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     //if the user clicks on a book they do not own, they will get a view page that doesn't allow edits
                     String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                    if (current_user.equals(book.getOwner().getEmail()))
-                    {
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
-                    }
-                    else
-                    {
-                        Intent intent = new Intent(mContext, ViewRequestableActivity.class);
-                        intent.putExtras(bundle);
-                        mContext.startActivity(intent);
-                    }
+
 
                 }
             });

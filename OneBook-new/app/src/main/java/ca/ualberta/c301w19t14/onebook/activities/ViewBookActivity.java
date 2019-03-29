@@ -1,102 +1,57 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
+        import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+        import android.widget.Button;
+        import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
-
-import static com.google.android.gms.vision.barcode.Barcode.ISBN;
+import ca.ualberta.c301w19t14.onebook.models.Request;
+import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
- * This class allows a user to view book information for a book that they own
+ * This class allows a user to view book information for a book that they do not own
  * Still need to add the book description
- * Still need to implement the set location so that a user can choose a location on the map
+ * Still need to implement the view location so that a user can see the correct pick up location
+ * Still need to add request process
+ * @author CMPUT 301 Team 14
  * */
-
 public class ViewBookActivity extends AppCompatActivity {
-//need to add description update
 
-    private TextView title;
-    private TextView author;
-    private TextView isbn;
-    private TextView owner;
-    private TextView description;
-    private TextView status;
-    private Book book;
-    private String book_id = "";
-    public Globals globals;
-
+    public Book book;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_book_main);
+        setContentView(R.layout.activity_requestable_book);
+        updateData(getIntent().getStringExtra("id"));
 
-        Intent intent = getIntent();
-        final Bundle bundle = intent.getExtras();
+        final User user = Globals.getInstance().users.getData().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(User.class);
 
-        book_id = bundle.getString("id");
-        updateData(book_id);
+        Button requestButton = findViewById(R.id.request);
+        if(!book.isOwner()) {
+            requestButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Request.requestBook(user, book, book.getId());
+                }
+            });
+        } else {
+            requestButton.setVisibility(View.GONE);
+        }
 
-        //let's the user click on an owner to see their profile
-        TextView owner = (TextView)findViewById(R.id.bookOwner);
-        owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //when the user clicks on their own name as owner
-                Intent intent = new Intent(ViewBookActivity.this, UserAccountActivity.class);
-                intent.putExtras(bundle);
-                ViewBookActivity.this.startActivity(intent);
-            }
-        });
-
-        globals = Globals.getInstance();
-
-        //Delete Button
-        Button deleteButton = findViewById(R.id.buttonDelete);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Books");
-                myRef.child(book.getId()).removeValue();
-
-                // TODO: MUST REMOVE REQUESTS
-                finish();
-
-            }
-        });
-
-        Button editButton =  findViewById(R.id.editBookButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewBookActivity.this, EditBookActivity.class);
-                intent.putExtras(bundle);
-                ViewBookActivity.this.startActivity(intent);
-            }
-        });
-
-        Button locationButton = findViewById(R.id.GetLocationButton);
-
-        if(book.getAcceptedRequest() != null &&
-                (book.getOwner().getUid().equals(Globals.getInstance().user.getUid()) ||
-                        book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
-        ) {
-            // TODO: if accepted request and book owner OR if book.requests where requester = user, show location button.
-
-            locationButton.setOnClickListener(new View.OnClickListener() {
+        Button locBtn = findViewById(R.id.location);
+        if(book.getAcceptedRequest() != null && (book.isOwner() || book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))) {
+            locBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
@@ -105,69 +60,86 @@ public class ViewBookActivity extends AppCompatActivity {
                 }
             });
         } else {
-            locationButton.setVisibility(View.GONE);
+            locBtn.setVisibility(View.GONE);
+        }
+
+        //let's the user click on an owner to see their profile
+        TextView owner = findViewById(R.id.owner);
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewBookActivity.this, UserAccountActivity.class);
+                intent.putExtra("id", book.getOwner().getUid());
+                ViewBookActivity.this.startActivity(intent);
+            }
+        });
+
+    }
+
+
+    private void updateData(String id) {
+        if(id != null) {
+            TextView title = findViewById(R.id.bookTitle2);
+            TextView author = findViewById(R.id.bookauthor2);
+            TextView isbn = findViewById(R.id.bookIsbn2);
+            TextView owner = findViewById(R.id.owner);
+            TextView description = findViewById(R.id.bookDescription2);
+            TextView status = findViewById(R.id.bookStatus2);
+
+            book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
+
+            title.setText(book.getTitle());
+            author.setText(book.getAuthor());
+            isbn.setText(Long.toString(book.getIsbn()));
+            owner.setText(book.getOwner().getName());
+            description.setText(book.getDescription());
+            status.setText(book.getStatus());
         }
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
-
-        if (Globals.getInstance().books.getData().child(book_id).getValue(Book.class) == null) {
-            finish();
-            Log.d("DEBUG_ONEBOOK", "book is equal to null");
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(book != null) {
+            return book.isOwner();
         }
 
-        else if(!book_id.isEmpty()) {
-            updateData(book_id);
-        }
+        return false;
     }
 
-    private void updateData(String id) {
-        if(id != null) {
-            title = findViewById(R.id.bookTitle);
-            author = findViewById(R.id.bookauthor);
-            isbn = findViewById(R.id.bookIsbn);
-            owner = findViewById(R.id.bookOwner);
-            description = findViewById(R.id.bookDescription);
-            status = findViewById(R.id.bookStatus);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.edit_book, menu);
+        return true;
+    }
 
-            book = Globals.getInstance().books.getData().child(id).getValue(Book.class);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-            String str_title = "Title: " + book.getTitle();
-            title.setText(str_title);
-
-            String str_author = "Author: " + book.getAuthor();
-            author.setText(str_author);
-
-            String str_ISBN = "ISBN: " + Long.toString(book.getIsbn());
-            isbn.setText(str_ISBN);
-
-            String str_owner = "Owner: " + book.getOwner().getName();
-            owner.setText(str_owner);
-
-            String str_description = "Description: " + book.getDescription();
-            description.setText(str_description);
-
-            String str_status = "Status: " + book.getStatus();
-            status.setText(str_status);
-
-
-            DataSnapshot book = Globals.getInstance().books.getData();
-            for (DataSnapshot i : book.getChildren()) {
-                Book item = i.getValue(Book.class);
-                if(item.getIsbn() == ISBN) {
-                    if(item.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
-                        // user is owner
-                    } else {
-                        // user is not owner
-                    }
+        switch(id) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.editIcon:
+                if(book.isOwner()) {
+                    Intent edit = new Intent(this, EditBookActivity.class);
+                    edit.putExtra("id", book.getId());
+                    startActivity(edit);
                 }
-            }
-
-            // otherwise book doesn't exist
-
+                return true;
+            case R.id.deleteIcon:
+                if(book.isOwner()) {
+                    book.delete();
+                    finish();
+                }
+                return true;
         }
-    }
 
+
+        return super.onOptionsItemSelected(item);
+    }
 }

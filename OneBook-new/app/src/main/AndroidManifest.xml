@@ -43,8 +43,6 @@
             android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.EditBookActivity"
             android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.ViewBookActivity"
-            android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.UserAccountActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
@@ -68,7 +66,7 @@
             android:name=".activities.SearchingActivity"
             android:label="@string/title_activity_searching_main"
             android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.ViewRequestableActivity" />
+        <activity android:name=".activities.ViewBookActivity" />
         <activity
             android:name=".activities.AddActivity"
             android:label="@string/title_activity_add"
