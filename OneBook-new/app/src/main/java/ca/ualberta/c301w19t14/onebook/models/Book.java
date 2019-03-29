@@ -57,7 +57,7 @@ public class Book {
         this.author = author;
         this.description = description;
         this.owner = owner;
-        this.status = "Available";
+        //this.status = "Available";
     }
 
     /**
@@ -166,6 +166,17 @@ public class Book {
         return null;
     }
 
+    private boolean userHasRequest(User user) {
+        if(this.getRequest() != null) {
+            for (Request r : this.getRequest().values()) {
+                if (r.getUser().getUid().equals(user.getUid())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Finds a book by it's ID.
      *
@@ -190,5 +201,23 @@ public class Book {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Books");
         myRef.child(this.getId()).setValue(this);
+    }
+
+    /**
+     * Returns if the current user is the books owner.
+     *
+     * @return boolean
+     */
+    public boolean userIsOwner() {
+        return this.getOwner().getUid().equals(Globals.getInstance().user.getUid());
+    }
+
+    /**
+     * Returns if the current user can request the book.
+     *
+     * @return boolean
+     */
+    public boolean userCanRequest() {
+        return (!this.userHasRequest(Globals.getCurrentUser()) && !this.userIsOwner());
     }
 }

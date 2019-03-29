@@ -24,12 +24,19 @@ import ca.ualberta.c301w19t14.onebook.activities.MessageActivity;
 import ca.ualberta.c301w19t14.onebook.models.Chat;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
+/**
+ * This class implements the adapter for displaying the users in the MessagingUserFragment.
+ * Each user will have their last message displayed if the current user hasn't responded back.
+ * @author jandaile CMPUT 301 team 14
+ * @since 2019-03-29
+ * @version 1.0
+ */
 public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdapter.ViewHolder>{
 
     private Context mContext;
     private List<User> mUsers;
 
-    String theLastMessage;
+    private String theLastMessage;
 
     public MessagingUserAdapter(Context mContext, List<User> mUsers){
         this.mUsers = mUsers;
@@ -70,7 +77,7 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView username;
+        private TextView username;
         private TextView lastMessage;
 
 
@@ -82,6 +89,11 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
         }
     }
 
+    /**
+     *
+     * @param userID: The user from the database.
+     * @param lastMessage: The last message from this user to the current user.
+     */
     private void lastMessage(final String userID, final TextView lastMessage) {
         theLastMessage = "default";
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

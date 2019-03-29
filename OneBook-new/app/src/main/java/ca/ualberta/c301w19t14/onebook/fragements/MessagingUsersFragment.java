@@ -29,7 +29,13 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.User;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
-
+/**
+ * This class implements user search and displays all users.
+ * From this class, users can be looked up and new chats can be started up between them.
+ * @author jandaile CMPUT 301 team 14
+ * @since 2019-03-29
+ * @version 1.0
+ */
 public class MessagingUsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -41,7 +47,7 @@ public class MessagingUsersFragment extends Fragment {
     EditText searchUsers;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_messaging_users, container, false);
@@ -61,17 +67,17 @@ public class MessagingUsersFragment extends Fragment {
         searchUsers.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence nameString, int start, int count, int after) {
 
             }
 
             @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    searchingUsers(s.toString());
+                public void onTextChanged(CharSequence nameString, int start, int before, int count) {
+                    searchingUsers(nameString.toString());
                 }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable nameString) {
 
             }
         });
@@ -79,13 +85,17 @@ public class MessagingUsersFragment extends Fragment {
         return myView;
     }
 
-    private void searchingUsers(String s) {
+    /**
+     * searches for users and updates the user list based on the search so far
+     * @param nameString: string to compare with for searching
+     */
+    private void searchingUsers(String nameString) {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference("Users")
                 .orderByChild("name")
-                .startAt(s)
-                .endAt(s+"\uf8ff");
+                .startAt(nameString)
+                .endAt(nameString+"\uf8ff");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,6 +123,9 @@ public class MessagingUsersFragment extends Fragment {
         });
     }
 
+    /**
+     * reads all users from the database and displays them
+     */
     private void readUsers(){
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

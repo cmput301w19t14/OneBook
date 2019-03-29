@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.fragements;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import ca.ualberta.c301w19t14.onebook.adapters.BookAdapter;
 import ca.ualberta.c301w19t14.onebook.Globals;
@@ -25,6 +28,8 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.AddActivity;
 import ca.ualberta.c301w19t14.onebook.activities.ScanIsbnActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 /**This class runs when "Lending" is clicked on the navigation menu
  * It displays all of the books that the current user owns
@@ -37,6 +42,19 @@ public class LendingFragment extends Fragment {
     ArrayList<Book> book;
     private Globals globals;
     private RecyclerView mRecyclerView;
+
+    String[] listItems;
+    boolean[] checkedItems;
+    ArrayList<Integer> mUserItems = new ArrayList<>();
+
+    String[] filterOptions = new String[] {
+            "Available",
+            "Borrowed"
+    };
+    boolean[] checkedFilters = new boolean[]{
+            true,
+            true
+    };
 
 
     public LendingFragment() {
@@ -77,6 +95,14 @@ public class LendingFragment extends Fragment {
                 }
         );
 
+        if(book.isEmpty()) {
+            myView.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+            myView.findViewById(R.id.recyclerView).setVisibility(View.GONE);
+        } else {
+            myView.findViewById(R.id.noData).setVisibility(View.GONE);
+            myView.findViewById(R.id.recyclerView).setVisibility(View.VISIBLE);
+        }
+
         return myView;
     }
 
@@ -115,17 +141,48 @@ public class LendingFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        final List<String> filtersList = Arrays.asList(filterOptions);
+
         if (id == R.id.quick_camera) {
             Intent intent = new Intent(getActivity(), ScanIsbnActivity.class);
             this.startActivity(intent);
         }
         else if (id == R.id.quick_filter) {
-            AlertDialog filterDialog = new AlertDialog.Builder(this.getContext()).create();
-            filterDialog.setTitle("Filtering options available:");
-            // you still need a body and buttons
-            // then call filterDialog.show();
-            Toast.makeText(myView.getContext(), "I clicked filter.", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
 
+            fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    if (isChecked) {
+                        if (!mUserItems.contains(which)) {
+                            mUserItems.add(which);
+                        }
+                    } else if (mUserItems.contains(which)) {
+                        mUserItems.remove(which);
+                    }
+                }
+            });
+
+            fBuilder.setCancelable(false);
+
+            fBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            fBuilder.setTitle("Filtering options available:");
+
+            AlertDialog fDialog = fBuilder.create();
+            fDialog.show();
         }
 
         return true;

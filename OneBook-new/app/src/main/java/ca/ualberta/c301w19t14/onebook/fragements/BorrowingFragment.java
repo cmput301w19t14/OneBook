@@ -1,5 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.fragements;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import ca.ualberta.c301w19t14.onebook.activities.ScanIsbnActivity;
 import ca.ualberta.c301w19t14.onebook.adapters.BookAdapter;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
@@ -32,13 +37,21 @@ public class BorrowingFragment extends Fragment {
     Globals globals;
     public ArrayList<Book> books = new ArrayList<Book>();
 
+    ArrayList<Integer> mUserItems = new ArrayList<>();
+
+    String[] filterOptions = new String[] {
+            "Available",
+            "Borrowed"
+    };
+    boolean[] checkedFilters = new boolean[]{
+            true,
+            true
+    };
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.borrowing_main,container, false);
-
-
-
 
         //get globals
         globals = Globals.getInstance();
@@ -54,6 +67,14 @@ public class BorrowingFragment extends Fragment {
         books = util.findBorrowerBooks();
         BookAdapter ba = new BookAdapter(getActivity(), books, true);
         recyclerView.setAdapter(ba);
+
+        if(books.isEmpty()) {
+            myView.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+            myView.findViewById(R.id.borrow_recycler).setVisibility(View.GONE);
+        } else {
+            myView.findViewById(R.id.noData).setVisibility(View.GONE);
+            myView.findViewById(R.id.borrow_recycler).setVisibility(View.VISIBLE);
+        }
 
         return myView;
     }
@@ -87,7 +108,51 @@ public class BorrowingFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        return false;
+
+        final List<String> filtersList = Arrays.asList(filterOptions);
+
+        if (id == R.id.quick_camera) {
+            Intent intent = new Intent(getActivity(), ScanIsbnActivity.class);
+            this.startActivity(intent);
+        }
+        else if (id == R.id.quick_filter) {
+            AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
+
+            fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    if (isChecked) {
+                        if (!mUserItems.contains(which)) {
+                            mUserItems.add(which);
+                        }
+                    } else if (mUserItems.contains(which)) {
+                        mUserItems.remove(which);
+                    }
+                }
+            });
+
+            fBuilder.setCancelable(false);
+
+            fBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            fBuilder.setTitle("Filtering options available:");
+
+            AlertDialog fDialog = fBuilder.create();
+            fDialog.show();
+        }
+        return true;
     }
 
 

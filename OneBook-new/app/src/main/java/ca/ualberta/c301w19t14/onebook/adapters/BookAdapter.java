@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,9 +16,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+//import de.hdodenhof.circleimageview.CircleImageView;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
-import ca.ualberta.c301w19t14.onebook.activities.ViewRequestableActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 
 /**This class is used to create all of the recycler views that list books.
@@ -63,11 +64,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(i);
         bookVh.book = book;
 
+
         bookVh.vTitle.setText(book.getTitle());
         bookVh.vOwner.setText(book.getOwner().getName());
-        bookVh.vStatus.setText(book.getStatus().toUpperCase());
+        //bookVh.vStatus.setText(book.getStatus().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
+        //bookVh.vImage.setImageBitmap();
 
+
+        /*
         //MODE = true -> do borrowing/lending
         if (mode) {
             // If status is Accepted or Requested, color code
@@ -79,7 +84,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
         else {
             // If status is borrowed, do nothing.
-        }
+        }*/
     }
 
     /**
@@ -101,10 +106,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
      *
      */
     public class BookViewHolder extends RecyclerView.ViewHolder {
-        protected TextView vStatus;
+        //protected TextView vStatus;
         protected TextView vOwner;
         protected TextView vAuthor;
         protected TextView vTitle;
+        //protected CircleImageView vImage;
         public Book book;
 
         /**
@@ -115,8 +121,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             super(v);
             vTitle =  (TextView) v.findViewById(R.id.bookTitle);
             vOwner = (TextView)  v.findViewById(R.id.bookOwner);
-            vStatus = (TextView)  v.findViewById(R.id.bookStatus);
+            //vStatus = (TextView)  v.findViewById(R.id.bookStatus);
             vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
+            //vImage = v.findViewById(R.id.bookImage);
 
             //make the cards clickable
             view = v;
@@ -136,18 +143,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     //if the user clicks on a book they do not own, they will get a view page that doesn't allow edits
                     String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                    if (current_user.equals(book.getOwner().getEmail()))
-                    {
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
-                    }
-                    else
-                    {
-                        Intent intent = new Intent(mContext, ViewRequestableActivity.class);
-                        intent.putExtras(bundle);
-                        mContext.startActivity(intent);
-                    }
+
 
                 }
             });

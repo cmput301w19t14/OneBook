@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,6 +21,7 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
+import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
  * requests book
@@ -75,51 +77,86 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             content = view.findViewById(R.id.content);
                 view.setOnClickListener(new View.OnClickListener() {
 
-                    @Override public void onClick(View v){
-                        if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                    @Override public void onClick(View v) {
+                        if (notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
                             // This notification is for an owner of a book, notifying them of a new actionable request.
-                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                        alertDialog.setTitle("Accept/Reject");
-                        alertDialog.setMessage("What would you like to do?");
-                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        notification.getRequest().setStatus("Accepted");
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference myRef = database.getReference("Requests");
-                                        myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+                            AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog.setTitle("Accept/Reject");
+                            alertDialog.setMessage("What would you like to do?");
+                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
 
-                                        Book book = notification.getRequest().getBook();
-                                        book.setStatus("Borrowed");
-                                        book.setBorrower(notification.getRequest().getUser());
-                                        myRef = database.getReference("Books");
-                                        myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
+                                            //update request status to accepted
+                                            Book book = notification.getRequest().getBook();
+                                            Request request = notification.getRequest();
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("book").child("status").setValue("Accepted");
 
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        notification.getRequest().setStatus("Rejected");
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference myRef = database.getReference("Requests");
-                                        myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+                                            //notify borrower that their request has been accepted
+                                            //TODO: how do they find out the location to meet up?
+                                            Notification accept_notification = new Notification("Request Accepted", notification.getUser().getName() + " has accepted your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            accept_notification.save();
 
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-                        else {
-                            // delete notification
-                            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
-                            db.child(notification.getId()).removeValue();
+                                            //notify borrower that they need to meet up with the owner
+                                            Notification trade_notification_borrower = new Notification("Meet up Required", "You need to meet " + notification.getUser().getName() + " to pick up " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            trade_notification_borrower.save();
 
-                            Toast.makeText(mContext, "Notification removed.", Toast.LENGTH_SHORT).show();
+                                            //notify owner that they need to meet up with borrower
+                                            Notification trade_notification_owner = new Notification("Meet up Required", "You need to meet " + notification.getRequest().getUser().getName()+ " to give them " + notification.getRequest().getBook().getTitle(), notification.getUser());
+                                            trade_notification_owner.save();
+
+                                            //deletes the original notification for owner
+                                            notification.delete();
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            //if they reject a request.
+                                            //create a new notification for the person who was rejected
+                                            Notification reject_notification = new Notification("Request Rejected", notification.getUser().getName() + " has rejected your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            reject_notification.save();
+
+                                            //deletes the original notification for current user
+                                            notification.delete();
+
+                                            //deletes the request from the book database
+                                            Book book = notification.getRequest().getBook();
+                                            Request request = notification.getRequest();
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        } else {
+
+                            AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog2.setTitle("Notification");
+                            alertDialog2.setMessage("What would you like to do?");
+                            alertDialog2.setButton(AlertDialog.BUTTON_POSITIVE, "DELETE",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            notification.delete();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "SAVE",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog2.show();
                         }
-                }});
+                    }
 
+                });
         }
     }
 }
