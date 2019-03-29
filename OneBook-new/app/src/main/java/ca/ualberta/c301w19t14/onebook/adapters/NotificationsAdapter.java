@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -75,51 +76,70 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             content = view.findViewById(R.id.content);
                 view.setOnClickListener(new View.OnClickListener() {
 
-                    @Override public void onClick(View v){
-                        if(notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
+                    @Override public void onClick(View v) {
+                        if (notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
                             // This notification is for an owner of a book, notifying them of a new actionable request.
-                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                        alertDialog.setTitle("Accept/Reject");
-                        alertDialog.setMessage("What would you like to do?");
-                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        notification.getRequest().setStatus("Accepted");
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference myRef = database.getReference("Requests");
-                                        myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+                            AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog.setTitle("Accept/Reject");
+                            alertDialog.setMessage("What would you like to do?");
+                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            notification.getRequest().setStatus("Accepted");
+                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            DatabaseReference myRef = database.getReference("Requests");
+                                            myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
-                                        Book book = notification.getRequest().getBook();
-                                        book.setStatus("Borrowed");
-                                        book.setBorrower(notification.getRequest().getUser());
-                                        myRef = database.getReference("Books");
-                                        myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
+                                            Book book = notification.getRequest().getBook();
+                                            book.setStatus("Borrowed");
+                                            book.setBorrower(notification.getRequest().getUser());
+                                            myRef = database.getReference("Books");
+                                            myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
 
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        notification.getRequest().setStatus("Rejected");
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference myRef = database.getReference("Requests");
-                                        myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
 
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-                        else {
-                            // delete notification
-                            DatabaseReference db = FirebaseDatabase.getInstance().getReference("Notifications");
-                            db.child(notification.getId()).removeValue();
+                                            //if they reject a request.
+                                            //create a new notification for the person who was rejected
+                                            Notification reject_notification = new Notification("Request Rejected", notification.getUser().getName() + " has rejected your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            reject_notification.save();
 
-                            Toast.makeText(mContext, "Notification removed.", Toast.LENGTH_SHORT).show();
+                                            //deletes the original notification for current user
+                                            notification.delete();
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        } else {
+
+                            AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
+                            alertDialog2.setTitle("Notification");
+                            alertDialog2.setMessage("What would you like to do?");
+                            alertDialog2.setButton(AlertDialog.BUTTON_POSITIVE, "DELETE",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            notification.delete();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "SAVE",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog2.show();
                         }
-                }});
+                    }
 
+                });
         }
     }
 }

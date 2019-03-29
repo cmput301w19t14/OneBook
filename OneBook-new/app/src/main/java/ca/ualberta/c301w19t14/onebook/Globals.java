@@ -13,6 +13,7 @@ public class Globals {
     public FirebaseUtil books;
     public FirebaseUtil requests;
     public FirebaseUtil users;
+    public FirebaseUtil notifications;
 
     public FirebaseUser user;
 
@@ -24,6 +25,7 @@ public class Globals {
         requests = new FirebaseUtil("Requests");
         books = new FirebaseUtil("Books");
         users = new FirebaseUtil("Users");
+        notifications = new FirebaseUtil("notifications");
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
