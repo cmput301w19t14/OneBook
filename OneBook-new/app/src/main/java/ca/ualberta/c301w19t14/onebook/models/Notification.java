@@ -73,6 +73,10 @@ public class Notification {
         db.child(this.getId()).setValue(this);
     }
 
+    public void delete() {
+        FirebaseDatabase.getInstance().getReference("Notifications").child(this.getUser().getUid()).child(this.getId()).removeValue();
+    }
+
     /**
      * Gets the notification ID.
      *
