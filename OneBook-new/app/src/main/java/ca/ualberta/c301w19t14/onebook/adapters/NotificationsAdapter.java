@@ -86,16 +86,26 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ACCEPT",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            notification.getRequest().setStatus("Accepted");
-                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                            DatabaseReference myRef = database.getReference("Requests");
-                                            myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
 
+                                            //notification.getRequest().setStatus("Accepted");
+                                            //FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            //DatabaseReference myRef = database.getReference("Requests");
+                                            //myRef.child(notification.getRequest().getId()).setValue(notification.getRequest());
+
+
+                                            //myRef2.child(book_id).child("request").child(ts).setValue(request_book);
+
+
+                                            //update request status to accepted
                                             Book book = notification.getRequest().getBook();
-                                            book.setStatus("Accepted");
-                                            book.setBorrower(notification.getRequest().getUser());
-                                            myRef = database.getReference("Books");
-                                            myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
+                                            Request request = notification.getRequest();
+
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("book").child("status").setValue("Accepted");
+
+                                            //book.child(book.getId()).child("request").child().setStatus("Accepted");
+                                            //book.setBorrower(notification.getRequest().getUser());
+                                            //myRef = database.getReference("Books");
+                                            //myRef.child(notification.getRequest().getBook().getId()).setValue(notification.getRequest().getBook());
 
                                             dialog.dismiss();
                                         }
@@ -103,7 +113,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            
+
                                             //if they reject a request.
                                             //create a new notification for the person who was rejected
                                             Notification reject_notification = new Notification("Request Rejected", notification.getUser().getName() + " has rejected your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
@@ -111,7 +121,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
                                             //deletes the original notification for current user
                                             notification.delete();
-*/
+
                                             //deletes the request from the book database
                                             Book book = notification.getRequest().getBook();
                                             Request request = notification.getRequest();
