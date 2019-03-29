@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,19 +79,25 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         bookVh.vOwner.setText(book.getOwner().getName());
         //bookVh.vStatus.setText(book.getStatus().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
-        storage.getReference().child("Book images/"+book.getId()+"/bookimage.png").getBytes(Long.MAX_VALUE)
-                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                        bookVh.vImage.setImageBitmap(bitmap);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+        try {
+            storage.getReference().child("Book images/" + book.getId() + "/bookimage.png").getBytes(Long.MAX_VALUE)
+                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            bookVh.vImage.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-            }
-        });
+                }
+            });
+        }
+        catch(Exception e)
+        {
+            Log.d("Book adapter", "onBindViewHolder: no image");
+        }
         //bookVh.vImage.setImageBitmap();
 
 
