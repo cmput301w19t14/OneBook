@@ -38,7 +38,7 @@ public class Request {
         String ts = tsLong.toString();
 
         this.user = user;
-        //this.book = book;
+        this.book = book;
         this.status = "Pending";
         //this.date = ts;
     }
