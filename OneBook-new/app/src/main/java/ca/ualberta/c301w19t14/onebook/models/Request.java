@@ -30,6 +30,16 @@ public class Request {
 
     /**
      * @param user
+     */
+    public Request(User user, String requestID) {
+        this.user = user;
+        this.status = "Pending";
+        this.id = requestID;
+    }
+
+
+    /**
+     * @param user
      * @param book
      */
     public Request(User user, Book book, String requestID) {
@@ -84,19 +94,24 @@ public class Request {
                     }
                     if (!duplicateRequest) {
                         //saves the request to database if they haven't already made a request
-                        Request request2 = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
-                        myRef2.child(book_id).child("request").child(ts).setValue(request2);
+                        Request request_book = new Request(user,book,myRef2.child(book_id).child("request").child(ts).getKey());
+                        myRef2.child(book_id).child("request").child(ts).setValue(request_book);
 
-                        Log.d("NEH TAG!", myRef2.child(book_id).child("request").child(ts).toString());
+                        Notification notification_waitlist = new Notification("You Requested a Book", "You've been added to the waitlist for " + item.getTitle(), user);
+                        notification_waitlist.save();
+
                     }
                 } else {
 
-                    //this is only request on the book
-                    Request request2 = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
-                    myRef2.child(book_id).child("request").child(ts).setValue(request2);
+                    //if this is only request on the book, they are the top of the waitlist. Notifies both users.
+                    Request request_notification = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
+                    Request request_book = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
+                    myRef2.child(book_id).child("request").child(ts).setValue(request_book);
+                    Notification notification_top = new Notification("You Requested a Book", "You're first in line to receive " + item.getTitle(), user);
+                    notification_top.save();
 
                     //notifies owner since they are automatically at the top of the waitlist
-                    Notification notification = new Notification("New Request on Book", user.getName() + " has requested " + item.getTitle(), request2, item.getOwner());
+                    Notification notification = new Notification("New Request on Book", user.getName() + " has requested " + item.getTitle(), request_notification, item.getOwner());
                     notification.save();
 
                 }
