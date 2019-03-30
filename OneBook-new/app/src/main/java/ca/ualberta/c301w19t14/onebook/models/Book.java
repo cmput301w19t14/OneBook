@@ -11,6 +11,10 @@ import ca.ualberta.c301w19t14.onebook.Globals;
  * @author CMPUT 301 Team 14
  * */
 public class Book {
+    final public static String AVAILABLE = "Available";
+    final public static String REQUESTED = "Requested";
+    final public static String ACCEPTED = "Accepted";
+    final public static String BORROWED = "Borrowed";
     private String id;
     private long isbn;
     private String description;
@@ -19,7 +23,6 @@ public class Book {
     private HashMap<String, Request> request;
     private User owner;
     private User borrower;
-    private String status;
 
     /**
      * getter for description
@@ -145,23 +148,37 @@ public class Book {
     public HashMap<String, Request> getRequest() {return request; }
 
     /**
-     * getter for book status
+     * Returns the status for the book.
+     *  * Owners can see AVAILABLE or BORROWED.
+     *  * Users can see AVAILABLE, BORROWED, ACCEPTED or REQUESTED.
+     *
+     * Most of the time, the status should be AVAILABLE.
+     *
      * @return status
      */
     public String getStatus() {
-        String status = "Invalid";
-
-        //need to go through the hashmap to see if it has any requests
-        if (this.request.isEmpty()){
-            status = "Available";
+        if(this.userIsOwner()) {
+            if(this.borrower != null) {
+                return Book.BORROWED;
+            }
+        } else {
+            if(this.userHasRequest(Globals.getCurrentUser()) && this.getAcceptedRequest().getUser() == Globals.getCurrentUser()) {
+                return Book.ACCEPTED;
+            } else if(this.userHasRequest(Globals.getCurrentUser())) {
+                return Book.REQUESTED;
+            } else if(this.borrower == Globals.getCurrentUser()) {
+                return Book.BORROWED;
+            }
         }
-        else {
-            status = "Requested";
-        }
 
-        return status;
+        return Book.AVAILABLE;
     }
 
+    /**
+     * Returns the accepted request on the book, if exists.
+     *
+     * @return Request|null
+     */
     public Request getAcceptedRequest() {
         if(this.getRequest() != null) {
             for (Request r : this.getRequest().values()) {
@@ -173,6 +190,12 @@ public class Book {
         return null;
     }
 
+    /**
+     * Returns if the user has a request on the book.
+     *
+     * @param user User
+     * @return boolean
+     */
     private boolean userHasRequest(User user) {
         if(this.getRequest() != null) {
             for (Request r : this.getRequest().values()) {
