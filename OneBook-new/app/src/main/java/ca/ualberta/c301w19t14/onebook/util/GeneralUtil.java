@@ -2,10 +2,12 @@ package ca.ualberta.c301w19t14.onebook.util;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
+import ca.ualberta.c301w19t14.onebook.models.Request;
 
 public class GeneralUtil {
 
@@ -34,6 +36,18 @@ public class GeneralUtil {
         }
 
         return borrower_books;
+    }
+
+    private String GetBookStatus(Book book){
+
+        //assume Available
+        String status = "Available";
+        globals = Globals.getInstance();
+        ArrayList<Request> requests = globals.requests.getAllRequests();
+
+
+
+        return status;
     }
 
 }

@@ -41,6 +41,7 @@ public class Book {
      *
      */
     public Book() {
+        this.request = new HashMap<>();
     }
 
     /**
@@ -57,7 +58,7 @@ public class Book {
         this.author = author;
         this.description = description;
         this.owner = owner;
-        //this.status = "Available";
+        this.request = new HashMap<>();
     }
 
     /**
@@ -147,13 +148,19 @@ public class Book {
      * getter for book status
      * @return status
      */
-    public String getStatus() { return status; }
+    public String getStatus() {
+        String status = "Invalid";
 
-    /**
-     * setter for book status
-     * @param status
-     */
-    public void setStatus(String status) { this.status = status; }
+        //need to go through the hashmap to see if it has any requests
+        if (this.request.isEmpty()){
+            status = "Available";
+        }
+        else {
+            status = "Requested";
+        }
+
+        return status;
+    }
 
     public Request getAcceptedRequest() {
         if(this.getRequest() != null) {

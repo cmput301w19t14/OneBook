@@ -41,9 +41,13 @@ public class BorrowingFragment extends Fragment {
 
     String[] filterOptions = new String[] {
             "Available",
-            "Borrowed"
+            "Borrowed",
+            "Requested",
+            "Accepted"
     };
     boolean[] checkedFilters = new boolean[]{
+            true,
+            true,
             true,
             true
     };
@@ -139,13 +143,13 @@ public class BorrowingFragment extends Fragment {
 
                 }
             });
-
+            /*
             fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
-            });
+            });*/
 
             fBuilder.setTitle("Filtering options available:");
 
