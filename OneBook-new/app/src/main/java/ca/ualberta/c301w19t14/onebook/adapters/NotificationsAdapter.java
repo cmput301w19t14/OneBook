@@ -22,12 +22,14 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
+import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
+
 /**
- * requests book
- * request was accepted
- * messages
+ * RecyclerView adapter for notifications.
+ * Handles displaying and clicking on notifications.
  *
- * Handles the request process
+ * @see NotificationFragment
+ * @author Natalie, Dimitri
  */
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationsViewHolder> {
 
@@ -137,7 +139,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.show();
                         } else {
                             //checks if it's a notification for a meet up. displays location if it is
-                            
+
                             //other notifications can be deleted
                             AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
                             alertDialog2.setTitle("Notification");

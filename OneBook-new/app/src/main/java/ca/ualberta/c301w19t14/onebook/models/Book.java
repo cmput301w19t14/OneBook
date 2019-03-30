@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 
@@ -20,7 +21,7 @@ public class Book {
     private String description;
     private String title;
     private String author;
-    private HashMap<String, Request> request;
+    private Map<String, Request> request;
     private User owner;
     private User borrower;
 
@@ -61,15 +62,6 @@ public class Book {
         this.description = description;
         this.owner = owner;
         this.request = new HashMap<>();
-    }
-
-    //This is for books saved within requests.
-    //zero can be any integer
-    public Book(long isbn, String title, String author,String description, User owner, int zero) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.owner = owner;
     }
 
     /**
@@ -136,6 +128,10 @@ public class Book {
      */
     public User getBorrower(){return borrower; }
 
+    public void clearAllRequests() {
+        this.request = null;
+    }
+
     /**
      * setter for book owner
      * @param owner
@@ -153,7 +149,7 @@ public class Book {
      * getter for book requesters
      * @return requesters
      */
-    public HashMap<String, Request> getRequest() {return request; }
+    public HashMap<String, Request> getRequest() {return (HashMap<String, Request>) request; }
 
     /**
      * Returns the status for the book.
@@ -165,17 +161,19 @@ public class Book {
      * @return status
      */
     public String getStatus() {
-        if(this.userIsOwner()) {
-            if(this.borrower != null) {
-                return Book.BORROWED;
-            }
-        } else {
-            if(this.userHasRequest(Globals.getCurrentUser()) && this.getAcceptedRequest().getUser() == Globals.getCurrentUser()) {
-                return Book.ACCEPTED;
-            } else if(this.userHasRequest(Globals.getCurrentUser())) {
-                return Book.REQUESTED;
-            } else if(this.borrower == Globals.getCurrentUser()) {
-                return Book.BORROWED;
+        if (this.getOwner() != null) {
+            if (this.userIsOwner()) {
+                if (this.borrower != null) {
+                    return Book.BORROWED;
+                }
+            } else {
+                if (this.userHasRequest(Globals.getCurrentUser()) && this.getAcceptedRequest() != null && this.getAcceptedRequest().getUser() == Globals.getCurrentUser()) {
+                    return Book.ACCEPTED;
+                } else if (this.userHasRequest(Globals.getCurrentUser())) {
+                    return Book.REQUESTED;
+                } else if (this.borrower == Globals.getCurrentUser()) {
+                    return Book.BORROWED;
+                }
             }
         }
 
@@ -204,7 +202,7 @@ public class Book {
      * @param user User
      * @return boolean
      */
-    private boolean userHasRequest(User user) {
+    public boolean userHasRequest(User user) {
         if(this.getRequest() != null) {
             for (Request r : this.getRequest().values()) {
                 if (r.getUser().getUid().equals(user.getUid())) {

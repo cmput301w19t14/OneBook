@@ -1,6 +1,5 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -27,17 +25,12 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 
-import ca.ualberta.c301w19t14.onebook.BookRequestAdapter;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
-import ca.ualberta.c301w19t14.onebook.models.Location;
-import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.models.Request;
-import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
  * View book information page.

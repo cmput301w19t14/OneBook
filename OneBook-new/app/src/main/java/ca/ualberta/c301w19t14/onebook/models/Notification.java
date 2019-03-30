@@ -3,8 +3,11 @@ package ca.ualberta.c301w19t14.onebook.models;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.models.Request;
@@ -36,9 +39,9 @@ public class Notification {
     /**
      * Constructor for basic notification.
      *
-     * @param title notification title
+     * @param title   notification title
      * @param content notification message
-     * @param user user receiving notification
+     * @param user    user receiving notification
      */
     public Notification(String title, String content, User user) {
         this.title = title;
@@ -49,10 +52,10 @@ public class Notification {
     /**
      * Constructor for notification for a book request.
      *
-     * @param title notification title
+     * @param title   notification title
      * @param content notification message
      * @param request book request
-     * @param user user receiving notification
+     * @param user    user receiving notification
      */
     public Notification(String title, String content, Request request, User user) {
         this.title = title;
@@ -75,6 +78,27 @@ public class Notification {
 
     public void delete() {
         FirebaseDatabase.getInstance().getReference("Notifications").child(this.getUser().getUid()).child(this.getId()).removeValue();
+    }
+
+    public static void deleteWhereRequestAndUser(final Request request, User user) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference("Notifications").child(user.getUid());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s : dataSnapshot.getChildren()) {
+                    Request r = s.getValue(Notification.class).getRequest();
+                    if (r != null && r.getId().equals(request.getId())) {
+                        s.getRef().removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**

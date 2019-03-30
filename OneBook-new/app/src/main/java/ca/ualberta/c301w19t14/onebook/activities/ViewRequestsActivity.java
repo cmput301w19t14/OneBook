@@ -14,6 +14,11 @@ import ca.ualberta.c301w19t14.onebook.adapters.RequestsAdapter;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
+/**
+ * Shows all the requests on a book.
+ *
+ * @author Dimitri
+ */
 public class ViewRequestsActivity extends AppCompatActivity {
 
     private ArrayList<Request> requests = new ArrayList<>();
@@ -21,6 +26,12 @@ public class ViewRequestsActivity extends AppCompatActivity {
     private RequestsAdapter adapter;
 
 
+    /**
+     * Initializes the view, adapter and recyclerView.
+     *
+     * @see this.loadData()
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
