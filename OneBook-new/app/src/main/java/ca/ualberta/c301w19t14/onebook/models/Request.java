@@ -33,7 +33,7 @@ public class Request {
      */
     public Request(User user, String requestID) {
         this.user = user;
-        //this.status = "Pending";
+        this.status = "Pending";
         this.id = requestID;
     }
 
