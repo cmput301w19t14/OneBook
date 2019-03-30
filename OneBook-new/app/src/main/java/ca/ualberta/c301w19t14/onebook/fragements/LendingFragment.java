@@ -44,17 +44,14 @@ public class LendingFragment extends Fragment {
     private Globals globals;
     private RecyclerView mRecyclerView;
 
-    String[] listItems;
-    boolean[] checkedItems;
     ArrayList<Integer> mUserItems = new ArrayList<>();
 
-    String[] filterOptions = new String[] {
+    private String[] filterOptions = new String[] {
             "Available",
             "Borrowed",
             "Requested"
     };
-    boolean[] checkedFilters = new boolean[]{
-            true,
+    private static boolean[] checkedFilters = new boolean[]{
             true,
             true,
             true
@@ -154,6 +151,9 @@ public class LendingFragment extends Fragment {
         else if (id == R.id.quick_filter) {
             AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
 
+            final boolean[] checkedFiltersOriginal = new boolean[3];
+            System.arraycopy(checkedFilters, 0, checkedFiltersOriginal, 0, checkedFilters.length);
+
             fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -168,6 +168,13 @@ public class LendingFragment extends Fragment {
             });
 
             fBuilder.setCancelable(false);
+            fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    checkedFilters = checkedFiltersOriginal;
+                    dialog.dismiss();
+                }
+            });
 
             fBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -194,10 +201,13 @@ public class LendingFragment extends Fragment {
                             for (int i = 0; i < size; i++) {
                                 if (checkedFilters[i]) {
                                     String filter = filterOptions[i];
-                                    if ((book.getStatus().contains(filter)) && (!deltabook.contains(book))) {
+                                    if (book.getStatus().contains(filter) && (!deltabook.contains(book))) {
                                         deltabook.add(book);
                                     }
-                                    else if ((!book.getStatus().contains(filter)) && (deltabook.contains(book))) {
+                                }
+                                else if (!checkedFilters[i]) {
+                                    String filter = filterOptions[i];
+                                    if (book.getStatus().contains(filter) && (deltabook.contains(book))) {
                                         deltabook.remove(book);
                                     }
                                 }
