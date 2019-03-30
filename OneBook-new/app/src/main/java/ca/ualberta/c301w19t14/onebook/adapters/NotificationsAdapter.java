@@ -133,7 +133,15 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                     });
                             alertDialog.show();
                         } else {
+                            //checks if it's a notification for a meet up. displays location if it is
 
+
+
+
+
+
+
+                            //other notifications can be deleted
                             AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
                             alertDialog2.setTitle("Notification");
                             alertDialog2.setMessage("What would you like to do?");

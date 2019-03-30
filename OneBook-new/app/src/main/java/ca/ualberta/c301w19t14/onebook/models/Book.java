@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,6 +62,15 @@ public class Book {
         this.description = description;
         this.owner = owner;
         this.request = new HashMap<>();
+    }
+
+    //This is for books saved within requests.
+    //zero can be any integer
+    public Book(long isbn, String title, String author,String description, User owner, int zero) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.owner = owner;
     }
 
     /**

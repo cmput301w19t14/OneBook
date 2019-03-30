@@ -74,16 +74,17 @@ public class Request {
 
     /**
      * @param user
-     * @param book
      */
-    public static void requestBook(User user, Book book, String book_id) {
+    public static void requestBook(User user, Book full_book, String book_id) {
         // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
         Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
 
+        Book book = new Book(full_book.getIsbn(), full_book.getTitle(), full_book.getAuthor(), full_book.getDescription(), full_book.getOwner(),0);
+
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
         DatabaseReference myRef2 = database2.getReference("Books");
-        String name2 = myRef2.child(book.getId()).getKey();
+        String name2 = myRef2.child(book_id).getKey();
 
         //adds user to waitlist if they aren't already on that book's waitlist
         DataSnapshot bookData = Globals.getInstance().books.getData();
@@ -101,8 +102,10 @@ public class Request {
                         }
                     }
                     if (!duplicateRequest) {
+                        Log.d("NEH", "not the first request");
+
                         //saves the request to database if they haven't already made a request
-                        Request request_book = new Request(user,book,myRef2.child(book_id).child("request").child(ts).getKey());
+                        Request request_book = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
                         myRef2.child(book_id).child("request").child(ts).setValue(request_book);
 
                         Notification notification_waitlist = new Notification("You Requested a Book", "You've been added to the waitlist for " + item.getTitle(), user);
@@ -110,11 +113,14 @@ public class Request {
 
                     }
                 } else {
+                    Log.d("NEH", "else statement");
 
-                    //if this is only request on the book, they are the top of the waitlist. Notifies both users.
-                    Request request_notification = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
+                    //if this is only request on the book, they are added to the top of the waitlist.
                     Request request_book = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
                     myRef2.child(book_id).child("request").child(ts).setValue(request_book);
+
+                    //notifies the borrower
+                    Request request_notification = new Request(user, book, myRef2.child(book_id).child("request").child(ts).getKey());
                     Notification notification_top = new Notification("You Requested a Book", "You're first in line to receive " + item.getTitle(), user);
                     notification_top.save();
 
@@ -173,6 +179,7 @@ public class Request {
      * @return status
      */
     public String getStatus() {
+
         return status;
     }
 
