@@ -160,7 +160,7 @@ public class Book {
      *
      * @return status
      */
-    public String getStatus() {
+    public String status() {
         if (this.getOwner() != null) {
             if (this.userIsOwner()) {
                 if (this.borrower != null) {
@@ -188,7 +188,7 @@ public class Book {
     public Request getAcceptedRequest() {
         if(this.getRequest() != null) {
             for (Request r : this.getRequest().values()) {
-                if (r.getStatus().equals(Request.ACCEPTED)) {
+                if (!r.getStatus().equals(Request.PENDING)) {
                     return r;
                 }
             }
@@ -255,5 +255,43 @@ public class Book {
      */
     public boolean userCanRequest() {
         return (!this.userHasRequest(Globals.getCurrentUser()) && !this.userIsOwner());
+    }
+
+    public void doBorrowHandover() {
+        this.getAcceptedRequest().commitNewStatus(Request.PENDING_BORROWER_SCAN);
+        Notification owner = new Notification("Handover Initiated", "You initiated the handover for " + this.getTitle() + ". Waiting on borrower scan.", this.getOwner());
+        Notification borrower = new Notification("Handover Initiated", "The owner initiated the handover for " + this.getTitle() + ". Please scan the book to complete.", this.getAcceptedRequest().getUser());
+        owner.save();
+        borrower.save();
+    }
+
+    public void finishBorrowHandover() {
+        this.setBorrower(this.getAcceptedRequest().getUser());
+        this.update();
+        this.getAcceptedRequest().commitNewStatus(Request.BORROWING);
+        Notification owner = new Notification("Handover Complete", "The handover for " + this.getTitle() + " is complete. " + this.getBorrower().getName() + " is now the borrower.", this.getOwner());
+        Notification borrower = new Notification("Handover Complete", "The handover for " + this.getTitle() + " is complete. You are now the borrower.", this.getAcceptedRequest().getUser());
+        owner.save();
+        borrower.save();
+    }
+
+    public void doReturnHandover() {
+        this.getAcceptedRequest().commitNewStatus(Request.PENDING_OWNER_SCAN);
+        Notification owner = new Notification("Return Initiated", "You initiated the handover for " + this.getTitle() + ". Waiting on owner scan.", this.getOwner());
+        Notification borrower = new Notification("Return Initiated", "The owner initiated the handover for " + this.getTitle() + ". Please scan the book to complete.", this.getAcceptedRequest().getUser());
+        owner.save();
+        borrower.save();
+    }
+
+    public void finishReturnHandover() {
+        Notification owner = new Notification("Return Complete", "The return for " + this.getTitle() + " is complete.", this.getOwner());
+        Notification borrower = new Notification("Return Complete", "The return for " + this.getTitle() + " is complete.", this.getAcceptedRequest().getUser());
+        owner.save();
+        borrower.save();
+
+        this.setBorrower(null);
+        this.update();
+        this.getAcceptedRequest().delete();
+
     }
 }

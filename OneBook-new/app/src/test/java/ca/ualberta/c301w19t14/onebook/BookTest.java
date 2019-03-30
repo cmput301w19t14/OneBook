@@ -57,7 +57,7 @@ public class BookTest {
         Assert.assertEquals(title, book.getTitle());
         Assert.assertEquals(author, book.getAuthor());
         Assert.assertEquals(category, book.getCategory());
-        Assert.assertEquals(status, book.getStatus());
+        Assert.assertEquals(status, book.status());
     }
 
     @Test

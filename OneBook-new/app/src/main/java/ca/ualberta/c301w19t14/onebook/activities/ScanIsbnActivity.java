@@ -1,7 +1,10 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
+import ca.ualberta.c301w19t14.onebook.models.Request;
 
 public class ScanIsbnActivity extends AppCompatActivity {
     TextView barcodeResult;
@@ -40,33 +44,64 @@ public class ScanIsbnActivity extends AppCompatActivity {
                 if (barcode.matches("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "You did not enter ISBN", Toast.LENGTH_LONG);
                     toast.show();
-                }
-                else {
+                } else {
                     long isbn = Long.parseLong(barcode);
                     DataSnapshot book = Globals.getInstance().books.getData();
+
                     for (DataSnapshot i : book.getChildren()) {
-                        Book item = i.getValue(Book.class);
-                        if(item.getIsbn() == isbn) {
-                            if(item.getOwner().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                // user is owner: we go to view book activity
-                                Intent intent = new Intent(ScanIsbnActivity.this, ViewBookActivity.class);
-                                final Bundle bundle = new Bundle();
-                                String id = item.getId();
-                                bundle.putString("id", id);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
+                        final Book item = i.getValue(Book.class);
+                        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                        if (item.getIsbn() == isbn) {
+                            if (item.getAcceptedRequest() != null && (item.getOwner().getUid().equals(userId) || item.getAcceptedRequest().getUser().getUid().equals(userId))) {
+                                // an accepted request exists, and the current user is either
+                                // the owner or borrower-to-be.
+                                if (item.getOwner().getUid().equals(userId)) {
+                                    // the user is the owner
+                                    switch (item.getAcceptedRequest().getStatus()) {
+                                        case Request.ACCEPTED:
+                                            showOwnerInitiate(v, item);
+                                            Snackbar.make(findViewById(R.id.scanIsbn), "Handover process initiated. Waiting on borrower scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                                            break;
+                                        case Request.PENDING_OWNER_SCAN:
+                                            // confirm returned
+                                            item.finishReturnHandover();
+                                            // TODO: WAITLIST STUFF HERE
+                                            // notify success
+                                            Snackbar.make(findViewById(R.id.scanIsbn), "Return process complete. The book has been returned. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                                            break;
+                                        default:
+                                            // go to view book
+                                            goToViewBook(item);
+                                            break;
+                                    }
+                                } else {
+                                    // the user is the borrower
+                                    switch (item.getAcceptedRequest().getStatus()) {
+                                        case Request.PENDING_BORROWER_SCAN:
+                                            item.finishBorrowHandover();
+                                            Snackbar.make(findViewById(R.id.scanIsbn), "Handover process complete. You are now the book borrower. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                                            break;
+                                        case Request.BORROWING:
+                                            showBorrowerInitiate(v, item);
+                                            Snackbar.make(findViewById(R.id.scanIsbn), "Return process initiated. Waiting on owner scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                                            break;
+                                        default:
+                                            // go to view book
+                                            goToViewBook(item);
+                                            break;
+                                    }
+                                }
+
+                            } else {
+                                // to view book page
+                                goToViewBook(item);
                             }
-                        }
-                        else {
-                            // user is not owner: go to edit book where everything is empty, but ISBN is autofilled
-                            Intent intent = new Intent(ScanIsbnActivity.this, AddActivity.class);
-                            intent.putExtra("ISBN", barcode);
-                            startActivity(intent);
                         }
                     }
                 }
             }
-        });
+            });
 
         Button scanButton =  findViewById(R.id.scanButton);
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +120,9 @@ public class ScanIsbnActivity extends AppCompatActivity {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra("barcode");
                     barcodeResult.setText(barcode.displayValue);
+
+                    // need to click button
+                    findViewById(R.id.findBookButton).performClick();
                 }
                 else {
                     barcodeResult.setHint("No barcode found. Please enter manually");
@@ -94,6 +132,55 @@ public class ScanIsbnActivity extends AppCompatActivity {
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void showOwnerInitiate(View v, final Book item) {
+        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+        alertDialog.setTitle("Choose an option:");
+        alertDialog.setMessage("There is an accepted request on this book. You can either initiate the handover process, or view book details.");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "HAND OVER",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        item.doBorrowHandover();
+                        Snackbar.make(findViewById(R.id.scanIsbn), "Handover process initiated. Waiting on borrower scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "VIEW",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        goToViewBook(item);
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void showBorrowerInitiate(View v, final Book item) {
+        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+        alertDialog.setTitle("Choose an option:");
+        alertDialog.setMessage("You are currently borrowing this book. You can either initiate the return process, or view book details.");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "RETURN",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        item.doReturnHandover();
+                        Snackbar.make(findViewById(R.id.scanIsbn), "Return process initiated. Waiting on owner scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "VIEW",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        goToViewBook(item);
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void goToViewBook(Book item) {
+        Intent intent = new Intent(ScanIsbnActivity.this, ViewBookActivity.class);
+        final Bundle bundle = new Bundle();
+        String id = item.getId();
+        bundle.putString("id", id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
 

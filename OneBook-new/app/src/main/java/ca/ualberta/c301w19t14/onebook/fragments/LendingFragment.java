@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -184,13 +183,13 @@ public class LendingFragment extends Fragment {
                             for (int i = 0; i < size; i++) {
                                 if (checkedFilters[i]) {
                                     String filter = filterOptions[i];
-                                    if (book.getStatus().contains(filter) && (!deltabook.contains(book))) {
+                                    if (book.status().contains(filter) && (!deltabook.contains(book))) {
                                         deltabook.add(book);
                                     }
                                 }
                                 else if (!checkedFilters[i]) {
                                     String filter = filterOptions[i];
-                                    if (book.getStatus().contains(filter) && (deltabook.contains(book))) {
+                                    if (book.status().contains(filter) && (deltabook.contains(book))) {
                                         deltabook.remove(book);
                                     }
                                 }

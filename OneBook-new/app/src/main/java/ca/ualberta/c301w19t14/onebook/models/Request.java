@@ -1,15 +1,9 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.HashMap;
-import java.util.Map;
-
-import ca.ualberta.c301w19t14.onebook.Globals;
 
 /**
  * Abstracts the Request data type.
@@ -18,18 +12,28 @@ import ca.ualberta.c301w19t14.onebook.Globals;
  */
 public class Request {
 
-    final static String ACCEPTED = "Accepted";
+    final public static String ACCEPTED = "Accepted";
+    final public static String PENDING = "Pending";
+    final public static String BORROWING = "Borrowing";
+    final public static String PENDING_BORROWER_SCAN = "Pending Borrower Scan";
+    final public static String PENDING_OWNER_SCAN = "Pending Owner Scan";
 
     private String id;
-    private Location location;
     private User user;
     private Book book;
-    private String status;
+    @NonNull
+    private String status = "Pending";
+    private Location location;
 
+    /**
+     * Firebase constructor.
+     */
     public Request() {
     }
 
     /**
+     * Request constructor.
+     *
      * @param user
      * @param book
      */
@@ -41,9 +45,13 @@ public class Request {
     }
 
     /**
-     * @param user
+     * Abstracts the request a book process.
+     *
+     * @param user User object requesting the book
+     * @param book Book being requested
+     *
      */
-    public static void requestBook(User user, Book book, String book_id) {
+    public static void requestBook(User user, Book book) {
         // https://stackoverflow.com/questions/8077530/android-get-current-timestamp
         if(!book.userHasRequest(user)) {
             HashMap<String, Request> hMap = new HashMap<>();
@@ -113,6 +121,22 @@ public class Request {
     }
 
     /**
+     * Change the status.
+     */
+    public void commitNewStatus(String status) {
+        Book book = this.getBook();
+
+        // update the status
+        FirebaseDatabase.getInstance()
+                .getReference("Books")
+                .child(book.getId())
+                .child("request")
+                .child(this.getId())
+                .child("status")
+                .setValue(status);
+    }
+
+    /**
      * Rejects the request.
      *  * deletes request
      *  * sends notifications
@@ -131,11 +155,13 @@ public class Request {
     }
 
     /**
-     *
-     * @return location
+     * Deletes the request.
      */
-    public Location getLocation() {
-        return location;
+    public void delete() {
+        Book book = this.getBook();
+
+        // delete the request
+        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(this.getId()).removeValue();
     }
 
     /**
@@ -158,17 +184,10 @@ public class Request {
      *
      * @return status
      */
+    @NonNull
     public String getStatus() {
 
         return status;
-    }
-
-    /**
-     *
-     * @param location
-     */
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     /**
@@ -211,4 +230,11 @@ public class Request {
         this.id = id;
     }
 
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
 }

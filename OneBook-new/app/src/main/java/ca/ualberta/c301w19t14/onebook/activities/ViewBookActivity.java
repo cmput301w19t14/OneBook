@@ -124,7 +124,7 @@ public class ViewBookActivity extends AppCompatActivity {
             requestButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Request.requestBook(Globals.getCurrentUser(),book, book_id);
+                    Request.requestBook(Globals.getCurrentUser(),book);
                     requestButton.setVisibility(View.GONE);
                     findViewById(R.id.divider7).setVisibility(View.GONE);
                     Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
@@ -167,7 +167,7 @@ public class ViewBookActivity extends AppCompatActivity {
             owner.setText(book.getOwner().getName());
             description.setText(book.getDescription());
 
-            String str_status = book.getStatus();
+            String str_status = book.status();
             status.setText(str_status);
             final ImageView bookimage = findViewById(R.id.bookImage);
 
