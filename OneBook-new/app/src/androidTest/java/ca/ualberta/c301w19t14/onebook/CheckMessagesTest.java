@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,13 +21,10 @@ import org.junit.Test;
 
 import androidx.test.rule.ActivityTestRule;
 import ca.ualberta.c301w19t14.onebook.activities.MainActivity;
-import ca.ualberta.c301w19t14.onebook.fragements.LendingFragment;
-import ca.ualberta.c301w19t14.onebook.fragements.MessagesFragment;
-import ca.ualberta.c301w19t14.onebook.fragements.MessagingChatsFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.MessagesFragment;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.core.AllOf.allOf;

@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import androidx.test.rule.ActivityTestRule;
 import ca.ualberta.c301w19t14.onebook.activities.MainActivity;
-import ca.ualberta.c301w19t14.onebook.fragements.MyacctFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.MyProfileFragment;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -69,10 +69,10 @@ public class MyAccountTest {
         Intent i = new Intent();
         activityRule.launchActivity(i);
 
-        MyacctFragment myacctFragment = new MyacctFragment();
+        MyProfileFragment myProfileFragment = new MyProfileFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 activityRule.getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, myacctFragment);
+        fragmentTransaction.replace(R.id.fragment_container, myProfileFragment);
         fragmentTransaction.commit();
     }
 

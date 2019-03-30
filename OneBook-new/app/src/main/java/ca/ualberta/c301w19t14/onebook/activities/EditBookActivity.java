@@ -141,10 +141,6 @@ public class EditBookActivity extends AppCompatActivity {
                 book.setIsbn(Long.valueOf(isbn.getText().toString()));
                 book.update();
 
-                //committing to real time database
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Books");
-                myRef.child(book.getId()).setValue(book);
                 finish();
                 //committing image to fire base storage
                 runOnUiThread(new Runnable() {

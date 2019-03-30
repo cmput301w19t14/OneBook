@@ -1,4 +1,4 @@
-package ca.ualberta.c301w19t14.onebook.fragements;
+package ca.ualberta.c301w19t14.onebook.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

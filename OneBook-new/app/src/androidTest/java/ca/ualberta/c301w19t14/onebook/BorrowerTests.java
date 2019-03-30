@@ -17,7 +17,7 @@ import org.junit.Test;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.rule.ActivityTestRule;
 import ca.ualberta.c301w19t14.onebook.activities.MainActivity;
-import ca.ualberta.c301w19t14.onebook.fragements.BorrowingFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.BorrowingFragment;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;

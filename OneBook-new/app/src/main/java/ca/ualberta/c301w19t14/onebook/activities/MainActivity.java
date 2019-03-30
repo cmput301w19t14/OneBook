@@ -12,20 +12,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 
-import java.util.ArrayList;
-
-import ca.ualberta.c301w19t14.onebook.models.Book;
-import ca.ualberta.c301w19t14.onebook.fragements.BorrowingFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.BorrowingFragment;
 import ca.ualberta.c301w19t14.onebook.Globals;
-import ca.ualberta.c301w19t14.onebook.fragements.LendingFragment;
-import ca.ualberta.c301w19t14.onebook.fragements.MessagesFragment;
-import ca.ualberta.c301w19t14.onebook.fragements.MyacctFragment;
-import ca.ualberta.c301w19t14.onebook.fragements.NotificationFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.LendingFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.MessagesFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.MyProfileFragment;
+import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
@@ -112,40 +107,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.addToBackStack(null).commit();
         }
         else if (id == R.id.nav_borrowing) {
-            if (globals.books.isNull()){
-                Toast.makeText(this, "Still loading data, please wait", Toast.LENGTH_SHORT).show();
-            }
-            else {
-
                 BorrowingFragment borrowingFragment = new BorrowingFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, borrowingFragment);
                 fragmentTransaction.addToBackStack(null).commit();
-            }
         }
 
         else if (id == R.id.nav_lending) {
-            ArrayList<Book> book = new ArrayList<Book>();
-
-            for(DataSnapshot snapshot : globals.books.getData().getChildren()) {
-                Book b = snapshot.getValue(Book.class);
-
-                if(b.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
-                {
-                    book.add(b);
-                }
-            }
-
-            LendingFragment lendingFragment = new LendingFragment(book);
+            LendingFragment lendingFragment = new LendingFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, lendingFragment);
             fragmentTransaction.addToBackStack(null).commit();
         }
 
         else if (id == R.id.nav_myacct) {
-            MyacctFragment myacctFragment = new MyacctFragment();
+            MyProfileFragment myProfileFragment = new MyProfileFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, myacctFragment);
+            fragmentTransaction.replace(R.id.fragment_container, myProfileFragment);
             fragmentTransaction.addToBackStack(null).commit();
         }
 
@@ -162,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

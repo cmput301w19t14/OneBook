@@ -1,5 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
