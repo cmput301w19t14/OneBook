@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,13 +53,11 @@ public class BorrowingFragment extends Fragment {
     ArrayList<Integer> mUserItems = new ArrayList<>();
 
     String[] filterOptions = new String[] {
-            "Available",
             "Borrowed",
             "Requested",
             "Accepted"
     };
-    boolean[] checkedFilters = new boolean[]{
-            true,
+    public static boolean[] checkedFilters = new boolean[]{
             true,
             true,
             true
@@ -138,6 +137,8 @@ public class BorrowingFragment extends Fragment {
         }
         else if (id == R.id.quick_filter) {
             AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
+            final boolean[] checkedFiltersOriginal = new boolean[3];
+            System.arraycopy(checkedFilters, 0, checkedFiltersOriginal, 0, checkedFilters.length);
 
             fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
@@ -153,20 +154,13 @@ public class BorrowingFragment extends Fragment {
             });
 
             fBuilder.setCancelable(false);
-
-            fBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            /*
             fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    checkedFilters = checkedFiltersOriginal;
                     dialog.dismiss();
                 }
-            });*/
+            });
 
             fBuilder.setTitle("Filtering options available:");
 
