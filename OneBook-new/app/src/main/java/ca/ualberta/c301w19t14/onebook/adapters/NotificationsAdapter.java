@@ -3,21 +3,21 @@ package ca.ualberta.c301w19t14.onebook.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
+import ca.ualberta.c301w19t14.onebook.activities.MapsActivity;
+import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
@@ -71,7 +71,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         protected TextView content;
         Notification notification;
 
-        NotificationsViewHolder(View view, int i) {
+        NotificationsViewHolder(final View view, int i) {
             super(view);
             title = view.findViewById(R.id.title);
             content = view.findViewById(R.id.content);
@@ -94,15 +94,15 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
                                             //notify borrower that their request has been accepted
                                             //TODO: how do they find out the location to meet up?
-                                            Notification accept_notification = new Notification("Request Accepted", notification.getUser().getName() + " has accepted your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            Notification accept_notification = new Notification("Request Accepted", notification.getUser().getName() + " has accepted your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest(), notification.getRequest().getUser());
                                             accept_notification.save();
 
                                             //notify borrower that they need to meet up with the owner
-                                            Notification trade_notification_borrower = new Notification("Meet up Required", "You need to meet " + notification.getUser().getName() + " to pick up " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
+                                            Notification trade_notification_borrower = new Notification("Meet up Required", "You need to meet " + notification.getUser().getName() + " to pick up " + notification.getRequest().getBook().getTitle(), notification.getRequest(), notification.getRequest().getUser());
                                             trade_notification_borrower.save();
 
                                             //notify owner that they need to meet up with borrower
-                                            Notification trade_notification_owner = new Notification("Meet up Required", "You need to meet " + notification.getRequest().getUser().getName()+ " to give them " + notification.getRequest().getBook().getTitle(), notification.getUser());
+                                            Notification trade_notification_owner = new Notification("Meet up Required", "You need to meet " + notification.getRequest().getUser().getName()+ " to give them " + notification.getRequest().getBook().getTitle(),  notification.getRequest(), notification.getUser());
                                             trade_notification_owner.save();
 
                                             //deletes the original notification for owner
@@ -134,12 +134,17 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.show();
                         } else {
                             //checks if it's a notification for a meet up. displays location if it is
+                            if(notification.getTitle().equals("Meet up Required")){
+
+                                //Intent intent = new Intent(mContext, MapsActivity.class);
+                                //Log.d("NEH", notification.getRequest().toString());
+                                //intent.putExtra("book_id", notification.getRequest().getBook().getId());
+                                //mContext.startActivity(intent);
+
+                                //TODO: open maps here to show location for notificaton.getRequest
 
 
-
-
-
-
+                            }
 
                             //other notifications can be deleted
                             AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
@@ -155,8 +160,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "SAVE",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-
-
                                             dialog.dismiss();
                                         }
                                     });

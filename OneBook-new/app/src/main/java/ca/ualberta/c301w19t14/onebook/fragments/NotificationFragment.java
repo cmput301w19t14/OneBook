@@ -62,6 +62,25 @@ public class NotificationFragment extends Fragment {
 
         loadData();
 
+        v.findViewById(R.id.bookReceivedButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), ScanIsbnActivity.class));
+                    }
+                }
+        );
+
+        v.findViewById(R.id.handOverBookButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), ScanIsbnActivity.class));
+                    }
+                }
+        );
+
+
         return v;
     }
 
