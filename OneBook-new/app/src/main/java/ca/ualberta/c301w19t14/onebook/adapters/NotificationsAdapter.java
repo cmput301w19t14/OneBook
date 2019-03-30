@@ -90,7 +90,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                             //update request status to accepted
                                             Book book = notification.getRequest().getBook();
                                             Request request = notification.getRequest();
-                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("book").child("status").setValue("Accepted");
+                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("status").setValue("Accepted");
 
                                             //notify borrower that their request has been accepted
                                             //TODO: how do they find out the location to meet up?

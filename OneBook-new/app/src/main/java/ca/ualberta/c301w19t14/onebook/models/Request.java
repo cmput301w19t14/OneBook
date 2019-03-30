@@ -45,7 +45,7 @@ public class Request {
     public Request(User user, Book book, String requestID) {
         this.user = user;
         this.book = book;
-        //this.status = "Pending";
+        this.status = "Pending";
         this.id = requestID;
     }
 
