@@ -40,7 +40,6 @@ import ca.ualberta.c301w19t14.onebook.models.User;
 public class AddActivity extends AppCompatActivity {
     public ImageView image;
 
-    private static final String TAG = "add activity";
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -57,7 +56,7 @@ public class AddActivity extends AppCompatActivity {
 
         if (intent != null) {
             String isbnString = intent.getStringExtra("ISBN");
-            EditText isbn = (EditText) findViewById(R.id.isbn);
+            EditText isbn = findViewById(R.id.isbn);
             isbn.setText(isbnString);
         }
 
@@ -142,7 +141,6 @@ public class AddActivity extends AppCompatActivity {
                 final Bitmap imageBitmap = (Bitmap) extras.get("data");
                 image.setImageBitmap(imageBitmap);
                 image.setAlpha(1);
-
             }
         }
     }

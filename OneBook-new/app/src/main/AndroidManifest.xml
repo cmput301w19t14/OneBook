@@ -45,7 +45,7 @@
         <activity android:name=".activities.EditUserActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.EditBookActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.ViewBookActivity" />
         <activity android:name=".activities.UserAccountActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
@@ -70,7 +70,11 @@
             android:label="@string/title_activity_searching_main"
             android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.ViewBookActivity"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:launchMode="singleTop" />
+
+        <activity android:name=".activities.ViewRequestsActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activities.ViewBookActivity"/>
         <activity
             android:name=".activities.AddActivity"
             android:label="@string/title_activity_add"

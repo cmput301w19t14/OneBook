@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -56,6 +58,8 @@ public class ViewBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_book);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if(book_id == null) {
             book_id = getIntent().getStringExtra("id");
         }
@@ -110,7 +114,14 @@ public class ViewBookActivity extends AppCompatActivity {
 
         Button requestsButton = findViewById(R.id.requests);
         if(book.userIsOwner()) {
-            // show all requests
+            requestsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ViewBookActivity.this, ViewRequestsActivity.class);
+                    intent.putExtra("id", book.getId());
+                    startActivity(intent);
+                }
+            });
         } else {
             requestsButton.setVisibility(View.GONE);
         }
@@ -134,6 +145,7 @@ public class ViewBookActivity extends AppCompatActivity {
 
     @Override
     public void onResume(){
+        Log.e("ERROR", "onResume");
         super.onResume();
 
         if(!book_id.isEmpty()) {
@@ -179,17 +191,12 @@ public class ViewBookActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    bookimage.setImageResource(R.drawable.ic_book_black_24dp);
                     hasImage = false;
                 }
             });
         }
     }
 
-            //BookRequestAdapter bookRequestAdapter = new BookRequestAdapter(ViewBookActivity.this,book.getRequest());
-            //recyclerView.setAdapter(bookRequestAdapter);
-
-            // otherwise book doesn't exist
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(book != null && book.userIsOwner()) {
@@ -199,26 +206,19 @@ public class ViewBookActivity extends AppCompatActivity {
         }
     }
 
-    //for Navigation menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.edit_book, menu);
         return true;
     }
 
-
-    //for Navigation menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch(id) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                finish();
                 return true;
             case R.id.editIcon:
                 Intent edit = new Intent(this, EditBookActivity.class);

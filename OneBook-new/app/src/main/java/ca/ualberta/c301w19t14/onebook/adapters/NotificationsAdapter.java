@@ -3,21 +3,20 @@ package ca.ualberta.c301w19t14.onebook.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
+import ca.ualberta.c301w19t14.onebook.activities.MapsActivity;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
@@ -61,7 +60,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public NotificationsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.request_list_item, viewGroup, false);
+                inflate(R.layout.notification_list_item, viewGroup, false);
 
         return new NotificationsViewHolder(itemView, i);
     }
@@ -77,7 +76,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
             content = view.findViewById(R.id.content);
                 view.setOnClickListener(new View.OnClickListener() {
 
-                    @Override public void onClick(View v) {
+                    @Override public void onClick(final View v) {
                         if (notification.getRequest() != null && notification.getRequest().getBook().getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
                             // This notification is for an owner of a book, notifying them of a new actionable request.
                             AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
@@ -93,7 +92,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                             FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("status").setValue("Accepted");
 
                                             //notify borrower that their request has been accepted
-                                            //TODO: how do they find out the location to meet up?
                                             Notification accept_notification = new Notification("Request Accepted", notification.getUser().getName() + " has accepted your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
                                             accept_notification.save();
 
@@ -109,6 +107,11 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                             notification.delete();
 
                                             dialog.dismiss();
+
+                                            // they need to select a location
+                                            Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                                            intent.putExtra("book_id", book.getId());
+                                            v.getContext().startActivity(intent);
                                         }
                                     });
                             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
@@ -134,13 +137,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.show();
                         } else {
                             //checks if it's a notification for a meet up. displays location if it is
-
-
-
-
-
-
-
+                            
                             //other notifications can be deleted
                             AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
                             alertDialog2.setTitle("Notification");

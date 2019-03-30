@@ -99,22 +99,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         {
             Log.d("Book adapter", "onBindViewHolder: no image");
         }
-        //bookVh.vImage.setImageBitmap();
-
-
-        /*
-        //MODE = true -> do borrowing/lending
-        if (mode) {
-            // If status is Accepted or Requested, color code
-            // otherwise, leave black if Borrowed
-            if (book.getStatus().equals("Accepted"))
-                bookVh.vStatus.setTextColor(Color.GREEN);
-            else if (book.getStatus().equals("Requested"))
-                bookVh.vStatus.setTextColor(Color.YELLOW);
-        }
-        else {
-            // If status is borrowed, do nothing.
-        }*/
     }
 
     /**
@@ -154,8 +138,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             vStatus = (TextView)  v.findViewById(R.id.bookStatus);
             vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
             vImage = v.findViewById(R.id.bookImage);
-
-
 
             //make the cards clickable
             view = v;

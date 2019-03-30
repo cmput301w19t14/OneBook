@@ -29,7 +29,7 @@
             android:layout_height="120dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            app:srcCompat="@drawable/ic_book_black_24dp" />
+            app:srcCompat="@drawable/book256" />
 
         <View
             android:id="@+id/divider"
