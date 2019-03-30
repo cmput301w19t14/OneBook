@@ -44,7 +44,6 @@ public class Book {
      *
      */
     public Book() {
-        this.request = new HashMap<>();
     }
 
     /**
