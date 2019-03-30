@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**This class is used to create all of the recycler views that list books.
  This includes the Search Book View, the Lending View, and the Borrowing View.
@@ -139,7 +140,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         protected TextView vOwner;
         protected TextView vAuthor;
         protected TextView vTitle;
-        //protected CircleImageView vImage;
+        protected CircleImageView vImage;
         public Book book;
 
         /**
@@ -153,6 +154,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             vStatus = (TextView)  v.findViewById(R.id.bookStatus);
             vAuthor = (TextView)  v.findViewById(R.id.bookAuthor);
             vImage = v.findViewById(R.id.bookImage);
+
+
 
             //make the cards clickable
             view = v;
