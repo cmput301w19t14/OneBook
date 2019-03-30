@@ -44,20 +44,17 @@ public class LendingFragment extends Fragment {
     private View v;
     private BookAdapter ba;
     private ArrayList<Book> books = new ArrayList<>();
-    private Globals globals;
+    private ArrayList<Book> filteredBooks = new ArrayList<>();
     private RecyclerView mRecyclerView;
-
-    ArrayList<Integer> mUserItems = new ArrayList<>();
 
     private String[] filterOptions = new String[] {
             "Available",
             "Borrowed",
-            "Requested"
     };
+
     private static boolean[] checkedFilters = new boolean[]{
             true,
             true,
-            true
     };
 
     /**
@@ -124,8 +121,6 @@ public class LendingFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        final List<String> filtersList = Arrays.asList(filterOptions);
-
         if (id == R.id.quick_camera) {
             Intent intent = new Intent(getActivity(), ScanIsbnActivity.class);
             this.startActivity(intent);
@@ -133,71 +128,17 @@ public class LendingFragment extends Fragment {
         else if (id == R.id.quick_filter) {
             AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
 
-            final boolean[] checkedFiltersOriginal = new boolean[3];
-            System.arraycopy(checkedFilters, 0, checkedFiltersOriginal, 0, checkedFilters.length);
-
             fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    if (isChecked) {
-                        if (!mUserItems.contains(which)) {
-                            mUserItems.add(which);
-                        }
-                    } else if (mUserItems.contains(which)) {
-                        mUserItems.remove(which);
-                    }
-                }
-            });
-
-            fBuilder.setCancelable(false);
-            fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    checkedFilters = checkedFiltersOriginal;
-                    dialog.dismiss();
+                    checkedFilters[which] = isChecked;
                 }
             });
 
             fBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // clear Recycler View
-                    final int size = books.size();
-                    if (size > 0) {
-                        for (int i = 0; i < size; i++) {
-                            books.remove(0);
-                        }
-                        ba.notifyItemRangeRemoved(0, size);
-                    }
-
-                    // update Recycler View
-                    globals = Globals.getInstance();
-                    ArrayList<Book> deltabook = new ArrayList<Book>();
-
-                    for(DataSnapshot snapshot : globals.books.getData().getChildren()) {
-                        Book book = snapshot.getValue(Book.class);
-
-                        if(book.getOwner().getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
-                        {
-                            deltabook.add(book);
-                            for (int i = 0; i < size; i++) {
-                                if (checkedFilters[i]) {
-                                    String filter = filterOptions[i];
-                                    if (book.status().contains(filter) && (!deltabook.contains(book))) {
-                                        deltabook.add(book);
-                                    }
-                                }
-                                else if (!checkedFilters[i]) {
-                                    String filter = filterOptions[i];
-                                    if (book.status().contains(filter) && (deltabook.contains(book))) {
-                                        deltabook.remove(book);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    ba = new BookAdapter(getActivity(), deltabook, true);
-                    mRecyclerView.setAdapter(ba);
+                    filterData();
                 }
             });
 
@@ -243,6 +184,7 @@ public class LendingFragment extends Fragment {
                 }
 
                 loader.setVisibility(View.GONE);
+                filterData();
                 ba.notifyDataSetChanged();
             }
 
@@ -251,6 +193,29 @@ public class LendingFragment extends Fragment {
 
             }
         });
+    }
+
+    private void filterData() {
+        ArrayList<String> statuses = new ArrayList<>();
+        for(int i = 0; i < 2; i++) {
+            if(checkedFilters[i]) {
+                statuses.add(filterOptions[i]);
+            }
+        }
+        for(Book b : books) {
+            if(!statuses.contains(b.status())) {
+                filteredBooks.add(b);
+                books.remove(b);
+            }
+        }
+        for(Book b : filteredBooks) {
+            if(statuses.contains(b.status())) {
+                filteredBooks.remove(b);
+                books.add(b);
+            }
+        }
+
+        ba.notifyDataSetChanged();
     }
 
 }

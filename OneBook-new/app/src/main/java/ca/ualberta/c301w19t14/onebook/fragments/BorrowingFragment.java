@@ -48,16 +48,20 @@ public class BorrowingFragment extends Fragment {
 
     public View v;
     public ArrayList<Book> books = new ArrayList<Book>();
+    private ArrayList<Book> filteredBooks = new ArrayList<>();
+
     private BookAdapter ba;
 
     ArrayList<Integer> mUserItems = new ArrayList<>();
 
     String[] filterOptions = new String[] {
+            "Available",
             "Borrowed",
             "Requested",
-            "Accepted"
+            "Accepted",
     };
     public static boolean[] checkedFilters = new boolean[]{
+            true,
             true,
             true,
             true
@@ -129,36 +133,24 @@ public class BorrowingFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        final List<String> filtersList = Arrays.asList(filterOptions);
-
         if (id == R.id.quick_camera) {
             Intent intent = new Intent(getActivity(), ScanIsbnActivity.class);
             this.startActivity(intent);
         }
         else if (id == R.id.quick_filter) {
             AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
-            final boolean[] checkedFiltersOriginal = new boolean[3];
-            System.arraycopy(checkedFilters, 0, checkedFiltersOriginal, 0, checkedFilters.length);
 
             fBuilder.setMultiChoiceItems(filterOptions, checkedFilters, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    if (isChecked) {
-                        if (!mUserItems.contains(which)) {
-                            mUserItems.add(which);
-                        }
-                    } else if (mUserItems.contains(which)) {
-                        mUserItems.remove(which);
-                    }
+                    checkedFilters[which] = isChecked;
                 }
             });
 
-            fBuilder.setCancelable(false);
-            fBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            fBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    checkedFilters = checkedFiltersOriginal;
-                    dialog.dismiss();
+                    filterData();
                 }
             });
 
@@ -202,6 +194,7 @@ public class BorrowingFragment extends Fragment {
                 }
 
                 loader.setVisibility(View.GONE);
+                filterData();
                 ba.notifyDataSetChanged();
             }
 
@@ -211,4 +204,28 @@ public class BorrowingFragment extends Fragment {
             }
         });
     }
+
+    private void filterData() {
+        ArrayList<String> statuses = new ArrayList<>();
+        for(int i = 0; i < 2; i++) {
+            if(checkedFilters[i]) {
+                statuses.add(filterOptions[i]);
+            }
+        }
+        for(Book b : books) {
+            if(!statuses.contains(b.status())) {
+                filteredBooks.add(b);
+                books.remove(b);
+            }
+        }
+        for(Book b : filteredBooks) {
+            if(statuses.contains(b.status())) {
+                filteredBooks.remove(b);
+                books.add(b);
+            }
+        }
+
+        ba.notifyDataSetChanged();
+    }
+
 }

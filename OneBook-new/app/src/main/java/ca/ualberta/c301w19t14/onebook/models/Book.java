@@ -128,10 +128,6 @@ public class Book {
      */
     public User getBorrower(){return borrower; }
 
-    public void clearAllRequests() {
-        this.request = null;
-    }
-
     /**
      * setter for book owner
      * @param owner
