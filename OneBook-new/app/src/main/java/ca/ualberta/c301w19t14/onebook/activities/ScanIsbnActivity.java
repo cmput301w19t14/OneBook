@@ -47,12 +47,13 @@ public class ScanIsbnActivity extends AppCompatActivity {
                 } else {
                     long isbn = Long.parseLong(barcode);
                     DataSnapshot book = Globals.getInstance().books.getData();
-
+                    Boolean exists = false;
                     for (DataSnapshot i : book.getChildren()) {
                         final Book item = i.getValue(Book.class);
                         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
                         if (item.getIsbn() == isbn) {
+                            exists = true;
+
                             if (item.getAcceptedRequest() != null && (item.getOwner().getUid().equals(userId) || item.getAcceptedRequest().getUser().getUid().equals(userId))) {
                                 // an accepted request exists, and the current user is either
                                 // the owner or borrower-to-be.
@@ -98,6 +99,13 @@ public class ScanIsbnActivity extends AppCompatActivity {
                                 goToViewBook(item);
                             }
                         }
+                    }
+                    if(!exists) {
+                        Intent intent = new Intent(ScanIsbnActivity.this, AddActivity.class);
+                        final Bundle bundle = new Bundle();
+                        bundle.putString("isbn", Long.toString(isbn));
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 }
             }

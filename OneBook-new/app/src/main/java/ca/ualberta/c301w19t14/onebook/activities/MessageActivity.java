@@ -28,6 +28,7 @@ import java.util.List;
 import ca.ualberta.c301w19t14.onebook.models.Chat;
 import ca.ualberta.c301w19t14.onebook.adapters.MessageAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
+import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
@@ -134,7 +135,24 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
 
-        reference.child("Chats").push().setValue(hashMap);
+        // send notification
+        DatabaseReference receiverRef = FirebaseDatabase.getInstance().getReference("Users")
+                .child(receiver);
+        receiverRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dS) {
+
+                Notification msg = new Notification("New Message",
+                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName() + " sent you a message.",
+                        dS.getValue(User.class));
+                msg.save();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         final DatabaseReference chatReference = FirebaseDatabase.getInstance().getReference("Chatlist")
                 .child(firebaseUser.getUid())

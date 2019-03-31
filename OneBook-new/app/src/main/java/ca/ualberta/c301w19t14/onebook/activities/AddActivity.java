@@ -55,7 +55,7 @@ public class AddActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent != null) {
-            String isbnString = intent.getStringExtra("ISBN");
+            String isbnString = intent.getStringExtra("isbn");
             EditText isbn = findViewById(R.id.isbn);
             isbn.setText(isbnString);
         }
