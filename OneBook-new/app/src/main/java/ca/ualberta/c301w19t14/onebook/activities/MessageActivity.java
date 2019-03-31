@@ -135,6 +135,8 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
 
+        reference.child("Chats").push().setValue(hashMap);
+
         // send notification
         DatabaseReference receiverRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(receiver);
@@ -154,15 +156,21 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        final DatabaseReference chatReference = FirebaseDatabase.getInstance().getReference("Chatlist")
+        final DatabaseReference chatSenderReference = FirebaseDatabase.getInstance().getReference("Chatlist")
                 .child(firebaseUser.getUid())
                 .child(receiver);
 
-        chatReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        final DatabaseReference chatReceiverReference = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(receiver)
+                .child(firebaseUser.getUid());
+
+        chatSenderReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()){
-                    chatReference.child("id").setValue(receiver);
+                    chatSenderReference.child("id").setValue(receiver);
+                    chatReceiverReference.child("id").setValue(firebaseUser.getUid());
+
                 }
             }
 
