@@ -10,9 +10,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Notification model.
- *
- * @author Dimitri Trofimuk
+ * This class is a model for the notifications.
+ * @author CMPUT301 Team14: Dimitri T
+ * @see ca.ualberta.c301w19t14.onebook.adapters.NotificationsAdapter
+ * @version 1.0
  */
 public class Notification {
 
@@ -58,7 +59,6 @@ public class Notification {
 
     /**
      * Constructor for notification for a book request.
-     *
      * @param title   notification title
      * @param content notification message
      * @param request book request
@@ -111,7 +111,6 @@ public class Notification {
 
     /**
      * Gets the notification ID.
-     *
      * @return String
      */
     public String getId() {
@@ -121,7 +120,6 @@ public class Notification {
     /**
      * Sets the notification ID.
      * Should be Firebases push().
-     *
      * @param id push() value
      */
     public void setId(String id) {
@@ -130,7 +128,6 @@ public class Notification {
 
     /**
      * Getter for title.
-     *
      * @return title notification title
      */
     public String getTitle() {
@@ -139,7 +136,6 @@ public class Notification {
 
     /**
      * Getter for content.
-     *
      * @return content notification content
      */
     public String getContent() {
@@ -148,7 +144,6 @@ public class Notification {
 
     /**
      * Getter for request.
-     *
      * @return request notification request or null
      */
     @Nullable
@@ -158,7 +153,6 @@ public class Notification {
 
     /**
      * Getter for user.
-     *
      * @return user user receiving notification
      */
     public User getUser() {
@@ -167,7 +161,6 @@ public class Notification {
 
     /**
      * Setter for content.
-     *
      * @param content notification content
      */
     public void setContent(String content) {
@@ -176,7 +169,6 @@ public class Notification {
 
     /**
      * Setter for request.
-     *
      * @param request notification request or null
      */
     public void setRequest(Request request) {
@@ -185,7 +177,6 @@ public class Notification {
 
     /**
      * Setter for user.
-     *
      * @param user user receiving notification
      */
     public void setUser(User user) {
@@ -194,7 +185,6 @@ public class Notification {
 
     /**
      * Setter for title.
-     *
      * @param title notification title
      */
     public void setTitle(String title) {
@@ -203,7 +193,6 @@ public class Notification {
 
     /**
      * Setter for icon.
-     *
      * @param icon notification icon
      */
     public void setIcon(int icon) {
@@ -212,7 +201,6 @@ public class Notification {
 
     /**
      * Getter for int.
-     *
      * @return int icon int
      */
     public int getIcon() {
