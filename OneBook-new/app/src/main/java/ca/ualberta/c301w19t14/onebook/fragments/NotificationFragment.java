@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -107,6 +108,8 @@ public class NotificationFragment extends Fragment {
                         }
                         ba.notifyItemRangeRemoved(0, size);
                     }
+                    String firebaseUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Notification.deleteAllForUser(firebaseUserId);
                 }
             });
             fBuilder.setTitle("Do you want to clear all of your notification?");
