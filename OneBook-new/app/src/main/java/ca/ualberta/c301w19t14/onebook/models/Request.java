@@ -2,7 +2,12 @@ package ca.ualberta.c301w19t14.onebook.models;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 
 /**
@@ -144,22 +149,44 @@ public class Request {
     public void reject() {
         Book book = this.getBook();
 
-        // delete the request
-        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(this.getId()).removeValue();
+        final Request request = this;
 
-        // create notifications
-        Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), this.getUser(), Notification.BOOK);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books").child(book.getId());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Book book = dataSnapshot.getValue(Book.class);
 
-        // send notifications
-        rejected.save();
+                if(book.getAcceptedRequest() != null && book.getAcceptedRequest().getId().equals(request.getId())) {
+                    // is the current accepted request
+                    book.waitlistDoNext();
+                } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
+                    book.waitlistDoNext();
+                }
+
+                // delete the request
+                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
+
+                // create notifications
+                Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);
+
+                // send notifications
+                rejected.save();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     /**
      * Deletes the request.
      */
-    public void delete() {
-        Book book = this.getBook();
-
+    public void delete(Book book) {
+        book.getRequest().remove(this.getId());
         // delete the request
         FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(this.getId()).removeValue();
     }

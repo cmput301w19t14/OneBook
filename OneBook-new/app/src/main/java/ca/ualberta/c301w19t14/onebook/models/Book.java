@@ -5,6 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 
@@ -210,6 +211,19 @@ public class Book {
     }
 
     /**
+     * Returns the next request from waitlist.
+     *
+     * @return Request|null
+     */
+    public Request getNextRequest() {
+        if(this.getRequest() != null && !this.getRequest().isEmpty()) {
+            TreeMap<String, Request> sortedRequests = new TreeMap<>(this.getRequest());
+            return sortedRequests.firstEntry().getValue();
+        }
+        return null;
+    }
+
+    /**
      * Finds a book by it's ID.
      *
      * @param id string book id
@@ -287,7 +301,17 @@ public class Book {
 
         this.setBorrower(null);
         this.update();
-        this.getAcceptedRequest().delete();
+        this.getAcceptedRequest().delete(this);
+        this.waitlistDoNext();
+    }
 
+    public void waitlistDoNext() {
+        Request next = this.getNextRequest();
+        if(next != null) {
+            Notification borrower = new Notification("Book Requested", "You're next in line to receive " + next.getBook().getTitle(), next.getUser(), Notification.BOOK);
+            Notification owner = new Notification("New Request on Book", next.getUser().getName() + " has requested " + next.getBook().getTitle(), next, next.getBook().getOwner(), Notification.BOOK);
+            borrower.save();
+            owner.save();
+        }
     }
 }
