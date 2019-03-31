@@ -11,9 +11,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 /**
- * Abstracts the Request data type.
- *
- * @author Natalie, Dimitri
+ * This class abstracts the Request data type.
+ * @author CMPUT301 Team14: Natalie H, Dimitri T
+ * @see ca.ualberta.c301w19t14.onebook.adapters.RequestsAdapter
+ * @version 1.0
  */
 public class Request {
 
@@ -26,6 +27,7 @@ public class Request {
     private String id;
     private User user;
     private Book book;
+
     @NonNull
     private String status = "Pending";
     private Location location;
@@ -38,7 +40,6 @@ public class Request {
 
     /**
      * Request constructor.
-     *
      * @param user
      * @param book
      */
@@ -51,7 +52,6 @@ public class Request {
 
     /**
      * Abstracts the request a book process.
-     *
      * @param user User object requesting the book
      * @param book Book being requested
      *
@@ -98,9 +98,7 @@ public class Request {
 
 
     /**
-     * Accepts the request.
-     *  * sends notifications
-     *  * updates status
+     * Accepts the request, sends notifications, and updates status
      */
     public void accept() {
         Book book = this.getBook();
@@ -142,9 +140,7 @@ public class Request {
     }
 
     /**
-     * Rejects the request.
-     *  * deletes request
-     *  * sends notifications
+     * Rejects the request, deletes request, and sends notifications
      */
     public void reject() {
         Book book = this.getBook();

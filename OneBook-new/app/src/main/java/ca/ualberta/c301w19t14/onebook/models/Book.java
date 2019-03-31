@@ -9,8 +9,10 @@ import java.util.TreeMap;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 
-/** Handles all attributes of the book object.
+/**
+ * This class handles all attributes of the book object.
  * @author CMPUT 301 Team 14
+ * @version 1.1
  * */
 public class Book {
     final public static String AVAILABLE = "Available";
@@ -267,6 +269,9 @@ public class Book {
         return (!this.userHasRequest(Globals.getCurrentUser()) && !this.userIsOwner());
     }
 
+    /**
+     * Initiates a borrowing handover to a borrower from an owner.
+     */
     public void doBorrowHandover() {
         this.getAcceptedRequest().commitNewStatus(Request.PENDING_BORROWER_SCAN);
         Notification owner = new Notification("Handover Initiated", "You initiated the handover for " + this.getTitle() + ". Waiting on borrower scan.", this.getOwner(), Notification.UP);
@@ -275,6 +280,9 @@ public class Book {
         borrower.save();
     }
 
+    /**
+     * Finishes a borrowing handover after all scans have been complete by the owner and borrower
+     */
     public void finishBorrowHandover() {
         this.setBorrower(this.getAcceptedRequest().getUser());
         this.update();
@@ -285,6 +293,9 @@ public class Book {
         borrower.save();
     }
 
+    /**
+     * Initiates a return handover to a borrower from an owner
+     */
     public void doReturnHandover() {
         this.getAcceptedRequest().commitNewStatus(Request.PENDING_OWNER_SCAN);
         Notification owner = new Notification("Return Initiated", "You initiated the handover for " + this.getTitle() + ". Waiting on owner scan.", this.getOwner(), Notification.DOWN);
@@ -293,6 +304,9 @@ public class Book {
         borrower.save();
     }
 
+    /**
+     * Finishes a return handover after all scans have been complete by the owner and borrower
+     */
     public void finishReturnHandover() {
         Notification owner = new Notification("Return Complete", "The return for " + this.getTitle() + " is complete.", this.getOwner(), Notification.DOWN);
         Notification borrower = new Notification("Return Complete", "The return for " + this.getTitle() + " is complete.", this.getAcceptedRequest().getUser(), Notification.DOWN);

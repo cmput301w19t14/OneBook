@@ -40,9 +40,9 @@ import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 /**
- * Shows the current books a user is borrowing.
- *
- * @author Dustin, Ana, Dimitri
+ * This fragment shows a list of books a user is currently borrowing.
+ * @author CMPUT301 Team14: Dustin M, Ana B, Dimitri T
+ * @version 1.0
  */
 public class BorrowingFragment extends Fragment {
 
@@ -112,7 +112,6 @@ public class BorrowingFragment extends Fragment {
 
     /**
      * Creates the options menu (top right).
-     *
      * @param menu options menu
      * @param inflater MenuInflater
      */
@@ -123,8 +122,7 @@ public class BorrowingFragment extends Fragment {
 
     /**
      * Handles selecting an options menu item.
-     *
-     * @param item android id of the item clicked
+     * @param item: android id of the item clicked
      * @return boolean if the item was handled or not
      */
     @Override
@@ -161,7 +159,7 @@ public class BorrowingFragment extends Fragment {
     }
 
     /**
-     * Loads borrowed books from database.
+     * This method loads borrowed books from database.
      * Manipulates the views during loading.
      */
     private void loadData() {
@@ -194,6 +192,9 @@ public class BorrowingFragment extends Fragment {
         });
     }
 
+    /**
+     * This methods filters through the data as a search is happening.
+     */
     private void filterData() {
         filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();

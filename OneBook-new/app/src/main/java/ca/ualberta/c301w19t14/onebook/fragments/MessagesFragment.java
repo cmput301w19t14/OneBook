@@ -29,6 +29,13 @@ public class MessagesFragment extends Fragment {
 
     ViewPageAdapter viewPageAdapter;
 
+    /**
+     * Initializes the view.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

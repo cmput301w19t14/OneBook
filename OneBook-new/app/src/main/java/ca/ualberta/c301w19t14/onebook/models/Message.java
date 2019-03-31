@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
-/**Class for messages.
+/**
+ * This class is a model for messages.
  * Will be implemented in part 5 as part of the messaging functionality
  * @author CMPUT 301 Team 14*/
 public class Message {
@@ -8,6 +9,17 @@ public class Message {
     private String message;
     private String date;
 
+    /**
+     *
+     * @param user
+     * @param message
+     * @param date
+     */
+    public Message (String user, String message, String date){
+        this.user = user;
+        this.message = message;
+        this.date = date;
+    }
     /**
      * setter for the target user of a message
      * @param user
@@ -56,15 +68,4 @@ public class Message {
         return date;
     }
 
-    /**
-     *
-     * @param user
-     * @param message
-     * @param date
-     */
-    public Message (String user, String message, String date){
-        this.user = user;
-        this.message = message;
-        this.date = date;
-    }
 }

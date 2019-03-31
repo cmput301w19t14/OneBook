@@ -33,6 +33,7 @@ import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
  * This class implements user search and displays all users.
  * From this class, users can be looked up and new chats can be started up between them.
  * @author jandaile CMPUT 301 team 14
+ * @see MessagesFragment
  * @since 2019-03-29
  * @version 1.0
  */

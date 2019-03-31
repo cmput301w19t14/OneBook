@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,9 +29,10 @@ import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
 /**
  * RecyclerView adapter for notifications.
  * Handles displaying and clicking on notifications.
- *
+ * @author CMPUT301 Team14: Natalie H, Dimitri T
  * @see NotificationFragment
- * @author Natalie, Dimitri
+ * @version 1.0
+ *
  */
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationsViewHolder> {
 
@@ -43,11 +45,21 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         this.mContext = context;
     }
 
+    /**
+     *
+     * @return the total number of notifications the user has.
+     */
     @Override
     public int getItemCount() {
         return notificationList.size();
     }
 
+    /**
+     * Attaches notification content to the view.
+     *
+     * @param mVh
+     * @param i
+     */
     @Override
     public void onBindViewHolder(NotificationsViewHolder mVh, int i) {
         Notification notification = notificationList.get(i);
@@ -86,6 +98,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     }
 
     @Override
+    @NonNull
     public NotificationsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).

@@ -20,6 +20,12 @@ import java.io.IOException;
 
 import ca.ualberta.c301w19t14.onebook.R;
 
+/**
+ * This class opens up the camera to scan a ISBN.
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ * @see ScanIsbnActivity {@link #onCreate}
+ */
 public class CameraActivity extends AppCompatActivity {
     SurfaceView cameraPreview;
 
@@ -32,6 +38,11 @@ public class CameraActivity extends AppCompatActivity {
         createCameraSource();
     }
 
+    /**
+     * This method find a camera to use and enables permission of use and scanning
+     * capabilities.
+     *
+     */
     private void createCameraSource() {
 
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).build();

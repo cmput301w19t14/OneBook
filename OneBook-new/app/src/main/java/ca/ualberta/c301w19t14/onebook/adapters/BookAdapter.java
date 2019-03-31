@@ -22,15 +22,17 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-//import de.hdodenhof.circleimageview.CircleImageView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-/**This class is used to create all of the recycler views that list books.
- This includes the Search Book View, the Lending View, and the Borrowing View.
- * @author CMPUT 301 Team 14
+/**
+ * This class is used to create all of the recycler views that list books.
+ * Includes the Search Book View, the Lending View, and the Borrowing View.
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ *
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
@@ -43,7 +45,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     /**
      *
-     * @param context
+     * @param context:
      * @param bookList
      * @param mode
      */
@@ -114,9 +116,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return new BookViewHolder(itemView);
     }
 
-    /**
-     *
-     */
     public class BookViewHolder extends RecyclerView.ViewHolder {
         protected TextView vStatus;
         protected TextView vOwner;
