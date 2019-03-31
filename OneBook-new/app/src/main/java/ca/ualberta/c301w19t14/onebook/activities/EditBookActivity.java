@@ -41,9 +41,10 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 /**
- * Edit book activity.
- *
- * @author Oran, Dimitri
+ * This class allows edits/updates to books that have been inputted into the database.
+ * @author CMPUT301 Team14: Oran R, Dimitri T
+ * @version 1.0
+ * @see ViewBookActivity {@link #onOptionsItemSelected}
  */
 public class EditBookActivity extends AppCompatActivity {
 
@@ -63,6 +64,10 @@ public class EditBookActivity extends AppCompatActivity {
 
     private Book book;
 
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,9 +210,13 @@ public class EditBookActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * For when the navigation item was selected.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // for up navigation
         //https://stackoverflow.com/questions/38438619/how-to-return-to-previous-fragment-by-clicking-backnot-hardware-back-button
 
         int id = item.getItemId();

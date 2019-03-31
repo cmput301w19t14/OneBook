@@ -12,12 +12,18 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import ca.ualberta.c301w19t14.onebook.models.User;
 
-/**Implements the user login functionality
- Allows a user to login with an email and password
- If a user inputs an email that isn't already associated with an account, they will be prompted to make a new account
- @author CMPUT 301 Team 14*/
+/**
+ * This class implements the user login functionality.
+ * Allows a user to login with an email and password and create will promote new account creation
+ * when a user inputs an email that isn't already associated with an account.
+ * @author CMPUT301 Team14: CCID
+ */
 public class UserLoginActivity extends AppCompatActivity {
 
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

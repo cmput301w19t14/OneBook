@@ -33,11 +33,14 @@ import ca.ualberta.c301w19t14.onebook.adapters.BookAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
-/**This class allows a user to do a key word search on a book title
+/**
+ * This class allows a user to do a key word search on a book title
  * Currently only allows keyword searches on title,
  * but we need to update it to include author, description, owner, and isbn
- * the search is currently case sensitive and we need to change that
- * @author CMPUT 301 Team 14*/
+ * the search is currently case sensitive and we need to change that.
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ */
 public class SearchingActivity extends AppCompatActivity {
 
     public BookAdapter ba;
@@ -60,6 +63,10 @@ public class SearchingActivity extends AppCompatActivity {
             true
     };
 
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -139,7 +146,7 @@ public class SearchingActivity extends AppCompatActivity {
     }
 
     /**
-     * Loads borrowed books from database.
+     * This method loads borrowed books from database.
      * Manipulates the views during loading.
      */
     private void loadData() {
@@ -171,6 +178,10 @@ public class SearchingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This methods filters through the data as a search is happening.
+     *
+     */
     private void filterData() {
         filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();

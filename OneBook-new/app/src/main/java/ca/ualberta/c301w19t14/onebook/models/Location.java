@@ -1,10 +1,10 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
 /**
- * Location class.
- * Mainly used to abstract location data for book pickup.
- *
- * @author Dimitri Trofimuk
+ * This class is mainly used to abstract location data for book pickup.
+ * @author CMPUT301 Team14: Dimitri T
+ * @see ca.ualberta.c301w19t14.onebook.activities.MapsActivity
+ * @version 1.0
  */
 public class Location {
 

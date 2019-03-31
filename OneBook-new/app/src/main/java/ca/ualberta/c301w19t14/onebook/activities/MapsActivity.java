@@ -32,15 +32,20 @@ import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 
 /**
- * Set/view the pickup location on a Google Maps instance.
- *
- * @author Dimitri Trofimuk
+ * This class will set/view the pickup location on a Google Maps instance.
+ * @author CMPUT301 Team14: Dimitri T
+ * @version 1.0
+ * @see ca.ualberta.c301w19t14.onebook.adapters.RequestsAdapter.RequestsViewHolder
  */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Book book;
 
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +60,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         book = Globals.getInstance().books.getData().child(book_id).getValue(Book.class);
     }
 
-
+    /**
+     * Options for when the map has been displayed
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -159,6 +167,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

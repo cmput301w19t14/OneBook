@@ -24,53 +24,52 @@ import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
-/**This class implements the main functionality of the app
+/**
+ * This class implements the main functionality of the app.
  * From this class, the navigation bar can be used and all of the fragments can be accessed.
- * @author CMPUT 301 Team 14*/
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ * */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private NotificationFragment notificationFragment;
+    NotificationFragment notificationFragment;
     NavigationView navigationView;
     Toolbar toolbar = null;
     Globals globals;
     GeneralUtil util;
 
-        /**
-        *
-        * @param savedInstanceState
-        */
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-            //Initialize singleton Globals
-            globals = Globals.getInstance();
-            globals.initFirebaseUtil();
+        //Initialize singleton Globals
+        globals = Globals.getInstance();
+        globals.initFirebaseUtil();
 
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-            toggle.syncState();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-            navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-            View headerView = navigationView.getHeaderView(0);
-            TextView name = (TextView) headerView.findViewById(R.id.nav_name);
-            name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-            TextView email = (TextView) headerView.findViewById(R.id.nav_email);
-            email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        View headerView = navigationView.getHeaderView(0);
+        TextView name = (TextView) headerView.findViewById(R.id.nav_name);
+        name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        TextView email = (TextView) headerView.findViewById(R.id.nav_email);
+        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-            notificationFragment = new NotificationFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
-            fragmentTransaction.commit();
-        }
+        notificationFragment = new NotificationFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
+        fragmentTransaction.commit();
+    }
 
     //for Navigation menu
     @Override
@@ -145,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * For when the back button is pressed and dependent on the drawer state.
+     */
     // https://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-fragments
     @Override
     public void onBackPressed() {
