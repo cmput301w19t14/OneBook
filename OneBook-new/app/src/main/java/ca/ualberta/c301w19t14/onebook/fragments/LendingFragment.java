@@ -75,7 +75,7 @@ public class LendingFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ba = new BookAdapter(getActivity(), books, true);
+        ba = new BookAdapter(getActivity(), filteredBooks, true);
         mRecyclerView.setAdapter(ba);
 
         v.findViewById(R.id.newBook).setOnClickListener(
@@ -175,17 +175,9 @@ public class LendingFragment extends Fragment {
                     }
                 }
 
-                if(books.isEmpty()) {
-                    v.findViewById(R.id.noData).setVisibility(View.VISIBLE);
-                    v.findViewById(R.id.bookList).setVisibility(View.GONE);
-                } else {
-                    v.findViewById(R.id.noData).setVisibility(View.GONE);
-                    v.findViewById(R.id.bookList).setVisibility(View.VISIBLE);
-                }
 
                 loader.setVisibility(View.GONE);
                 filterData();
-                ba.notifyDataSetChanged();
             }
 
             @Override
@@ -196,6 +188,7 @@ public class LendingFragment extends Fragment {
     }
 
     private void filterData() {
+        filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();
         for(int i = 0; i < 2; i++) {
             if(checkedFilters[i]) {
@@ -203,16 +196,17 @@ public class LendingFragment extends Fragment {
             }
         }
         for(Book b : books) {
-            if(!statuses.contains(b.status())) {
+            if(statuses.contains(b.status())) {
                 filteredBooks.add(b);
-                books.remove(b);
             }
         }
-        for(Book b : filteredBooks) {
-            if(statuses.contains(b.status())) {
-                filteredBooks.remove(b);
-                books.add(b);
-            }
+
+        if(filteredBooks.isEmpty()) {
+            v.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+            v.findViewById(R.id.bookList).setVisibility(View.GONE);
+        } else {
+            v.findViewById(R.id.noData).setVisibility(View.GONE);
+            v.findViewById(R.id.bookList).setVisibility(View.VISIBLE);
         }
 
         ba.notifyDataSetChanged();

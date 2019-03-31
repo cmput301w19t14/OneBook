@@ -52,8 +52,6 @@ public class BorrowingFragment extends Fragment {
 
     private BookAdapter ba;
 
-    ArrayList<Integer> mUserItems = new ArrayList<>();
-
     String[] filterOptions = new String[] {
             "Available",
             "Borrowed",
@@ -84,7 +82,7 @@ public class BorrowingFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
 
-        ba = new BookAdapter(getActivity(), books, true);
+        ba = new BookAdapter(getActivity(), filteredBooks, true);
         recyclerView.setAdapter(ba);
 
         loadData();
@@ -185,17 +183,8 @@ public class BorrowingFragment extends Fragment {
                     }
                 }
 
-                if(books.isEmpty()) {
-                    v.findViewById(R.id.noData).setVisibility(View.VISIBLE);
-                    v.findViewById(R.id.bookList).setVisibility(View.GONE);
-                } else {
-                    v.findViewById(R.id.noData).setVisibility(View.GONE);
-                    v.findViewById(R.id.bookList).setVisibility(View.VISIBLE);
-                }
-
                 loader.setVisibility(View.GONE);
                 filterData();
-                ba.notifyDataSetChanged();
             }
 
             @Override
@@ -206,23 +195,25 @@ public class BorrowingFragment extends Fragment {
     }
 
     private void filterData() {
+        filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 4; i++) {
             if(checkedFilters[i]) {
                 statuses.add(filterOptions[i]);
             }
         }
         for(Book b : books) {
-            if(!statuses.contains(b.status())) {
+            if(statuses.contains(b.status())) {
                 filteredBooks.add(b);
-                books.remove(b);
             }
         }
-        for(Book b : filteredBooks) {
-            if(statuses.contains(b.status())) {
-                filteredBooks.remove(b);
-                books.add(b);
-            }
+
+        if(filteredBooks.isEmpty()) {
+            v.findViewById(R.id.noData).setVisibility(View.VISIBLE);
+            v.findViewById(R.id.bookList).setVisibility(View.GONE);
+        } else {
+            v.findViewById(R.id.noData).setVisibility(View.GONE);
+            v.findViewById(R.id.bookList).setVisibility(View.VISIBLE);
         }
 
         ba.notifyDataSetChanged();

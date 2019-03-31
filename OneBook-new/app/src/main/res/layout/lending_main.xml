@@ -18,7 +18,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="You are not lending any books."
+        android:text="You are not lending any books (or none matched your filters)."
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
