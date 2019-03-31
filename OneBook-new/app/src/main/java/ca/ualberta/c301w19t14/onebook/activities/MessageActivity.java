@@ -146,7 +146,7 @@ public class MessageActivity extends AppCompatActivity {
 
                 Notification msg = new Notification("New Message",
                         FirebaseAuth.getInstance().getCurrentUser().getDisplayName() + " sent you a message.",
-                        dS.getValue(User.class));
+                        dS.getValue(User.class), Notification.MESSAGE);
                 msg.save();
             }
 

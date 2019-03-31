@@ -128,7 +128,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                     // update request location
                                     book.getAcceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
                                     book.update();
-                                    Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.getAcceptedRequest().getUser());
+                                    Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.getAcceptedRequest().getUser(), Notification.MARKER);
                                     notification.save();
                                     dialog.dismiss();
                                     finish();

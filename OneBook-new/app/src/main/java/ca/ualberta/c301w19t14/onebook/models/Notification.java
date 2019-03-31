@@ -9,19 +9,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import ca.ualberta.c301w19t14.onebook.Globals;
-import ca.ualberta.c301w19t14.onebook.models.Request;
-import ca.ualberta.c301w19t14.onebook.models.User;
-
 /**
  * Notification model.
  *
  * @author Dimitri Trofimuk
  */
 public class Notification {
+
+    final static public int UP = 1;
+    final static public int DOWN = 2;
+    final static public int BOOK = 3;
+    final static public int MESSAGE = 4;
+    final static public int COMPASS = 5;
+    final static public int MARKER = 6;
+    final static public int ROCKET = 7;
     private String id;
     private String title;
     private String content;
+    private Long date;
+    private int icon;
 
     @Nullable
     private Request request = null;
@@ -43,10 +49,11 @@ public class Notification {
      * @param content notification message
      * @param user    user receiving notification
      */
-    public Notification(String title, String content, User user) {
+    public Notification(String title, String content, User user, int icon) {
         this.title = title;
         this.content = content;
         this.user = user;
+        this.icon = icon;
     }
 
     /**
@@ -56,13 +63,14 @@ public class Notification {
      * @param content notification message
      * @param request book request
      * @param user    user receiving notification
+     * @param icon    icon to show
      */
-    public Notification(String title, String content, Request request, User user) {
+    public Notification(String title, String content, Request request, User user, int icon) {
         this.title = title;
         this.content = content;
         this.user = user;
-
         this.request = request;
+        this.icon = icon;
     }
 
     /**
@@ -191,5 +199,23 @@ public class Notification {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * Setter for icon.
+     *
+     * @param icon notification icon
+     */
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
+    /**
+     * Getter for int.
+     *
+     * @return int icon int
+     */
+    public int getIcon() {
+        return this.icon;
     }
 }

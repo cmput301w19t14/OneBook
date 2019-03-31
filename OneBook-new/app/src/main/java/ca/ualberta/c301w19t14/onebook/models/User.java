@@ -1,10 +1,15 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**This class is for the user and encompasses borrowers and owners
  * @author CMPUT 301 Team 14*/
@@ -40,7 +45,24 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        myRef.child(firebaseUid).setValue(new User(firebaseUid, user.getDisplayName(), user.getEmail()));
+        final User userClass = new User(firebaseUid, user.getDisplayName(), user.getEmail());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.child(firebaseUid).exists()) {
+                    Notification newUser = new Notification("Welcome to OneBook", "Borrow your first book in seconds. Get started by opening the menu.", userClass, Notification.ROCKET);
+                    newUser.save();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        myRef.child(firebaseUid).setValue(userClass);
+
     }
 
     /**

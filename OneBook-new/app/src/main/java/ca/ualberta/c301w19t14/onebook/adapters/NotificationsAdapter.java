@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -56,6 +57,32 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         mVh.title.setText(notification.getTitle());
         mVh.content.setText(notification.getContent());
 
+        switch(notification.getIcon()) {
+            case Notification.UP:
+                mVh.icon.setImageResource(R.drawable.arrowup64);
+                break;
+            case Notification.DOWN:
+                mVh.icon.setImageResource(R.drawable.arrowdown64);
+                break;
+            case Notification.BOOK:
+                mVh.icon.setImageResource(R.drawable.booklet64);
+                break;
+            case Notification.MESSAGE:
+                mVh.icon.setImageResource(R.drawable.mail64);
+                break;
+            case Notification.COMPASS:
+                mVh.icon.setImageResource(R.drawable.compass64);
+                break;
+            case Notification.MARKER:
+                mVh.icon.setImageResource(R.drawable.location64);
+                break;
+            case Notification.ROCKET:
+                mVh.icon.setImageResource(R.drawable.rocket64);
+                break;
+            default:
+                mVh.icon.setImageResource(R.drawable.rocket64);
+                break;
+        }
     }
 
     @Override
@@ -70,12 +97,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public class NotificationsViewHolder extends RecyclerView.ViewHolder {
         protected TextView title;
         protected TextView content;
+        protected ImageView icon;
         Notification notification;
 
         NotificationsViewHolder(View view, int i) {
             super(view);
             title = view.findViewById(R.id.title);
             content = view.findViewById(R.id.content);
+            icon = view.findViewById(R.id.icon);
                 view.setOnClickListener(new View.OnClickListener() {
 
                     @Override public void onClick(final View v) {
@@ -133,8 +162,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "SAVE",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-
-
                                             dialog.dismiss();
                                         }
                                     });

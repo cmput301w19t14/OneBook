@@ -40,7 +40,6 @@ public class UserLoginActivity extends AppCompatActivity {
         if (requestCode == 123) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
-
             // Successfully signed in
             if (resultCode == RESULT_OK) {
                 User.updateDatabase(FirebaseAuth.getInstance().getCurrentUser().getUid());

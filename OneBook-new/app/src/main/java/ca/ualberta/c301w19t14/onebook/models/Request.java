@@ -67,8 +67,8 @@ public class Request {
                 // no requests on book
 
                 // create notifications
-                Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user);
-                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner());
+                Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user, Notification.BOOK);
+                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner(), Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -79,7 +79,7 @@ public class Request {
                 hMap = book.getRequest();
 
                 // create notifications
-                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user);
+                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -110,9 +110,9 @@ public class Request {
                 .setValue("Accepted");
 
         // create notifications
-        Notification accepted = new Notification("Request Accepted", book.getOwner().getName() + " has accepted your request on " + book.getTitle(), this.getUser());
-        Notification borrowerMeetup = new Notification("Meet up Required", "You need to meet " + book.getOwner().getName() + " to pick up " + book.getTitle(), this.getUser());;
-        Notification ownerMeetup = new Notification("Meet up Required", "You need to meet " + this.getUser().getName()+ " to give them " + book.getTitle(), book.getOwner());
+        Notification accepted = new Notification("Request Accepted", book.getOwner().getName() + " has accepted your request on " + book.getTitle(), this.getUser(), Notification.BOOK);
+        Notification borrowerMeetup = new Notification("Meet up Required", "You need to meet " + book.getOwner().getName() + " to pick up " + book.getTitle(), this.getUser(), Notification.COMPASS);
+        Notification ownerMeetup = new Notification("Meet up Required", "You need to meet " + this.getUser().getName()+ " to give them " + book.getTitle(), book.getOwner(), Notification.COMPASS);
 
         // send notifications
         accepted.save();
@@ -148,7 +148,7 @@ public class Request {
         FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(this.getId()).removeValue();
 
         // create notifications
-        Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), this.getUser());
+        Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), this.getUser(), Notification.BOOK);
 
         // send notifications
         rejected.save();
