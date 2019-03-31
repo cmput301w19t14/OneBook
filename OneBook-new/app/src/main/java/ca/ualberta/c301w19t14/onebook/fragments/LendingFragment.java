@@ -35,9 +35,9 @@ import ca.ualberta.c301w19t14.onebook.activities.ScanIsbnActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 
 /**
- * Shows the current books a user owns.
- *
- * @author Ana, Dimitri
+ * This fragment shows a list of the current books a user owns.
+ * @author CMPUT301 Team14: Ana B, Dimitri T
+ * @version 1.0
  */
 public class LendingFragment extends Fragment {
 
@@ -102,7 +102,6 @@ public class LendingFragment extends Fragment {
 
     /**
      * Creates the options menu (top right).
-     *
      * @param menu options menu
      * @param inflater MenuInflater
      */
@@ -113,7 +112,6 @@ public class LendingFragment extends Fragment {
 
     /**
      * Handles selecting an options menu item.
-     *
      * @param item android id of the item clicked
      * @return boolean if the item was handled or not
      */
@@ -187,6 +185,9 @@ public class LendingFragment extends Fragment {
         });
     }
 
+    /**
+     * This methods filters through the data as a search is happening.
+     */
     private void filterData() {
         filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();

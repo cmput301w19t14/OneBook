@@ -33,9 +33,9 @@ import ca.ualberta.c301w19t14.onebook.adapters.NotificationsAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
 
 /**
- * Handles displaying notifications, and showing action buttons.
- *
- * @author Dimitri, Ana
+ * This fragment handles displaying notifications and showing action buttons.
+ * @author CMPUT301 Team14: Dimitri T, Ana B
+ * @version 1.0
  */
 public class NotificationFragment extends Fragment {
     View v;

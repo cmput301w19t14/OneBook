@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,11 +35,16 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
- * Add a new book.
+ * This class adds a book to the database after the owner scans a ISBN or manually inputs
+ * the book's descriptors.
+ * @author CMPUT301 Team14: Oran R, Dimitri T
+ * @version 1.0
+ * @see ca.ualberta.c301w19t14.onebook.fragments.LendingFragment {@link #onCreateView}
+ * @see ScanIsbnActivity {@link #onCreate}
  *
- * @author Oran R, Dimitri T
  */
 public class AddActivity extends AppCompatActivity {
+
     public ImageView image;
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -45,6 +52,10 @@ public class AddActivity extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference;
 
+    /**
+     * Initializes the view
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +94,7 @@ public class AddActivity extends AppCompatActivity {
                         final StorageReference personRef = storageReference.child("Book images/" + book.getId() + "/bookimage.png");
 
                         runOnUiThread(new Runnable() {
+
                             @Override
                             public void run() {
                                 try {
@@ -92,6 +104,7 @@ public class AddActivity extends AppCompatActivity {
                                     byte[] byteArray = baos.toByteArray();
                                     UploadTask uploadTask = personRef.putBytes(byteArray);
                                     uploadTask.addOnFailureListener(new OnFailureListener() {
+
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                         }
@@ -130,6 +143,12 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * From takePictureIntent. Checks if a valid picture was taken.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -145,6 +164,11 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Grabs the editText string.
+     * @param e: EditText value.
+     * @return the EditText as a string.
+     */
     private String stringFromEditText(View e) {
         return ((EditText) e).getText().toString();
     }
