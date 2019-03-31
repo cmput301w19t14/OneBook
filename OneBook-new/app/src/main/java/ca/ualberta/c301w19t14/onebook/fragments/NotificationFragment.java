@@ -1,5 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -75,7 +77,7 @@ public class NotificationFragment extends Fragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.camera_toolbar, menu);
+        inflater.inflate(R.menu.camera_clear_toolbar, menu);
     }
 
     /**
@@ -90,6 +92,27 @@ public class NotificationFragment extends Fragment {
         if(id == R.id.quick_scan) {
             startActivity(new Intent(getContext(), ScanIsbnActivity.class));
             return true;
+        }
+
+        else if (id == R.id.quick_clear) {
+            AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
+
+            fBuilder.setPositiveButton("CLEAR", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final int size = notifications.size();
+                    if (size > 0) {
+                        for (int i = 0; i < size; i++) {
+                            notifications.remove(0);
+                        }
+                        ba.notifyItemRangeRemoved(0, size);
+                    }
+                }
+            });
+            fBuilder.setTitle("Do you want to clear all of your notification?");
+
+            AlertDialog fDialog = fBuilder.create();
+            fDialog.show();
         }
 
         return false;
