@@ -88,22 +88,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
 
-                                            //update request status to accepted
-                                            Book book = notification.getRequest().getBook();
                                             Request request = notification.getRequest();
-                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).child("status").setValue("Accepted");
-
-                                            //notify borrower that their request has been accepted
-                                            Notification accept_notification = new Notification("Request Accepted", notification.getUser().getName() + " has accepted your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
-                                            accept_notification.save();
-
-                                            //notify borrower that they need to meet up with the owner
-                                            Notification trade_notification_borrower = new Notification("Meet up Required", "You need to meet " + notification.getUser().getName() + " to pick up " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
-                                            trade_notification_borrower.save();
-
-                                            //notify owner that they need to meet up with borrower
-                                            Notification trade_notification_owner = new Notification("Meet up Required", "You need to meet " + notification.getRequest().getUser().getName()+ " to give them " + notification.getRequest().getBook().getTitle(), notification.getUser());
-                                            trade_notification_owner.save();
+                                            request.accept();
 
                                             //deletes the original notification for owner
                                             notification.delete();
@@ -112,7 +98,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
                                             // they need to select a location
                                             Intent intent = new Intent(v.getContext(), MapsActivity.class);
-                                            intent.putExtra("book_id", book.getId());
+                                            intent.putExtra("book_id", request.getBook().getId());
                                             v.getContext().startActivity(intent);
                                         }
                                     });
@@ -120,25 +106,18 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
 
-                                            //if they reject a request.
-                                            //create a new notification for the person who was rejected
-                                            Notification reject_notification = new Notification("Request Rejected", notification.getUser().getName() + " has rejected your request on " + notification.getRequest().getBook().getTitle(), notification.getRequest().getUser());
-                                            reject_notification.save();
+                                            Request request = notification.getRequest();
+                                            request.reject();
 
                                             //deletes the original notification for current user
                                             notification.delete();
-
-                                            //deletes the request from the book database
-                                            Book book = notification.getRequest().getBook();
-                                            Request request = notification.getRequest();
-                                            FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                                             dialog.dismiss();
                                         }
                                     });
                             alertDialog.show();
                         } else {
-                            //checks if it's a notification for a meet up. displays location if it is
+                            // TODO: checks if it's a notification for a meet up. displays location if it is
 
                             //other notifications can be deleted
                             AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();
