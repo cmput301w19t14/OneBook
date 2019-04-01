@@ -121,32 +121,7 @@ public class MessagingUsersFragment extends Fragment {
 
             }
         });
-        /*query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                users.clear();
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
 
-                    assert user != null;
-                    assert firebaseUser != null;
-                    if (!(user.getName().equals(firebaseUser.getDisplayName()))){
-                        users.add(user);
-                    }
-                }
-
-
-                messagingUserAdapter = new MessagingUserAdapter(getContext(), users);
-                recyclerView.setAdapter(messagingUserAdapter);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        */
     }
 
     /**

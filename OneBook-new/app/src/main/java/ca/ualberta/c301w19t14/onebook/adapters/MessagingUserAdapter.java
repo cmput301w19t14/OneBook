@@ -69,7 +69,7 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
         viewHolder.username.setText(user.getName());
 
         lastMessage(user.getUid(), viewHolder.lastMessage);
-
+        //Gets the profile picture from the database
         StorageReference ref = storage.getReference("Profile pictures/"+user.getUid()+"/profile.png");
         ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
@@ -79,7 +79,7 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
                 }
             }
         });
-
+        //Sets on click listener for name to view the individuals profile.
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
