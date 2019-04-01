@@ -154,19 +154,19 @@ public class Request {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book newBook = dataSnapshot.getValue(Book.class);
                 FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
-
-                newBook.getRequest().remove(request.getId());
-
+                
                 // delete the request
                 Log.e("DEBUG", "onDataChange()");
 
                 if(newBook.acceptedRequest() != null && newBook.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
                     Log.e("DEBUG", "acceptedRequest()");
+                    newBook.getRequest().remove(request.getId());
 
                     newBook.waitlistDoNext();
                 } else if(newBook.getNextRequest() != null && newBook.getNextRequest().getId().equals(request.getId())) {
                     Log.e("DEBUG", "acceptedRequest()");
+                    newBook.getRequest().remove(request.getId());
 
                     newBook.waitlistDoNext();
                 }
