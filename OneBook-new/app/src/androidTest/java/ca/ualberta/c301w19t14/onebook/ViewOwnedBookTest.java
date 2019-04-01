@@ -28,7 +28,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
  * @author CMPUT301 Team14
  */
 
-public class ViewBookTest {
+public class ViewOwnedBookTest {
 
     //Variable for functionality
     public Globals globals;
