@@ -80,88 +80,23 @@ public class ViewBookActivity extends AppCompatActivity {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     View popup = inflater.inflate(R.layout.image_pop_up, null);
                     ImageView picture = popup.findViewById(R.id.ImageCloseUp);
-                        picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
-                        int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                        int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                        final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
-                        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-                        popup.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                popupWindow.dismiss();
-                            }
-                        });
+                    picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
+                    int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
+                    popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                    popup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
                 }
             }
         });
 
 
         // TODO: Click owner, go to view profile.
-
-
-        LinearLayout owner = findViewById(R.id.ownerInfo);
-        owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewBookActivity.this,UserAccountActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ID",book.getOwner().getUid());
-                bundle.putString("NAME",book.getOwner().getName());
-                bundle.putString("EMAIL",book.getOwner().getEmail());
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-        Button locationButton = findViewById(R.id.location);
-
-        if(book.acceptedRequest() != null &&
-                (book.userIsOwner() ||
-                        book.acceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
-        ) {
-            locationButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
-                    intent.putExtra("book_id", book.getId());
-                    // TODO: Show snackbar after location set
-                    startActivityForResult(intent, 1);
-                }
-            });
-        } else {
-            locationButton.setVisibility(View.GONE);
-        }
-
-
-
-        Button requestsButton = findViewById(R.id.requests);
-        if(book.userIsOwner()) {
-            requestsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ViewBookActivity.this, ViewRequestsActivity.class);
-                    intent.putExtra("id", book.getId());
-                    startActivity(intent);
-                }
-            });
-        } else {
-            requestsButton.setVisibility(View.GONE);
-        }
-
-        final Button requestButton = findViewById(R.id.request);
-        if(book.userCanRequest()) {
-            requestButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Request.requestBook(Globals.getCurrentUser(),book);
-                    requestButton.setVisibility(View.GONE);
-                    findViewById(R.id.divider7).setVisibility(View.GONE);
-                    Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            requestButton.setVisibility(View.GONE);
-            findViewById(R.id.divider7).setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -228,6 +163,24 @@ public class ViewBookActivity extends AppCompatActivity {
                             hasImage = false;
                         }
                     });
+                    LinearLayout ownerinfo = findViewById(R.id.ownerInfo);
+                    ownerinfo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (globalBook != null) {
+
+                                Intent intent = new Intent(ViewBookActivity.this, UserAccountActivity.class);
+                                Bundle bundle = new Bundle();
+
+                                bundle.putString("ID", globalBook.getOwner().getUid());
+                                bundle.putString("NAME", globalBook.getOwner().getName());
+                                bundle.putString("EMAIL", globalBook.getOwner().getEmail());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
                     Button locationButton = findViewById(R.id.location);
 
                     if (book.acceptedRequest() != null &&

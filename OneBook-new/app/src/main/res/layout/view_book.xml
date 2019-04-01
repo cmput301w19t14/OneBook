@@ -205,14 +205,6 @@
 
                 </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/ownerInfo"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
 
             </LinearLayout>
 
@@ -234,17 +226,14 @@
                     android:id="@+id/imageView7"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="Owner: Amy33"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="18sp" />
+                    app:srcCompat="@drawable/ic_face_black_24dp" />
 
-                <TextView
-                    android:id="@+id/textView3"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/ownerInfo"
+                    >
 
 
                     <TextView
@@ -253,7 +242,6 @@
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="gotoOwner2"
                         android:text="Owner: Amy33"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp" />
