@@ -2,23 +2,17 @@ package ca.ualberta.c301w19t14.onebook.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -48,9 +42,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     /**
      *
-     * @param context:
-     * @param bookList
-     * @param mode
+     * @param context: the activity/fragment's state
+     * @param bookList: the lists of books being used
+     * @param mode: state of the book
      */
     public BookAdapter(Context context, ArrayList<Book> bookList, Boolean mode) {
         this.bookList = bookList;
@@ -69,8 +63,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     /**
      *
-     * @param bookVh
-     * @param i
+     * @param bookVh: BookViewHolder the bookList is going in.
+     * @param i: index of the bookList
      */
     @Override
     public void onBindViewHolder(final BookViewHolder bookVh, int i) {
@@ -97,9 +91,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     /**
      *
-     * @param viewGroup
-     * @param i
-     * @return
+     * @param viewGroup: the view the bookList is going in
+     * @param i: index from the bookList
+     * @return BookViewHolder object containing the right book list
      */
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -120,7 +114,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         /**
          *
-         * @param v
+         * @param v: the view for a book
          */
         public BookViewHolder(View v) {
             super(v);

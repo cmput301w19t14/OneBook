@@ -20,23 +20,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.adapters.MessagingUserAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
-import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
  * This class implements user search and displays all users.
  * From this class, users can be looked up and new chats can be started up between them.
  * @author jandaile CMPUT 301 team 14
+ * @version 1.0
  * @see MessagesFragment
  * @since 2019-03-29
- * @version 1.0
  */
 public class MessagingUsersFragment extends Fragment {
 

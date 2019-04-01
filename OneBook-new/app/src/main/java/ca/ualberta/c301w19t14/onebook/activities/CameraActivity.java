@@ -29,6 +29,10 @@ import ca.ualberta.c301w19t14.onebook.R;
 public class CameraActivity extends AppCompatActivity {
     SurfaceView cameraPreview;
 
+    /**
+     * Initializes the view
+     * @param savedInstanceState: last possible state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

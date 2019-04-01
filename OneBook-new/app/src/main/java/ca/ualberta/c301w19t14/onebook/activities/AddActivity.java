@@ -1,7 +1,6 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,7 +53,7 @@ public class AddActivity extends AppCompatActivity {
 
     /**
      * Initializes the view
-     * @param savedInstanceState
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,9 +144,9 @@ public class AddActivity extends AppCompatActivity {
 
     /**
      * From takePictureIntent. Checks if a valid picture was taken.
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode: code inputted for activity result
+     * @param resultCode: code received from activity
+     * @param data: the activity data received
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
