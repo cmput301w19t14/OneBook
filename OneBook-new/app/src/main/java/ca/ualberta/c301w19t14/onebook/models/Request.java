@@ -160,12 +160,12 @@ public class Request {
                 // delete the request
                 Log.e("DEBUG", "onDataChange()");
 
-                if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
+                if(newBook.acceptedRequest() != null && newBook.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
                     Log.e("DEBUG", "acceptedRequest()");
 
                     newBook.waitlistDoNext();
-                } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
+                } else if(newBook.getNextRequest() != null && newBook.getNextRequest().getId().equals(request.getId())) {
                     Log.e("DEBUG", "acceptedRequest()");
 
                     newBook.waitlistDoNext();
