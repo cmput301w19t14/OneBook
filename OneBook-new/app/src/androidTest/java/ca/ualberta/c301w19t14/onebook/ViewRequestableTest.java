@@ -30,6 +30,16 @@ public class ViewRequestableTest {
     public String email = "UITest@gmail.com";
     public String email2 = "UITest2@gmail.com";
     public String password = "test123";
+    private String name = "John Smith";
+
+    //Book details
+    private String description = "In the depths of the Utah desert, long after the Flame Deluge has " +
+        "scoured the earth clean, a monk of the Order...";
+    private String author = "Walter M. Miller Jr.";
+    private String title = "A Canticle For Leibowitz";
+    private long isbn = 9780553273816L;
+    private String bookid = "-LbOjjHy4D5iees53kTd";
+    private String status = "Available";
 
     @Rule
     public ActivityTestRule<ViewBookActivity> activityRule =
@@ -76,32 +86,21 @@ public class ViewRequestableTest {
     @Test
     public void testViewBook(){
 
-        //init variables
-        long ISBN = 123123L;
-        String description = "test";
-        String status = "Borrowed";
-        String title = "test2";
-        String author = "Adam";
-        String owner = "adam@gmail.com";
-        String name = "Jandaile DeGuzman";
-        String id = "-L_iAvX6BTsHxB6_Zeqk";
-
-
         Bundle bundle = new Bundle();
-        bundle.putString("id", id);
+        bundle.putString("id", bookid);
 
         Intent i = new Intent();
         i.putExtras(bundle);
 
         activityRule.launchActivity(i);
 
-        onView(withId(R.id.bookTitle)).check(matches(withText("Title: " + title)));
-        onView(withId(R.id.bookAuthor)).check(matches(withText("Author: " + author)));
+        onView(withId(R.id.title)).check(matches(withText(title)));
+        onView(withId(R.id.author)).check(matches(withText(author)));
         onView(withId(R.id.isbn))
-                .check(matches(withText("ISBN: " + String.valueOf(ISBN))));
-        onView(withId(R.id.bookOwner)).check(matches(withText("Owner: " + name)));
-        onView(withId(R.id.description)).check(matches(withText("Description: " + description)));
-        onView(withId(R.id.bookStatus)).check(matches(withText("Status: " + status)));
+                .check(matches(withText(String.valueOf(isbn))));
+        onView(withId(R.id.owner)).check(matches(withText(name)));
+        onView(withId(R.id.description)).check(matches(withText(description)));
+        onView(withId(R.id.status)).check(matches(withText(status)));
 
     }
 

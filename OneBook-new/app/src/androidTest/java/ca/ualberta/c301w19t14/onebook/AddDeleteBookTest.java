@@ -137,7 +137,7 @@ public class AddDeleteBookTest {
 
         //click on the book you just created
         onView(new RecyclerViewMatcher(this.resID)
-                .atPositionOnView(0, R.id.bookTitle))
+                .atPositionOnView(1, R.id.bookTitle))
                 .perform(click());
 
         //Click "Delete"
