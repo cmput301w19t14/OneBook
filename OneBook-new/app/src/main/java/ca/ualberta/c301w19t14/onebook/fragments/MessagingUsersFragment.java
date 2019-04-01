@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.adapters.MessagingUserAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
+import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
@@ -88,7 +89,8 @@ public class MessagingUsersFragment extends Fragment {
      * searches for users and updates the user list based on the search so far
      * @param nameString: string to compare with for searching
      */
-    private void searchingUsers(String nameString) {
+    private void searchingUsers(final String nameString) {
+
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference("Users")
@@ -96,7 +98,30 @@ public class MessagingUsersFragment extends Fragment {
                 .startAt(nameString)
                 .endAt(nameString+"\uf8ff");
 
-        query.addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference("Users");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                users.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    User r = ds.getValue(User.class);
+                    if(r.getName().toLowerCase().contains(nameString.toLowerCase())) {
+                        users.add(r);
+                    }
+                }
+
+
+                messagingUserAdapter = new MessagingUserAdapter(getContext(), users);
+                recyclerView.setAdapter(messagingUserAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 users.clear();
@@ -110,6 +135,7 @@ public class MessagingUsersFragment extends Fragment {
                     }
                 }
 
+
                 messagingUserAdapter = new MessagingUserAdapter(getContext(), users);
                 recyclerView.setAdapter(messagingUserAdapter);
 
@@ -120,6 +146,7 @@ public class MessagingUsersFragment extends Fragment {
 
             }
         });
+        */
     }
 
     /**
