@@ -2,13 +2,19 @@ package ca.ualberta.c301w19t14.onebook.models;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 
 /**
- * Abstracts the Request data type.
- *
- * @author Natalie, Dimitri
+ * This class abstracts the Request data type.
+ * @author CMPUT301 Team14: Natalie H, Dimitri T
+ * @see ca.ualberta.c301w19t14.onebook.adapters.RequestsAdapter
+ * @version 1.0
  */
 public class Request {
 
@@ -21,6 +27,7 @@ public class Request {
     private String id;
     private User user;
     private Book book;
+
     @NonNull
     private String status = "Pending";
     private Location location;
@@ -33,7 +40,6 @@ public class Request {
 
     /**
      * Request constructor.
-     *
      * @param user
      * @param book
      */
@@ -46,7 +52,6 @@ public class Request {
 
     /**
      * Abstracts the request a book process.
-     *
      * @param user User object requesting the book
      * @param book Book being requested
      *
@@ -67,8 +72,8 @@ public class Request {
                 // no requests on book
 
                 // create notifications
-                Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user);
-                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner());
+                Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user, Notification.BOOK);
+                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner(), Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -79,7 +84,7 @@ public class Request {
                 hMap = book.getRequest();
 
                 // create notifications
-                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user);
+                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -93,9 +98,7 @@ public class Request {
 
 
     /**
-     * Accepts the request.
-     *  * sends notifications
-     *  * updates status
+     * Accepts the request, sends notifications, and updates status
      */
     public void accept() {
         Book book = this.getBook();
@@ -110,9 +113,9 @@ public class Request {
                 .setValue("Accepted");
 
         // create notifications
-        Notification accepted = new Notification("Request Accepted", book.getOwner().getName() + " has accepted your request on " + book.getTitle(), this.getUser());
-        Notification borrowerMeetup = new Notification("Meet up Required", "You need to meet " + book.getOwner().getName() + " to pick up " + book.getTitle(), this.getUser());;
-        Notification ownerMeetup = new Notification("Meet up Required", "You need to meet " + this.getUser().getName()+ " to give them " + book.getTitle(), book.getOwner());
+        Notification accepted = new Notification("Request Accepted", book.getOwner().getName() + " has accepted your request on " + book.getTitle(), this.getUser(), Notification.BOOK);
+        Notification borrowerMeetup = new Notification("Meet up Required", "You need to meet " + book.getOwner().getName() + " to pick up " + book.getTitle(), this.getUser(), Notification.COMPASS);
+        Notification ownerMeetup = new Notification("Meet up Required", "You need to meet " + this.getUser().getName()+ " to give them " + book.getTitle(), book.getOwner(), Notification.COMPASS);
 
         // send notifications
         accepted.save();
@@ -137,29 +140,49 @@ public class Request {
     }
 
     /**
-     * Rejects the request.
-     *  * deletes request
-     *  * sends notifications
+     * Rejects the request, deletes request, and sends notifications
      */
     public void reject() {
         Book book = this.getBook();
 
-        // delete the request
-        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(this.getId()).removeValue();
+        final Request request = this;
 
-        // create notifications
-        Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), this.getUser());
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books").child(book.getId());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Book book = dataSnapshot.getValue(Book.class);
 
-        // send notifications
-        rejected.save();
+                if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
+                    // is the current accepted request
+                    book.waitlistDoNext();
+                } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
+                    book.waitlistDoNext();
+                }
+
+                // delete the request
+                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
+
+                // create notifications
+                Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);
+
+                // send notifications
+                rejected.save();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     /**
      * Deletes the request.
      */
-    public void delete() {
-        Book book = this.getBook();
-
+    public void delete(Book book) {
+        book.getRequest().remove(this.getId());
         // delete the request
         FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(this.getId()).removeValue();
     }

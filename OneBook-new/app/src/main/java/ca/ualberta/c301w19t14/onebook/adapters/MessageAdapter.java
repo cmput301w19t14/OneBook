@@ -21,6 +21,7 @@ import ca.ualberta.c301w19t14.onebook.models.Chat;
  * The messages organized to show which messages are from the sender vs
  * the receiver from this class.
  * @author jandaile CMPUT 301 team 14
+ * @see ca.ualberta.c301w19t14.onebook.activities.MessageActivity
  * @since 2019-03-29
  * @version 1.0
  */
@@ -39,6 +40,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     }
 
+    /**
+     * Initializes the view based on the sender and receiver messages.
+     * @param viewGroup
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -52,6 +59,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    /**
+     * Attaches the messages to the view.
+     * @param viewHolder
+     * @param i
+     */
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder viewHolder, int i) {
 
@@ -61,6 +73,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     }
 
+    /**
+     *
+     * @return the total chat size for any tests or checks.
+     */
     @Override
     public int getItemCount() {
 
@@ -79,6 +95,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    /**
+     * Determines who the message is from.
+     * @param position: message position in the chat list.
+     * @return The view type for adapter use.
+     */
     @Override
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

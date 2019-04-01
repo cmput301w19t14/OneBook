@@ -2,11 +2,8 @@ package ca.ualberta.c301w19t14.onebook.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -32,15 +29,20 @@ import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
 
 /**
- * Set/view the pickup location on a Google Maps instance.
- *
- * @author Dimitri Trofimuk
+ * This class will set/view the pickup location on a Google Maps instance.
+ * @author CMPUT301 Team14: Dimitri T
+ * @version 1.0
+ * @see ca.ualberta.c301w19t14.onebook.adapters.RequestsAdapter.RequestsViewHolder
  */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Book book;
 
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +57,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         book = Globals.getInstance().books.getData().child(book_id).getValue(Book.class);
     }
 
-
+    /**
+     * Options for when the map has been displayed
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if(book.getAcceptedRequest().getLocation() != null) {
-            Location loc = book.getAcceptedRequest().getLocation();
+        if(book.acceptedRequest().getLocation() != null) {
+            Location loc = book.acceptedRequest().getLocation();
             LatLng latLng = new LatLng(loc.getLat(), loc.getLng());
 
             AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
@@ -85,7 +90,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if(book.getOwner().getUid().equals(Globals.getInstance().user.getUid())) {
 
-            if(book.getAcceptedRequest().getLocation() == null) {
+            if(book.acceptedRequest().getLocation() == null) {
                 AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
                 alertDialog.setTitle("Select a Pickup Location");
                 alertDialog.setMessage("Now that you have accepted a request, you must select a pickup location for the borrower to pickup the book. Don't worry, you can change this location later. The borrower will always be notified.");
@@ -126,9 +131,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // update request location
-                                    book.getAcceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
+                                    book.acceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
                                     book.update();
-                                    Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.getAcceptedRequest().getUser());
+                                    Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.acceptedRequest().getUser(), Notification.MARKER);
                                     notification.save();
                                     dialog.dismiss();
                                     finish();
@@ -144,7 +149,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     alertDialog.show();
                 }
             });
-        } else if(book.getAcceptedRequest().getLocation() == null) {
+        } else if(book.acceptedRequest().getLocation() == null) {
             AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
             alertDialog.setTitle("No Location Set");
             alertDialog.setMessage("The owner has yet to set a pickup location. Don't worry, you'll receive a notification when they do.");
@@ -159,6 +164,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

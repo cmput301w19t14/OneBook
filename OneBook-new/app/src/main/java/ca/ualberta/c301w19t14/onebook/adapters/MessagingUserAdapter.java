@@ -28,6 +28,7 @@ import ca.ualberta.c301w19t14.onebook.models.User;
  * This class implements the adapter for displaying the users in the MessagingUserFragment.
  * Each user will have their last message displayed if the current user hasn't responded back.
  * @author jandaile CMPUT 301 team 14
+ * @see ca.ualberta.c301w19t14.onebook.fragments.MessagingUsersFragment
  * @since 2019-03-29
  * @version 1.0
  */
@@ -70,8 +71,13 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
         });
     }
 
+    /**
+     *
+     * @return the total number of users for testing
+     */
     @Override
     public int getItemCount() {
+
         return mUsers.size();
     }
 
@@ -90,7 +96,7 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
     }
 
     /**
-     *
+     * Grabs the last message sent by the receiver.
      * @param userID: The user from the database.
      * @param lastMessage: The last message from this user to the current user.
      */
@@ -120,9 +126,7 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
                         default:
                             lastMessage.setText(theLastMessage);
                             break;
-
                     }
-
                     theLastMessage = "default";
                 }
             }

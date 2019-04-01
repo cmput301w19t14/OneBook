@@ -1,10 +1,14 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,8 +27,19 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
+/**
+ * This class implements a scanner for ISBN codes. Uses phone's camera to create the scanner.
+ *
+ * @author CMPUT301 Team14: Ana, Dimitri
+ * @version 1.0
+ */
 public class ScanIsbnActivity extends AppCompatActivity {
     TextView barcodeResult;
+
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +69,12 @@ public class ScanIsbnActivity extends AppCompatActivity {
                         if (item.getIsbn() == isbn) {
                             exists = true;
 
-                            if (item.getAcceptedRequest() != null && (item.getOwner().getUid().equals(userId) || item.getAcceptedRequest().getUser().getUid().equals(userId))) {
+                            if (item.acceptedRequest() != null && (item.getOwner().getUid().equals(userId) || item.acceptedRequest().getUser().getUid().equals(userId))) {
                                 // an accepted request exists, and the current user is either
                                 // the owner or borrower-to-be.
                                 if (item.getOwner().getUid().equals(userId)) {
                                     // the user is the owner
-                                    switch (item.getAcceptedRequest().getStatus()) {
+                                    switch (item.acceptedRequest().getStatus()) {
                                         case Request.ACCEPTED:
                                             showOwnerInitiate(v, item);
                                             Snackbar.make(findViewById(R.id.scanIsbn), "Handover process initiated. Waiting on borrower scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
@@ -78,7 +93,7 @@ public class ScanIsbnActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     // the user is the borrower
-                                    switch (item.getAcceptedRequest().getStatus()) {
+                                    switch (item.acceptedRequest().getStatus()) {
                                         case Request.PENDING_BORROWER_SCAN:
                                             item.finishBorrowHandover();
                                             Snackbar.make(findViewById(R.id.scanIsbn), "Handover process complete. You are now the book borrower. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
@@ -115,8 +130,16 @@ public class ScanIsbnActivity extends AppCompatActivity {
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScanIsbnActivity.this, CameraActivity.class);
-                startActivityForResult(intent, 0);
+                if (ContextCompat.checkSelfPermission(ScanIsbnActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ScanIsbnActivity.this,
+                            new String[]{Manifest.permission.CAMERA}, 1);
+                }
+                else {
+                    Intent intent = new Intent(ScanIsbnActivity.this, CameraActivity.class);
+                    startActivityForResult(intent, 0);
+
+                }
             }
         });
     }
@@ -142,6 +165,11 @@ public class ScanIsbnActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method initiates the handover process from a owner from a book request.
+     * @param v: from a findBookButton click. Brought up for a request
+     * @param item: the book from the owner that is being requested by a borrower
+     */
     private void showOwnerInitiate(View v, final Book item) {
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setTitle("Choose an option:");
@@ -162,6 +190,11 @@ public class ScanIsbnActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * This method initiates the return process from a borrower to the owner of the book.
+     * @param v: from a findBookButton click. Brought up for a request
+     * @param item: the book from the owner that is being requested by a borrower
+     */
     private void showBorrowerInitiate(View v, final Book item) {
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setTitle("Choose an option:");
@@ -182,6 +215,10 @@ public class ScanIsbnActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * This method moves to ViewBookActivity to see the book's descriptors.
+     * @param item: the book object to be looked at.
+     */
     private void goToViewBook(Book item) {
         Intent intent = new Intent(ScanIsbnActivity.this, ViewBookActivity.class);
         final Bundle bundle = new Bundle();

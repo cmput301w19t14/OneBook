@@ -1,5 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.activities.ScanIsbnActivity;
@@ -29,9 +34,9 @@ import ca.ualberta.c301w19t14.onebook.adapters.NotificationsAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
 
 /**
- * Handles displaying notifications, and showing action buttons.
- *
- * @author Dimitri, Ana
+ * This fragment handles displaying notifications and showing action buttons.
+ * @author CMPUT301 Team14: Dimitri T, Ana B
+ * @version 1.0
  */
 public class NotificationFragment extends Fragment {
     View v;
@@ -73,7 +78,7 @@ public class NotificationFragment extends Fragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.camera_toolbar, menu);
+        inflater.inflate(R.menu.camera_clear_toolbar, menu);
     }
 
     /**
@@ -88,6 +93,29 @@ public class NotificationFragment extends Fragment {
         if(id == R.id.quick_scan) {
             startActivity(new Intent(getContext(), ScanIsbnActivity.class));
             return true;
+        }
+
+        else if (id == R.id.quick_clear) {
+            AlertDialog.Builder fBuilder = new AlertDialog.Builder(this.getContext());
+
+            fBuilder.setPositiveButton("CLEAR", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final int size = notifications.size();
+                    if (size > 0) {
+                        for (int i = 0; i < size; i++) {
+                            notifications.remove(0);
+                        }
+                        ba.notifyItemRangeRemoved(0, size);
+                    }
+                    String firebaseUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Notification.deleteAllForUser(firebaseUserId);
+                }
+            });
+            fBuilder.setTitle("Do you want to clear all of your notification?");
+
+            AlertDialog fDialog = fBuilder.create();
+            fDialog.show();
         }
 
         return false;
@@ -134,6 +162,7 @@ public class NotificationFragment extends Fragment {
                 }
 
                 loader.setVisibility(View.GONE);
+                Collections.reverse(notifications);
                 ba.notifyDataSetChanged();
             }
 

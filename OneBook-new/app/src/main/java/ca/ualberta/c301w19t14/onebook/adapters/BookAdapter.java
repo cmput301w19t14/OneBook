@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,23 +15,28 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-//import de.hdodenhof.circleimageview.CircleImageView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-/**This class is used to create all of the recycler views that list books.
- This includes the Search Book View, the Lending View, and the Borrowing View.
- * @author CMPUT 301 Team 14
+/**
+ * This class is used to create all of the recycler views that list books.
+ * Includes the Search Book View, the Lending View, and the Borrowing View.
+ *
+ * @author CMPUT301 Team14: Dustin, Dimitri, Oran
+ * @version 1.0
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
@@ -39,11 +45,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public Context mContext;
     public Boolean mode;
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference;
 
     /**
      *
-     * @param context
+     * @param context:
      * @param bookList
      * @param mode
      */
@@ -73,30 +78,21 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(i);
         bookVh.book = book;
 
-
         bookVh.vTitle.setText(book.getTitle());
         bookVh.vOwner.setText(book.getOwner().getName());
         bookVh.vStatus.setText(book.status().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
-        try {
-            storage.getReference().child("Book images/" + book.getId() + "/bookimage.png").getBytes(Long.MAX_VALUE)
-                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            bookVh.vImage.setImageBitmap(bitmap);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
+        bookVh.vImage.setImageResource(R.drawable.book64);
+        StorageReference ref = storage.getReference().child("Book images/" + book.getId() + "/bookimage.png");
+        ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()) {
+                    Glide.with(mContext).load(task.getResult()).placeholder(R.drawable.book64).into(bookVh.vImage);
                 }
-            });
-        }
-        catch(Exception e)
-        {
-            Log.d("Book adapter", "onBindViewHolder: no image");
-        }
+            }
+        });
+
     }
 
     /**
@@ -114,9 +110,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return new BookViewHolder(itemView);
     }
 
-    /**
-     *
-     */
     public class BookViewHolder extends RecyclerView.ViewHolder {
         protected TextView vStatus;
         protected TextView vOwner;
@@ -158,8 +151,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
-
-
                 }
             });
         }

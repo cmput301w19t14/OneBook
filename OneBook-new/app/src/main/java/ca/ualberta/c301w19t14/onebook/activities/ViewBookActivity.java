@@ -12,7 +12,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,9 +32,12 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
- * View book information page.
+ * This class implement a view book information page.
+ * Shows all the descriptors for the book and allows updating by the owner
+ * for each of the descriptors.
  *
- * @author Dimitri Trofimuk, Oran R
+ * @author CMPUT301 Team14: Dimitri T, Oran R
+ * @version 1.0
  */
 
 public class ViewBookActivity extends AppCompatActivity {
@@ -46,7 +48,10 @@ public class ViewBookActivity extends AppCompatActivity {
     private String book_id = null;
     private boolean hasImage = false;
 
-
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,60 +90,10 @@ public class ViewBookActivity extends AppCompatActivity {
 
 
         // TODO: Click owner, go to view profile.
-
-        Button locationButton = findViewById(R.id.location);
-
-        if(book.getAcceptedRequest() != null &&
-                (book.userIsOwner() ||
-                        book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
-        ) {
-            locationButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
-                    intent.putExtra("book_id", book.getId());
-                    // TODO: Show snackbar after location set
-                    startActivityForResult(intent, 1);
-                }
-            });
-        } else {
-            locationButton.setVisibility(View.GONE);
-        }
-
-        Button requestsButton = findViewById(R.id.requests);
-        if(book.userIsOwner()) {
-            requestsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ViewBookActivity.this, ViewRequestsActivity.class);
-                    intent.putExtra("id", book.getId());
-                    startActivity(intent);
-                }
-            });
-        } else {
-            requestsButton.setVisibility(View.GONE);
-        }
-
-        final Button requestButton = findViewById(R.id.request);
-        if(book.userCanRequest()) {
-            requestButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Request.requestBook(Globals.getCurrentUser(),book);
-                    requestButton.setVisibility(View.GONE);
-                    findViewById(R.id.divider7).setVisibility(View.GONE);
-                    Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            requestButton.setVisibility(View.GONE);
-            findViewById(R.id.divider7).setVisibility(View.GONE);
-        }
     }
 
     @Override
     public void onResume(){
-        Log.e("ERROR", "onResume");
         super.onResume();
 
         if(!book_id.isEmpty()) {
@@ -150,6 +105,10 @@ public class ViewBookActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * This method will display all the book's descriptors at the moment.
+     * @param id: the book's id. Referred by in the database.
+     */
     private void updateData(String id) {
         if(id != null) {
             book = Book.find(id);
@@ -187,6 +146,54 @@ public class ViewBookActivity extends AppCompatActivity {
                     hasImage = false;
                 }
             });
+            Button locationButton = findViewById(R.id.location);
+
+            if(book.acceptedRequest() != null &&
+                    (book.userIsOwner() ||
+                            book.acceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
+            ) {
+                locationButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
+                        intent.putExtra("book_id", book.getId());
+                        // TODO: Show snackbar after location set
+                        startActivityForResult(intent, 1);
+                    }
+                });
+            } else {
+                locationButton.setVisibility(View.GONE);
+            }
+
+            Button requestsButton = findViewById(R.id.requests);
+            if(book.userIsOwner()) {
+                requestsButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewBookActivity.this, ViewRequestsActivity.class);
+                        intent.putExtra("id", book.getId());
+                        startActivity(intent);
+                    }
+                });
+            } else {
+                requestsButton.setVisibility(View.GONE);
+            }
+
+            final Button requestButton = findViewById(R.id.request);
+            if(book.userCanRequest()) {
+                requestButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Request.requestBook(Globals.getCurrentUser(),book);
+                        requestButton.setVisibility(View.GONE);
+                        findViewById(R.id.divider7).setVisibility(View.GONE);
+                        Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                requestButton.setVisibility(View.GONE);
+                findViewById(R.id.divider7).setVisibility(View.GONE);
+            }
         }
     }
 
@@ -216,7 +223,7 @@ public class ViewBookActivity extends AppCompatActivity {
             case R.id.editIcon:
                 Intent edit = new Intent(this, EditBookActivity.class);
                 edit.putExtra("id", book.getId());
-                startActivity(edit);
+                startActivityForResult(edit, 1);
                 break;
             case R.id.deleteIcon:
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -243,5 +250,4 @@ public class ViewBookActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -5,12 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,22 +24,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.activities.ScanIsbnActivity;
 import ca.ualberta.c301w19t14.onebook.adapters.BookAdapter;
-import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.SearchingActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
-import ca.ualberta.c301w19t14.onebook.models.Notification;
-import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 /**
- * Shows the current books a user is borrowing.
- *
- * @author Dustin, Ana, Dimitri
+ * This fragment shows a list of books a user is currently borrowing.
+ * @author CMPUT301 Team14: Dustin M, Ana B, Dimitri T
+ * @version 1.0
  */
 public class BorrowingFragment extends Fragment {
 
@@ -53,13 +46,11 @@ public class BorrowingFragment extends Fragment {
     private BookAdapter ba;
 
     String[] filterOptions = new String[] {
-            "Available",
             "Borrowed",
             "Requested",
             "Accepted",
     };
     public static boolean[] checkedFilters = new boolean[]{
-            true,
             true,
             true,
             true
@@ -112,7 +103,6 @@ public class BorrowingFragment extends Fragment {
 
     /**
      * Creates the options menu (top right).
-     *
      * @param menu options menu
      * @param inflater MenuInflater
      */
@@ -123,8 +113,7 @@ public class BorrowingFragment extends Fragment {
 
     /**
      * Handles selecting an options menu item.
-     *
-     * @param item android id of the item clicked
+     * @param item: android id of the item clicked
      * @return boolean if the item was handled or not
      */
     @Override
@@ -161,7 +150,7 @@ public class BorrowingFragment extends Fragment {
     }
 
     /**
-     * Loads borrowed books from database.
+     * This method loads borrowed books from database.
      * Manipulates the views during loading.
      */
     private void loadData() {
@@ -180,6 +169,8 @@ public class BorrowingFragment extends Fragment {
                     Book r = ds.getValue(Book.class);
                     if(r.getBorrower() != null && r.getBorrower().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         books.add(r);
+                    } else if(r.userHasRequest(Globals.getCurrentUser())) {
+                        books.add(r);
                     }
                 }
 
@@ -194,10 +185,13 @@ public class BorrowingFragment extends Fragment {
         });
     }
 
+    /**
+     * This methods filters through the data as a search is happening.
+     */
     private void filterData() {
         filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             if(checkedFilters[i]) {
                 statuses.add(filterOptions[i]);
             }

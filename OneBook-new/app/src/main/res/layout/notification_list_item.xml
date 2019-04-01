@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="9dp">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/icon"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_gravity="left"

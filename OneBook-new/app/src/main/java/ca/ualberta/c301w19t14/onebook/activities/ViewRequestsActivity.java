@@ -1,11 +1,18 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -15,9 +22,11 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
- * Shows all the requests on a book.
+ * This class shows all the requests on a book.
  *
- * @author Dimitri
+ * @author CMPUT301 Team14: Dimitri T
+ * @version 1.0
+ *
  */
 public class ViewRequestsActivity extends AppCompatActivity {
 
@@ -28,9 +37,8 @@ public class ViewRequestsActivity extends AppCompatActivity {
 
     /**
      * Initializes the view, adapter and recyclerView.
-     *
      * @see this.loadData()
-     * @param savedInstanceState
+     * @param savedInstanceState: instance state last used.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class ViewRequestsActivity extends AppCompatActivity {
     }
 
     /**
-     * Loads borrowed books from database.
+     * This method loads borrowed books from database.
      * Manipulates the views during loading.
      */
     private void loadData() {
@@ -57,19 +65,36 @@ public class ViewRequestsActivity extends AppCompatActivity {
         findViewById(R.id.requestList).setVisibility(View.GONE);
         loader.setVisibility(View.VISIBLE);
 
-        if(book.getRequest() != null) {
-            requests.addAll(book.getRequest().values());
-        }
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference("Books").child(book.getId());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                requests.clear();
+                if(dataSnapshot.child("request").exists()) {
+                    for (DataSnapshot ds : dataSnapshot.child("request").getChildren()) {
+                        requests.add(ds.getValue(Request.class));
+                    }
+                }
 
-        if(requests.isEmpty()) {
-            findViewById(R.id.noData).setVisibility(View.VISIBLE);
-            findViewById(R.id.requestList).setVisibility(View.GONE);
-        } else {
-            findViewById(R.id.noData).setVisibility(View.GONE);
-            findViewById(R.id.requestList).setVisibility(View.VISIBLE);
-        }
 
-        loader.setVisibility(View.GONE);
-        adapter.notifyDataSetChanged();
+                if(requests.isEmpty()) {
+                    findViewById(R.id.noData).setVisibility(View.VISIBLE);
+                    findViewById(R.id.requestList).setVisibility(View.GONE);
+                } else {
+                    findViewById(R.id.noData).setVisibility(View.GONE);
+                    findViewById(R.id.requestList).setVisibility(View.VISIBLE);
+                }
+
+                loader.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
