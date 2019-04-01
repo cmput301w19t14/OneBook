@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -144,7 +145,6 @@ public class ViewBookActivity extends AppCompatActivity {
 
     @Override
     public void onResume(){
-        Log.e("ERROR", "onResume");
         super.onResume();
 
         if(!book_id.isEmpty()) {
@@ -226,7 +226,7 @@ public class ViewBookActivity extends AppCompatActivity {
             case R.id.editIcon:
                 Intent edit = new Intent(this, EditBookActivity.class);
                 edit.putExtra("id", book.getId());
-                startActivity(edit);
+                startActivityForResult(edit, 1);
                 break;
             case R.id.deleteIcon:
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -253,5 +253,4 @@ public class ViewBookActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

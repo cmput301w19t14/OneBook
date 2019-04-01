@@ -22,13 +22,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -60,8 +64,6 @@ public class EditBookActivity extends AppCompatActivity {
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference book_ref;
 
-    private Book book;
-
     /**
      * Initializes the view.
      * @param savedInstanceState
@@ -72,7 +74,6 @@ public class EditBookActivity extends AppCompatActivity {
         setContentView(R.layout.edit_book_main);
 
         Intent intent = getIntent();
-        book = Book.find(intent.getStringExtra("id"));
 
         image = findViewById(R.id.bookPhoto);
         title = findViewById(R.id.title);
@@ -80,97 +81,111 @@ public class EditBookActivity extends AppCompatActivity {
         isbn = findViewById(R.id.isbn);
         description = findViewById(R.id.description);
 
-        final Bundle bundle = intent.getExtras();
-        final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
-        book_ref = storage.getReference().child("Book images/"+book.getId()+"/bookimage.png");
+        final ProgressBar loader = findViewById(R.id.loader);
+        loader.setVisibility(View.VISIBLE);
 
-        // set the current data
-        title.setText(book.getTitle());
-        author.setText(book.getAuthor());
-        isbn.setText(Long.toString(book.getIsbn()));
-        description.setText(book.getDescription());
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference ref = db.getReference("Books").child(intent.getStringExtra("id"));
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        book_ref.getBytes(Long.MAX_VALUE)
-                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                        image.setImageBitmap(bitmap);
-                        image.setImageAlpha(255);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+                final Book book = dataSnapshot.getValue(Book.class);
+                title.setText(book.getTitle());
+                author.setText(book.getAuthor());
+                isbn.setText(Long.toString(book.getIsbn()));
+                description.setText(book.getDescription());
+
+                book_ref = storage.getReference().child("Book images/"+book.getId()+"/bookimage.png");
+
+                // set the current data
+
+                book_ref.getBytes(Long.MAX_VALUE)
+                        .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                                image.setImageBitmap(bitmap);
+                                image.setImageAlpha(255);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
                     @Override public void onFailure(@NonNull Exception e) { }});
 
-        editphoto = findViewById(R.id.addPhoto);
-        editphoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(EditBookActivity.this, Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(EditBookActivity.this,
-                            new String[]{Manifest.permission.CAMERA}, 1);
-                }
-                else {
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    }
-                }
-            }
-        });
-
-        Button saveButton =  findViewById(R.id.save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                book.setAuthor(author.getText().toString());
-                book.setTitle(title.getText().toString());
-                book.setDescription(description.getText().toString());
-                book.setIsbn(Long.valueOf(isbn.getText().toString()));
-                book.update();
-
-                finish();
-                //committing image to fire base storage
-                runOnUiThread(new Runnable() {
+                editphoto = findViewById(R.id.addPhoto);
+                editphoto.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void run() {
-                        try {
-                            Bitmap imageBitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                            byte[] byteArray = baos.toByteArray();
-                            UploadTask uploadTask = book_ref.putBytes(byteArray);
-                            uploadTask.addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditBookActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                    Toast.makeText(EditBookActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                    public void onClick(View v) {
+                        if (ContextCompat.checkSelfPermission(EditBookActivity.this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(EditBookActivity.this,
+                                    new String[]{Manifest.permission.CAMERA}, 1);
                         }
-                        catch(ClassCastException e)
-                        {
-                            book_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(EditBookActivity.this, "Data deleted", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditBookActivity.this, "Data is still there idiot", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                        else {
+                            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                            }
                         }
                     }
                 });
+
+                Button saveButton =  findViewById(R.id.save);
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        book.setAuthor(author.getText().toString());
+                        book.setTitle(title.getText().toString());
+                        book.setDescription(description.getText().toString());
+                        book.setIsbn(Long.valueOf(isbn.getText().toString()));
+                        book.update();
+                        //committing image to fire base storage
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    loader.setVisibility(View.VISIBLE);
+                                    Bitmap imageBitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                    imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                                    byte[] byteArray = baos.toByteArray();
+                                    UploadTask uploadTask = book_ref.putBytes(byteArray);
+                                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                        }
+                                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            finish();
+                                        }
+                                    });
+
+
+                                }
+                                catch(ClassCastException e)
+                                {
+                                    book_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                    }
+                });
+
+                loader.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
