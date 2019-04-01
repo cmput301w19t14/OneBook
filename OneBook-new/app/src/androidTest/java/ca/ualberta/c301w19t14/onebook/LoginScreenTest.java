@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -39,12 +42,19 @@ public class LoginScreenTest {
     //REFERENCe
     //onView(withId(R.layout.fui_email_link_sign_in_layout)
 
+    @Before
+    public void init(){
+        FirebaseAuth.getInstance().signOut();
+    }
+
     @Test
     public void CheckLoginScreen() throws InterruptedException {
 
         email = "UITest@gmail.com";
         password = "test123";
         actual_name = "John Smith";
+
+        Thread.sleep(1000);
 
         Intent i = new Intent();
         activityRule.launchActivity(i);
@@ -72,7 +82,7 @@ public class LoginScreenTest {
 
         //now we should be at the my account fragment.
         //check to see that "John Smith" is the name on display
-        onView(withId(R.id.Name)).check(matches(withText("Name: " + actual_name)));
+        onView(withId(R.id.Name)).check(matches(withText(actual_name)));
 
 
         //InfiniteLoop();

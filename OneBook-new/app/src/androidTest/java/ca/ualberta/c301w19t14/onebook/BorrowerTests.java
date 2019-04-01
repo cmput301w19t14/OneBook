@@ -84,19 +84,18 @@ public class BorrowerTests {
     @Test
     public void CheckBookDetails() throws InterruptedException{
 
-
-
         Thread.sleep(1500);
+
 
         //Check to see if the title of the book is what it should be
         onView(new RecyclerViewMatcher(this.resID)
-                        .atPositionOnView(0, R.id.bookTitle))
+                        .atPositionOnView(1, R.id.bookTitle))
                 .check(matches(withText("Polywogs and jiblegarble")));
 
         //check to see if the book is borrowed (it should be)
         onView(new RecyclerViewMatcher(this.resID)
-                .atPositionOnView(0, R.id.bookStatus))
-                .check(matches(withText("REQUESTED")));
+                .atPositionOnView(1, R.id.bookStatus))
+                .check(matches(withText("BORROWED")));
 
     }
 
