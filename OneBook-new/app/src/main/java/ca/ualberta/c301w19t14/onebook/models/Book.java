@@ -1,5 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -224,7 +226,11 @@ public class Book {
      * @return Request|null
      */
     public Request getNextRequest() {
+        Log.e("DEBUG", "getNextRequest()");
+
         if(this.getRequest() != null && !this.getRequest().isEmpty()) {
+            Log.e("DEBUG", "not empty getNextRequest()");
+
             TreeMap<String, Request> sortedRequests = new TreeMap<>(this.getRequest());
             return sortedRequests.firstEntry().getValue();
         }
@@ -327,7 +333,9 @@ public class Book {
 
     public void waitlistDoNext() {
         Request next = this.getNextRequest();
+        Log.e("DEBUG", "we got to before next waitlistDoNext()");
         if(next != null) {
+            Log.e("DEBUG", "we got to next waitlistDoNext()");
             Notification borrower = new Notification("Book Requested", "You're next in line to receive " + next.getBook().getTitle(), next.getUser(), Notification.BOOK);
             Notification owner = new Notification("New Request on Book", next.getUser().getName() + " has requested " + next.getBook().getTitle(), next, next.getBook().getOwner(), Notification.BOOK);
             borrower.save();

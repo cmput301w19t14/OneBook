@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -154,11 +155,16 @@ public class Request {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book newBook = dataSnapshot.getValue(Book.class);
                 // delete the request
+                Log.e("DEBUG", "onDataChange()");
 
                 if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
+                    Log.e("DEBUG", "acceptedRequest()");
+
                     newBook.waitlistDoNext();
                 } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
+                    Log.e("DEBUG", "acceptedRequest()");
+
                     newBook.waitlistDoNext();
                 }
 
