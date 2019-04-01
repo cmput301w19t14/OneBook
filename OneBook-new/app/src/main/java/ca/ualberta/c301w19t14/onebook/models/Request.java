@@ -146,6 +146,7 @@ public class Request {
         Book book = this.getBook();
 
         final Request request = this;
+        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books").child(book.getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -153,7 +154,6 @@ public class Request {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book book = dataSnapshot.getValue(Book.class);
                 // delete the request
-                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                 if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
