@@ -73,7 +73,7 @@ public class Request {
 
                 // create notifications
                 Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user, Notification.BOOK);
-                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner(), Notification.BOOK);
+                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle() + ". Click to approve or reject.", request, book.getOwner(), Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -84,7 +84,7 @@ public class Request {
                 hMap = book.getRequest();
 
                 // create notifications
-                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
+                Notification borrower = new Notification("Book Requested", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
 
                 // send notifications
                 borrower.save();
