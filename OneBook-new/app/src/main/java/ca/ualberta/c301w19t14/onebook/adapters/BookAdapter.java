@@ -139,11 +139,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     Bundle bundle = new Bundle();
                     bundle.putString("id", book.getId());
 
-                    //DEBUG - remove later
-                    Toast toast = Toast
-                            .makeText(mContext, "Book ID: " + book.getTitle(), Toast.LENGTH_SHORT);
-                    toast.show();
-
                     //if the user clicks on a book they own, they will get a view page that allows edits
                     //if the user clicks on a book they do not own, they will get a view page that doesn't allow edits
                     String current_user = FirebaseAuth.getInstance().getCurrentUser().getEmail();

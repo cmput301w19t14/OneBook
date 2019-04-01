@@ -20,10 +20,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import ca.ualberta.c301w19t14.onebook.models.Book;
@@ -41,7 +47,7 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
  */
 
 public class ViewBookActivity extends AppCompatActivity {
-    private Book book;
+    private Book globalBook;
     public ImageView image;
     public RecyclerView recyclerView;
 
@@ -109,97 +115,114 @@ public class ViewBookActivity extends AppCompatActivity {
      * This method will display all the book's descriptors at the moment.
      * @param id: the book's id. Referred by in the database.
      */
-    private void updateData(String id) {
+    private void updateData(final String id) {
         if(id != null) {
-            book = Book.find(id);
+            final ProgressBar loader = findViewById(R.id.loader);
+            loader.setVisibility(View.VISIBLE);
 
-            TextView title = findViewById(R.id.title);
-            TextView author = findViewById(R.id.author);
-            TextView isbn = findViewById(R.id.isbn);
-            TextView owner = findViewById(R.id.owner);
-            TextView description = findViewById(R.id.description);
-            TextView status = findViewById(R.id.status);
-
-            title.setText(book.getTitle());
-            author.setText(book.getAuthor());
-            isbn.setText(Long.toString(book.getIsbn()));
-            owner.setText(book.getOwner().getName());
-            description.setText(book.getDescription());
-
-            String str_status = book.status();
-            status.setText(str_status);
-            final ImageView bookimage = findViewById(R.id.bookImage);
-
-            FirebaseStorage.getInstance().getReference().child("Book images/"+id+"/bookimage.png").getBytes(Long.MAX_VALUE)
-                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference ref = db.getReference("Books").child(id);
+            ref.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onSuccess(byte[] bytes) {
-                    if(bytes != null) {
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                        bookimage.setImageBitmap(bitmap);
-                        hasImage = true;
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    hasImage = false;
-                }
-            });
-            Button locationButton = findViewById(R.id.location);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    final Book book = dataSnapshot.getValue(Book.class);
+                    globalBook = book;
+                    invalidateOptionsMenu();
+                    TextView title = findViewById(R.id.title);
+                    TextView author = findViewById(R.id.author);
+                    TextView isbn = findViewById(R.id.isbn);
+                    TextView owner = findViewById(R.id.owner);
+                    TextView description = findViewById(R.id.description);
+                    TextView status = findViewById(R.id.status);
 
-            if(book.acceptedRequest() != null &&
-                    (book.userIsOwner() ||
-                            book.acceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
-            ) {
-                locationButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
-                        intent.putExtra("book_id", book.getId());
-                        // TODO: Show snackbar after location set
-                        startActivityForResult(intent, 1);
-                    }
-                });
-            } else {
-                locationButton.setVisibility(View.GONE);
-            }
+                    title.setText(book.getTitle());
+                    author.setText(book.getAuthor());
+                    isbn.setText(Long.toString(book.getIsbn()));
+                    owner.setText(book.getOwner().getName());
+                    description.setText(book.getDescription());
+                    loader.setVisibility(View.GONE);
 
-            Button requestsButton = findViewById(R.id.requests);
-            if(book.userIsOwner()) {
-                requestsButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ViewBookActivity.this, ViewRequestsActivity.class);
-                        intent.putExtra("id", book.getId());
-                        startActivity(intent);
-                    }
-                });
-            } else {
-                requestsButton.setVisibility(View.GONE);
-            }
+                    String str_status = book.status();
+                    status.setText(str_status);
+                    final ImageView bookimage = findViewById(R.id.bookImage);
 
-            final Button requestButton = findViewById(R.id.request);
-            if(book.userCanRequest()) {
-                requestButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Request.requestBook(Globals.getCurrentUser(),book);
+                    FirebaseStorage.getInstance().getReference().child("Book images/" + id + "/bookimage.png").getBytes(Long.MAX_VALUE)
+                            .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                @Override
+                                public void onSuccess(byte[] bytes) {
+                                    if (bytes != null) {
+                                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        bookimage.setImageBitmap(bitmap);
+                                        hasImage = true;
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            hasImage = false;
+                        }
+                    });
+                    Button locationButton = findViewById(R.id.location);
+
+                    if (book.acceptedRequest() != null &&
+                            (book.userIsOwner() ||
+                                    book.acceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
+                    ) {
+                        locationButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(ViewBookActivity.this, MapsActivity.class);
+                                intent.putExtra("book_id", book.getId());
+                                // TODO: Show snackbar after location set
+                                startActivityForResult(intent, 1);
+                            }
+                        });
+                    } else {
+                        locationButton.setVisibility(View.GONE);
+                    }
+
+                    Button requestsButton = findViewById(R.id.requests);
+                    if (book.userIsOwner()) {
+                        requestsButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(ViewBookActivity.this, ViewRequestsActivity.class);
+                                intent.putExtra("id", book.getId());
+                                startActivity(intent);
+                            }
+                        });
+                    } else {
+                        requestsButton.setVisibility(View.GONE);
+                    }
+
+                    final Button requestButton = findViewById(R.id.request);
+                    if (book.userCanRequest()) {
+                        requestButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Request.requestBook(Globals.getCurrentUser(), book);
+                                requestButton.setVisibility(View.GONE);
+                                findViewById(R.id.divider7).setVisibility(View.GONE);
+                                Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
+                            }
+                        });
+                    } else {
                         requestButton.setVisibility(View.GONE);
                         findViewById(R.id.divider7).setVisibility(View.GONE);
-                        Snackbar.make(findViewById(R.id.viewBook), "Book requested.", Snackbar.LENGTH_LONG).show();
                     }
-                });
-            } else {
-                requestButton.setVisibility(View.GONE);
-                findViewById(R.id.divider7).setVisibility(View.GONE);
-            }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(book != null && book.userIsOwner()) {
+        if(globalBook != null && globalBook.userIsOwner()) {
             return true;
         } else {
             return false;
@@ -222,7 +245,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 return true;
             case R.id.editIcon:
                 Intent edit = new Intent(this, EditBookActivity.class);
-                edit.putExtra("id", book.getId());
+                edit.putExtra("id", globalBook.getId());
                 startActivityForResult(edit, 1);
                 break;
             case R.id.deleteIcon:
@@ -234,7 +257,7 @@ public class ViewBookActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // update request location
                                 dialog.dismiss();
-                                book.delete();
+                                globalBook.delete();
                                 finish();
                             }
                         });

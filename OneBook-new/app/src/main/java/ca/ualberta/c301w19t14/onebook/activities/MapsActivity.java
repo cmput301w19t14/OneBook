@@ -113,45 +113,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     List<Address> addresses;
                     geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
 
-                    final Marker marker = mMap.addMarker(new MarkerOptions().position(point).title("New Pick Up Location"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
-
-                    String addr;
-
                     try {
                         addresses = geocoder.getFromLocation(point.latitude, point.longitude, 1);
-                        addr = addresses.get(0).getAddressLine(0);
-                    } catch (IOException e) {
+                        final String address = addresses.get(0).getAddressLine(0);
+                        final Marker marker = mMap.addMarker(new MarkerOptions().position(point).title("New Pick Up Location"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
+                        AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
+                        alertDialog.setTitle("Set New Location");
+                        alertDialog.setMessage(address);
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // update request location
+                                        book.acceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
+                                        book.update();
+                                        Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.acceptedRequest().getUser(), Notification.MARKER);
+                                        notification.save();
+                                        dialog.dismiss();
+                                        finish();
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        marker.remove();
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+
+                    } catch (Exception e) {
                         Toast.makeText(MapsActivity.this, "Invalid location, please try again.", Toast.LENGTH_SHORT).show();
-                        marker.remove();
-                        return;
                     }
 
-                    final String address = addr;
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
-                    alertDialog.setTitle("Set New Location");
-                    alertDialog.setMessage(address);
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // update request location
-                                    book.acceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
-                                    book.update();
-                                    Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.acceptedRequest().getUser(), Notification.MARKER);
-                                    notification.save();
-                                    dialog.dismiss();
-                                    finish();
-                                }
-                            });
-                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    marker.remove();
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
                 }
             });
         } else if(book.acceptedRequest().getLocation() == null) {
