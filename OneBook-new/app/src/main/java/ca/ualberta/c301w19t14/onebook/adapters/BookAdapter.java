@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,9 +31,9 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
 /**
  * This class is used to create all of the recycler views that list books.
  * Includes the Search Book View, the Lending View, and the Borrowing View.
- * @author CMPUT301 Team14: CCID
- * @version 1.0
  *
+ * @author CMPUT301 Team14: Dustin, Dimitri, Oran
+ * @version 1.0
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
@@ -41,7 +42,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public Context mContext;
     public Boolean mode;
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference;
 
     /**
      *
@@ -75,30 +75,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(i);
         bookVh.book = book;
 
-
         bookVh.vTitle.setText(book.getTitle());
         bookVh.vOwner.setText(book.getOwner().getName());
         bookVh.vStatus.setText(book.status().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
-        try {
-            storage.getReference().child("Book images/" + book.getId() + "/bookimage.png").getBytes(Long.MAX_VALUE)
-                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            bookVh.vImage.setImageBitmap(bitmap);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
 
-                }
-            });
-        }
-        catch(Exception e)
-        {
-            Log.d("Book adapter", "onBindViewHolder: no image");
-        }
+        StorageReference ref = storage.getReference().child("Book images/" + book.getId() + "/bookimage.png");
+        Glide.with(mContext).load(ref).placeholder(R.drawable.book64).into(bookVh.vImage);
     }
 
     /**
@@ -157,8 +140,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                         Intent intent = new Intent(mContext, ViewBookActivity.class);
                         intent.putExtras(bundle);
                         mContext.startActivity(intent);
-
-
                 }
             });
         }

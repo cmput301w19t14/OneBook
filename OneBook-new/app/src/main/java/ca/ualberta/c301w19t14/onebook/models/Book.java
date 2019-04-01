@@ -204,6 +204,9 @@ public class Book {
     public boolean userHasRequest(User user) {
         if(this.getRequest() != null) {
             for (Request r : this.getRequest().values()) {
+                if(r.getUser() == null) {
+                    return false;
+                }
                 if (r.getUser().getUid().equals(user.getUid())) {
                     return true;
                 }

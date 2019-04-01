@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.adapters.ViewPageAdapter;
-import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 /**
  * This class implements the Messaging Functionality in different fragments for the app.
@@ -24,7 +23,6 @@ import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 public class MessagesFragment extends Fragment {
 
     View myView;
-    GeneralUtil util;
     Globals globals;
 
     ViewPageAdapter viewPageAdapter;
@@ -43,7 +41,6 @@ public class MessagesFragment extends Fragment {
 
         //get globals
         globals = Globals.getInstance();
-        util = new GeneralUtil();
 
         TabLayout tabLayout = myView.findViewById(R.id.tabLayout);
         ViewPager viewPager = myView.findViewById(R.id.viewPager);

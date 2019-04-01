@@ -5,12 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,17 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.activities.ScanIsbnActivity;
 import ca.ualberta.c301w19t14.onebook.adapters.BookAdapter;
-import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.SearchingActivity;
 import ca.ualberta.c301w19t14.onebook.models.Book;
-import ca.ualberta.c301w19t14.onebook.models.Notification;
-import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 /**
  * This fragment shows a list of books a user is currently borrowing.
@@ -177,6 +170,8 @@ public class BorrowingFragment extends Fragment {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Book r = ds.getValue(Book.class);
                     if(r.getBorrower() != null && r.getBorrower().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        books.add(r);
+                    } else if(r.userHasRequest(Globals.getCurrentUser())) {
                         books.add(r);
                     }
                 }

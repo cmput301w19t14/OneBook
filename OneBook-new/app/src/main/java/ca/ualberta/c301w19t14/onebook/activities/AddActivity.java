@@ -33,15 +33,16 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.User;
+import ca.ualberta.c301w19t14.onebook.fragments.LendingFragment;
 
 /**
  * This class adds a book to the database after the owner scans a ISBN or manually inputs
  * the book's descriptors.
+ *
  * @author CMPUT301 Team14: Oran R, Dimitri T
  * @version 1.0
- * @see ca.ualberta.c301w19t14.onebook.fragments.LendingFragment {@link #onCreateView}
+ * @see LendingFragment {@link #onCreateView}
  * @see ScanIsbnActivity {@link #onCreate}
- *
  */
 public class AddActivity extends AppCompatActivity {
 

@@ -22,7 +22,6 @@ import ca.ualberta.c301w19t14.onebook.fragments.MessagesFragment;
 import ca.ualberta.c301w19t14.onebook.fragments.MyProfileFragment;
 import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
 import ca.ualberta.c301w19t14.onebook.R;
-import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 /**
  * This class implements the main functionality of the app.
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar = null;
     Globals globals;
-    GeneralUtil util;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        util = new GeneralUtil();
 
         //open fragments depending on what was clicked in the nagivation menu
         if (id == R.id.nav_notifications) {

@@ -22,7 +22,7 @@ import ca.ualberta.c301w19t14.onebook.R;
 
 /**
  * This class opens up the camera to scan a ISBN.
- * @author CMPUT301 Team14: CCID
+ * @author CMPUT301 Team14: Ana B.
  * @version 1.0
  * @see ScanIsbnActivity {@link #onCreate}
  */
@@ -95,13 +95,11 @@ public class CameraActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() > 0) {
                     Intent intent = new Intent();
-                    intent.putExtra("barcode", barcodes.valueAt(0)); // get latest barcode from the array
+                    intent.putExtra("barcode", barcodes.valueAt(0));
                     setResult(CommonStatusCodes.SUCCESS, intent);
                     finish();
                 }
             }
         });
-
-
     }
 }

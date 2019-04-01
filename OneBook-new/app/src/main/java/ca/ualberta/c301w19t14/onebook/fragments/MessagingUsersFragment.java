@@ -27,7 +27,6 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.adapters.MessagingUserAdapter;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.User;
-import ca.ualberta.c301w19t14.onebook.util.GeneralUtil;
 
 /**
  * This class implements user search and displays all users.
@@ -41,7 +40,6 @@ public class MessagingUsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private MessagingUserAdapter messagingUserAdapter;
-    GeneralUtil util;
     Globals globals;
     public ArrayList<User> users = new ArrayList<User>();
 
@@ -55,7 +53,6 @@ public class MessagingUsersFragment extends Fragment {
 
         //get globals
         globals = Globals.getInstance();
-        util = new GeneralUtil();
 
         recyclerView = myView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
