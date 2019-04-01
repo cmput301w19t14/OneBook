@@ -1,13 +1,11 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,6 +71,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -85,8 +84,18 @@ public class MessageActivity extends AppCompatActivity {
 
 
         intent = getIntent();
-        final String userID = intent.getStringExtra("userID");
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser(); 
+        final Bundle bundle = intent.getExtras();
+        final String userID = bundle.getString("ID");
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MessageActivity.this,UserAccountActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

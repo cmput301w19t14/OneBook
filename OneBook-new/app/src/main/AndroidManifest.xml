@@ -7,13 +7,15 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -23,8 +25,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.CameraActivity"></activity>
-        <!-- add mobile vision dependencies and vision to metadata -->
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.CameraActivity" /> <!-- add mobile vision dependencies and vision to metadata -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -32,9 +37,11 @@
             android:name="com.google.android.gms.version.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".activities.ScanIsbnActivity"
-            android:parentActivityName=".activities.MainActivity"
-            android:label = "Barcode Reader" />
+        <activity
+            android:name=".activities.ScanIsbnActivity"
+            android:label="Barcode Reader"
+            android:parentActivityName=".activities.MainActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -42,15 +49,18 @@
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".activities.EditUserActivity"
+        <activity
+            android:name=".activities.EditUserActivity"
             android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.EditBookActivity"
+        <activity
+            android:name=".activities.EditBookActivity"
             android:parentActivityName=".activities.ViewBookActivity" />
-        <activity android:name=".activities.UserAccountActivity"
+        <activity
+            android:name=".activities.UserAccountActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.MessageActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
@@ -69,12 +79,13 @@
             android:name=".activities.SearchingActivity"
             android:label="@string/title_activity_searching_main"
             android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.ViewBookActivity"
+        <activity
+            android:name=".activities.ViewBookActivity"
             android:launchMode="singleTop" />
-
-        <activity android:name=".activities.ViewRequestsActivity"
+        <activity
+            android:name=".activities.ViewRequestsActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".activities.ViewBookActivity"/>
+            android:parentActivityName=".activities.ViewBookActivity" />
         <activity
             android:name=".activities.AddActivity"
             android:label="@string/title_activity_add"

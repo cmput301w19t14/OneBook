@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -55,6 +54,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         String book_id = getIntent().getExtras().getString("book_id");
         book = Globals.getInstance().books.getData().child(book_id).getValue(Book.class);
+
     }
 
     /**
@@ -64,6 +64,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(53.5444, -113.4909)));
 
         if(book.acceptedRequest().getLocation() != null) {
             Location loc = book.acceptedRequest().getLocation();
@@ -111,42 +112,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     List<Address> addresses;
                     geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
 
-                    final Marker marker = mMap.addMarker(new MarkerOptions().position(point).title("New Pick Up Location"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
-
                     try {
                         addresses = geocoder.getFromLocation(point.latitude, point.longitude, 1);
-                    } catch (IOException e) {
+                        final String address = addresses.get(0).getAddressLine(0);
+                        final Marker marker = mMap.addMarker(new MarkerOptions().position(point).title("New Pick Up Location"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
+                        AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
+                        alertDialog.setTitle("Set New Location");
+                        alertDialog.setMessage(address);
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // update request location
+                                        book.acceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
+                                        book.update();
+                                        Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.acceptedRequest().getUser(), Notification.MARKER);
+                                        notification.save();
+                                        dialog.dismiss();
+                                        finish();
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        marker.remove();
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+
+                    } catch (Exception e) {
                         Toast.makeText(MapsActivity.this, "Invalid location, please try again.", Toast.LENGTH_SHORT).show();
-                        marker.remove();
-                        return;
                     }
 
-                    final String address = addresses.get(0).getAddressLine(0);
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
-                    alertDialog.setTitle("Set New Location");
-                    alertDialog.setMessage(address);
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // update request location
-                                    book.acceptedRequest().setLocation(new Location(address, point.latitude, point.longitude));
-                                    book.update();
-                                    Notification notification = new Notification("Pickup Location Set", "The owner of " + book.getTitle() + " set pickup at " + address, book.acceptedRequest().getUser(), Notification.MARKER);
-                                    notification.save();
-                                    dialog.dismiss();
-                                    finish();
-                                }
-                            });
-                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    marker.remove();
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
                 }
             });
         } else if(book.acceptedRequest().getLocation() == null) {

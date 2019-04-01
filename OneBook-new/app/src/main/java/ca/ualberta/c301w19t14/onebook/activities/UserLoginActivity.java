@@ -16,7 +16,7 @@ import ca.ualberta.c301w19t14.onebook.models.User;
  * This class implements the user login functionality.
  * Allows a user to login with an email and password and create will promote new account creation
  * when a user inputs an email that isn't already associated with an account.
- * @author CMPUT301 Team14: CCID
+ * @author CMPUT301 Team14
  */
 public class UserLoginActivity extends AppCompatActivity {
 
@@ -39,6 +39,12 @@ public class UserLoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.

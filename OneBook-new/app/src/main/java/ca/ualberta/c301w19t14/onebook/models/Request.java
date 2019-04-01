@@ -73,7 +73,7 @@ public class Request {
 
                 // create notifications
                 Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user, Notification.BOOK);
-                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner(), Notification.BOOK);
+                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle() + ". Click to approve or reject.", request, book.getOwner(), Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -84,7 +84,7 @@ public class Request {
                 hMap = book.getRequest();
 
                 // create notifications
-                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
+                Notification borrower = new Notification("Book Requested", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -143,7 +143,7 @@ public class Request {
      * Rejects the request, deletes request, and sends notifications
      */
     public void reject() {
-        Book book = this.getBook();
+        final Book book = this.getBook();
 
         final Request request = this;
 
@@ -151,17 +151,20 @@ public class Request {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Book book = dataSnapshot.getValue(Book.class);
-
-                if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
-                    // is the current accepted request
-                    book.waitlistDoNext();
-                } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
-                    book.waitlistDoNext();
-                }
+                Book newBook = dataSnapshot.getValue(Book.class);
+                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                 // delete the request
-                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
+                if(newBook.acceptedRequest() != null && newBook.acceptedRequest().getId().equals(request.getId())) {
+                    // is the current accepted request
+                    newBook.getRequest().remove(request.getId());
+
+                    newBook.waitlistDoNext();
+                } else if(newBook.getNextRequest() != null && newBook.getNextRequest().getId().equals(request.getId())) {
+                    newBook.getRequest().remove(request.getId());
+
+                    newBook.waitlistDoNext();
+                }
 
                 // create notifications
                 Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);

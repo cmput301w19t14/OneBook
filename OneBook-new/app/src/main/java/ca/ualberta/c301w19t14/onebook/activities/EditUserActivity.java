@@ -3,20 +3,25 @@ package ca.ualberta.c301w19t14.onebook.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.PopupWindow;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +38,7 @@ import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
  * This class allows a user to edit their account information.
- * @author CMPUT301 Team14: CCID
+ * @author CMPUT301 Team14: Natalie H, Oran R, Anastasia B
  * @version 1.0
  * @see ca.ualberta.c301w19t14.onebook.fragments.MyProfileFragment {@link #onOptionsItemSelected}
  */
@@ -48,8 +53,8 @@ public class EditUserActivity extends AppCompatActivity {
     private final int REQUEST_IMAGE_GALLERY = 101;
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference profile_ref;
+    private Boolean hasImage;
 
-    Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +69,47 @@ public class EditUserActivity extends AppCompatActivity {
         profilePicture = findViewById(R.id.profilePicture);
         em_edit.setText(Globals.getInstance().user.getEmail());
         nm_edit.setText(Globals.getInstance().user.getDisplayName());
+
+
         profile_ref = storage.getReference("Profile pictures/"+FirebaseAuth.getInstance()
                 .getUid()+"/profile.png");
-
+        
+        profile_ref.getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                if(bytes != null) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    profilePicture.setImageBitmap(bitmap);
+                    hasImage = true;
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Toast.makeText(EditUserActivity.this, "no profile pic", Toast.LENGTH_SHORT).show();
+            }
+        });
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hasImage) {
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popup = inflater.inflate(R.layout.image_pop_up, null);
+                    ImageView picture = popup.findViewById(R.id.ImageCloseUp);
+                    picture.setImageBitmap(((BitmapDrawable) profilePicture.getDrawable()).getBitmap());
+                    int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
+                    popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                    popup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                }
+            }
+        });
         ph_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +151,9 @@ public class EditUserActivity extends AppCompatActivity {
                 String nameInput = nm_edit.getText().toString();
                 String passwordInput = ps_edit.getText().toString();
 
-                User.updateEmail(FirebaseAuth.getInstance().getUid(), emailInput);
                 User.updateName(FirebaseAuth.getInstance().getUid(), nameInput);
+                User.updateEmail(FirebaseAuth.getInstance().getUid(), emailInput);
+
                 if(!passwordInput.isEmpty()) {
                     User.updatePassword(FirebaseAuth.getInstance().getUid(), passwordInput);
                 }
@@ -126,13 +170,11 @@ public class EditUserActivity extends AppCompatActivity {
                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditUserActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                    Toast.makeText(EditUserActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -142,12 +184,10 @@ public class EditUserActivity extends AppCompatActivity {
                             profile_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(EditUserActivity.this, "Data deleted", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditUserActivity.this, "Data is still there idiot", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -176,7 +216,6 @@ public class EditUserActivity extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 final Bitmap imageBitmap = (Bitmap) extras.get("data");
                 profilePicture.setImageBitmap(imageBitmap);
-                Toast.makeText(EditUserActivity.this, "Camera selection", Toast.LENGTH_SHORT).show();
             }
             if(requestCode == REQUEST_IMAGE_GALLERY)
             {
@@ -189,7 +228,6 @@ public class EditUserActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    Toast.makeText(EditUserActivity.this, "Gallery failure", Toast.LENGTH_SHORT).show();
                 }
 
             }
