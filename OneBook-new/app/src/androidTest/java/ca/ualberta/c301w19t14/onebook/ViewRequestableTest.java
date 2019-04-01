@@ -23,16 +23,22 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * This test checks to see that a user can view one of his/her owned books and its details
+ * @author CMPUT301 Team14
+ */
+
 public class ViewRequestableTest {
 
     public Globals globals;
+
+    //Login variables
     public boolean complete;
     public String email = "UITest@gmail.com";
     public String email2 = "UITest2@gmail.com";
     public String password = "test123";
-    private String name = "John Smith";
 
-    //Book details
+    //Book details, for validation
     private String description = "In the depths of the Utah desert, long after the Flame Deluge has " +
         "scoured the earth clean, a monk of the Order...";
     private String author = "Walter M. Miller Jr.";
@@ -40,6 +46,7 @@ public class ViewRequestableTest {
     private long isbn = 9780553273816L;
     private String bookid = "-LbOjjHy4D5iees53kTd";
     private String status = "Available";
+    private String name = "John Smith";
 
     @Rule
     public ActivityTestRule<ViewBookActivity> activityRule =

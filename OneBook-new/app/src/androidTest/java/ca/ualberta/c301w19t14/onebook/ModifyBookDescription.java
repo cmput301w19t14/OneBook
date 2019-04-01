@@ -30,24 +30,26 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
+/**
+ * This test checks to see if a user can change the description of one of his/her owned books
+ * @author CMPUT301 Team14
+ */
+
 public class ModifyBookDescription {
 
+    //Login variables
     public boolean complete;
     public String email = "UITest3@gmail.com";
     public String name = "You Eye";
     public String password = "test789";
-    private String description_prefix = "Description: ";
+
+    //Description strings used for entering and checking (validating)
     public String before_description = "This is a book about the end of the world!";
     private String after_description = "This book is about mayhem and Armageddon.";
 
+    //Variables for functionality
     private Globals globals;
     private int resID = R.id.bookList;
-
-    //input details
-    public String booktitle = "The Art of the Deal";
-    public String bookauthor = "Orange Man";
-    public String bookdescription = "How to business 101";
-    public String bookisbn = "15297723";
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule =
@@ -137,8 +139,6 @@ public class ModifyBookDescription {
         onView(withId(R.id.editIcon)).perform(click());
 
         //now we're in the edit book page. Change the description
-        //onView(withId(R.id.editBookDescription)).perform(typeText(after_description));
-        //TEMP
         onView(withId(R.id.description)).perform(replaceText(""));
         onView(withId(R.id.description)).perform(typeText(before_description));
 
