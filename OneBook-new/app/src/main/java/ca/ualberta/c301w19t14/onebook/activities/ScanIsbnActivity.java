@@ -1,10 +1,14 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -115,8 +119,16 @@ public class ScanIsbnActivity extends AppCompatActivity {
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScanIsbnActivity.this, CameraActivity.class);
-                startActivityForResult(intent, 0);
+                if (ContextCompat.checkSelfPermission(ScanIsbnActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ScanIsbnActivity.this,
+                            new String[]{Manifest.permission.CAMERA}, 1);
+                }
+                else {
+                    Intent intent = new Intent(ScanIsbnActivity.this, CameraActivity.class);
+                    startActivityForResult(intent, 0);
+
+                }
             }
         });
     }

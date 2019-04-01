@@ -5,10 +5,18 @@
     android:padding="10dp"
     android:layout_height="wrap_content">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src = "@drawable/book64"/>
     <TextView
         android:id="@+id/user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profilePicture"
+        android:layout_toEndOf="@id/profilePicture"
         android:text="username"
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
@@ -19,9 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/user"
-        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/profilePicture"
+        android:layout_toEndOf="@id/profilePicture"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:paddingTop="5dp"
-        android:layout_marginLeft="20dp"
         android:maxLines="1"
         android:textColor="@color/colorPrimaryDark"/>
 
