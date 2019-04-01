@@ -64,7 +64,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(53.5444, 113.4909)));
+        mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(53.5444, -113.4909)));
 
         if(book.acceptedRequest().getLocation() != null) {
             Location loc = book.acceptedRequest().getLocation();
