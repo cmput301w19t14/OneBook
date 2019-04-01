@@ -192,7 +192,9 @@ public class SearchingActivity extends AppCompatActivity {
         }
 
         for(Book b : books) {
-            String check = b.getTitle() + b.getAuthor() + Long.toString(b.getIsbn()).toLowerCase();
+            String check = (b.getTitle() + b.getAuthor() + Long.toString(b.getIsbn()) + b.getDescription()).toLowerCase();
+            Log.e("d", check);
+
             if(statuses.contains(b.status()) && check.contains(keyword.toLowerCase())) {
                 filteredBooks.add(b);
             }

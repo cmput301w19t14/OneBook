@@ -27,6 +27,7 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.EditUserActivity;
 import ca.ualberta.c301w19t14.onebook.activities.UserAccountActivity;
 import ca.ualberta.c301w19t14.onebook.models.User;
+import ca.ualberta.c301w19t14.onebook.util.DykUtil;
 
 /**
  * This fragments displays a user profile page with all their information.
@@ -59,6 +60,10 @@ public class MyProfileFragment extends Fragment {
 
         String str_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         nm.setText(str_name);
+
+        DykUtil dyk = new DykUtil();
+        TextView dykText = myView.findViewById(R.id.dyk);
+        dykText.setText(dyk.getDyk());
 
         final ImageView profilePic = myView.findViewById(R.id.profilePicture);
         FirebaseStorage.getInstance().getReference().child("Profile pictures/" +

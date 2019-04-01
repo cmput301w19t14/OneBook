@@ -109,8 +109,6 @@ public class EditUserActivity extends AppCompatActivity {
                 String nameInput = nm_edit.getText().toString();
                 String passwordInput = ps_edit.getText().toString();
 
-
-
                 User.updateEmail(FirebaseAuth.getInstance().getUid(), emailInput);
                 User.updateName(FirebaseAuth.getInstance().getUid(), nameInput);
                 if(!passwordInput.isEmpty()) {
@@ -156,7 +154,8 @@ public class EditUserActivity extends AppCompatActivity {
                         }
                     }
                 });
-                startActivity(new Intent(EditUserActivity.this, MainActivity.class));
+
+                finish();
             }
         });
     }

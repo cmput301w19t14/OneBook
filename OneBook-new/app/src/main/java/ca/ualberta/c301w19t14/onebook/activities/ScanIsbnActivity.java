@@ -69,12 +69,12 @@ public class ScanIsbnActivity extends AppCompatActivity {
                         if (item.getIsbn() == isbn) {
                             exists = true;
 
-                            if (item.getAcceptedRequest() != null && (item.getOwner().getUid().equals(userId) || item.getAcceptedRequest().getUser().getUid().equals(userId))) {
+                            if (item.acceptedRequest() != null && (item.getOwner().getUid().equals(userId) || item.acceptedRequest().getUser().getUid().equals(userId))) {
                                 // an accepted request exists, and the current user is either
                                 // the owner or borrower-to-be.
                                 if (item.getOwner().getUid().equals(userId)) {
                                     // the user is the owner
-                                    switch (item.getAcceptedRequest().getStatus()) {
+                                    switch (item.acceptedRequest().getStatus()) {
                                         case Request.ACCEPTED:
                                             showOwnerInitiate(v, item);
                                             Snackbar.make(findViewById(R.id.scanIsbn), "Handover process initiated. Waiting on borrower scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
@@ -93,7 +93,7 @@ public class ScanIsbnActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     // the user is the borrower
-                                    switch (item.getAcceptedRequest().getStatus()) {
+                                    switch (item.acceptedRequest().getStatus()) {
                                         case Request.PENDING_BORROWER_SCAN:
                                             item.finishBorrowHandover();
                                             Snackbar.make(findViewById(R.id.scanIsbn), "Handover process complete. You are now the book borrower. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
