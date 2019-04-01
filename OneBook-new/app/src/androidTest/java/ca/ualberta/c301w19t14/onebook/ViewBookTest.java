@@ -23,9 +23,17 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * This test checks to see that a user can view the details of a book that isn't his/hers
+ * @author CMPUT301 Team14
+ */
+
 public class ViewBookTest {
 
+    //Variable for functionality
     public Globals globals;
+
+    //Variables for logging in
     public boolean complete;
     public String email = "UITest@gmail.com";
     public String email2 = "UITest2@gmail.com";

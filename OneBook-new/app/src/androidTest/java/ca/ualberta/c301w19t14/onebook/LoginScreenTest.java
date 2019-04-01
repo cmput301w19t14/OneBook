@@ -26,21 +26,27 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
+/**
+ * This test makes sure that a user can log in through the Firebase login pages by entering valid
+ * login credentials
+ * @author CMPUT301 Team14
+ */
+
 public class LoginScreenTest {
 
+    //Login variables
     public boolean complete;
     public Globals globals;
     public String email;
     public String password;
+
+    //Variables for testing
     public String check_name;
     public String actual_name;
 
     @Rule
     public ActivityTestRule<UserLoginActivity> activityRule =
             new ActivityTestRule<UserLoginActivity>(UserLoginActivity.class, false, false);
-
-    //REFERENCe
-    //onView(withId(R.layout.fui_email_link_sign_in_layout)
 
     @Before
     public void init(){
@@ -83,9 +89,6 @@ public class LoginScreenTest {
         //now we should be at the my account fragment.
         //check to see that "John Smith" is the name on display
         onView(withId(R.id.Name)).check(matches(withText(actual_name)));
-
-
-        //InfiniteLoop();
 
     }
 

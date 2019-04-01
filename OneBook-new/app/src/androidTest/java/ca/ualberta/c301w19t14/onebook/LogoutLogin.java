@@ -20,11 +20,20 @@ import ca.ualberta.c301w19t14.onebook.activities.EditUserActivity;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * This is a quick test to make sure that the user can log out and subsequently log in with
+ * valid login credentials using FirebaseAuth
+ * @author CMPUT301 Team14
+ */
+
 public class LogoutLogin {
 
+    //Login details
     public boolean complete;
     public String email;
     public String password;
+
+    //Variables for matching (test)
     public String check_name;
     public String actual_name;
 
@@ -68,21 +77,6 @@ public class LogoutLogin {
                 return;
             }
         }
-
-        /*
-        while(true){
-            if (UserLoaded){
-                Intent i = new Intent();
-                activityRule.launchActivity(i);
-                Assert.assertTrue(true);
-                return;
-            }
-        }
-        */
-
-        //Assert.assertNotNull(FirebaseAuth.);
-
-
 
     }
 

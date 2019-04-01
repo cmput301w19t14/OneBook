@@ -22,13 +22,22 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * This test checks to see if the correct details are displayed on the MyAccount page after the
+ * user logs in
+ * @author CMPUT301 Team14
+ */
+
 public class MyAccountTest {
 
+    //Variables used for logging in
     public boolean complete;
     public String email = "UITest@gmail.com";
     public String email2 = "UITest2@gmail.com";
     public String password = "test123";
     public String password2 = "test456";
+
+    //Variables used for checking
     public String check_name;
     public String actual_name = "John Smith";
     public String actual_name2 = "Mary Jane";
@@ -78,6 +87,7 @@ public class MyAccountTest {
 
     @Test
     public void CheckUserDetails(){
+        //ensure that the right name and email are displayed on the profile page
         onView(withId(R.id.Name)).check(matches(withText(actual_name)));
         onView(withId(R.id.email)).check(matches(withText(email.toLowerCase())));
     }

@@ -7,7 +7,10 @@ import org.hamcrest.Matcher;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 
-
+/**
+ * This class is used for functionality of some tests
+ * @author CMPUT301 Team14
+ */
 //https://stackoverflow.com/questions/28476507/using-espresso-to-click-view-inside-recyclerview-item
 public class MyViewAction {
 
