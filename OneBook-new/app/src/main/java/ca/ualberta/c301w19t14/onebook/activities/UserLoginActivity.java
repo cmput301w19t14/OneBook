@@ -17,12 +17,13 @@ import ca.ualberta.c301w19t14.onebook.models.User;
  * Allows a user to login with an email and password and create will promote new account creation
  * when a user inputs an email that isn't already associated with an account.
  * @author CMPUT301 Team14
+ * @version 1.0
  */
 public class UserLoginActivity extends AppCompatActivity {
 
     /**
      * Initializes the view.
-     * @param savedInstanceState
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,10 @@ public class UserLoginActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * Checks for if the login is valid.
+     * @param requestCode: code inputted for activity result
+     * @param resultCode: code received from activity
+     * @param data: the activity data received
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

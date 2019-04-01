@@ -111,7 +111,7 @@ public class Notification {
 
     /**
      * Deletes all notifications for current user
-     * @param userId
+     * @param userId the current user
      */
     public static void deleteAllForUser(String userId) {
         FirebaseDatabase.getInstance().getReference("Notifications").child(userId).removeValue();

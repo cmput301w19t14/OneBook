@@ -41,7 +41,7 @@ public class Book {
 
     /**
      * setter for description
-     * @param description
+     * @param description: String
      */
     public void setDescription(String description) {
         this.description = description;
@@ -55,11 +55,11 @@ public class Book {
 
     /**
      *
-     * @param isbn
-     * @param title
-     * @param author
-     * @param description
-     * @param owner
+     * @param isbn: long
+     * @param title: String
+     * @param author: String
+     * @param description: String
+     * @param owner: User
      */
     public Book(long isbn, String title, String author, String description, User owner) {
         this.isbn = isbn;
@@ -72,11 +72,11 @@ public class Book {
 
     /**
      *
-     * @param isbn
-     * @param title
-     * @param author
-     * @param description
-     * @param owner
+     * @param isbn: long
+     * @param title: String
+     * @param author: String
+     * @param description: String
+     * @param owner: User
      */
     public Book(long isbn, String title, String author, String description, User owner, User borrower) {
         this.isbn = isbn;
@@ -98,7 +98,7 @@ public class Book {
 
     /**
      * setter for Book Id
-     * @param id
+     * @param id: String
      */
     public void setId(String id) {
         this.id = id;
@@ -112,7 +112,7 @@ public class Book {
 
     /**
      * setter for book ISBN
-     * @param isbn
+     * @param isbn: long
      */
     public void setIsbn(long isbn) { this.isbn = isbn; }
 
@@ -124,7 +124,7 @@ public class Book {
 
     /**
      * setter for Book Title
-     * @param Title
+     * @param Title: String
      */
     public void setTitle(String Title) { this.title = Title; }
 
@@ -136,7 +136,7 @@ public class Book {
 
     /**
      * setter for book author
-     * @param author
+     * @param author: String
      */
     public void setAuthor(String author) { this.author = author; }
 
@@ -148,20 +148,20 @@ public class Book {
 
     /**
      * getter for book borrower
-     * @return
+     * @return borrower
      */
     public User getBorrower(){return borrower; }
 
     /**
      * setter for book owner
-     * @param owner
+     * @param owner: User
      */
     public void setOwner(User owner) { this.owner = owner; }
     public void setBorrower(User borrower) { this.borrower = borrower; }
 
     /**
      * setter for book requesters
-     * @param request
+     * @param request: Request
      */
     public void setRequest(HashMap<String, Request> request) {this.request = request; }
 

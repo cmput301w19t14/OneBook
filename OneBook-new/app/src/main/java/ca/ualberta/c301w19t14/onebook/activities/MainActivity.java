@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar = null;
     Globals globals;
 
+    /**
+     * Initialize the view
+     * @param savedInstanceState: last instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
+    /**
+     * Resume the view/acitvity with any changes
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -94,6 +101,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Navigation drawer method. Proceeds to the right fragment/activity
+     * @param item: item selected by user in the drawer
+     * @return a boolean indicating if nothing was done
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.

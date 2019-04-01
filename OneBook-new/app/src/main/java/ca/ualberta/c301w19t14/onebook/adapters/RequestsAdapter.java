@@ -10,17 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.MapsActivity;
-import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 import ca.ualberta.c301w19t14.onebook.activities.ViewRequestsActivity;
-import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
@@ -28,6 +24,7 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
  * RecyclerView adapter for requests.
  * Handles displaying and clicking on requests, in ViewRequestsActivity.
  * @author CMPUT301 Team14: Dimitri T, Natalie H
+ * @version 1.0
  * @see ViewRequestsActivity
  */
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.RequestsViewHolder> {

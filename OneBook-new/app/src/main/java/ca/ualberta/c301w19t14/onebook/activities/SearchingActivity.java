@@ -59,7 +59,7 @@ public class SearchingActivity extends AppCompatActivity {
 
     /**
      * Initializes the view.
-     * @param savedInstanceState
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +80,8 @@ public class SearchingActivity extends AppCompatActivity {
 
     /**
      *
-     * @param menu
-     * @return
+     * @param menu: from the selected activity actionbar
+     * @return a check so the method won't stop
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,8 +111,8 @@ public class SearchingActivity extends AppCompatActivity {
 
     /**
      *
-     * @param item
-     * @return
+     * @param item: filter selecred
+     * @return the state of the item if will exist
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

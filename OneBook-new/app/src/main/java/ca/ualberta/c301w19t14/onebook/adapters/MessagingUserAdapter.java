@@ -36,9 +36,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * This class implements the adapter for displaying the users in the MessagingUserFragment.
  * Each user will have their last message displayed if the current user hasn't responded back.
  * @author jandaile CMPUT 301 team 14
+ * @version 1.0
  * @see ca.ualberta.c301w19t14.onebook.fragments.MessagingUsersFragment
  * @since 2019-03-29
- * @version 1.0
  */
 public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdapter.ViewHolder>{
 
@@ -55,6 +55,12 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
 
     }
 
+    /**
+     *
+     * @param viewGroup: the viewlayout where the view belongs to
+     * @param i: position in the view layout
+     * @return a view of the messages
+     */
     @NonNull
     @Override
     public MessagingUserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -62,6 +68,11 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
         return new MessagingUserAdapter.ViewHolder(view);
     }
 
+    /**
+     *
+     * @param viewHolder: the view being looked at
+     * @param i: position in the user list
+     */
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
