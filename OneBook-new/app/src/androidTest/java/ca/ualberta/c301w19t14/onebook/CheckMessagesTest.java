@@ -32,20 +32,27 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
+/**
+ * This tests checks to see if the user can click into his/her messages tab, then open a conversation
+ * between himself/herself and another user
+ * @author CMPUT301 Team14
+ */
+
 public class CheckMessagesTest {
 
+    //needed for functionality
+    private Globals globals;
     private int resID = R.id.recyclerView;
 
+    //Log in variables
+    private boolean complete = false;
+    public String owner_email = "OwnerTim@gmail.com";
+    public String owner_name = "Tim Watto";
+    public String owner_pass = "owner1";
     public String requester_email = "RequesterMike@gmail.com";
     public String requester_name = "Mike Scott";
     public String requester_pass = "request";
 
-    public String owner_email = "OwnerTim@gmail.com";
-    public String owner_name = "Tim Watto";
-    public String owner_pass = "owner1";
-
-    private boolean complete = false;
-    private Globals globals;
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule =
