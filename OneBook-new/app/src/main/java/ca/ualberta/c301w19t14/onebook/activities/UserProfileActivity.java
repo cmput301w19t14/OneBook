@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import ca.ualberta.c301w19t14.onebook.R;
+/**
+ @deprecated
 
+ **/
 public class UserProfileActivity extends AppCompatActivity {
 
     private ImageView picture;

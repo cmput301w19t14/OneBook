@@ -28,7 +28,7 @@ import ca.ualberta.c301w19t14.onebook.models.User;
 /**
  * This class implements the Chatlist functionality of the Messaging part of the app.
  * From this class, messages that exist between two users are held then displayed.
- * @author jandaile CMPUT 301 team 14
+ * @author Jandaile D, Oran RCMPUT 301 team 14
  * @see MessagesFragment
  * @since 2019-03-29
  * @version 1.0
