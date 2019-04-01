@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +29,7 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
 /**
  * This class implements a scanner for ISBN codes. Uses phone's camera to create the scanner.
  *
- * @author CMPUT301 Team14: Ana, Dimitri
+ * @author CMPUT301 Team14: Anastasia B
  * @version 1.0
  */
 public class ScanIsbnActivity extends AppCompatActivity {

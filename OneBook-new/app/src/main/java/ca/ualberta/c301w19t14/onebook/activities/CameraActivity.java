@@ -22,7 +22,7 @@ import ca.ualberta.c301w19t14.onebook.R;
 
 /**
  * This class opens up the camera to scan a ISBN.
- * @author CMPUT301 Team14: Ana B.
+ * @author CMPUT301 Team14: Anastasia B.
  * @version 1.0
  * @see ScanIsbnActivity {@link #onCreate}
  */
@@ -39,7 +39,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     /**
-     * This method find a camera to use and enables permission of use and scanning
+     * This method finds a camera to use and enables permission of use and scanning
      * capabilities.
      *
      */
@@ -93,6 +93,7 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
+                // start cameraActivity to scan ISBN
                 if (barcodes.size() > 0) {
                     Intent intent = new Intent();
                     intent.putExtra("barcode", barcodes.valueAt(0));
