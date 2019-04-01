@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -170,7 +171,7 @@ public class Book {
             } else {
                 if (this.userHasRequest(Globals.getCurrentUser()) && this.acceptedRequest() != null && this.acceptedRequest().getUser() == Globals.getCurrentUser()) {
                     return Book.ACCEPTED;
-                } else if (this.borrower == Globals.getCurrentUser()) {
+                } else if (this.borrower != null && this.borrower.getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     return Book.BORROWED;
                 } else if (this.userHasRequest(Globals.getCurrentUser())) {
                     return Book.REQUESTED;

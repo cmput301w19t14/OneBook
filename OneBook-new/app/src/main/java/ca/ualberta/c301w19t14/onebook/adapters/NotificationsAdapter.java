@@ -147,12 +147,12 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "REJECT",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-
                                             Request request = notification.getRequest();
-                                            request.reject();
 
                                             //deletes the original notification for current user
                                             notification.delete();
+
+                                            request.reject();
 
                                             dialog.dismiss();
                                         }

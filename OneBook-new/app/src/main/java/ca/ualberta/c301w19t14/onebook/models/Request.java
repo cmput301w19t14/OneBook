@@ -73,7 +73,7 @@ public class Request {
 
                 // create notifications
                 Notification borrower = new Notification("Book Requested", "You're first in line to receive " + book.getTitle(), user, Notification.BOOK);
-                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle(), request, book.getOwner(), Notification.BOOK);
+                Notification owner = new Notification("New Request on Book", user.getName() + " has requested " + book.getTitle() + ". Click to approve or reject.", request, book.getOwner(), Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -84,7 +84,7 @@ public class Request {
                 hMap = book.getRequest();
 
                 // create notifications
-                Notification borrower = new Notification("New Request on Book", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
+                Notification borrower = new Notification("Book Requested", "You've been added to the waitlist for " + book.getTitle(), user, Notification.BOOK);
 
                 // send notifications
                 borrower.save();
@@ -146,12 +146,14 @@ public class Request {
         Book book = this.getBook();
 
         final Request request = this;
+        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books").child(book.getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book book = dataSnapshot.getValue(Book.class);
+                // delete the request
 
                 if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
@@ -160,8 +162,6 @@ public class Request {
                     book.waitlistDoNext();
                 }
 
-                // delete the request
-                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                 // create notifications
                 Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);
