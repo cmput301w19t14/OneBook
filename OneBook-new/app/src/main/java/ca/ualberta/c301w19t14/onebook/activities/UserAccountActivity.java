@@ -49,7 +49,6 @@ public class UserAccountActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(byte[] bytes) {
                         if (bytes != null) {
-                            Toast.makeText(UserAccountActivity.this, "Data found", Toast.LENGTH_SHORT).show();
                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                             profilePic.setImageBitmap(bitmap);
                             //hasImage = true;
@@ -59,7 +58,6 @@ public class UserAccountActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 //hasImage = false;
-                Toast.makeText(UserAccountActivity.this, "image not found", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -70,8 +68,6 @@ public class UserAccountActivity extends AppCompatActivity {
         final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
 
         String str_email = "Email: " + book.getOwner().getEmail();
-        //em.setText(str_email);
-        //em.setText("fuck this shit");
         String str_name = "Name: " + book.getOwner().getName();
         nm.setText(str_name);
     }

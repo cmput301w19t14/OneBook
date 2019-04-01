@@ -129,7 +129,7 @@ public class ViewBookActivity extends AppCompatActivity {
                     if(isDeleted) {
                         return;
                     }
-                    
+
                     final Book book = dataSnapshot.getValue(Book.class);
                     globalBook = book;
                     invalidateOptionsMenu();

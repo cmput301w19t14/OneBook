@@ -54,6 +54,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+        notificationFragment = new NotificationFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -62,11 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         TextView email = (TextView) headerView.findViewById(R.id.nav_email);
         email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
-        notificationFragment = new NotificationFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, notificationFragment);
-        fragmentTransaction.commit();
     }
 
     //for Navigation menu
