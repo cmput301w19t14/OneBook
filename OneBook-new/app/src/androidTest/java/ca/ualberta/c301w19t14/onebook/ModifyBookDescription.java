@@ -115,22 +115,19 @@ public class ModifyBookDescription {
         onView(withId(R.id.editIcon)).perform(click());
 
         //now we're in the edit book page. Change the description
-        onView(withId(R.id.editBookDescription)).perform(replaceText(""));
-        onView(withId(R.id.editBookDescription)).perform(typeText(after_description));
+        onView(withId(R.id.description)).perform(replaceText(""));
+        onView(withId(R.id.description)).perform(typeText(after_description));
 
         //Hide the keyboard
         Espresso.closeSoftKeyboard();
 
         //so we've typed in the new description. Click save
-        onView(withId(R.id.saveBookButton)).perform(click());
+        onView(withId(R.id.save)).perform(click());
 
         //press the back button
         Espresso.pressBack();
 
-        //click on the book again
-        onView(new RecyclerViewMatcher(this.resID)
-                .atPositionOnView(0, R.id.bookTitle))
-                .perform(click());
+
 
         //check to see if the before description matches
         onView(withId(R.id.description))
@@ -142,14 +139,14 @@ public class ModifyBookDescription {
         //now we're in the edit book page. Change the description
         //onView(withId(R.id.editBookDescription)).perform(typeText(after_description));
         //TEMP
-        onView(withId(R.id.editBookDescription)).perform(replaceText(""));
-        onView(withId(R.id.editBookDescription)).perform(typeText(before_description));
+        onView(withId(R.id.description)).perform(replaceText(""));
+        onView(withId(R.id.description)).perform(typeText(before_description));
 
         //Hide the keyboard
         Espresso.closeSoftKeyboard();
 
         //so we've typed in the new description. Click save
-        onView(withId(R.id.saveBookButton)).perform(click());
+        onView(withId(R.id.save)).perform(click());
 
     }
 

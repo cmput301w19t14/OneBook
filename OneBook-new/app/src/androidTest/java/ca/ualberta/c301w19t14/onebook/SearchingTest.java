@@ -32,6 +32,7 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 //import static androidx.test.espresso.assertion.ViewAssertions.matches;
 //import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -98,28 +99,19 @@ public class SearchingTest {
     public void SearchingTest()
     {
         onView(withId(R.id.search)).perform(click());
-        typeText("War of")
+        onView(withId(R.id.search_src_text)).perform(typeText("War of"));
         //onView(withId(R.id.SearchButton)).perform(click());
 
-        //DEBUG - delete later
-        Methods methods = new Methods();
-        methods.InfiniteLoop();
+
 
         //Check to see if the title of the book is what it should be
         onView(new RecyclerViewMatcher(this.resID)
                 .atPositionOnView(0, R.id.bookTitle))
-                .check(matches(withText("test2")));
+                .check(matches(withText("War of the Worlds")));
 
         //onView(withId(R.id.SearchRecycler)).perform(RecyclerViewActions.<VH>actionOnItemAtPosition(ITEM_BELOW_THE_));
                 //.check(matches(hasDescendant(withText("Test2"))));
 
-
-
-
-
-
-
     }
-
 
 }
