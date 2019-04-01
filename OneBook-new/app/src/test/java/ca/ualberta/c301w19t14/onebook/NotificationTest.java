@@ -39,7 +39,7 @@ public class NotificationTest {
     private Book book = new Book(isbn, booktitle, author, description, owner);
 
     private Request request = new Request(borrower, book, request_id);
-    private Notification notificationTest = new Notification(title, content, request, owner);
+    private Notification notificationTest = new Notification(title, content, request, owner, 2);
 
     @Test
     public void checkGetTitle(){

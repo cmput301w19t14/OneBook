@@ -24,8 +24,15 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+/**
+ * This tests checks to see if the book a user is currently borrowing appears in his/her list of
+ * borrowed books
+ * @author CMPUT301 Team14
+ */
+
 public class BorrowerTests {
 
+    //login details
     public boolean complete;
     public String email = "UITest@gmail.com";
     public String email2 = "UITest2@gmail.com";
@@ -36,6 +43,8 @@ public class BorrowerTests {
     public String actual_name2 = "Mary Jane";
     public String DUSTIN_EMAIL = "dustinmcrorie@gmail.com";
     public String DUSTIN_PASS = "hunter2";
+
+    //variables needed for functionality
     private int resID = R.id.bookList;
     private RecyclerView mRecyclerView;
 
