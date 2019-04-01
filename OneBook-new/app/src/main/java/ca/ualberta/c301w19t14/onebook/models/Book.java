@@ -164,14 +164,16 @@ public class Book {
             if (this.userIsOwner()) {
                 if (this.borrower != null) {
                     return Book.BORROWED;
+                } else if(this.acceptedRequest() != null) {
+                    return Book.ACCEPTED;
                 }
             } else {
                 if (this.userHasRequest(Globals.getCurrentUser()) && this.acceptedRequest() != null && this.acceptedRequest().getUser() == Globals.getCurrentUser()) {
                     return Book.ACCEPTED;
-                } else if (this.userHasRequest(Globals.getCurrentUser())) {
-                    return Book.REQUESTED;
                 } else if (this.borrower == Globals.getCurrentUser()) {
                     return Book.BORROWED;
+                } else if (this.userHasRequest(Globals.getCurrentUser())) {
+                    return Book.REQUESTED;
                 }
             }
         }
