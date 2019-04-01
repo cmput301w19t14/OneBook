@@ -171,10 +171,10 @@ public class Book {
                     return Book.ACCEPTED;
                 }
             } else {
-                if (this.userHasRequest(Globals.getCurrentUser()) && this.acceptedRequest() != null && this.acceptedRequest().getUser() == Globals.getCurrentUser()) {
-                    return Book.ACCEPTED;
-                } else if (this.borrower != null && this.borrower.getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                if (this.borrower != null && this.borrower.getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     return Book.BORROWED;
+                } else if (this.userHasRequest(Globals.getCurrentUser()) && this.acceptedRequest() != null && this.acceptedRequest().getUser().getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    return Book.ACCEPTED;
                 } else if (this.userHasRequest(Globals.getCurrentUser())) {
                     return Book.REQUESTED;
                 }

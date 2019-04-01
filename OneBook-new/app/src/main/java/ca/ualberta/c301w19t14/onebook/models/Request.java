@@ -1,7 +1,6 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -154,23 +153,18 @@ public class Request {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book newBook = dataSnapshot.getValue(Book.class);
                 FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
-                
-                // delete the request
-                Log.e("DEBUG", "onDataChange()");
 
+                // delete the request
                 if(newBook.acceptedRequest() != null && newBook.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
-                    Log.e("DEBUG", "acceptedRequest()");
                     newBook.getRequest().remove(request.getId());
 
                     newBook.waitlistDoNext();
                 } else if(newBook.getNextRequest() != null && newBook.getNextRequest().getId().equals(request.getId())) {
-                    Log.e("DEBUG", "acceptedRequest()");
                     newBook.getRequest().remove(request.getId());
 
                     newBook.waitlistDoNext();
                 }
-
 
                 // create notifications
                 Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);
