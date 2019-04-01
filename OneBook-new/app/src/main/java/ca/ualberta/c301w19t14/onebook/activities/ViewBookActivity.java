@@ -52,6 +52,7 @@ public class ViewBookActivity extends AppCompatActivity {
     public ImageView image;
     public RecyclerView recyclerView;
 
+    private boolean isDeleted = false;
     private String book_id = null;
     private boolean hasImage = false;
 
@@ -126,6 +127,10 @@ public class ViewBookActivity extends AppCompatActivity {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(isDeleted) {
+                        return;
+                    }
+
                     final Book book = dataSnapshot.getValue(Book.class);
                     globalBook = book;
                     invalidateOptionsMenu();
@@ -281,9 +286,11 @@ public class ViewBookActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // update request location
+                                isDeleted = true;
                                 dialog.dismiss();
                                 globalBook.delete();
                                 finish();
+
                             }
                         });
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",

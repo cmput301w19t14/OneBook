@@ -107,7 +107,6 @@ public class MyProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(byte[] bytes) {
                         if (bytes != null) {
-                            //Toast.makeText(myView.getContext(), "Data found", Toast.LENGTH_SHORT).show();
                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                             profilePic.setImageBitmap(bitmap);
                             //hasImage = true;
@@ -117,7 +116,6 @@ public class MyProfileFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 //hasImage = false;
-                //Toast.makeText(myView.getContext(), "image not found", Toast.LENGTH_SHORT).show();
 
             }
         });

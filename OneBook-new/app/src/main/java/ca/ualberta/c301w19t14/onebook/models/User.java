@@ -1,7 +1,10 @@
 package ca.ualberta.c301w19t14.onebook.models;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -56,6 +59,9 @@ public class User {
                 if(!dataSnapshot.child(firebaseUid).exists()) {
                     Notification newUser = new Notification("Welcome to OneBook", "Borrow your first book in seconds. Get started by opening the menu.", userClass, Notification.ROCKET);
                     newUser.save();
+
+                    Notification welcome = new Notification("Using the Camera Button", "At any time, you can click the camera button on the top right to search, borrow or return a book.", userClass, Notification.ROCKET);
+                    welcome.save();
                 }
             }
 
@@ -65,8 +71,9 @@ public class User {
             }
         });
 
-        myRef.child(firebaseUid).setValue(userClass);
+        Log.e("tag", userClass.getEmail());
 
+        myRef.child(firebaseUid).setValue(userClass);
     }
 
     /**
@@ -74,9 +81,13 @@ public class User {
      * @param firebaseUid
      * @param new_email
      */
-    public static void updateEmail(final String firebaseUid, String new_email) {
-        FirebaseAuth.getInstance().getCurrentUser().updateEmail(new_email);
-        updateDatabase(firebaseUid);
+    public static void updateEmail(final String firebaseUid, final String new_email) {
+        FirebaseAuth.getInstance().getCurrentUser().updateEmail(new_email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                updateDatabase(firebaseUid);
+            }
+        });
     }
 
     /**
@@ -87,7 +98,6 @@ public class User {
     public static void updateName(final String firebaseUid, String new_name) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(new_name).build());
-        updateDatabase(firebaseUid);
     }
 
     /**
@@ -97,38 +107,6 @@ public class User {
      */
     public static void updatePassword(final String firebaseUid, String new_password) {
         FirebaseAuth.getInstance().getCurrentUser().updatePassword(new_password);
-        updateDatabase(firebaseUid);
-    }
-
-    /**
-     * updates the user's name
-     * @param username
-     * @return
-     */
-    protected boolean changeUsername(String username) {
-        boolean is_success = false;
-
-        return is_success;
-    }
-
-    /**
-     * changes a user's password.
-     * @param password
-     * @return
-     */
-    protected boolean changePassword(String password) {
-        boolean is_success = false;
-
-        return is_success;
-    }
-
-    /**
-     * updates a user's contact information
-     * @param email
-     * @param phone
-     */
-    public void editContactInfo( String email, long phone) {
-        boolean is_success = false;
     }
 
     /**

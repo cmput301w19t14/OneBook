@@ -153,8 +153,9 @@ public class EditUserActivity extends AppCompatActivity {
                 String nameInput = nm_edit.getText().toString();
                 String passwordInput = ps_edit.getText().toString();
 
-                User.updateEmail(FirebaseAuth.getInstance().getUid(), emailInput);
                 User.updateName(FirebaseAuth.getInstance().getUid(), nameInput);
+                User.updateEmail(FirebaseAuth.getInstance().getUid(), emailInput);
+
                 if(!passwordInput.isEmpty()) {
                     User.updatePassword(FirebaseAuth.getInstance().getUid(), passwordInput);
                 }
@@ -171,13 +172,11 @@ public class EditUserActivity extends AppCompatActivity {
                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditUserActivity.this, "failed data commit", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                                    Toast.makeText(EditUserActivity.this, "Data commited", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -187,12 +186,10 @@ public class EditUserActivity extends AppCompatActivity {
                             profile_ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(EditUserActivity.this, "Data deleted", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditUserActivity.this, "Data is still there idiot", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -221,7 +218,6 @@ public class EditUserActivity extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 final Bitmap imageBitmap = (Bitmap) extras.get("data");
                 profilePicture.setImageBitmap(imageBitmap);
-                Toast.makeText(EditUserActivity.this, "Camera selection", Toast.LENGTH_SHORT).show();
             }
             if(requestCode == REQUEST_IMAGE_GALLERY)
             {
@@ -234,7 +230,6 @@ public class EditUserActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    Toast.makeText(EditUserActivity.this, "Gallery failure", Toast.LENGTH_SHORT).show();
                 }
 
             }

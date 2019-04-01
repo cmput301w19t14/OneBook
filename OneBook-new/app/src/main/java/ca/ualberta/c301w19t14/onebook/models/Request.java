@@ -146,22 +146,25 @@ public class Request {
         final Book book = this.getBook();
 
         final Request request = this;
-        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books").child(book.getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book newBook = dataSnapshot.getValue(Book.class);
-                // delete the request
+                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
-                if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
+                // delete the request
+                if(newBook.acceptedRequest() != null && newBook.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
+                    newBook.getRequest().remove(request.getId());
+
                     newBook.waitlistDoNext();
-                } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
+                } else if(newBook.getNextRequest() != null && newBook.getNextRequest().getId().equals(request.getId())) {
+                    newBook.getRequest().remove(request.getId());
+
                     newBook.waitlistDoNext();
                 }
-
 
                 // create notifications
                 Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);
