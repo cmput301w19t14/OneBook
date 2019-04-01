@@ -218,7 +218,7 @@ public class Request {
 
     /**
      *
-     * @param user
+     * @param user: User
      */
     public void setUser(User user) {
         this.user = user;
@@ -226,7 +226,7 @@ public class Request {
 
     /**
      *
-     * @param book
+     * @param book: Book
      */
     public void setBook(Book book) {
         this.book = book;
@@ -234,7 +234,7 @@ public class Request {
 
     /**
      *
-     * @param status
+     * @param status: String
      */
     public void setStatus(String status) {
         this.status = status;
@@ -250,16 +250,24 @@ public class Request {
 
     /**
      *
-     * @param id
+     * @param id: String
      */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param location: Location
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    /**
+     *
+     * @return location
+     */
     public Location getLocation() {
         return location;
     }

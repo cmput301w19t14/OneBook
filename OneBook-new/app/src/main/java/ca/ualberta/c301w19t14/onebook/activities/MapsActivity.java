@@ -40,7 +40,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     /**
      * Initializes the view.
-     * @param savedInstanceState
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

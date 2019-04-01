@@ -21,9 +21,9 @@ import ca.ualberta.c301w19t14.onebook.models.Chat;
  * The messages organized to show which messages are from the sender vs
  * the receiver from this class.
  * @author jandaile CMPUT 301 team 14
+ * @version 1.0
  * @see ca.ualberta.c301w19t14.onebook.activities.MessageActivity
  * @since 2019-03-29
- * @version 1.0
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
 
@@ -42,8 +42,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     /**
      * Initializes the view based on the sender and receiver messages.
-     * @param viewGroup
-     * @param viewType
+     * @param viewGroup: which viewlayout in view will belongs in
+     * @param viewType: based on who the user is. Changes the side the messages are on.
      * @return
      */
     @NonNull
@@ -61,8 +61,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     /**
      * Attaches the messages to the view.
-     * @param viewHolder
-     * @param i
+     * @param viewHolder: view for the messages
+     * @param i: chat message index in the list of messages
      */
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder viewHolder, int i) {
@@ -97,13 +97,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     /**
      * Determines who the message is from.
-     * @param position: message position in the chat list.
+     * @param i: message position in the chat list.
      * @return The view type for adapter use.
      */
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int i) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (mChat.get(position).getSender().equals(firebaseUser.getUid())){
+        if (mChat.get(i).getSender().equals(firebaseUser.getUid())){
             return  MSG_TYPE_RIGHT;
         }
         else

@@ -58,7 +58,7 @@ public class ViewBookActivity extends AppCompatActivity {
 
     /**
      * Initializes the view.
-     * @param savedInstanceState
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,9 +95,6 @@ public class ViewBookActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        // TODO: Click owner, go to view profile.
     }
 
     @Override
@@ -252,8 +249,8 @@ public class ViewBookActivity extends AppCompatActivity {
 
     /**
      *
-     * @param menu
-     * @return
+     * @param menu: the activity's layout
+     * @return checks for a success
      */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -266,8 +263,8 @@ public class ViewBookActivity extends AppCompatActivity {
 
     /**
      *
-     * @param menu
-     * @return
+     * @param menu: the activity's layout
+     * @return checks for a success
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -277,8 +274,8 @@ public class ViewBookActivity extends AppCompatActivity {
 
     /**
      *
-     * @param item
-     * @return
+     * @param item: the item selected from the given options
+     * @return a check for success
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

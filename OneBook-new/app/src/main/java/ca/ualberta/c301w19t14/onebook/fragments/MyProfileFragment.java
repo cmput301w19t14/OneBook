@@ -7,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -21,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,12 +28,9 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.activities.EditUserActivity;
-import ca.ualberta.c301w19t14.onebook.activities.UserAccountActivity;
-import ca.ualberta.c301w19t14.onebook.models.User;
 import ca.ualberta.c301w19t14.onebook.util.DykUtil;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 /**
  * This fragments displays a user profile page with all their information.

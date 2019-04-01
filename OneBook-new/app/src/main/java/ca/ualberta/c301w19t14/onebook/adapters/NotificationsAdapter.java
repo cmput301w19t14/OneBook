@@ -13,15 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.activities.MapsActivity;
 import ca.ualberta.c301w19t14.onebook.models.Notification;
 import ca.ualberta.c301w19t14.onebook.R;
-import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
 import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
@@ -31,8 +28,8 @@ import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
  * Handles displaying and clicking on notifications.
  * Future improvements include having location for a meet up show when a meet up notification is clicked.
  * @author CMPUT301 Team14: Natalie H, Dimitri T
- * @see NotificationFragment
  * @version 1.0
+ * @see NotificationFragment
  *
  */
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationsViewHolder> {
@@ -58,11 +55,11 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     /**
      * Attaches notification content to the view.
      *
-     * @param mVh
-     * @param i
+     * @param mVh: the view being used by notifications
+     * @param i: position in the notification list
      */
     @Override
-    public void onBindViewHolder(NotificationsViewHolder mVh, int i) {
+    public void onBindViewHolder(@NonNull NotificationsViewHolder mVh, int i) {
         Notification notification = notificationList.get(i);
         Log.e("TEST", notification.getContent());
 
@@ -98,6 +95,12 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         }
     }
 
+    /**
+     *
+     * @param viewGroup: the viewlayout where the view belongs to
+     * @param i: the position of the view in the ViewGroup
+     * @return the view in the right position of the ViewGroup
+     */
     @Override
     @NonNull
     public NotificationsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -160,7 +163,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                                     });
                             alertDialog.show();
                         } else {
-                            // TODO: checks if it's a notification for a meet up. displays location if it is
 
                             //other notifications can be deleted
                             AlertDialog alertDialog2 = new AlertDialog.Builder(v.getContext()).create();

@@ -6,9 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,8 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,7 +35,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 
 import ca.ualberta.c301w19t14.onebook.models.Book;
-import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
@@ -66,7 +60,7 @@ public class EditBookActivity extends AppCompatActivity {
 
     /**
      * Initializes the view.
-     * @param savedInstanceState
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,8 +203,8 @@ public class EditBookActivity extends AppCompatActivity {
 
     /**
      * For when the navigation item was selected.
-     * @param item
-     * @return
+     * @param item: item that was selected by user
+     * @return based on if the item was selected properly
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

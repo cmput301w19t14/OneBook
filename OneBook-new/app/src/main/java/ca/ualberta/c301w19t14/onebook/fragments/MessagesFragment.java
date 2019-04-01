@@ -16,9 +16,9 @@ import ca.ualberta.c301w19t14.onebook.adapters.ViewPageAdapter;
  * This class implements the Messaging Functionality in different fragments for the app.
  * From this class, the fragments is linked to user and chat fragments.
  * These fragments are held by a ViewPager and have their own methods.
+ * @version 1.0
  * @author jandaile CMPUT 301 team 14
  * @since 2019-03-29
- * @version 1.0
  */
 public class MessagesFragment extends Fragment {
 
@@ -29,10 +29,10 @@ public class MessagesFragment extends Fragment {
 
     /**
      * Initializes the view.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater: view inflater for the layout used
+     * @param container: container to hold any views going into the View
+     * @param savedInstanceState: last possible state
+     * @return the view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

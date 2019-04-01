@@ -55,6 +55,10 @@ public class MessageActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    /**
+     * Initializes the view
+     * @param savedInstanceState: last possible state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

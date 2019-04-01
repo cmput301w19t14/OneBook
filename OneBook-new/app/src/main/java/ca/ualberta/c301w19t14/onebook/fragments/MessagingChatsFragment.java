@@ -29,9 +29,9 @@ import ca.ualberta.c301w19t14.onebook.models.User;
  * This class implements the Chatlist functionality of the Messaging part of the app.
  * From this class, messages that exist between two users are held then displayed.
  * @author jandaile CMPUT 301 team 14
+ * @version 1.0
  * @see MessagesFragment
  * @since 2019-03-29
- * @version 1.0
  */
 public class MessagingChatsFragment extends Fragment {
 
@@ -46,10 +46,10 @@ public class MessagingChatsFragment extends Fragment {
 
     /**
      * Initializes the view.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater: view inflater for the layout used
+     * @param container: container the view is held in
+     * @param savedInstanceState: last possible state
+     * @return the view for the chat fragment
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

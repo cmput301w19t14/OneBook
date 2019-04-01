@@ -36,8 +36,8 @@ public class ScanIsbnActivity extends AppCompatActivity {
     TextView barcodeResult;
 
     /**
-     * Initializes the view.
-     * @param savedInstanceState
+     * Initializes the view
+     * @param savedInstanceState: last possible state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +158,12 @@ public class ScanIsbnActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * @param requestCode: code inputted for activity result
+     * @param resultCode: code received from activity
+     * @param data: the activity data received
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==0) {

@@ -11,23 +11,24 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 
-import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
-import ca.ualberta.c301w19t14.onebook.models.Book;
 
 /**
  * This class shows a user's information when someone clicks on the owner of a book.
  *
- * @author CMPUT301 Team14
+ * @author CMPUT301 Team14: Oran R
  * @version 1.0
  */
 public class UserAccountActivity extends AppCompatActivity {
     private final String TAG = "UserAccountActivity";
     private ImageView profilePic;
 
+    /**
+     * Initializes the view.
+     * @param savedInstanceState: last possible state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
