@@ -43,7 +43,7 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
  * Shows all the descriptors for the book and allows updating by the owner
  * for each of the descriptors.
  *
- * @author CMPUT301 Team14: Dimitri T, Oran R, Anastasia B
+ * @author CMPUT301 Team14: Dimitri T, Oran R, Anastasia B, Natalie H.
  * @version 1.0
  */
 
