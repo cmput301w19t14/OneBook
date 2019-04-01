@@ -189,7 +189,7 @@ public class EditBookActivity extends AppCompatActivity {
 
             }
         });
-        finish();
+
     }
 
     @Override

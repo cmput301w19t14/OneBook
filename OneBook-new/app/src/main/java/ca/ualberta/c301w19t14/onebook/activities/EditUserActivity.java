@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,7 +86,7 @@ public class EditUserActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(EditUserActivity.this, "no profile pic", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(EditUserActivity.this, "no profile pic", Toast.LENGTH_SHORT).show();
             }
         });
         profilePicture.setOnClickListener(new View.OnClickListener() {
