@@ -57,7 +57,7 @@ public class RequestTest {
 
     public Request request = new Request(bob, book, request_id);
     public Notification notification = new Notification(requesttitle, requestcontent,request,
-            steve);
+            steve, 2);
 
 
     @Test

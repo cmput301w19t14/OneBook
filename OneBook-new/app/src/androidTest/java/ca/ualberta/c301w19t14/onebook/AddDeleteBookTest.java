@@ -44,19 +44,23 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
+/**
+ * This tests checks to see if a user can add and delete a book from his/her owned books
+ * @author CMPUT301 Team14
+ */
+
 public class AddDeleteBookTest {
 
-    private Methods methods;
-
+    //Variables needed for login
     public boolean complete;
     public String email = "UITest@gmail.com";
-    public String email2 = "UITest2@gmail.com";
     public String password = "test123";
 
+    //Variables needed for functionality
     private Globals globals;
     private int resID = R.id.bookList;
 
-    //input details
+    //input details for creating the book
     public String booktitle = "The Art of the Deal";
     public String bookauthor = "Orange Man";
     public String bookdescription = "How to business 101";
