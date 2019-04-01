@@ -52,9 +52,7 @@ public class EditBookActivity extends AppCompatActivity {
     private EditText title;
     private EditText author;
     private EditText isbn;
-    private TextView owner;
     private Button editphoto;
-    private Button editDelete;
 
     private ImageView image;
     private EditText description;
@@ -76,24 +74,20 @@ public class EditBookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         book = Book.find(intent.getStringExtra("id"));
 
-
-        image = findViewById(R.id.bookImage);
-        // init the views
-        title = findViewById(R.id.editBookTitle);
-        author = findViewById(R.id.editBookAuthor);
-        isbn = findViewById(R.id.editBookISBN);
-        TextView owner = findViewById(R.id.viewBookOwner);
-        description = findViewById(R.id.editBookDescription);
-
+        image = findViewById(R.id.bookPhoto);
+        title = findViewById(R.id.title);
+        author = findViewById(R.id.author);
+        isbn = findViewById(R.id.isbn);
+        description = findViewById(R.id.description);
 
         final Bundle bundle = intent.getExtras();
         final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
         book_ref = storage.getReference().child("Book images/"+book.getId()+"/bookimage.png");
+
         // set the current data
         title.setText(book.getTitle());
         author.setText(book.getAuthor());
         isbn.setText(Long.toString(book.getIsbn()));
-        owner.setText(book.getOwner().getName());
         description.setText(book.getDescription());
 
         book_ref.getBytes(Long.MAX_VALUE)
@@ -102,23 +96,12 @@ public class EditBookActivity extends AppCompatActivity {
                     public void onSuccess(byte[] bytes) {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
                         image.setImageBitmap(bitmap);
+                        image.setImageAlpha(255);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override public void onFailure(@NonNull Exception e) { }});
-        editDelete = findViewById(R.id.delete_botton);
-        editDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.ic_account_box_black_24dp);
-                //Drawable drawable = getResources().getDrawable(R.drawable.ic_account_box_black_24dp);
-                //Bitmap i = ((BitmapDrawable) drawable).getBitmap();
-                image.setImageResource(R.drawable.ic_account_box_black_24dp);
-                //image.setImageBitmap(i);
 
-            }
-        });
-
-        editphoto = findViewById(R.id.editPhoto);
+        editphoto = findViewById(R.id.addPhoto);
         editphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,8 +119,7 @@ public class EditBookActivity extends AppCompatActivity {
             }
         });
 
-
-        Button saveButton =  findViewById(R.id.saveBookButton);
+        Button saveButton =  findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -201,11 +183,10 @@ public class EditBookActivity extends AppCompatActivity {
         {
             if(requestCode == REQUEST_IMAGE_CAPTURE)
             {
-                //Log.d(TAG, "onActivityResult: sucessful return to intent");
                 Bundle extras = data.getExtras();
                 final Bitmap imageBitmap = (Bitmap) extras.get("data");
                 image.setImageBitmap(imageBitmap);
-
+                image.setImageAlpha(255);
             }
         }
     }
