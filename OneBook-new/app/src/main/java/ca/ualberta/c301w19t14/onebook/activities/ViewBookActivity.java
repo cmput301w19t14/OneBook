@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -80,17 +81,17 @@ public class ViewBookActivity extends AppCompatActivity {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     View popup = inflater.inflate(R.layout.image_pop_up, null);
                     ImageView picture = popup.findViewById(R.id.ImageCloseUp);
-                        picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
-                        int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                        int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                        final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
-                        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-                        popup.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                popupWindow.dismiss();
-                            }
-                        });
+                    picture.setImageBitmap(((BitmapDrawable) image.getDrawable()).getBitmap());
+                    int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                    final PopupWindow popupWindow = new PopupWindow(popup, width, height, true);
+                    popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                    popup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
                 }
             }
         });
@@ -167,6 +168,24 @@ public class ViewBookActivity extends AppCompatActivity {
                             hasImage = false;
                         }
                     });
+                    LinearLayout ownerinfo = findViewById(R.id.ownerInfo);
+                    ownerinfo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (globalBook != null) {
+
+                                Intent intent = new Intent(ViewBookActivity.this, UserAccountActivity.class);
+                                Bundle bundle = new Bundle();
+
+                                bundle.putString("ID", globalBook.getOwner().getUid());
+                                bundle.putString("NAME", globalBook.getOwner().getName());
+                                bundle.putString("EMAIL", globalBook.getOwner().getEmail());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
                     Button locationButton = findViewById(R.id.location);
 
                     if (book.acceptedRequest() != null &&

@@ -231,7 +231,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/ownerInfo"
+                    >
 
 
                     <TextView
@@ -240,7 +242,6 @@
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         android:focusable="true"
-                        android:onClick="gotoOwner2"
                         android:text="Owner: Amy33"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp" />

@@ -23,7 +23,6 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
  *
  * @author CMPUT301 Team14
  * @version 1.0
- * @deprecated by MyProfileFragment
  */
 public class UserAccountActivity extends AppCompatActivity {
     private final String TAG = "UserAccountActivity";
@@ -32,16 +31,25 @@ public class UserAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_my_accnt_activity);
+        setContentView(R.layout.content_user_profile);
 
 
         TextView nm = findViewById(R.id.Name);
         TextView em = findViewById(R.id.email);
         profilePic = findViewById(R.id.profilePicture);
 
+        Intent intent = getIntent();
+        final Bundle bundle = intent.getExtras();
 
+
+        String str_email = "Email: " + bundle.getString("EMAIL");
+        String str_name = "Name: " + bundle.getString("NAME");
+        nm.setText(str_name);
+        em.setText(str_email);
+
+        //Log.d(TAG, "onCreate: "+bundle.getString("ID"));
         FirebaseStorage.getInstance().getReference().child("Profile pictures/" +
-                FirebaseAuth.getInstance().getUid() + "/profile.png").getBytes(Long.MAX_VALUE)
+                bundle.getString("ID") + "/profile.png").getBytes(Long.MAX_VALUE)
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
@@ -59,14 +67,7 @@ public class UserAccountActivity extends AppCompatActivity {
             }
         });
 
-
-        Intent intent = getIntent();
-        final Bundle bundle = intent.getExtras();
-        final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
-
-        String str_email = "Email: " + book.getOwner().getEmail();
-        String str_name = "Name: " + book.getOwner().getName();
-        nm.setText(str_name);
     }
+
 }
 
