@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * This class implements the ViewPageAdapter for the chat and user fragments.
  * From this class, the user and chat fragments will be attached to the MessagingFragment.
  * @author jandaile CMPUT 301 team 14
+ * @see ca.ualberta.c301w19t14.onebook.fragments.MessagesFragment
  * @since 2019-03-29
  * @version 1.0
  */

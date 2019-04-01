@@ -29,9 +29,9 @@ import ca.ualberta.c301w19t14.onebook.activities.UserAccountActivity;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
 /**
- * Displays a user profile page.
- *
- * @author Natalie
+ * This fragments displays a user profile page with all their information.
+ * @author CMPUT301 Team14: Natalie H
+ * @version 1.0
  */
 public class MyProfileFragment extends Fragment {
 

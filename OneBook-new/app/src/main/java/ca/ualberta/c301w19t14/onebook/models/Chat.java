@@ -2,7 +2,7 @@ package ca.ualberta.c301w19t14.onebook.models;
 
 /**
  * This class is a model for a Chat in Firebase.
- * @author jandaile CMPUT 301 team 14
+ * @author CMPUT301 Team14: Jandaile D
  * @since 2019-03-29
  * @version 1.0
  */

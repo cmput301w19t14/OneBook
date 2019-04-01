@@ -33,9 +33,12 @@ import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
- * View book information page.
+ * This class implement a view book information page.
+ * Shows all the descriptors for the book and allows updating by the owner
+ * for each of the descriptors.
+ * @author CMPUT301 Team14: Dimitri T, Oran R
+ * @version 1.0
  *
- * @author Dimitri Trofimuk, Oran R
  */
 
 public class ViewBookActivity extends AppCompatActivity {
@@ -46,7 +49,10 @@ public class ViewBookActivity extends AppCompatActivity {
     private String book_id = null;
     private boolean hasImage = false;
 
-
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +156,10 @@ public class ViewBookActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * This method will display all the book's descriptors at the moment.
+     * @param id: the book's id. Referred by in the database.
+     */
     private void updateData(String id) {
         if(id != null) {
             book = Book.find(id);

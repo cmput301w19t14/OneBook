@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +31,12 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
-/**This class allows a user to edit their account information
- * @author CMPUT 301 Team 14*/
+/**
+ * This class allows a user to edit their account information.
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ * @see ca.ualberta.c301w19t14.onebook.fragments.MyProfileFragment {@link #onOptionsItemSelected}
+ */
 public class EditUserActivity extends AppCompatActivity {
 
     private EditText nm_edit;
@@ -155,6 +160,12 @@ public class EditUserActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

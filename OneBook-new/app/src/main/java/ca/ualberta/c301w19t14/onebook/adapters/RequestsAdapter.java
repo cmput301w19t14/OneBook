@@ -27,9 +27,8 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
 /**
  * RecyclerView adapter for requests.
  * Handles displaying and clicking on requests, in ViewRequestsActivity.
- *
+ * @author CMPUT301 Team14: Dimitri T, Natalie H
  * @see ViewRequestsActivity
- * @author Dimitri, Natalie
  */
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.RequestsViewHolder> {
 
@@ -42,11 +41,21 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         this.mContext = context;
     }
 
+    /**
+     *
+     * @return the total number of requests for the books
+     */
     @Override
     public int getItemCount() {
         return list.size();
     }
 
+    /**
+     * Attaches content to the each request in the view.
+     *
+     * @param mVh
+     * @param i
+     */
     @Override
     public void onBindViewHolder(RequestsViewHolder mVh, int i) {
         Request request = list.get(i);

@@ -1,11 +1,13 @@
 package ca.ualberta.c301w19t14.onebook.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +36,10 @@ import ca.ualberta.c301w19t14.onebook.models.User;
 /**
  * This class implements the chat view for the messaging functionality of the app.
  * Messages are sent, received, and viewed by this class.
- * @author jandaile CMPUT 301 team 14
+ * @author CMPUT301 Team14: Jandaile D
+ * @version 1.1
+ * @see ca.ualberta.c301w19t14.onebook.adapters.MessagingUserAdapter
  * @since 2019-03-29
- * @version 1.0
  */
 public class MessageActivity extends AppCompatActivity {
 
@@ -124,7 +127,6 @@ public class MessageActivity extends AppCompatActivity {
      * @param sender: tracks the current user
      * @param receiver: tracks who the chat is going to
      * @param message: holds the message string by sender
-     *
      */
     private void sendMessage(String sender, final String receiver, String message) {
 
@@ -146,7 +148,7 @@ public class MessageActivity extends AppCompatActivity {
 
                 Notification msg = new Notification("New Message",
                         FirebaseAuth.getInstance().getCurrentUser().getDisplayName() + " sent you a message.",
-                        dS.getValue(User.class));
+                        dS.getValue(User.class), Notification.MESSAGE);
                 msg.save();
             }
 

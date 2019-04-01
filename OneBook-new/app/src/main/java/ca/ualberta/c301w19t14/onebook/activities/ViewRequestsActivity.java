@@ -15,9 +15,11 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
- * Shows all the requests on a book.
+ * This class shows all the requests on a book.
  *
- * @author Dimitri
+ * @author CMPUT301 Team14: Dimitri T
+ * @version 1.0
+ *
  */
 public class ViewRequestsActivity extends AppCompatActivity {
 
@@ -28,9 +30,8 @@ public class ViewRequestsActivity extends AppCompatActivity {
 
     /**
      * Initializes the view, adapter and recyclerView.
-     *
      * @see this.loadData()
-     * @param savedInstanceState
+     * @param savedInstanceState: instance state last used.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class ViewRequestsActivity extends AppCompatActivity {
     }
 
     /**
-     * Loads borrowed books from database.
+     * This method loads borrowed books from database.
      * Manipulates the views during loading.
      */
     private void loadData() {

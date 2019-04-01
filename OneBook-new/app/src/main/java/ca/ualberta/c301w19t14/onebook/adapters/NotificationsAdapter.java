@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,9 +29,10 @@ import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
 /**
  * RecyclerView adapter for notifications.
  * Handles displaying and clicking on notifications.
- *
+ * @author CMPUT301 Team14: Natalie H, Dimitri T
  * @see NotificationFragment
- * @author Natalie, Dimitri
+ * @version 1.0
+ *
  */
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationsViewHolder> {
 
@@ -42,11 +45,21 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         this.mContext = context;
     }
 
+    /**
+     *
+     * @return the total number of notifications the user has.
+     */
     @Override
     public int getItemCount() {
         return notificationList.size();
     }
 
+    /**
+     * Attaches notification content to the view.
+     *
+     * @param mVh
+     * @param i
+     */
     @Override
     public void onBindViewHolder(NotificationsViewHolder mVh, int i) {
         Notification notification = notificationList.get(i);
@@ -56,9 +69,36 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         mVh.title.setText(notification.getTitle());
         mVh.content.setText(notification.getContent());
 
+        switch(notification.getIcon()) {
+            case Notification.UP:
+                mVh.icon.setImageResource(R.drawable.arrowup64);
+                break;
+            case Notification.DOWN:
+                mVh.icon.setImageResource(R.drawable.arrowdown64);
+                break;
+            case Notification.BOOK:
+                mVh.icon.setImageResource(R.drawable.booklet64);
+                break;
+            case Notification.MESSAGE:
+                mVh.icon.setImageResource(R.drawable.mail64);
+                break;
+            case Notification.COMPASS:
+                mVh.icon.setImageResource(R.drawable.compass64);
+                break;
+            case Notification.MARKER:
+                mVh.icon.setImageResource(R.drawable.location64);
+                break;
+            case Notification.ROCKET:
+                mVh.icon.setImageResource(R.drawable.rocket64);
+                break;
+            default:
+                mVh.icon.setImageResource(R.drawable.rocket64);
+                break;
+        }
     }
 
     @Override
+    @NonNull
     public NotificationsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
@@ -70,12 +110,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     public class NotificationsViewHolder extends RecyclerView.ViewHolder {
         protected TextView title;
         protected TextView content;
+        protected ImageView icon;
         Notification notification;
 
         NotificationsViewHolder(View view, int i) {
             super(view);
             title = view.findViewById(R.id.title);
             content = view.findViewById(R.id.content);
+            icon = view.findViewById(R.id.icon);
                 view.setOnClickListener(new View.OnClickListener() {
 
                     @Override public void onClick(final View v) {
@@ -133,8 +175,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
                             alertDialog2.setButton(AlertDialog.BUTTON_NEGATIVE, "SAVE",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-
-
                                             dialog.dismiss();
                                         }
                                     });

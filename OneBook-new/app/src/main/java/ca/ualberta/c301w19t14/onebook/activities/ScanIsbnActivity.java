@@ -27,8 +27,19 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 
+/**
+ * This class implements a scanner for ISBN codes. Uses phone's camera to create the scanner.
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ *
+ */
 public class ScanIsbnActivity extends AppCompatActivity {
     TextView barcodeResult;
+
+    /**
+     * Initializes the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +165,11 @@ public class ScanIsbnActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method initiates the handover process from a owner from a book request.
+     * @param v: from a findBookButton click. Brought up for a request
+     * @param item: the book from the owner that is being requested by a borrower
+     */
     private void showOwnerInitiate(View v, final Book item) {
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setTitle("Choose an option:");
@@ -174,6 +190,11 @@ public class ScanIsbnActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * This method initiates the return process from a borrower to the owner of the book.
+     * @param v: from a findBookButton click. Brought up for a request
+     * @param item: the book from the owner that is being requested by a borrower
+     */
     private void showBorrowerInitiate(View v, final Book item) {
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setTitle("Choose an option:");
@@ -194,6 +215,10 @@ public class ScanIsbnActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * This method moves to ViewBookActivity to see the book's descriptors.
+     * @param item: the book object to be looked at.
+     */
     private void goToViewBook(Book item) {
         Intent intent = new Intent(ScanIsbnActivity.this, ViewBookActivity.class);
         final Bundle bundle = new Bundle();

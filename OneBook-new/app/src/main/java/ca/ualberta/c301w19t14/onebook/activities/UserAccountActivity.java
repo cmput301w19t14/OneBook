@@ -21,7 +21,13 @@ import ca.ualberta.c301w19t14.onebook.Globals;
 import ca.ualberta.c301w19t14.onebook.R;
 import ca.ualberta.c301w19t14.onebook.models.Book;
 
-//this class shows a user's information when someone clicks on the owner of a book
+/**
+ * This class shows a user's information when someone clicks on the owner of a book.
+ *
+ * @author CMPUT301 Team14: CCID
+ * @version 1.0
+ * @deprecated by MyProfileFragment
+ */
 public class UserAccountActivity extends AppCompatActivity {
     private final String TAG = "UserAccountActivity";
     private ImageView profilePic;
