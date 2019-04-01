@@ -37,6 +37,9 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 //import static androidx.test.espresso.assertion.ViewAssertions.matches;
 //import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -51,7 +54,7 @@ public class AddDeleteBookTest {
     public String password = "test123";
 
     private Globals globals;
-    private int resID = R.id.recyclerView;
+    private int resID = R.id.bookList;
 
     //input details
     public String booktitle = "The Art of the Deal";
@@ -115,13 +118,14 @@ public class AddDeleteBookTest {
 
         onView(withId(R.id.newBook)).perform(click());
 
-
-
         //at this point, we are at the add book activity. Now we need to fill in the details
         //of our new book.
         onView(withId(R.id.title)).perform(typeText(booktitle));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.author)).perform(typeText(bookauthor));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.isbn)).perform(typeText(bookisbn));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.description)).perform(typeText(bookdescription));
         //once the details are filled out, add the book
         Espresso.closeSoftKeyboard();
@@ -137,7 +141,8 @@ public class AddDeleteBookTest {
                 .perform(click());
 
         //Click "Delete"
-        onView(withId(R.id.buttonDelete)).perform(click());
+        onView(withId(R.id.deleteIcon)).perform(click());
+        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
         //restart lending transaction
         StartLendingTransaction();
@@ -155,7 +160,7 @@ public class AddDeleteBookTest {
             }
         }
 
-        LendingFragment mylendingfragment = new LendingFragment(book);
+        LendingFragment mylendingfragment = new LendingFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 activityRule.getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, mylendingfragment);

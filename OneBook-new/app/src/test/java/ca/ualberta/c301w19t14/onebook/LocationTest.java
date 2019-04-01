@@ -1,5 +1,6 @@
 package ca.ualberta.c301w19t14.onebook;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import ca.ualberta.c301w19t14.onebook.models.Location;
@@ -8,41 +9,39 @@ import ca.ualberta.c301w19t14.onebook.models.Location;
 public class LocationTest {
 
     private Location location;
+    private String address;
+    private double lat;
+    private double lng;
 
     public LocationTest() {
         location = new Location();
     }
 
-    @Test
-    public void test_location_latlng()
-    {
-        Location loc = new Location("test", 19.123213213, 12.123213213);
 
-        Assert.assertEquals("test", loc.getName());
-        Assert.assertEquals("message", 19.123213213,
-                loc.getLat(), 0.01f);
-        Assert.assertEquals("message", 12.123213213,
-                loc.getLng(), 0.01f);
+    @Before
+    public void init(){
+        address = "9232 Baker Street NW";
+        lat = 167.22;
+        lng = 58.75;
+        location = new Location(address, lat, lng);
     }
 
     @Test
-    public void test_location_full()
+    public void test_location_lat()
     {
-        Location loc = new Location("test", "1525 99 Street", "Edmonton",
-                "Alberta", "Canada");
-
-        Assert.assertEquals("test", loc.getName());
-        Assert.assertEquals("1525 99 Street", loc.getStreetAddress());
-        Assert.assertEquals("Edmonton", loc.getCity());
-        Assert.assertEquals("Alberta", loc.getState());
-        Assert.assertEquals("Canada", loc.getCountry());
+        Assert.assertEquals(lat, location.getLat(), 0.001);
     }
 
     @Test
-    public void test_set_name()
+    public void test_location_lng()
     {
-        location.setName("Jandaile");
-        Assert.assertEquals("Jandaile", location.getName());
+        Assert.assertEquals(lng, location.getLng(), 0.001);
+    }
+
+    @Test
+    public void test_Address()
+    {
+        Assert.assertEquals(address, location.getAddress());
     }
 
     @Test
@@ -64,28 +63,9 @@ public class LocationTest {
     @Test
     public void test_streetAddress()
     {
-        location.setStreetAddress("Jandaile");
-        Assert.assertEquals("Jandaile", location.getStreetAddress());
+        location.setAddress("4133 Pegasus Drive SW");
+        Assert.assertEquals("4133 Pegasus Drive SW", location.getAddress());
     }
 
-    @Test
-    public void test_city()
-    {
-        location.setCity("Edmonton");
-        Assert.assertEquals("Edmonton", location.getCity());
-    }
 
-    @Test
-    public void test_state()
-    {
-        location.setState("Alberta");
-        Assert.assertEquals("Alberta", location.getState());
-    }
-
-    @Test
-    public void test_country()
-    {
-        location.setCountry("Canada");
-        Assert.assertEquals("Canada", location.getCountry());
-    }
 }

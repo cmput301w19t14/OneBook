@@ -78,8 +78,8 @@ public class MyAccountTest {
 
     @Test
     public void CheckUserDetails(){
-        onView(withId(R.id.Name)).check(matches(withText("Name: " + actual_name)));
-        onView(withId(R.id.email)).check(matches(withText("Email: " + email.toLowerCase())));
+        onView(withId(R.id.Name)).check(matches(withText(actual_name)));
+        onView(withId(R.id.email)).check(matches(withText(email.toLowerCase())));
     }
 
 }

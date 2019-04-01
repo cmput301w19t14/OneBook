@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import androidx.test.rule.ActivityTestRule;
+import ca.ualberta.c301w19t14.onebook.activities.ViewBookActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -95,11 +96,11 @@ public class ViewBookTest {
         activityRule.launchActivity(i);
 
         onView(withId(R.id.bookTitle)).check(matches(withText("Title: " + title)));
-        onView(withId(R.id.bookauthor)).check(matches(withText("Author: " + author)));
-        onView(withId(R.id.bookIsbn))
+        onView(withId(R.id.bookAuthor)).check(matches(withText("Author: " + author)));
+        onView(withId(R.id.isbn))
                 .check(matches(withText("ISBN: " + String.valueOf(ISBN))));
         onView(withId(R.id.bookOwner)).check(matches(withText("Owner: " + name)));
-        onView(withId(R.id.bookDescription)).check(matches(withText("Description: " + description)));
+        onView(withId(R.id.description)).check(matches(withText("Description: " + description)));
         onView(withId(R.id.bookStatus)).check(matches(withText("Status: " + status)));
 
     }

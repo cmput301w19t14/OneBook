@@ -31,7 +31,7 @@ public class UserTest {
     public long isbn = 1897213L;
     public String title = "Narnia";
     public String author = "Narnia Guy";
-    public String category = "Fantasy";
+    public String description = "Fantasy";
     public String status = "Requested";
 
 
@@ -41,8 +41,8 @@ public class UserTest {
     public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
     public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
-    public Book book = new Book(1897213, title, author,category,
-            steve, bob, edmonton, status);
+    public Book book = new Book(1897213, title, author,description,
+            steve);
 
 //comment
 

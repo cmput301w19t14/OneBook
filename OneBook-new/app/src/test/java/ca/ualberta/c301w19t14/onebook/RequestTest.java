@@ -32,7 +32,8 @@ public class RequestTest {
 
     //Book info
     public long isbn = 1897213L;
-    public long isbn2 = 1876543L;
+    private String request_id = "48wH221U";
+    public String request_id2 = "dfa52GH775";
     public String title = "Narnia";
     public String author = "Narnia Guy";
     public String description = "Fantasy book about lions";
@@ -54,14 +55,14 @@ public class RequestTest {
     public Book book = new Book(1897213, title, author,description,
             steve);
 
-    public Request request = new Request(steve, book, edmonton, date, status);
+    public Request request = new Request(bob, book, request_id);
     public Notification notification = new Notification(requesttitle, requestcontent,request,
             steve);
 
 
     @Test
     public void testSetOwner() {
-        request.setOwneremail(steve_email);
+        request.setUser(steve);
         Assert.assertNotEquals(bob_email, request.getUser().getEmail());
         Assert.assertEquals(steve_email, request.getUser().getEmail());
     }
@@ -69,13 +70,13 @@ public class RequestTest {
     @Test
     public void testSetLocation() {
         request.setLocation(edmonton);
-        Assert.assertEquals(edmonton_name, request.getLocation().getName());
+        Assert.assertEquals(edmonton_name, request.getLocation().getAddress());
     }
 
     @Test
-    public void testSetISBN() {
-        request.setISBN(isbn2);
-        assertNotEquals(isbn, request.getBook().getIsbn());
-        assertEquals(isbn2, request.getBook().getIsbn());
+    public void testSetID() {
+        request.setId(request_id2);
+        assertNotEquals(request_id, request.getId());
+        assertEquals(request_id2, request.getId());
     }
 }
