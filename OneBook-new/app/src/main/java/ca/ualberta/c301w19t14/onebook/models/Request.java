@@ -143,7 +143,7 @@ public class Request {
      * Rejects the request, deletes request, and sends notifications
      */
     public void reject() {
-        Book book = this.getBook();
+        final Book book = this.getBook();
 
         final Request request = this;
         FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
@@ -152,14 +152,14 @@ public class Request {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Book book = dataSnapshot.getValue(Book.class);
+                Book newBook = dataSnapshot.getValue(Book.class);
                 // delete the request
 
                 if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
-                    book.waitlistDoNext();
+                    newBook.waitlistDoNext();
                 } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
-                    book.waitlistDoNext();
+                    newBook.waitlistDoNext();
                 }
 
 
