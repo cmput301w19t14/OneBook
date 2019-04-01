@@ -38,7 +38,7 @@ import static android.support.v4.content.ContextCompat.getSystemService;
 
 /**
  * This fragments displays a user profile page with all their information.
- * @author CMPUT301 Team14: Natalie H
+ * @author CMPUT301 Team14: Natalie H, Oran R.
  * @version 1.0
  */
 public class MyProfileFragment extends Fragment {

@@ -26,7 +26,7 @@ import ca.ualberta.c301w19t14.onebook.R;
 /**
  * This class implements the main functionality of the app.
  * From this class, the navigation bar can be used and all of the fragments can be accessed.
- * @author CMPUT301 Team14: Dimitri T, Anastasia B.
+ * @author CMPUT301 Team14: Dimitri T, Anastasia B, Natalie H.
  * @version 1.0
  * */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
