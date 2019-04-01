@@ -148,7 +148,7 @@ public class EditBookActivity extends AppCompatActivity {
                 book.setIsbn(Long.valueOf(isbn.getText().toString()));
                 book.update();
 
-                finish();
+
                 //committing image to fire base storage
                 runOnUiThread(new Runnable() {
                     @Override
@@ -192,6 +192,7 @@ public class EditBookActivity extends AppCompatActivity {
 
             }
         });
+        finish();
     }
 
     @Override

@@ -69,7 +69,7 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
 
         lastMessage(user.getUid(), viewHolder.lastMessage);
 
-        StorageReference ref = storage.getReference("Book images/"+user.getUid()+"/profiles.png");
+        StorageReference ref = storage.getReference("Profile pictures/"+user.getUid()+"/profile.png");
         ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {

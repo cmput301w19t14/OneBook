@@ -26,7 +26,6 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
  *
  * @author CMPUT301 Team14: CCID
  * @version 1.0
- * @deprecated by MyProfileFragment
  */
 public class UserAccountActivity extends AppCompatActivity {
     private final String TAG = "UserAccountActivity";
@@ -35,12 +34,13 @@ public class UserAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_my_accnt_activity);
+        setContentView(R.layout.content_user_profile);
 
-
+        /*
         TextView nm = findViewById(R.id.Name);
         TextView em = findViewById(R.id.email);
         profilePic = findViewById(R.id.profilePicture);
+
 
 
         FirebaseStorage.getInstance().getReference().child("Profile pictures/" +
@@ -74,6 +74,9 @@ public class UserAccountActivity extends AppCompatActivity {
         //em.setText("fuck this shit");
         String str_name = "Name: " + book.getOwner().getName();
         nm.setText(str_name);
+        */
+
     }
+
 }
 

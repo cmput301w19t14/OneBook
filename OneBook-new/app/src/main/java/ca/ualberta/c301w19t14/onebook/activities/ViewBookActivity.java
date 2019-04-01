@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -92,6 +93,16 @@ public class ViewBookActivity extends AppCompatActivity {
 
         // TODO: Click owner, go to view profile.
 
+
+        LinearLayout owner = findViewById(R.id.ownerInfo);
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewBookActivity.this,UserAccountActivity.class);
+                intent.putExtra("id",book.getOwner().getUid());
+                startActivity(intent);
+            }
+        });
         Button locationButton = findViewById(R.id.location);
 
         if(book.acceptedRequest() != null &&
@@ -110,6 +121,8 @@ public class ViewBookActivity extends AppCompatActivity {
         } else {
             locationButton.setVisibility(View.GONE);
         }
+
+
 
         Button requestsButton = findViewById(R.id.requests);
         if(book.userIsOwner()) {

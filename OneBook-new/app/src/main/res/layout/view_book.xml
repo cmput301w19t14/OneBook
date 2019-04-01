@@ -200,6 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:id="@+id/ownerInfo"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -221,7 +222,6 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="gotoOwner2"
                     android:text="Owner: Amy33"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="18sp" />
