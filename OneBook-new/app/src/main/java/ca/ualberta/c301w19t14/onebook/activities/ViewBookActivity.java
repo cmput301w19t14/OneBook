@@ -187,6 +187,8 @@ public class ViewBookActivity extends AppCompatActivity {
                             (book.userIsOwner() ||
                                     book.acceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
                     ) {
+                        locationButton.setVisibility(View.VISIBLE);
+
                         locationButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -202,6 +204,8 @@ public class ViewBookActivity extends AppCompatActivity {
 
                     Button requestsButton = findViewById(R.id.requests);
                     if (book.userIsOwner()) {
+                        requestsButton.setVisibility(View.VISIBLE);
+
                         requestsButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -216,6 +220,8 @@ public class ViewBookActivity extends AppCompatActivity {
 
                     final Button requestButton = findViewById(R.id.request);
                     if (book.userCanRequest()) {
+                        requestButton.setVisibility(View.VISIBLE);
+
                         requestButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
