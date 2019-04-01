@@ -23,6 +23,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.action.ViewActions.typeTextIntoFocusedView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -95,7 +96,7 @@ public class EditProfileTest {
 
 
     @Test
-    public void TestEditProfile(){
+    public void TestEditProfile() throws InterruptedException{
 
         //should be at my account. Next, click on the edit button
         onView(withId(R.id.pencil_button)).perform(click());
@@ -110,8 +111,31 @@ public class EditProfileTest {
         //click save
         onView(withId(R.id.UserSaveButton)).perform(click());
 
-        //DEBUG - remove later
-        methods.InfiniteLoop();
+        //wait for page to update
+        Thread.sleep(3500);
+
+        //see if the profile name updated correctly
+        onView(withId(R.id.Name)).check(matches(withText(name2)));
+
+        //Do it all again, except reverting the changes
+        //should be at my account. Next, click on the edit button
+        onView(withId(R.id.pencil_button)).perform(click());
+
+        //now we should be at the edit page activity
+        onView(withId(R.id.editName)).perform(replaceText(""));
+        onView(withId(R.id.editName)).perform(typeText(name1));
+
+        //Hide the keyboard
+        Espresso.closeSoftKeyboard();
+
+        //click save
+        onView(withId(R.id.UserSaveButton)).perform(click());
+
+        //wait for page to update
+        Thread.sleep(3500);
+
+        //see if the profile name updated correctly
+        onView(withId(R.id.Name)).check(matches(withText(name1)));
 
     }
 

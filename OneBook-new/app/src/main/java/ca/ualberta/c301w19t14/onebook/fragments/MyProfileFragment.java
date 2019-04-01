@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -44,6 +45,8 @@ import static android.support.v4.content.ContextCompat.getSystemService;
 public class MyProfileFragment extends Fragment {
 
     View myView;
+    private TextView nm;
+    private TextView em;
 
     /**
      * Initializes the view.
@@ -59,8 +62,8 @@ public class MyProfileFragment extends Fragment {
         myView = inflater.inflate(R.layout.content_my_accnt_activity, container, false);
         setHasOptionsMenu(true);
 
-        TextView nm = myView.findViewById(R.id.Name);
-        TextView em = myView.findViewById(R.id.email);
+        nm = myView.findViewById(R.id.Name);
+        em = myView.findViewById(R.id.email);
 
         String str_email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         em.setText(str_email);
@@ -146,4 +149,39 @@ public class MyProfileFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onResume()  {
+        super.onResume();
+
+
+        //https://stackoverflow.com/questions/17237287/how-can-i-wait-for-10-second-without
+        // -locking-application-ui-in-android
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Actions to do after 2 seconds
+                //Toast.makeText(getContext(),"Updating for new information", Toast.LENGTH_SHORT).show();
+                String str_email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                em.setText(str_email);
+
+                String str_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                nm.setText(str_name);
+            }
+        }, 3000);
+        updateUserInfo();
+
+    }
+
+    public void updateUserInfo() {
+
+        //Toast.makeText(this.getContext(),"Updating for new information", Toast.LENGTH_SHORT).show();
+
+
+        String str_email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        em.setText(str_email);
+
+        String str_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        nm.setText(str_name);
+
+    }
 }
