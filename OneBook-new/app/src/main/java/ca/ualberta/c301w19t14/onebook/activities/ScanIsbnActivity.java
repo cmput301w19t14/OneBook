@@ -78,16 +78,6 @@ public class ScanIsbnActivity extends AppCompatActivity {
                                     switch (item.acceptedRequest().getStatus()) {
                                         case Request.ACCEPTED:
                                             showOwnerInitiate(v, item);
-                                            alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                                            alertDialog.setTitle("Handover process initiated");
-                                            alertDialog.setMessage("Waiting on borrower to scan. Scan again to view book details.");
-                                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                                                    new DialogInterface.OnClickListener() {
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            dialog.dismiss();
-                                                        }
-                                                    });
-                                            alertDialog.show();
                                             break;
                                         case Request.PENDING_OWNER_SCAN:
                                             // confirm returned
@@ -126,16 +116,6 @@ public class ScanIsbnActivity extends AppCompatActivity {
                                             break;
                                         case Request.BORROWING:
                                             showBorrowerInitiate(v, item);
-                                            alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                                            alertDialog.setTitle("Return process initiated");
-                                            alertDialog.setMessage("Waiting on owner scan. Scan again to view book details.");
-                                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                                                    new DialogInterface.OnClickListener() {
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            dialog.dismiss();
-                                                        }
-                                                    });
-                                            alertDialog.show();
                                             break;
                                         default:
                                             // go to view book
@@ -205,7 +185,7 @@ public class ScanIsbnActivity extends AppCompatActivity {
      * @param v: from a findBookButton click. Brought up for a request
      * @param item: the book from the owner that is being requested by a borrower
      */
-    private void showOwnerInitiate(View v, final Book item) {
+    private void showOwnerInitiate(final View v, final Book item) {
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setTitle("Choose an option:");
         alertDialog.setMessage("There is an accepted request on this book. You can either initiate the handover process, or view book details.");
@@ -213,7 +193,16 @@ public class ScanIsbnActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         item.doBorrowHandover();
-                        Snackbar.make(findViewById(R.id.scanIsbn), "Handover process initiated. Waiting on borrower scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                        alertDialog.setTitle("Handover process initiated");
+                        alertDialog.setMessage("Waiting on borrower to scan. Scan again to view book details.");
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "VIEW",
@@ -230,7 +219,7 @@ public class ScanIsbnActivity extends AppCompatActivity {
      * @param v: from a findBookButton click. Brought up for a request
      * @param item: the book from the owner that is being requested by a borrower
      */
-    private void showBorrowerInitiate(View v, final Book item) {
+    private void showBorrowerInitiate(final View v, final Book item) {
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setTitle("Choose an option:");
         alertDialog.setMessage("You are currently borrowing this book. You can either initiate the return process, or view book details.");
@@ -238,7 +227,16 @@ public class ScanIsbnActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         item.doReturnHandover();
-                        Snackbar.make(findViewById(R.id.scanIsbn), "Return process initiated. Waiting on owner scan. Scan again to view book details.", Snackbar.LENGTH_LONG).show();
+                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                        alertDialog.setTitle("Return process initiated");
+                        alertDialog.setMessage("Waiting on owner scan. Scan again to view book details.");
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "VIEW",
