@@ -36,15 +36,23 @@ public class UserAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_user_profile);
 
-        /*
+
         TextView nm = findViewById(R.id.Name);
         TextView em = findViewById(R.id.email);
         profilePic = findViewById(R.id.profilePicture);
 
+        Intent intent = getIntent();
+        final Bundle bundle = intent.getExtras();
 
 
+        String str_email = "Email: " + bundle.getString("EMAIL");
+        String str_name = "Name: " + bundle.getString("NAME");
+        nm.setText(str_name);
+        em.setText(str_email);
+
+        //Log.d(TAG, "onCreate: "+bundle.getString("ID"));
         FirebaseStorage.getInstance().getReference().child("Profile pictures/" +
-                FirebaseAuth.getInstance().getUid() + "/profile.png").getBytes(Long.MAX_VALUE)
+                bundle.getString("ID") + "/profile.png").getBytes(Long.MAX_VALUE)
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
@@ -65,16 +73,8 @@ public class UserAccountActivity extends AppCompatActivity {
         });
 
 
-        Intent intent = getIntent();
-        final Bundle bundle = intent.getExtras();
-        final Book book = Globals.getInstance().books.getData().child(bundle.getString("id")).getValue(Book.class);
 
-        String str_email = "Email: " + book.getOwner().getEmail();
-        //em.setText(str_email);
-        //em.setText("fuck this shit");
-        String str_name = "Name: " + book.getOwner().getName();
-        nm.setText(str_name);
-        */
+
 
     }
 

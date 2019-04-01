@@ -99,7 +99,11 @@ public class ViewBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewBookActivity.this,UserAccountActivity.class);
-                intent.putExtra("id",book.getOwner().getUid());
+                Bundle bundle = new Bundle();
+                bundle.putString("ID",book.getOwner().getUid());
+                bundle.putString("NAME",book.getOwner().getName());
+                bundle.putString("EMAIL",book.getOwner().getEmail());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
