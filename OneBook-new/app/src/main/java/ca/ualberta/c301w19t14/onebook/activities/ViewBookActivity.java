@@ -94,9 +94,9 @@ public class ViewBookActivity extends AppCompatActivity {
 
         Button locationButton = findViewById(R.id.location);
 
-        if(book.getAcceptedRequest() != null &&
+        if(book.acceptedRequest() != null &&
                 (book.userIsOwner() ||
-                        book.getAcceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
+                        book.acceptedRequest().getUser().getUid().equals(Globals.getInstance().user.getUid()))
         ) {
             locationButton.setOnClickListener(new View.OnClickListener() {
                 @Override

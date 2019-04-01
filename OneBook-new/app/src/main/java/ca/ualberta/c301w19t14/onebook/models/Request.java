@@ -153,7 +153,7 @@ public class Request {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book book = dataSnapshot.getValue(Book.class);
 
-                if(book.getAcceptedRequest() != null && book.getAcceptedRequest().getId().equals(request.getId())) {
+                if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
                     book.waitlistDoNext();
                 } else if(book.getNextRequest() != null && book.getNextRequest().getId().equals(request.getId())) {
