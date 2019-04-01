@@ -160,7 +160,7 @@ public class AddActivity extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 final Bitmap imageBitmap = (Bitmap) extras.get("data");
                 image.setImageBitmap(imageBitmap);
-                image.setAlpha(1);
+                image.setImageAlpha(255);
             }
         }
     }
