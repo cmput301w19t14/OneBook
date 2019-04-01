@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -79,9 +82,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         bookVh.vOwner.setText(book.getOwner().getName());
         bookVh.vStatus.setText(book.status().toUpperCase());
         bookVh.vAuthor.setText(book.getAuthor());
-
+        bookVh.vImage.setImageResource(R.drawable.book64);
         StorageReference ref = storage.getReference().child("Book images/" + book.getId() + "/bookimage.png");
-        Glide.with(mContext).load(ref).placeholder(R.drawable.book64).into(bookVh.vImage);
+        ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()) {
+                    Glide.with(mContext).load(task.getResult()).placeholder(R.drawable.book64).into(bookVh.vImage);
+                }
+            }
+        });
+
     }
 
     /**
