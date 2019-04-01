@@ -77,14 +77,14 @@ public class ViewBookTest {
     public void testViewBook(){
 
         //init variables
-        long ISBN = 123123L;
-        String description = "test";
+        long ISBN = 3789527L;
+        String description = "This is a book about the end of the world!";
         String status = "Borrowed";
-        String title = "test2";
-        String author = "Adam";
+        String title = "Polywogs and jiblegarble";
+        String author = "Crazy Person";
         String owner = "adam@gmail.com";
-        String name = "Jandaile DeGuzman";
-        String id = "-L_iAvX6BTsHxB6_Zeqk";
+        String name = "You Eye";
+        String id = "-LaTT1EdrC9h1oCdxyUT";
 
 
         Bundle bundle = new Bundle();
@@ -95,13 +95,13 @@ public class ViewBookTest {
 
         activityRule.launchActivity(i);
 
-        onView(withId(R.id.bookTitle)).check(matches(withText("Title: " + title)));
-        onView(withId(R.id.bookAuthor)).check(matches(withText("Author: " + author)));
+        onView(withId(R.id.title)).check(matches(withText(title)));
+        onView(withId(R.id.author)).check(matches(withText(author)));
         onView(withId(R.id.isbn))
-                .check(matches(withText("ISBN: " + String.valueOf(ISBN))));
-        onView(withId(R.id.bookOwner)).check(matches(withText("Owner: " + name)));
-        onView(withId(R.id.description)).check(matches(withText("Description: " + description)));
-        onView(withId(R.id.bookStatus)).check(matches(withText("Status: " + status)));
+                .check(matches(withText(String.valueOf(ISBN))));
+        onView(withId(R.id.owner)).check(matches(withText(name)));
+        onView(withId(R.id.description)).check(matches(withText(description)));
+        onView(withId(R.id.status)).check(matches(withText(status)));
 
     }
 

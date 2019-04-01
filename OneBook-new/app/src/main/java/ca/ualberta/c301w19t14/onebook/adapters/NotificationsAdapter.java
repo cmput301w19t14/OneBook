@@ -29,6 +29,7 @@ import ca.ualberta.c301w19t14.onebook.fragments.NotificationFragment;
 /**
  * RecyclerView adapter for notifications.
  * Handles displaying and clicking on notifications.
+ * Future improvements include having location for a meet up show when a meet up notification is clicked.
  * @author CMPUT301 Team14: Natalie H, Dimitri T
  * @see NotificationFragment
  * @version 1.0
