@@ -3,6 +3,7 @@ package ca.ualberta.c301w19t14.onebook.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -84,7 +85,11 @@ public class MessagingUserAdapter extends RecyclerView.Adapter<MessagingUserAdap
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userID", user.getUid());
+                Bundle bundle = new Bundle();
+                bundle.putString("ID",user.getUid());
+                bundle.putString("EMAIL",user.getEmail());
+                bundle.putString("NAME",user.getName());
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });

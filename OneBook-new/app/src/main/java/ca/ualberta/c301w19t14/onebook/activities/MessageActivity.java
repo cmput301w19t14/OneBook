@@ -73,6 +73,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -85,8 +86,18 @@ public class MessageActivity extends AppCompatActivity {
 
 
         intent = getIntent();
-        final String userID = intent.getStringExtra("userID");
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser(); 
+        final Bundle bundle = intent.getExtras();
+        final String userID = bundle.getString("ID");
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MessageActivity.this,UserAccountActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
