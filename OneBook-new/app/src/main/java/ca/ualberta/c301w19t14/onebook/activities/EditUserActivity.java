@@ -66,6 +66,7 @@ public class EditUserActivity extends AppCompatActivity {
         nm_edit.setText(Globals.getInstance().user.getDisplayName());
         profile_ref = storage.getReference("Profile pictures/"+FirebaseAuth.getInstance()
                 .getUid()+"/profile.png");
+        
 
         ph_edit.setOnClickListener(new View.OnClickListener() {
             @Override
