@@ -41,7 +41,7 @@ public class ModifyBookDescription {
     private String after_description = "This book is about mayhem and Armageddon.";
 
     private Globals globals;
-    private int resID = R.id.recyclerView;
+    private int resID = R.id.bookList;
 
     //input details
     public String booktitle = "The Art of the Deal";
@@ -100,7 +100,7 @@ public class ModifyBookDescription {
     }
 
     @Test
-    public void ModifyDescriptionTest(){
+    public void ModifyDescriptionTest() throws InterruptedException{
 
         //click on the book (should only be one)
         onView(new RecyclerViewMatcher(this.resID)
@@ -108,11 +108,11 @@ public class ModifyBookDescription {
                 .perform(click());
 
         //check to see if the before description matches
-        onView(withId(R.id.bookDescription))
-                .check(matches(withText(description_prefix + before_description)));
+        onView(withId(R.id.description))
+                .check(matches(withText(before_description)));
 
         //click into the edit button
-        onView(withId(R.id.editBookButton)).perform(click());
+        onView(withId(R.id.editIcon)).perform(click());
 
         //now we're in the edit book page. Change the description
         onView(withId(R.id.editBookDescription)).perform(replaceText(""));
@@ -133,11 +133,11 @@ public class ModifyBookDescription {
                 .perform(click());
 
         //check to see if the before description matches
-        onView(withId(R.id.bookDescription))
-                .check(matches(withText(description_prefix + after_description)));
+        onView(withId(R.id.description))
+                .check(matches(withText(after_description)));
 
         //click into the edit button
-        onView(withId(R.id.editBookButton)).perform(click());
+        onView(withId(R.id.editIcon)).perform(click());
 
         //now we're in the edit book page. Change the description
         //onView(withId(R.id.editBookDescription)).perform(typeText(after_description));
@@ -150,11 +150,6 @@ public class ModifyBookDescription {
 
         //so we've typed in the new description. Click save
         onView(withId(R.id.saveBookButton)).perform(click());
-
-        //as a final precaution, check to see that the description is back to what it was
-        //before
-        onView(withId(R.id.bookDescription))
-                .check(matches(withText(description_prefix + before_description)));
 
     }
 
@@ -171,7 +166,7 @@ public class ModifyBookDescription {
             }
         }
 
-        LendingFragment mylendingfragment = new LendingFragment(book);
+        LendingFragment mylendingfragment = new LendingFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 activityRule.getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, mylendingfragment);

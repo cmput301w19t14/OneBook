@@ -1,6 +1,7 @@
 package ca.ualberta.c301w19t14.onebook;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class BookTest {
     public long isbn = 1897213L;
     public String title = "Narnia";
     public String author = "Narnia Guy";
-    public String category = "Fantasy";
+    public String description = "Fantasy";
     public String status = "Requested";
 
 
@@ -40,9 +41,13 @@ public class BookTest {
     public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
     public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
-    public Book book = new Book(1897213, title, author,category,
-            steve, bob, edmonton, status);
+    public Book book = new Book(1897213, title, author,description,
+            steve);
 
+    @Before
+    public void init(){
+        book.setBorrower(bob);
+    }
 
     @Test 
     public void test_Uid()
@@ -56,8 +61,7 @@ public class BookTest {
         Assert.assertEquals(isbn, book.getIsbn());
         Assert.assertEquals(title, book.getTitle());
         Assert.assertEquals(author, book.getAuthor());
-        Assert.assertEquals(category, book.getCategory());
-        Assert.assertEquals(status, book.status());
+        Assert.assertEquals(description, book.getDescription());
     }
 
     @Test
@@ -70,13 +74,6 @@ public class BookTest {
     public void testName(){
         Assert.assertEquals(steve_name, book.getOwner().getName());
         Assert.assertEquals(bob_name, book.getBorrower().getName());
-    }
-
-    @Test
-    public void testLocation(){
-        Assert.assertEquals(edmonton_name, book.getLocation().getName());
-        Assert.assertEquals("message",edmonton_lat, book.getLocation().getLat(), 0.01);
-        Assert.assertEquals("message",edmonton_long, book.getLocation().getLng(), 0.01);
     }
 
 }

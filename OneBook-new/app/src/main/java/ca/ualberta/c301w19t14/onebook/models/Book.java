@@ -65,6 +65,24 @@ public class Book {
     }
 
     /**
+     *
+     * @param isbn
+     * @param title
+     * @param author
+     * @param description
+     * @param owner
+     */
+    public Book(long isbn, String title, String author, String description, User owner, User borrower) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.owner = owner;
+        this.request = new HashMap<>();
+        this.borrower = borrower;
+    }
+
+    /**
      * getter for Book Id
      * @return this.id
      */

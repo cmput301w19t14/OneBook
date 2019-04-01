@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.c301w19t14.onebook.models.Book;
 import ca.ualberta.c301w19t14.onebook.models.Location;
+import ca.ualberta.c301w19t14.onebook.models.MessagingChatsList;
 import ca.ualberta.c301w19t14.onebook.models.Request;
 import ca.ualberta.c301w19t14.onebook.models.User;
 
@@ -21,7 +22,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class MessageSystemTest {
 
-    public MessagingSystem messagingSystem = new MessagingSystem();
+    private String id = "14bw77Y4";
+    public MessagingChatsList messagingSystem = new MessagingChatsList(id);
 
     public String steve_uid = "13w74X57b";
     public String bob_uid = "43h82Y12a";
@@ -42,7 +44,7 @@ public class MessageSystemTest {
     public long isbn = 1897213L;
     public String title = "Narnia";
     public String author = "Narnia Guy";
-    public String category = "Fantasy";
+    public String description = "Fantasy";
     public String status = "Requested";
 
 
@@ -52,21 +54,19 @@ public class MessageSystemTest {
     public Location edmonton = new Location(edmonton_name, edmonton_lat, edmonton_long);
     public Location calgary = new Location(calgary_name, calgary_lat, calgary_long);
 
-    public Book book = new Book(1897213, title, author,category,
-            steve, bob, edmonton, status);
+    public Book book = new Book(1897213, title, author,description,
+            steve);
 
     @Test
-    public void testSetUser(){
-        messagingSystem.setUser(bob);
+    public void testGetId(){
+        Assert.assertEquals(id, messagingSystem.getId());
     }
 
     @Test
-    public void checkSend(){
-        Assert.assertTrue(messagingSystem.sendMessage(steve, "Sup bro!"));
+    public void testSetId(){
+        String newid = "44b4TTy8";
+        messagingSystem.setId(newid);
+        Assert.assertEquals(newid, messagingSystem.getId());
     }
 
-    @Test
-    public void checkGetMessages(){
-        Assert.assertTrue(messagingSystem.checkNewMessages());
-    }
 }

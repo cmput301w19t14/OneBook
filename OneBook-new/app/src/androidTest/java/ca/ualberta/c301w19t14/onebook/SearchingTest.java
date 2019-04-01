@@ -38,12 +38,14 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 public class SearchingTest {
 
-    public int resID = R.id.SearchRecycler;
+    public int resID = R.id.bookList;
 
     public boolean complete;
     public String email = "UITest@gmail.com";
     public String email2 = "UITest2@gmail.com";
     public String password = "test123";
+
+    private Globals globals;
 
     @Rule
     public ActivityTestRule<SearchingActivity> activityRule =
@@ -76,6 +78,18 @@ public class SearchingTest {
 
             }
         }
+
+        //wait for books to be loaded in
+        globals = Globals.getInstance();
+        globals.initFirebaseUtil();
+
+        //wait for globals to load from firebase
+        while(true){
+            if (Globals.getInstance().books.data_loaded){
+                break;
+            }
+        }
+
         Intent i = new Intent();
         activityRule.launchActivity(i);
     }
@@ -83,10 +97,13 @@ public class SearchingTest {
     @Test
     public void SearchingTest()
     {
-        onView(withId(R.id.search)).perform(typeText("te"));
-        onView(withId(R.id.SearchButton)).perform(click());
+        onView(withId(R.id.search)).perform(click());
+        typeText("War of")
+        //onView(withId(R.id.SearchButton)).perform(click());
 
-
+        //DEBUG - delete later
+        Methods methods = new Methods();
+        methods.InfiniteLoop();
 
         //Check to see if the title of the book is what it should be
         onView(new RecyclerViewMatcher(this.resID)

@@ -36,7 +36,7 @@ public class BorrowerTests {
     public String actual_name2 = "Mary Jane";
     public String DUSTIN_EMAIL = "dustinmcrorie@gmail.com";
     public String DUSTIN_PASS = "hunter2";
-    private int resID = R.id.borrow_recycler;
+    private int resID = R.id.bookList;
     private RecyclerView mRecyclerView;
 
     @Rule
@@ -82,17 +82,21 @@ public class BorrowerTests {
 
 
     @Test
-    public void CheckBookDetails(){
+    public void CheckBookDetails() throws InterruptedException{
+
+
+
+        Thread.sleep(1500);
 
         //Check to see if the title of the book is what it should be
         onView(new RecyclerViewMatcher(this.resID)
                         .atPositionOnView(0, R.id.bookTitle))
-                .check(matches(withText("UI Test Book 1")));
+                .check(matches(withText("Polywogs and jiblegarble")));
 
         //check to see if the book is borrowed (it should be)
         onView(new RecyclerViewMatcher(this.resID)
                 .atPositionOnView(0, R.id.bookStatus))
-                .check(matches(withText("BORROWED")));
+                .check(matches(withText("REQUESTED")));
 
     }
 

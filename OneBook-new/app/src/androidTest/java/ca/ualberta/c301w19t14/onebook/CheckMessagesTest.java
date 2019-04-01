@@ -19,17 +19,22 @@ import org.junit.Rule;
 import org.junit.Test;
 
 
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.rule.ActivityTestRule;
 import ca.ualberta.c301w19t14.onebook.activities.MainActivity;
 import ca.ualberta.c301w19t14.onebook.fragments.MessagesFragment;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
 public class CheckMessagesTest {
+
+    private int resID = R.id.recyclerView;
 
     public String requester_email = "RequesterMike@gmail.com";
     public String requester_name = "Mike Scott";
@@ -83,14 +88,18 @@ public class CheckMessagesTest {
     }
 
     @Test
-    public void CheckMessage(){
+    public void CheckMessage() throws InterruptedException{
 
         //StartChatTransaction();
 
         ClickViewPagerChat();
-        //infinite loop
-        Methods methods = new Methods();
-        methods.InfiniteLoop();
+
+
+        Thread.sleep(1500);
+        //Check to see if the title of the book is what it should be
+        onView(nthChildOf(nthChildOf(nthChildOf(withId(R.id.viewPager), 1), 1), 0))
+                .perform(click());
+
     }
 
     public void StartMessagesTransaction(){

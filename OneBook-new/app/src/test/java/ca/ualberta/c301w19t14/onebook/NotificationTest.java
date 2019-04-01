@@ -30,13 +30,15 @@ public class NotificationTest {
     private String borrowuid = "a47NM7T12A";
     private User borrower = new User(borrowuid, borrowname, borrowemail);
 
+    private String request_id = "5Hh672Ba55";
+
     private String booktitle = "Harry Potter";
     private String author = "J.K. Rowling";
     private String description = "About wizards and magic";
     private long isbn = 27892231L;
     private Book book = new Book(isbn, booktitle, author, description, owner);
 
-    private Request request = new Request(borrower, book);
+    private Request request = new Request(borrower, book, request_id);
     private Notification notificationTest = new Notification(title, content, request, owner);
 
     @Test
