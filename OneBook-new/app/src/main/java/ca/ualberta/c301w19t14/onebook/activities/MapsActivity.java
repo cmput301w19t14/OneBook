@@ -55,6 +55,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         String book_id = getIntent().getExtras().getString("book_id");
         book = Globals.getInstance().books.getData().child(book_id).getValue(Book.class);
+
     }
 
     /**
@@ -63,7 +64,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(53.5444, 113.4909)));
 
         if(book.acceptedRequest().getLocation() != null) {
             Location loc = book.acceptedRequest().getLocation();
@@ -114,15 +115,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     final Marker marker = mMap.addMarker(new MarkerOptions().position(point).title("New Pick Up Location"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
 
+                    String addr;
+
                     try {
                         addresses = geocoder.getFromLocation(point.latitude, point.longitude, 1);
+                        addr = addresses.get(0).getAddressLine(0);
                     } catch (IOException e) {
                         Toast.makeText(MapsActivity.this, "Invalid location, please try again.", Toast.LENGTH_SHORT).show();
                         marker.remove();
                         return;
                     }
 
-                    final String address = addresses.get(0).getAddressLine(0);
+                    final String address = addr;
 
                     AlertDialog alertDialog = new AlertDialog.Builder(MapsActivity.this).create();
                     alertDialog.setTitle("Set New Location");
