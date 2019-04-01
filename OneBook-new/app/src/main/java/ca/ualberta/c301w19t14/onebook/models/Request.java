@@ -152,6 +152,8 @@ public class Request {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book book = dataSnapshot.getValue(Book.class);
+                // delete the request
+                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                 if(book.acceptedRequest() != null && book.acceptedRequest().getId().equals(request.getId())) {
                     // is the current accepted request
@@ -160,8 +162,6 @@ public class Request {
                     book.waitlistDoNext();
                 }
 
-                // delete the request
-                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
                 // create notifications
                 Notification rejected = new Notification("Request Rejected", book.getOwner().getName() + " has rejected your request on " + book.getTitle(), request.getUser(), Notification.BOOK);
