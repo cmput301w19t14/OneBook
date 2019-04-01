@@ -147,13 +147,16 @@ public class Request {
         final Book book = this.getBook();
 
         final Request request = this;
-        FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books").child(book.getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Book newBook = dataSnapshot.getValue(Book.class);
+                FirebaseDatabase.getInstance().getReference("Books").child(book.getId()).child("request").child(request.getId()).removeValue();
+
+                newBook.getRequest().remove(request.getId());
+
                 // delete the request
                 Log.e("DEBUG", "onDataChange()");
 
