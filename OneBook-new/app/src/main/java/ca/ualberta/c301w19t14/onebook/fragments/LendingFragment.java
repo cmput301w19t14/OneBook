@@ -49,10 +49,12 @@ public class LendingFragment extends Fragment {
 
     private String[] filterOptions = new String[] {
             "Available",
+            "Accepted",
             "Borrowed",
     };
 
     private static boolean[] checkedFilters = new boolean[]{
+            true,
             true,
             true,
     };
@@ -191,7 +193,7 @@ public class LendingFragment extends Fragment {
     private void filterData() {
         filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 3; i++) {
             if(checkedFilters[i]) {
                 statuses.add(filterOptions[i]);
             }

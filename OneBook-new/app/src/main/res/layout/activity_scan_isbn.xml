@@ -14,10 +14,34 @@
         android:orientation="vertical"
         android:paddingTop="25dp">
 
+        <Button
+            android:id="@+id/scanButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan Barcode"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/enterIsbnManual"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:text="OR"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/enterIsbnManual"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="71dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:ems="10"
             android:hint="Enter ISBN"
             android:inputType="textPersonName"
@@ -28,22 +52,11 @@
             app:layout_constraintTop_toBottomOf="@+id/scanButton" />
 
         <Button
-            android:id="@+id/scanButton"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scan Barcode"
-            app:layout_constraintBottom_toTopOf="@+id/enterIsbnManual"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
             android:id="@+id/findBookButton"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
+            android:layout_marginBottom="15dp"
             android:text="Find a book"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

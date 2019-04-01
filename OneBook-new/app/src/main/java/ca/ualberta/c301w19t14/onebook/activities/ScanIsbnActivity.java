@@ -29,9 +29,9 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
 
 /**
  * This class implements a scanner for ISBN codes. Uses phone's camera to create the scanner.
- * @author CMPUT301 Team14: CCID
- * @version 1.0
  *
+ * @author CMPUT301 Team14: Ana, Dimitri
+ * @version 1.0
  */
 public class ScanIsbnActivity extends AppCompatActivity {
     TextView barcodeResult;

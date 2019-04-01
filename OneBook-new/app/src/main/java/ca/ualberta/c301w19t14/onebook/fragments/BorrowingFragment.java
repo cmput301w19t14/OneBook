@@ -46,13 +46,11 @@ public class BorrowingFragment extends Fragment {
     private BookAdapter ba;
 
     String[] filterOptions = new String[] {
-            "Available",
             "Borrowed",
             "Requested",
             "Accepted",
     };
     public static boolean[] checkedFilters = new boolean[]{
-            true,
             true,
             true,
             true
@@ -193,7 +191,7 @@ public class BorrowingFragment extends Fragment {
     private void filterData() {
         filteredBooks.clear();
         ArrayList<String> statuses = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             if(checkedFilters[i]) {
                 statuses.add(filterOptions[i]);
             }
