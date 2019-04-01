@@ -26,7 +26,7 @@ import ca.ualberta.c301w19t14.onebook.R;
 /**
  * This class implements the main functionality of the app.
  * From this class, the navigation bar can be used and all of the fragments can be accessed.
- * @author CMPUT301 Team14: CCID
+ * @author CMPUT301 Team14: Dimitri T, Anastasia B.
  * @version 1.0
  * */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /**
      * For when the back button is pressed and dependent on the drawer state.
      */
-    // https://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-fragments
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -161,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (count == 0) {
             super.onBackPressed();
-            //additional code
         } else {
             getSupportFragmentManager().popBackStack();
         }

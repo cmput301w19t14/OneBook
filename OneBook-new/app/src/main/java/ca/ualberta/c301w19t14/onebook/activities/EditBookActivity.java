@@ -46,7 +46,7 @@ import ca.ualberta.c301w19t14.onebook.util.FirebaseUtil;
 
 /**
  * This class allows edits/updates to books that have been inputted into the database.
- * @author CMPUT301 Team14: Oran R, Dimitri T
+ * @author CMPUT301 Team14: Oran R, Dimitri T, Anastasia B.
  * @version 1.0
  * @see ViewBookActivity {@link #onOptionsItemSelected}
  */

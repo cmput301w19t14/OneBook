@@ -43,7 +43,7 @@ import ca.ualberta.c301w19t14.onebook.models.Request;
  * Shows all the descriptors for the book and allows updating by the owner
  * for each of the descriptors.
  *
- * @author CMPUT301 Team14: Dimitri T, Oran R
+ * @author CMPUT301 Team14: Dimitri T, Oran R, Anastasia B
  * @version 1.0
  */
 
@@ -250,6 +250,11 @@ public class ViewBookActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(globalBook != null && globalBook.userIsOwner()) {
@@ -259,12 +264,22 @@ public class ViewBookActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.edit_book, menu);
         return true;
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

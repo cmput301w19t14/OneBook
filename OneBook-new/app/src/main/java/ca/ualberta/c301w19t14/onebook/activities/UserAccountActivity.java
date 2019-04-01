@@ -3,14 +3,11 @@ package ca.ualberta.c301w19t14.onebook.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,7 +21,7 @@ import ca.ualberta.c301w19t14.onebook.models.Book;
 /**
  * This class shows a user's information when someone clicks on the owner of a book.
  *
- * @author CMPUT301 Team14: CCID
+ * @author CMPUT301 Team14
  * @version 1.0
  */
 public class UserAccountActivity extends AppCompatActivity {
